@@ -1,0 +1,7 @@
+{
+  "name": "sistema-de-citas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
