@@ -1,41 +1,41 @@
 import { Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
+import { TabsPage } from './tabs-peluquero.page';
 
 export const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'peluquero',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'fila',
         loadComponent: () =>
-          import('../fila/tab1.page').then((m) => m.Tab1Page),
+          import('../fila/fila.page').then((m) => m.FilaPage),
       },
       {
         path: 'tab2',
         loadComponent: () =>
-          import('../servicios/tab2.page').then((m) => m.Tab2Page),
+          import('../servicios/servicios.page').then((m) => m.ServiciosPage),
       },
       {
         path: 'tab3',
         loadComponent: () =>
-          import('../reservas/tab3.page').then((m) => m.Tab3Page),
+          import('../reservas/reservas-peluquero.page').then((m) => m.ReservasPeluqueroPage),
       },
       {
         path: 'tab4',
         loadComponent: () =>
-          import('../perfil/tab4.page').then((m) => m.Tab4Page),
+          import('../perfil/perfil-peluquero.page').then((m) => m.PerfilPeluqueroPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/peluquero/fila',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/peluquero/fila',
     pathMatch: 'full',
   },
 ];
