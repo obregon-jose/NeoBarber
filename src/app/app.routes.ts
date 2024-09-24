@@ -3,8 +3,17 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./peluquero/tabs peluquero/tabs-peluquero.routes').then((m) => m.routes),
+    loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
   },
+  {
+    path: 'peluquero',
+    loadChildren: () => import('./peluquero/tabs peluquero/tabs-peluquero.routes').then( m => m.routes)
+  },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./cliente/tabs cliente/tabs-cliente.routes').then( m => m.routes)
+  },
+  
   {
     path: 'login',
     loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
@@ -16,7 +25,11 @@ export const routes: Routes = [
   {
     path: 'registro',
     loadComponent: () => import('./auth/registro/registro.page').then( m => m.RegistroPage)
+  },  {
+    path: 'passrecovery',
+    loadComponent: () => import('./auth/passrecovery/passrecovery.page').then( m => m.PassrecoveryPage)
   },
+
   
 
 
