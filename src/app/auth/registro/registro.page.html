@@ -1,13 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>registro</ion-title>
+    <ion-title>
+      Registrar Usuario
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <ion-list >
+    <ion-list>
+      <ion-item class="ion-padding">
+        <ion-input label="" placeholder="Nombre"></ion-input>
+      </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-item class="ion-padding">
+        <ion-input label="" placeholder="Apellido"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-padding">
+        <ion-input label="" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-padding">
+        <ion-input label="" type="number" placeholder="Celular"></ion-input>
+      </ion-item>
+  
+      <ion-item class="ion-padding">
+        <ion-input label="" helperText= "Mínimo 8 caracteres" type="Password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+      
+      <ion-item class="ion-padding">
+        <ion-input  min="8" label="" type="Password" placeholder="Confirmar Contraseña"></ion-input>
+      </ion-item>
+
+      <ion-button href="login" ionBlur= true expand="block">Continuar</ion-button>
+  
+    </ion-list>
+  </ion-list>
 </ion-content>

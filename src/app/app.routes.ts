@@ -25,12 +25,21 @@ export const routes: Routes = [
   {
     path: 'registro',
     loadComponent: () => import('./auth/registro/registro.page').then( m => m.RegistroPage)
-  },  {
+  },
+  {
     path: 'passrecovery',
     loadComponent: () => import('./auth/passrecovery/passrecovery.page').then( m => m.PassrecoveryPage)
+  },  {
+    path: 'codeconfirmation',
+    loadComponent: () => import('./auth/passrecovery/codeconfirmation/codeconfirmation.page').then( m => m.CodeconfirmationPage)
+  },
+  {
+    path: 'changepassword',
+    loadComponent: () => import('./auth/passrecovery/changepassword/changepassword.page').then( m => m.ChangepasswordPage)
   },
 
-  
+
+
 
 
 
