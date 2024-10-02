@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Servicios
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Servicios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Título para la lista de servicios -->
+  <ion-list-header>
+    <ion-label color="primary" class="header-title">Servicios disponibles</ion-label>
+  </ion-list-header>
+
+  <!-- Lista de servicios -->
+  <ion-list lines="full">
+    <ion-item *ngFor="let service of services">
+      {{ service.name }}
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón flotante para agregar servicios -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addService()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   
+  
 </ion-content>
+
+
+

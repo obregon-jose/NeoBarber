@@ -38,14 +38,14 @@ export const routes: Routes = [
       // },
       {
         path: '',
-        redirectTo: '/cliente/reservas',
+        redirectTo: '/cliente/home',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/cliente/reservas',
+    redirectTo: '/cliente/home',
     pathMatch: 'full',
   },
 ];

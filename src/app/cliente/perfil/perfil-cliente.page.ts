@@ -3,7 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 // import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 
 @Component({
-  selector: 'app-reservas-peluquero',
+  selector: 'app-perfil-cliente',
   templateUrl: 'perfil-cliente.page.html',
   styleUrls: ['perfil-cliente.page.scss'],
   standalone: true,

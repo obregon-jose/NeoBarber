@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+.center-content {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa del contenedor */
+  }
+
+
+// .form-container {
+//     width: 92%;
+//     max-width: 500px;
+//     margin: 0 auto; /* Centra el formulario */
+//     padding: 20px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra */
+//     border-radius: 10px;
+//     background-color: white; /* Fondo blanco para destacar */
+//     position: fixed; /* Ajusta la posición para centrar el contenedor */
+//     top: 50%; /* Centra verticalmente */
+//     left: 50%; /* Centra horizontalmente */
+//     transform: translate(-50%, -50%); 
+// }
+
+  /* Botón de registro estilizado */
+  .register-button {
+    margin-top: 20px;
+    --background: #3880ff; /* Color de fondo del botón */
+    --border-radius: 8px; /* Bordes redondeados */
+    --padding: 12px; /* Espaciado interno */
+  }
+
+  /* Evita el desplazamiento hacia arriba */
+  ion-content {
+    scroll-behavior: smooth; /* Desplazamiento suave */
+  }
+
+ion-title{
+    font-family: "Ubuntu", ;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+} 

@@ -1,0 +1,32 @@
+.header-title {
+    font-size: 25px;
+    font-weight: bold; 
+    color: black;
+    text-align: center;
+    margin-top: 35px;
+  }
+  
+ion-list {
+    border: 2px solid #ccc;
+    margin: 16px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  
+  ion-item {
+    margin: 8px 0;
+    border-bottom: 1px dotted #ccc;
+  }
+  
+  ion-fab-button {
+    --background: black;
+  }
+  
+  ion-tab-bar {
+    --background: lightgray;
+  }
+  
+  ion-tab-button {
+    color: black;
+  }
+  

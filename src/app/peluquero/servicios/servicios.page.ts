@@ -1,5 +1,8 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonFabButton, IonIcon, IonItem, IonCheckbox, IonFab, IonTabs, IonTabBar, IonTabButton, IonListHeader, IonLabel } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
 
 
 @Component({
@@ -7,10 +10,18 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
   templateUrl: 'servicios.page.html',
   styleUrls: ['servicios.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ]
+  imports: [IonLabel, IonListHeader, IonTabButton, IonTabBar, IonTabs, IonFab, IonCheckbox, IonItem, IonIcon, IonFabButton, IonList, IonHeader, IonToolbar, IonTitle, IonContent,NgFor, ]
 })
 export class ServiciosPage {
-
-  constructor() {}
-
+  services = [
+    { name: 'Corte de pelo' },
+    { name: 'Afeitado' },
+    { name: 'Tinte' }
+  ];
+  constructor() {
+    addIcons({ add});
+  }
+  addService() {
+    this.services.push({ name: 'Nuevo servicio' });
+  }
 }

@@ -1,39 +1,46 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Registrar Usuario
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
+
+    
+  
+<!-- <ion-content class="ion-padding">
+  <ion-title>
+    Registrar Usuario
+  </ion-title>
   <ion-list >
     <ion-list>
-      <ion-item class="ion-padding">
-        <ion-input label="" placeholder="Nombre"></ion-input>
-      </ion-item>
+      <ion-input label="Nombre" label-placement="floating" fill="outline" placeholder="Escribe tu Nombre"></ion-input>
+      <br>
+      <ion-input label="Apellido" label-placement="floating" fill="outline" placeholder="Escribe tu Apellido"></ion-input>
+      <br>
+      <ion-input label="Email" label-placement="floating" fill="outline" placeholder="Escribe tu Correo electronico" type="email"></ion-input>
+      <br>
+      <ion-input label="Numero Whatsapp" label-placement="floating" fill="outline" placeholder="Escribe tu Numero de Whatsapp" type="number"></ion-input>
+      <br>
+      <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Escribe tu Contraseña" helperText= "Mínimo 8 caracteres" type="Password"></ion-input>
+      <br>
+      <ion-input label="Confirmar Contraseña" label-placement="floating" fill="outline" placeholder="Confirma tu contraseña" type="Password"></ion-input>
 
-      <ion-item class="ion-padding">
-        <ion-input label="" placeholder="Apellido"></ion-input>
-      </ion-item>
-
-      <ion-item class="ion-padding">
-        <ion-input label="" type="email" placeholder="Email"></ion-input>
-      </ion-item>
-
-      <ion-item class="ion-padding">
-        <ion-input label="" type="number" placeholder="Celular"></ion-input>
-      </ion-item>
-  
-      <ion-item class="ion-padding">
-        <ion-input label="" helperText= "Mínimo 8 caracteres" type="Password" placeholder="Contraseña"></ion-input>
-      </ion-item>
-      
-      <ion-item class="ion-padding">
-        <ion-input  min="8" label="" type="Password" placeholder="Confirmar Contraseña"></ion-input>
-      </ion-item>
-
-      <ion-button href="login" ionBlur= true expand="block">Continuar</ion-button>
-  
     </ion-list>
+    <ion-button href="login" ionBlur= true expand="block">Registrate</ion-button>
+  </ion-list>
+</ion-content> -->
+
+<ion-content class="ion-padding center-content">
+   <ion-title>
+    Registrarse
+  </ion-title>
+  <ion-list class="form-container">
+    <ion-input label="Nombre" label-placement="floating" fill="outline" placeholder="Escribe tu Nombre"></ion-input>
+      <br>
+      <ion-input label="Apellido" label-placement="floating" fill="outline" placeholder="Escribe tu Apellido"></ion-input>
+      <br>
+      <ion-input label="Email" label-placement="floating" fill="outline" placeholder="Escribe tu Correo electronico" type="email"></ion-input>
+      <br>
+      <ion-input label="Numero Whatsapp" label-placement="floating" fill="outline" placeholder="Escribe tu Numero de Whatsapp" type="number"></ion-input>
+      <br>
+      <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Escribe tu Contraseña" helperText= "Mínimo 8 caracteres" type="Password"></ion-input>
+      <br>
+      <ion-input label="Confirmar Contraseña" label-placement="floating" fill="outline" placeholder="Confirma tu contraseña" type="Password"></ion-input>
+  
+    <ion-button href="login" expand="block" class="register-button">Regístrate</ion-button>
   </ion-list>
 </ion-content>
