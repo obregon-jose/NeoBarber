@@ -37,6 +37,10 @@ export const routes: Routes = [
     path: 'changepassword',
     loadComponent: () => import('./auth/passrecovery/changepassword/changepassword.page').then( m => m.ChangepasswordPage)
   },
+  {
+    path: 'registropeluquero',
+    loadComponent: () => import('./auth/registropeluquero/registropeluquero.page').then( m => m.RegistropeluqueroPage)
+  },
 
 
 
