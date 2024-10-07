@@ -1,65 +1,96 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton } from '@ionic/angular/standalone';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistroService } from '../services/registro/registro.service';
+import {Router} from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem]
+  imports: [IonButton, IonInput, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem,
+    ReactiveFormsModule,
+    HttpClientModule,
+    
+  ],
+  providers:[
+    RegistroService,
+  ]
+
 })
 export class RegistroPage implements OnInit {
-
   nombre: string = '';
-  apellido: string = '';
   email: string = '';
-  numeroWhatsapp: string = '';
   password: string = '';
-  confirmarPassword: string = '';
-  emailValido: boolean = true;
-  passwordValida: boolean = true;
-  contrasenasCoinciden: boolean = true;
 
-  constructor() { }
+
+  // apellido: string = '';
+  // numeroWhatsapp: string = '';
+  // confirmarPassword: string = '';
+  // emailValido: boolean = true;
+  // passwordValida: boolean = true;
+  // contrasenasCoinciden: boolean = true;
+
+  constructor(
+    private _registroService:RegistroService,
+    private alertController:AlertController,
+    private _router:Router,
+  ) { }
 
   ngOnInit() {}
 
-  validarEmail() {
-    const patronEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    this.emailValido = patronEmail.test(this.email);
+  showAlert(header: string, message: string){
+    this.alertController.create({
+      header:header, 
+      message:message,
+    buttons: ['OK']
+  }).then(alert=>alert.present());
   }
+  
+  async registrarUsuario() {
+    if (!this.email || !this.nombre || !this.password) {
+      await this.showAlert('Error', 'debe llenar todos los campos');
+      return;
+    }
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(this.email)) {
+      await this.showAlert('Error', 'Debes ingresar un Correo Electrónico válido');
+      return;
+    }
+    // const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    // if (!passwordPattern.test(this.password)) {
+    //   await this.showAlert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número');
+    //   return;
+    // }
 
-  validarPassword() {
-    this.passwordValida = this.password.length >= 8;
-  }
+    let userData = {
+      name: this.nombre,
+      email: this.email,
+      password: this.password
+    }
 
-  validarConfirmacionPassword() {
-    this.contrasenasCoinciden = this.password === this.confirmarPassword;
-  }
+    this._registroService.registroUser(userData).subscribe(
+      async (response: any) => {
+        if (!response.error) {
+          // console.log(response);
+          await this.showAlert('Notificación', response.message);
+          //ruta aqui
+            // // this.router.navigate(['/login']);
+          return;
+        } else{
+          console.log(response);
+        }
 
-  formularioValido(): boolean {
-    return (
-      this.nombre !== '' &&
-      this.apellido !== '' &&
-      this.emailValido &&
-      this.numeroWhatsapp !== '' &&
-      this.passwordValida &&
-      this.contrasenasCoinciden
+      },
+      async (error: any) => {
+        await this.showAlert('Error', error.error.message || 'Ocurrió un error inesperado');
+      }
     );
   }
-
-  registrarUsuario() {
-    if (this.formularioValido()) {
-      console.log('Usuario registrado:', {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        email: this.email,
-        numeroWhatsapp: this.numeroWhatsapp
-      });
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
+  
 }

@@ -5,16 +5,16 @@
  <ion-list class="form-container">
    <ion-input [(ngModel)]="nombre" label="Nombre" label-placement="floating" fill="outline" placeholder="Escribe tu Nombre" required></ion-input>
    <br>
-   <ion-input [(ngModel)]="apellido" label="Apellido" label-placement="floating" fill="outline" placeholder="Escribe tu Apellido" required></ion-input>
+   <!-- <ion-input [(ngModel)]="apellido" label="Apellido" label-placement="floating" fill="outline" placeholder="Escribe tu Apellido" required></ion-input> -->
    <br>
-   <ion-input [(ngModel)]="email" label="Email" label-placement="floating" fill="outline" placeholder="Escribe tu Correo electronico" type="email" (ionInput)="validarEmail()" required></ion-input>
+   <ion-input [(ngModel)]="email" label="Email" label-placement="floating" fill="outline" placeholder="Escribe tu Correo electronico" type="email"></ion-input>
    <br>
-   <ion-input [(ngModel)]="numeroWhatsapp" label="Numero Whatsapp (Opcional)" label-placement="floating" fill="outline" placeholder="Escribe tu Numero de Whatsapp" type="number" required></ion-input>
+   <!-- <ion-input [(ngModel)]="numeroWhatsapp" label="Numero Whatsapp (Opcional)" label-placement="floating" fill="outline" placeholder="Escribe tu Numero de Whatsapp" type="number" required></ion-input> -->
    <br>
-   <ion-input [(ngModel)]="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Escribe tu Contraseña" helperText="Mínimo 8 caracteres" type="password" (ionInput)="validarPassword()" required></ion-input>
+   <ion-input [(ngModel)]="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Escribe tu Contraseña" helperText="Mínimo 8 caracteres" type="password" ></ion-input>
    <br>
-   <ion-input [(ngModel)]="confirmarPassword" label="Confirmar Contraseña" label-placement="floating" fill="outline" placeholder="Confirma tu contraseña" type="password" (ionInput)="validarConfirmacionPassword()" required></ion-input>
+   <!-- <ion-input [(ngModel)]="confirmarPassword" label="Confirmar Contraseña" label-placement="floating" fill="outline" placeholder="Confirma tu contraseña" type="password" (ionInput)="validarConfirmacionPassword()" required></ion-input> -->
    <br>
-   <ion-button [disabled]="!formularioValido()" (click)="registrarUsuario()" expand="block" class="register-button">Regístrate</ion-button>
+   <ion-button (click)="registrarUsuario()" expand="block" class="register-button">Regístrate</ion-button>
  </ion-list>
 </ion-content>
