@@ -62,12 +62,12 @@ export class RegistroPage implements OnInit {
       await this.showAlert('Error', 'Debes ingresar un Correo Electrónico válido');
       return;
     }
-    // const passwordPattern = /^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    // if (!passwordPattern.test(this.password)) {
-    //   await this.showAlert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número');
-    //   return;
-    // }
-
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordPattern.test(this.password)) {
+      await this.showAlert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y puede contener símbolos.');
+      return;
+    }
+    
     let userData = {
       name: this.nombre,
       email: this.email,
@@ -83,7 +83,7 @@ export class RegistroPage implements OnInit {
             // // this.router.navigate(['/login']);
           return;
         } else{
-          console.log(response);
+          // console.log(response);
         }
 
       },
