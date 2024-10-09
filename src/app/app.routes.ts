@@ -29,7 +29,8 @@ export const routes: Routes = [
   {
     path: 'passrecovery',
     loadComponent: () => import('./auth/passrecovery/passrecovery.page').then( m => m.PassrecoveryPage)
-  },  {
+  },
+  {
     path: 'codeconfirmation',
     loadComponent: () => import('./auth/passrecovery/codeconfirmation/codeconfirmation.page').then( m => m.CodeconfirmationPage)
   },
@@ -39,8 +40,12 @@ export const routes: Routes = [
   },
   {
     path: 'registropeluquero',
-    loadComponent: () => import('./auth/registropeluquero/registropeluquero.page').then( m => m.RegistropeluqueroPage)
+    loadComponent: () => import('./root/registropeluquero/registropeluquero.page').then( m => m.RegistropeluqueroPage)
+  },  {
+    path: 'irregistro',
+    loadComponent: () => import('./root/irregistro/irregistro.page').then( m => m.IrregistroPage)
   },
+
 
 
 

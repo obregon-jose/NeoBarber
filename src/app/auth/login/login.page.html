@@ -20,19 +20,19 @@
     <!-- Área de contenido -->
     <div class="content">
       
-      <form (submit)="iniciarSesion($event, email?.value ?? '', password?.value ?? '')">
+      <form (submit)="login()">
           <div>
           <h2>Iniciar Sesion</h2>
           <ion-label for="email">Correo</ion-label>
           <ion-item>
-            <ion-input #email type="email" placeholder="Correo Electrónico" required></ion-input>
+            <ion-input [(ngModel)]="email" name="email" type="email" placeholder="Correo Electrónico" required></ion-input>
           </ion-item>
           
           <br>
           
           <ion-label for="password">Contraseña</ion-label>
             <ion-item>
-              <ion-input #password type="password" placeholder="Contraseña" required></ion-input>
+              <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required></ion-input>
             </ion-item>
           
             <br>
@@ -42,13 +42,14 @@
           <br>
           <div class="link-container">
             <!-- hay que redireccionar bien esto -->
-            <a href="/passrecovery">¿Olvidaste la contraseña?</a> 
+            <a href="/passrecovery">¿Olvidaste la contraseña?</a>
           </div>
         </div>
         </form>
                 
       </div>
     </div>
+    
 </ion-content>
 
 <!-- <ion-footer>
@@ -124,4 +125,4 @@
     </ion-item>
   </ion-list>
 
-</ion-content> -->
+</ion-content> -->

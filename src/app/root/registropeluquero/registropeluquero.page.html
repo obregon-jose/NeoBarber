@@ -1,0 +1,36 @@
+<ion-content class="ion-padding center-content">
+  
+  <ion-title>
+    Registrar Peluquero
+  </ion-title>
+  <ion-input [(ngModel)]="nombre" label="Nombre" label-placement="floating" fill="outline" placeholder="Escribe tu Nombre" required></ion-input>
+ <br>
+ <!-- <ion-input [(ngModel)]="apellido" label="Apellido" label-placement="floating" fill="outline" placeholder="Escribe tu Apellido" required></ion-input> -->
+
+ <ion-input [(ngModel)]="email" label="Email" label-placement="floating" fill="outline" placeholder="Escribe tu Correo electronico" type="email"  required></ion-input>
+ <br>
+ <!-- <ion-input [(ngModel)]="numeroWhatsapp" label="Numero Whatsapp (Opcional)" label-placement="floating" fill="outline" placeholder="Escribe tu Numero de Whatsapp" type="number" required></ion-input> -->
+ 
+ <!-- <ion-input [(ngModel)]="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Escribe tu Contraseña" helperText="Mínimo 8 caracteres" type="password" required></ion-input> -->
+  <br>
+  <!-- <ion-input [(ngModel)]="rol" label="Rol" label-placement="floating" fill="outline" placeholder="Escribe el numero de rol" type="number" required></ion-input> -->
+  <ion-accordion-group>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>Seleccionar Rol</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-radio-group [(ngModel)]="selectedRol">
+          <ion-item>
+            <ion-label>Peluquero</ion-label>
+            <ion-radio slot="start" [value]="2"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ion-button  (click)="registrarBarbero()" expand="block" class="register-button">Regístrate</ion-button>
+</ion-content>
+
+
