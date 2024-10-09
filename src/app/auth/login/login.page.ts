@@ -63,14 +63,22 @@ export class LoginPage implements OnInit {
     this._loginService.login(UserData).subscribe(
       async (response: any) => {
         if (!response.error) {
-          //console.log(response.token);
-          this._loginService.saveToken(response.token); // Guardar el token
           
-          await this.showAlert('Notificación', response.message);
-          //ruta aqui
-            // verificar el tipo rol del usuario y mandarlo a su home
-            // this.router.navigate(['/admin']);
-          return;
+          this._loginService.saveToken(response.token); // Guardar el token
+
+          if (response.role == 'cliente') {
+            this._router.navigate(['/cliente']);
+          } else if (response.role == 'peluquero') {
+            this._router.navigate(['/peluquero']);
+          } else if (response.role == 'administrador') {
+            // this._router.navigate(['/']);
+          } else if (response.role == 'dueño') {
+            // return this._router.navigate(['/']);
+          } else if (response.role == 'root') {
+            this._router.navigate(['/irregistro']);
+          } else {
+            await this.showAlert('Error','No se ha podido identificar el usuario')
+          }
         }
       },
       async (error: any) => {
@@ -79,7 +87,6 @@ export class LoginPage implements OnInit {
     )
 
   }
-
 
   //esto debe ir en pagina de perfil
   logout(){

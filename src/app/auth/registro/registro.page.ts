@@ -64,9 +64,10 @@ export class RegistroPage implements OnInit {
     }
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordPattern.test(this.password)) {
-      await this.showAlert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y puede contener símbolos.');
+      await this.showAlert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.');
       return;
     }
+    
     
     let userData = {
       name: this.nombre,
@@ -79,8 +80,7 @@ export class RegistroPage implements OnInit {
         if (!response.error) {
           // console.log(response);
           await this.showAlert('Notificación', response.message);
-          //ruta aqui
-            // // this.router.navigate(['/login']);
+          this._router.navigate(['/login']);
           return;
         } else{
           // console.log(response);
