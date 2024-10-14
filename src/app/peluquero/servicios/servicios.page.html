@@ -6,21 +6,26 @@
   </ion-list-header>
 
   <!-- Lista de servicios -->
-  <ion-list lines="full">
+  <!-- <ion-list lines="full">
+    <ion-item *ngFor="let service of servicios">
+      {{ service.nombre }}
+    </ion-item>
+  </ion-list> -->
+  <ion-list>
     <ion-item *ngFor="let service of services">
-      {{ service.name }}
+      <ion-label>
+        <h2>{{ service.name }}</h2>
+        <p>Price: {{ service.price }}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
-
+  
   <!-- Botón flotante para agregar servicios -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addService()">
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
-
-  
-  
+  </ion-fab> -->
 </ion-content>
 
 
