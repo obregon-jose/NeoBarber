@@ -12,15 +12,17 @@ export class ServiciosService {
     private _http: HttpClient
   ) { }
 
-  mostrarServicios():Observable<any>{
+  cargarServicios():Observable<any>{
     return this._http.get(this.apiUrl)
   }
   // mostrarUnServicio(data: any){
   
   // }
-  // crearServicios(data: any){
-  
-  // }
+  crearServicio(data: any){
+    return this._http.post<any>(this.apiUrl, data,).pipe(map((resp:any)=>{
+      return resp
+    }))
+  }
   // editarServicios(data: any){
   
   // }

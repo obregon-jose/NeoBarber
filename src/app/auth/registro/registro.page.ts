@@ -49,7 +49,7 @@ export class RegistroPage implements OnInit {
       header:header, 
       message:message,
     buttons: ['OK']
-  }).then(alert=>alert.present());
+    }).then(alert=>alert.present());
   }
   
   async registrarUsuario() {
