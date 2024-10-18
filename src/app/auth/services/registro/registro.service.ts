@@ -20,12 +20,12 @@ registroUser(data: any){
 
 
 }
-registroUserPro(data: any){
-  return this._http.post<any>(this.apiUrl + '/register', data,).pipe(map((resp:any)=>{
-    return resp
-  }))
+// registroUserPro(data: any){
+//   return this._http.post<any>(this.apiUrl + '/register', data,).pipe(map((resp:any)=>{
+//     return resp
+//   }))
 
 
-}
+// }
 
 }
