@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { Subject, takeUntil } from 'rxjs';
 import { addIcons } from 'ionicons';
-import { add, createOutline, trashOutline } from 'ionicons/icons';
-
+import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-servicios',
   templateUrl: 'servicios.page.html',
@@ -34,7 +34,9 @@ export class ServiciosPage implements OnInit {
   constructor(
      private _serviciosServicie:ServiciosService,
      private _alertService: AlertToastService,
-     
+     private alertController: AlertController,
+     private _loading: AlertToastService,
+
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -47,11 +49,13 @@ export class ServiciosPage implements OnInit {
   }
 
   async mostrarServicios() {
+    const loading = await this._loading.presentLoading();
     this._serviciosServicie.cargarServicios()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe({
-        next: (response) => {
+        next: async (response) => {
           this.services = response.services;
+          await loading.dismiss();
         },
         error: () => {
           this._alertService.alertToastRed('Error al cargar los servicios', 'top');
@@ -64,24 +68,66 @@ export class ServiciosPage implements OnInit {
       name: data.nombre,
       price: data.precio,
     };
+    const loading = await this._loading.presentLoading();
   
     this._serviciosServicie.crearServicio(serviceData).subscribe(
-      (response: any) => {
+      async (response: any) => {
         if (!response.error) {
           this.mostrarServicios();
           this._alertService.alertToastGreen('Servicio agregado exitosamente', 'top');
+          await loading.dismiss();
         } else {
           this._alertService.alertToastRed(response.error.message || 'Error al agregar el servicio', 'top');
         }
       },
-      (error: any) => {
+      async (error: any) => {
         // Maneja errores en la petición HTTP
         this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
+        await loading.dismiss();
       }
     );
-    
   }
 
+  async editarServicio(data: any, id: number) {
+    let serviceData = {
+      id: id,
+      name: data.nombre,
+      price: data.precio,
+    };
+    const loading = await this._loading.presentLoading();
+
+    this._serviciosServicie.editarServicios(serviceData).subscribe(
+      async (response: any) => {
+        if (!response.error) {
+          this.mostrarServicios(); // Actualiza la lista de servicios
+          this._alertService.alertToastGreen('Servicio editado con éxito');
+          await loading.dismiss();
+        } else {
+          this._alertService.alertToastRed('Error al editar el servicio');
+        }
+      },
+      async (error: any) => {
+        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
+        await loading.dismiss();
+      }
+    );
+  }
+  
+  async eliminarServicio(id: number) {
+    this._serviciosServicie.eliminarServicios(id).subscribe(
+      (response: any) => {
+        if (!response.error) {
+          this.mostrarServicios(); 
+          this._alertService.alertToastGreen('Servicio eliminado con éxito');
+        } else {
+          this._alertService.alertToastRed('Error al eliminar el servicio');
+        }
+      },
+      (error: any) => {
+        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado');
+      }
+    );
+  }
   public alertButtons = [
     {
       text: 'CANCELAR',
@@ -120,7 +166,54 @@ export class ServiciosPage implements OnInit {
     }
     
   ];
+  
+/*----------------------EDITAR---------------------*/
+async openEditAlert(service: any) {
+  const alert = await this.alertController.create({
+    header: 'Editar Servicio',
+    inputs: [
+      {
+        name: 'nombre',
+        placeholder: 'Nombre',
+        value: service.name // Prellenar el campo con el nombre actual
+      },
+      {
+        name: 'precio',
+        placeholder: 'Precio',
+        value: this.formatPriceShow(service.price), // Prellenar el campo con el precio actual
+        type: 'text',
+        attributes: {
+          inputmode: 'numeric',
+          maxlength: 6,
+          oninput: (event: any) => this.formatPrice(event)
+        }
+      }
+    ],
+    buttons: [
+      {
+        text: 'CANCELAR',
+      },
+      {
+        text: 'GUARDAR',
+        role: 'GUARDAR',
+        handler: (data: any) => {
+          if (data.nombre && data.precio) {
+            data.precio = this.removeFormatting(data.precio);
+            this.editarServicio(data, service.id); // Llama a la función para editar el servicio
+            return true
+          } else {
+            this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
+            return false;
+          }
+        }
+      }
+    ]
+  });
 
+  await alert.present();
+}
+
+/*-------------------------------------------*/
   formatPrice(event: any) {
     let input = event.target;
     let value = input.value.replace(/\D/g, '');
@@ -140,4 +233,5 @@ export class ServiciosPage implements OnInit {
   getFormattedPrice(price: number): string {
     return this.formatPriceShow(price);
   }
+  
 }

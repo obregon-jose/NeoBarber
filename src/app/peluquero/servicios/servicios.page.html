@@ -17,12 +17,12 @@
         <p>Price: {{ getFormattedPrice(service.price) }}</p>
       </ion-label>
     <!-- Botón para editar el servicio -->
-    <ion-button color="secondary">
+    <ion-button color="secondary" (click)="openEditAlert(service)">
       <ion-icon slot="icon-only" name="create-outline"></ion-icon>
     </ion-button>
 
     <!-- Botón para eliminar el servicio -->
-    <ion-button color="danger">
+    <ion-button color="danger" (click)="eliminarServicio(service.id)">
       <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
     </ion-button>
   

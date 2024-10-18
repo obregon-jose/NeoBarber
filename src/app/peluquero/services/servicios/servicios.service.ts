@@ -28,6 +28,7 @@ export class ServiciosService {
 
   // mostrarUnServicio(data: any){}
   
+  // Crear un servicio
   crearServicio(data: any): Observable<any> {
     return from(this._tokenService.getHeaders()).pipe(
       switchMap((headers: HttpHeaders) => 
@@ -47,10 +48,49 @@ export class ServiciosService {
       })
     );
   }
-  // editarServicios(data: any){
-  
-  // }
-  // eliminarServicios(data: any){
-  
-  // }
+
+  //Editar un servicio
+  editarServicios(data: any): Observable<any> {
+    return from(this._tokenService.getHeaders()).pipe(
+      switchMap((headers: HttpHeaders) =>
+        this._http.put(`${this.apiUrl}/${data.id}`, data, { headers }).pipe(
+          map((resp: any) => {
+            return resp;
+          }),
+          catchError((error) => {
+            this._alertService.alertToastRed('Error al editar el servicio', 'top');
+            return throwError(() => error);
+          })
+        )
+      ),
+      catchError((error) => {
+        this._alertService.alertToastRed('Error al obtener los encabezados', 'top');
+        return throwError(() => error);
+      })
+    );
+  }
+
+  //Eliminar servicio
+  eliminarServicios(id: number): Observable<any> {
+    return from(this._tokenService.getHeaders()).pipe(
+      switchMap((headers: HttpHeaders) =>
+        this._http.delete(`${this.apiUrl}/${id}`, { headers }).pipe(
+          map((resp: any) => {
+            return resp;
+          }),
+          catchError((error) => {
+            this._alertService.alertToastRed('Error al eliminar el servicio');
+            return throwError(() => error);
+          })
+        )
+      ),
+      catchError((error) => {
+        this._alertService.alertToastRed('Error al obtener los encabezados');
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+
 }

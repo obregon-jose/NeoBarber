@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AlertToastService {
   constructor(
     private toastController: ToastController,
     private alertController:AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router, 
   ) { }
 
   // Método para mostrar el toast TEMPORAL
@@ -59,4 +61,5 @@ export class AlertToastService {
     await loading.present();
     return loading;
   }
+
 }
