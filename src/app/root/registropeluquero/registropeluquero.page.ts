@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonInput, IonButton, IonItem, IonLabel, IonCheckbox, IonAccordionGroup, IonAccordion, IonRadioGroup, IonRadio, IonIcon } from '@ionic/angular/standalone';
 import { HttpClientModule } from '@angular/common/http';
-import { RegistroPeluqueroService } from 'src/app/auth/services/registro-peluquero/registro-peluquero.service';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { RegistroService } from 'src/app/auth/services/registro/registro.service';
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
 
 
 @Component({
@@ -17,7 +16,7 @@ import { AlertController } from '@ionic/angular';
     ReactiveFormsModule,
     HttpClientModule,
   ], providers:[
-    RegistroPeluqueroService,
+    RegistroService,
   ]
 })
 export class RegistropeluqueroPage implements OnInit {
@@ -30,36 +29,21 @@ export class RegistropeluqueroPage implements OnInit {
   ];
   selectedRol: number = 2; // Valor inicial por defecto
 
-
-
   constructor(
-    private _registroPeluqueroService:RegistroPeluqueroService,
-    private alertController:AlertController,
-    private _router:Router,
+    private _registroPeluquero: RegistroService,
+    private _alertService: AlertToastService,
   ) { }
 
   ngOnInit() {
   }
 
-  showAlert(header: string, message: string){
-    this.alertController.create({
-      header:header, 
-      message:message,
-    buttons: ['OK']
-  }).then(alert=>alert.present());
-  }
-
-
   async registrarBarbero() {
-
     if (!this.email || !this.nombre) {
-      await this.showAlert('Error', 'debe llenar todos los campos');
-      return;
+      return this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
     }
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
-      await this.showAlert('Error', 'Debes ingresar un Correo Electrónico válido');
-      return;
+      return this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
     }
 
     let userData = {
@@ -68,20 +52,21 @@ export class RegistropeluqueroPage implements OnInit {
       role_id: this.selectedRol,
     };
   
-    try {
-      const response: any = await this._registroPeluqueroService.registerBarber(userData);
-      
-      if (response && !response.error) {
-        await this.showAlert('Notificación', response.message || 'Registro exitoso');
-      } else {
-        await this.showAlert('Error', response.message || 'Ocurrió un error');
+    this._registroPeluquero.crearUsuarioConRol(userData).subscribe(
+      (response: any) => {
+        if (!response.error) {
+          // this.mostrarUsuarios(); // si es creado por un admin y tiene la lista de peluqueros abajo
+          this._alertService.alertToastGreen('Usuario agregado exitosamente', 'top');
+        } else {
+          this._alertService.alertToastRed(response.error.message || 'Error al agregar el Usuario', 'top');
+        }
+      },
+      (error: any) => {
+        // Maneja errores en la petición HTTP
+        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
       }
-    } catch (error: any) {
-      // Manejar el error, asegurándote que tenga la estructura esperada
-      await this.showAlert('Error', error.error?.message || 'Ocurrió un error inesperado');
-    }
+    );
   }
-  
 
 }
 

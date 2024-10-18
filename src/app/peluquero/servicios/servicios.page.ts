@@ -1,12 +1,13 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit, NO_ERRORS_SCHEMA  } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonFabButton, IonIcon, IonItem, IonCheckbox, IonFab, IonTabs, IonTabBar, IonTabButton, IonListHeader, IonLabel } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { add } from 'ionicons/icons';
 import { ServiciosService } from '../services/servicios/servicios.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
+import { Subject, takeUntil } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { add, createOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-servicios',
@@ -21,67 +22,66 @@ import { AlertController } from '@ionic/angular';
   ],
   providers:[
     ServiciosService,
+    AlertToastService,
+
   ],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class ServiciosPage implements OnInit {
-  // precio: number=0;
-  // nombre: string='';
+  private unsubscribe$ = new Subject<void>();
   services: any[] = [];
 
   constructor(
      private _serviciosServicie:ServiciosService,
-     private alertController:AlertController,
-  ) {}
+     private _alertService: AlertToastService,
+     
+  ) {
+    addIcons({
+      'create-outline': createOutline,
+      'trash-outline': trashOutline,
+      'add': add,
+    });
+  }
   ngOnInit() {
     this.mostrarServicios();
   }
 
-  showAlert(header: string, message: string){
-    this.alertController.create({
-      header:header,
-      message:message,
-    buttons: ['OK']
-    }).then(alert=>alert.present());
+  async mostrarServicios() {
+    this._serviciosServicie.cargarServicios()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (response) => {
+          this.services = response.services;
+        },
+        error: () => {
+          this._alertService.alertToastRed('Error al cargar los servicios', 'top');
+        }
+      });
   }
 
-  mostrarServicios(){
-    this._serviciosServicie.cargarServicios().subscribe(Response=>{
-      this.services = Response.services;
-    },
-    error=>{
-      console.log('error')
-    })
-  }
-
-
-  async agregarServicio(data: any){
+  async agregarServicio(data: any) {
     let serviceData = {
       name: data.nombre,
       price: data.precio,
-    }
-
+    };
+  
     this._serviciosServicie.crearServicio(serviceData).subscribe(
-      async (response: any) => {
+      (response: any) => {
         if (!response.error) {
-          console.log(response);
           this.mostrarServicios();
-          await this.showAlert('Notificación', response.message);
-          return;
-        } else{
-          console.log('error',response);
+          this._alertService.alertToastGreen('Servicio agregado exitosamente', 'top');
+        } else {
+          this._alertService.alertToastRed(response.error.message || 'Error al agregar el servicio', 'top');
         }
-
       },
-      async (error: any) => {
-        console.log(error);
-        await this.showAlert('Error', error.error.message || 'Ocurrió un error inesperado');
+      (error: any) => {
+        // Maneja errores en la petición HTTP
+        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
       }
     );
+    
   }
 
-
-  // --------------------------------------
   public alertButtons = [
     {
       text: 'CANCELAR',
@@ -95,7 +95,7 @@ export class ServiciosPage implements OnInit {
           this.agregarServicio(data);
           return true; 
         } else {
-          this.showAlert('Error', 'Debe llenar todos los campos');
+          this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
           return false;
         }
       },
@@ -125,10 +125,19 @@ export class ServiciosPage implements OnInit {
     let input = event.target;
     let value = input.value.replace(/\D/g, '');
     value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    input.value = value;
+    return input.value = value;
   }
   removeFormatting(value: string): number {
     return parseInt(value.replace(/\./g, ''), 10);
   }
-  
+
+  formatPriceShow(value: number): string {
+    let stringValue = value.toString().replace(/\D/g, '');
+    stringValue = stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return stringValue;
+  }
+
+  getFormattedPrice(price: number): string {
+    return this.formatPriceShow(price);
+  }
 }

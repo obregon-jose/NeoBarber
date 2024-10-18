@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel } from '@ionic/angular/standalone';
-import { AlertController } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, IonButtons } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { Router, RouterLink } from '@angular/router'; 
 import { LoginService } from '../services/login/login.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
+import { TokenService } from '../services/get-token/token.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, 
+  imports: [IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, 
     ReactiveFormsModule,
     HttpClientModule,
+    RouterLink,
   ],
   providers: [
     LoginService,
+    AlertToastService,
+    TokenService, //
   ] 
 
 })
@@ -26,31 +30,24 @@ export class LoginPage implements OnInit {
   password:any = null;
 
   constructor(
-    private alertController: AlertController, 
+    private _alertService: AlertToastService,
     private _router: Router,
     private _loginService: LoginService,
+    private _tokenService: TokenService, //
   ) { } 
 
   ngOnInit() { }
 
-  showAlert(header: string, message: string) {
-    this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['OK']
-    }).then(alert => alert.present());
-  }
-
   async login() {
     
     if(!this.email || !this.password){
-      await this.showAlert('Error', 'Debe ingresar un correo electrónico y una contraseña');
+      this._alertService.alertToastYellow('Debe ingresar un correo electrónico y una contraseña', 'top');
       return;
     }
     
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
-      await this.showAlert('Error', 'Debes ingresar un Correo Electrónico válido');
+      this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
       return;
     }
     
@@ -60,11 +57,8 @@ export class LoginPage implements OnInit {
 
     };
 
-    this._loginService.login(UserData).subscribe(
-      async (response: any) => {
+    this._loginService.login(UserData).subscribe((response: any) => {
         if (!response.error) {
-          
-          this._loginService.saveToken(response.token); // Guardar el token
 
           if (response.role == 'cliente') {
             this._router.navigate(['/cliente']);
@@ -77,19 +71,23 @@ export class LoginPage implements OnInit {
           } else if (response.role == 'root') {
             this._router.navigate(['/irregistro']);
           } else {
-            await this.showAlert('Error','No se ha podido identificar el usuario')
+            this._alertService.alertToastRed('No se ha podido identificar el usuario', 'top');
           }
+          this._tokenService.saveToken(response.token); // Guardar el token
         }
       },
-      async (error: any) => {
-        await this.showAlert('Error', error.error.message || 'Ocurrió un error inesperado');
+      (error: any) => {
+        this._alertService.alertToastRed( error.error.message || 'Ocurrió un error inesperado', 'top');
       }
     )
+    
 
   }
 
   //esto debe ir en pagina de perfil
   logout(){
     this._loginService.logout();
+    this._alertService.alertToastGreen('Sesión cerrada', 'top');
   }
+  // <ion-button (click)="logout()">Cerrar sesion</ion-button>
 }

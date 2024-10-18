@@ -5,71 +5,44 @@
     <ion-label color="primary" class="header-title">Servicios disponibles</ion-label>
   </ion-list-header>
 
-  <!-- Lista de servicios -->
-  <!-- <ion-list lines="full">
-    <ion-item *ngFor="let service of servicios">
-      {{ service.nombre }}
-    </ion-item>
-  </ion-list> -->
   <ion-list>
+    <ion-item *ngIf="services.length === 0">
+      <ion-label>
+        <h2>No hay servicios Agregados</h2>
+      </ion-label>
+    </ion-item>
     <ion-item *ngFor="let service of services">
       <ion-label>
         <h2>{{ service.name }}</h2>
-        <p>Price: {{ service.price }}</p>
+        <p>Price: {{ getFormattedPrice(service.price) }}</p>
       </ion-label>
+    <!-- Botón para editar el servicio -->
+    <ion-button color="secondary">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+
+    <!-- Botón para eliminar el servicio -->
+    <ion-button color="danger">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  
     </ion-item>
   </ion-list>
   
   <!-- Botón flotante para agregar servicios -->
-  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button >
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
+  <ion-fab id="present-alert" horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
 </ion-content>
 
-
-
-<!-- FORMULARIO PARA CREAR SEVICIO -->
-
-<!-- <ion-content>
-  <form (Submit)="agregarServicio()">
-    <ion-item>
-      <ion-label position="floating">Service Name</ion-label>
-      <ion-input type="text" [(ngModel)]="nombre" name="nombre" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Price</ion-label>
-      <ion-input type="number" [(ngModel)]="precio" name="precio" required></ion-input>
-    </ion-item>
-    <ion-button type="submit">Crear Servicio</ion-button>
-  </form>
-</ion-content> -->
-
-<!-- <form (submit)="agregarServicio()">
-  <div>
-    <ion-label for="email">nombre del servicio </ion-label>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="nombre" name="nombre" required></ion-input>
-      <ion-input [(ngModel)]="email" name="email" type="email" placeholder="Correo Electrónico" required></ion-input>
-    </ion-item>
-    <br>
-    <ion-label for="password">Precio</ion-label>
-      <ion-item>
-        <ion-input type="number" [(ngModel)]="precio" name="precio" required></ion-input>
-        <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required></ion-input>
-      </ion-item>
-      <br>
-    <ion-button type="submit">Crear Servicio1</ion-button>
-  </div>
-</form> -->
-
-<!-- <ion-button (click)="presentAlert()">Agregar servicio</ion-button> -->
-
-<ion-button id="present-alert">Agregar servicio</ion-button>
-<ion-alert
-  trigger="present-alert"
-  header="Ingrese el Servicio"
-  [buttons]="alertButtons"
-  [inputs]="alertInputs"
-></ion-alert>
+  <!-- FORMULARIO PARA CREAR SEVICIO -->
+  <!-- <ion-button id="present-alert">Agregar servicio</ion-button> -->
+  <ion-alert
+    trigger="present-alert"
+    header="Ingrese el Servicio"
+    [buttons]="alertButtons"
+    [inputs]="alertInputs"
+  ></ion-alert>
