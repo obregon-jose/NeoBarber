@@ -17,9 +17,19 @@ export const routes: Routes = [
           import('../servicios/servicios.page').then((m) => m.ServiciosPage),
       },
       {
-        path: 'reservas',
+        path: 'reservar',
         loadComponent: () =>
-          import('../reservas/reservas-peluquero.page').then((m) => m.ReservasPeluqueroPage),
+          import('../reservar/reservar.page').then((m) => m.ReservarPage),
+      },
+      {
+        path: 'reservar/seleccionarbarbero',
+        loadComponent: () =>
+          import('../reservar/seleccionbarbero/seleccionarbarbero.page').then((m) => m.SeleccionarBarberoPage),
+      },
+      {
+        path: 'reservar/fechayhora',
+        loadComponent: () =>
+          import('../reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
       },
       {
         path: 'perfil',

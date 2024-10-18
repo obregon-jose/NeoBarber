@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Seleccionar Fecha y Hora
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-progress-bar value="0.67"></ion-progress-bar> <!-- Barra de progreso -->
+
+  <h3>Seleccionar Fecha y Hora</h3>
+
+  <ion-item>
+    <ion-label>Selecciona un Día</ion-label>
+    <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" [(ngModel)]="selectedDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Selecciona una Hora</ion-label>
+    <ion-select [(ngModel)]="selectedTime">
+      <ion-select-option value="09:00">09:00 AM</ion-select-option>
+      <ion-select-option value="10:00">10:00 AM</ion-select-option>
+      <ion-select-option value="11:00">11:00 AM</ion-select-option>
+      <ion-select-option value="12:00">12:00 PM</ion-select-option>
+      <ion-select-option value="13:00">01:00 PM</ion-select-option>
+      <ion-select-option value="14:00">02:00 PM</ion-select-option>
+      <ion-select-option value="15:00">03:00 PM</ion-select-option>
+      <ion-select-option value="16:00">04:00 PM</ion-select-option>
+      <ion-select-option value="17:00">05:00 PM</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="confirmSelection()">
+    Siguiente
+  </ion-button>
+</ion-content>

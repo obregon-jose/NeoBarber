@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.progress {
+    height: 100%;
+    background-color: #3b5998; /* Cambia el color según tu preferencia */
+    border-radius: 5px;
+}
+
+ion-card {
+    margin: 10px;
+    text-align: center;
+    height: 300px; /* Establece una altura fija para las tarjetas */
+}
+
+ion-card img {
+    width: 100%;
+    height: 200px; /* Establece una altura fija para las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    border-radius: 10px;
+}
+
+ion-title {
+    font-family: "Aclonica";
+    font-size: bold;
+    text-align: center;
+    margin-top: 10px;
+}
