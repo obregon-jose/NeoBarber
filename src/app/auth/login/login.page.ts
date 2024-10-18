@@ -34,7 +34,8 @@ export class LoginPage implements OnInit {
     private _alertService: AlertToastService,
     private _router: Router,
     private _loginService: LoginService,
-    private _tokenService: TokenService, //
+    private _tokenService: TokenService, 
+    private _loading: AlertToastService,
   ) { } 
 
   ngOnInit() { }
@@ -59,7 +60,8 @@ export class LoginPage implements OnInit {
 
     const loading = await this._loading.presentLoading();
 
-    this._loginService.login(UserData).subscribe((response: any) => {
+    this._loginService.login(UserData).subscribe( 
+      async (response: any) => {
       await loading.dismiss();
         if (!response.error) {
 
@@ -79,13 +81,11 @@ export class LoginPage implements OnInit {
           this._tokenService.saveToken(response.token); // Guardar el token
         }
       },
-      (error: any) => {
+      async (error: any) => {
         await loading.dismiss();
         this._alertService.alertToastRed( error.error.message || 'Ocurrió un error inesperado', 'top');
       }
     )
-    
-
   }
 
   // Método para cerrar sesión

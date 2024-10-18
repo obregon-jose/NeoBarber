@@ -31,27 +31,20 @@ export class RegistropeluqueroPage implements OnInit {
   constructor(
     private _registroPeluquero: RegistroService,
     private _alertService: AlertToastService,
-    private loadingController: LoadingController
+    private _loading: AlertToastService,
   ) { }
 
   ngOnInit() {
   }
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Registrando...',
-      spinner: 'crescent',
-    });
-    await loading.present();
-    return loading;
-  }
+  
   async registrarBarbero() {
     if (!this.email || !this.nombre) {
-      return this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
+      return this._alertService.alertToastYellow('Debe llenar todos los campos');
     }
 
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
-      return this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
+      return this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido');
     }
 
     let userData = {
@@ -59,22 +52,23 @@ export class RegistropeluqueroPage implements OnInit {
       email: this.email,
       role_id: this.selectedRol,
     };
-    const loading = await this.presentLoading();
+    const loading = await this._loading.presentLoading('Registrando...');
   
     this._registroPeluquero.crearUsuarioConRol(userData).subscribe(
-      await loading.dismiss();
-      (response: any) => {
+      
+      async (response: any) => {
+        await loading.dismiss();
         if (!response.error) {
           // this.mostrarUsuarios(); // si es creado por un admin y tiene la lista de peluqueros abajo
-          this._alertService.alertToastGreen('Usuario agregado exitosamente', 'top');
+          this._alertService.alertToastGreen('Usuario agregado exitosamente');
         } else {
-          this._alertService.alertToastRed(response.error.message || 'Error al agregar el Usuario', 'top');
+          this._alertService.alertToastRed(response.error.message || 'Error al agregar el Usuario');
         }
       },
-      (error: any) => {
-        // Maneja errores en la petición HTTP
+      async (error: any) => {
         await loading.dismiss();
-        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
+        // Maneja errores en la petición HTTP
+        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado');
       }
     );
   }

@@ -32,6 +32,7 @@ export class RegistroPage implements OnInit {
   constructor(
     private _registroCliente:RegistroService,
     private _alertService: AlertToastService,
+    private _loading: AlertToastService,
     private _router:Router,
   ) { }
 
@@ -66,14 +67,16 @@ export class RegistroPage implements OnInit {
 
     this._registroCliente.registroUser(userData).subscribe(
       async (response: any) => {
-        if (!response.error) {await loading.dismiss();
-          //this._router.navigate(['/login']);
+        await loading.dismiss();
+        if (!response.error) {
+          this._router.navigate(['/login']);
           this._alertService.alertToastGreen(response.message || 'Registro exitoso', 'top');
         } else { //revisar no esta validando aqui
           this._alertService.alertToastRed(response.error.message || 'Ocurrió un error inesperado', 'top');
         }
       },
-      (error: any) => {await loading.dismiss();
+      async(error: any) => {
+        await loading.dismiss();
         // Maneja errores en la petición HTTP
         this._alertService.alertToastYellow(error.error?.message || 'No pudimos registra su cuenta', 'top');
       }
