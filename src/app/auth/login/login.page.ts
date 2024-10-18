@@ -26,8 +26,9 @@ import { TokenService } from '../services/get-token/token.service';
 
 })
 export class LoginPage implements OnInit {
-  email:any = null;
-  password:any = null;
+  email: any = null;
+  password: any = null;
+  loading: any;  // Variable para controlar el spinner
 
   constructor(
     private _alertService: AlertToastService,
@@ -44,20 +45,22 @@ export class LoginPage implements OnInit {
       this._alertService.alertToastYellow('Debe ingresar un correo electrónico y una contraseña', 'top');
       return;
     }
-    
+
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
       this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
       return;
     }
-    
+
     let UserData = {
       email: this.email,
       password: this.password
-
     };
 
+    const loading = await this._loading.presentLoading();
+
     this._loginService.login(UserData).subscribe((response: any) => {
+      await loading.dismiss();
         if (!response.error) {
 
           if (response.role == 'cliente') {
@@ -65,9 +68,9 @@ export class LoginPage implements OnInit {
           } else if (response.role == 'peluquero') {
             this._router.navigate(['/peluquero']);
           } else if (response.role == 'administrador') {
-            // this._router.navigate(['/']);
+            // Redirigir según sea necesario
           } else if (response.role == 'dueño') {
-            // return this._router.navigate(['/']);
+            // Redirigir según sea necesario
           } else if (response.role == 'root') {
             this._router.navigate(['/irregistro']);
           } else {
@@ -77,6 +80,7 @@ export class LoginPage implements OnInit {
         }
       },
       (error: any) => {
+        await loading.dismiss();
         this._alertService.alertToastRed( error.error.message || 'Ocurrió un error inesperado', 'top');
       }
     )
@@ -84,8 +88,8 @@ export class LoginPage implements OnInit {
 
   }
 
-  //esto debe ir en pagina de perfil
-  logout(){
+  // Método para cerrar sesión
+  logout() {
     this._loginService.logout();
     this._alertService.alertToastGreen('Sesión cerrada', 'top');
   }

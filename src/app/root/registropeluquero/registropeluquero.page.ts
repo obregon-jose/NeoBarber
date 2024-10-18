@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonInput, IonButton, IonItem, IonLabel, IonCheckbox, IonAccordionGroup, IonAccordion, IonRadioGroup, IonRadio, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonInput, IonButton, IonItem, IonLabel, IonCheckbox, IonAccordionGroup, IonAccordion, IonRadioGroup, IonRadio, IonIcon, LoadingController } from '@ionic/angular/standalone';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistroService } from 'src/app/auth/services/registro/registro.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
@@ -24,7 +24,6 @@ export class RegistropeluqueroPage implements OnInit {
   email: string = '';
   password: string = '';
   roles: { value: number }[] = [
-    
     { value: 2 }
   ];
   selectedRol: number = 2; // Valor inicial por defecto
@@ -32,15 +31,24 @@ export class RegistropeluqueroPage implements OnInit {
   constructor(
     private _registroPeluquero: RegistroService,
     private _alertService: AlertToastService,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
   }
-
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Registrando...',
+      spinner: 'crescent',
+    });
+    await loading.present();
+    return loading;
+  }
   async registrarBarbero() {
     if (!this.email || !this.nombre) {
       return this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
     }
+
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
       return this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
@@ -51,8 +59,10 @@ export class RegistropeluqueroPage implements OnInit {
       email: this.email,
       role_id: this.selectedRol,
     };
+    const loading = await this.presentLoading();
   
     this._registroPeluquero.crearUsuarioConRol(userData).subscribe(
+      await loading.dismiss();
       (response: any) => {
         if (!response.error) {
           // this.mostrarUsuarios(); // si es creado por un admin y tiene la lista de peluqueros abajo
@@ -63,12 +73,10 @@ export class RegistropeluqueroPage implements OnInit {
       },
       (error: any) => {
         // Maneja errores en la petición HTTP
+        await loading.dismiss();
         this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
       }
     );
   }
 
 }
-
-
-

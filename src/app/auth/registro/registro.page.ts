@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, LoadingController, IonLabel } from '@ionic/angular/standalone';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistroService } from '../services/registro/registro.service';
 import {Router} from '@angular/router';
@@ -13,10 +13,9 @@ import { AlertToastService } from 'src/app/shared/alert-toast.service';
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem,
+  imports: [IonLabel, IonButton, IonInput, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem,
     ReactiveFormsModule,
     HttpClientModule,
-    
   ],
   providers:[
     RegistroService,
@@ -28,14 +27,7 @@ export class RegistroPage implements OnInit {
   nombre: string = '';
   email: string = '';
   password: string = '';
-
-
-  // apellido: string = '';
-  // numeroWhatsapp: string = '';
-  // confirmarPassword: string = '';
-  // emailValido: boolean = true;
-  // passwordValida: boolean = true;
-  // contrasenasCoinciden: boolean = true;
+  loading: any;  // Variable para controlar el spinner
 
   constructor(
     private _registroCliente:RegistroService,
@@ -50,34 +42,38 @@ export class RegistroPage implements OnInit {
       this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
       return;
     }
+
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
       this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
       return;
     }
+
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordPattern.test(this.password)) {
       this._alertService.alertToastYellow('La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.', 'top');
       return;
     }
-    
-    
+
     let userData = {
       name: this.nombre,
       email: this.email,
       password: this.password
-    }
+    };
+
+    // Mostrar el spinner antes de la llamada a la API
+    const loading = await this._loading.presentLoading('Registrando...');
 
     this._registroCliente.registroUser(userData).subscribe(
-      (response: any) => {
-        if (!response.error) {
+      async (response: any) => {
+        if (!response.error) {await loading.dismiss();
           //this._router.navigate(['/login']);
           this._alertService.alertToastGreen(response.message || 'Registro exitoso', 'top');
         } else { //revisar no esta validando aqui
           this._alertService.alertToastRed(response.error.message || 'Ocurrió un error inesperado', 'top');
         }
       },
-      (error: any) => {
+      (error: any) => {await loading.dismiss();
         // Maneja errores en la petición HTTP
         this._alertService.alertToastYellow(error.error?.message || 'No pudimos registra su cuenta', 'top');
       }

@@ -1,177 +1,153 @@
-/* Estilos generales */
 ion-content {
-    --background: linear-gradient(to bottom right, #292524, #44403c);
-  }
-  
-  .container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Fondo animado */
- /*  .background-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.1;
-    background-repeat: repeat;
-    background-position: center;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  } */
-  
-  /* Elementos decorativos */
-  .red-circle, .blue-circle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.2;
-    animation: pulse 5s ease-in-out infinite;
-  }
-  
-  .red-circle {
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(to bottom right, #ef4444, #dc2626);
-  }
-  
-  .blue-circle {
-    bottom: 0;
-    right: 0;
-    width: 350px;
-    height: 350px;
-    background: linear-gradient(to top left, #60a5fa, #3b82f6);
-  }
-  
-  /* Herramientas de barbería */
-  .tools {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .tools img {
-    width: 80px;
-    height: 80px;
-    opacity: 0.2;
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .tools img:nth-child(2) {
-    animation-delay: 200ms;
-  }
-  
-  .tools img:nth-child(3) {
-    animation-delay: 400ms;
-  }
-  
-  /* Área de contenido */
-  .content {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .content h2 {
-    text-align: center;
-    font-size: 30px;
-    color: white;
-    margin-bottom: 30px;
-    margin-top: -200px;
-    font-weight: bold;
-  }
-  
-  .content p {
-    font-size: 20px;
-    color: #d6d3d1;
+  --background: linear-gradient(to bottom right, #292524, #44403c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Mantiene la altura mínima para pantallas pequeñas */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Fondo dinámico con degradado radial */
+.background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.5), transparent 70%),
+              radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.5), transparent 70%);
+  z-index: 1;
+  filter: brightness(1);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  z-index: 2;
+}
+
+.logo-container img {
+  width: 100px;
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  .logo-container img {
+    width: 150px;
+    height: 150px;
   }
 
-  .content form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  ion-button {
-    --border-radius: 10px;  
-    width: 100%;
-  }
-
-  ion-item {
-    --border-radius: 10px; 
-  }
-  
-  ion-input {
-    --border-radius: 10px; 
-    padding: 10px;
-  }
-
-  ion-label {
-    color: #fff;
-  }
-
-  
-  
-  /* Animaciones */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
+}
 
 
-  
-  
-//   h1 {
-//     color: white;
-//     margin-bottom: 20px;
-//   }
-  
-//   form {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 15px; /* Espaciado entre los elementos del formulario */
-//   }
-  
-//   ion-item {
-//     --border-radius: 10px;
-//     background-color: rgba(255, 255, 255, 0.8); /* Fondo claro para los inputs */
-//     padding: 5px;
-//   }
-  
-//   ion-input {
-//     padding: 10px;
-//     --border-radius: 10px;
-//   }
-  
-//   ion-button {
-//     --border-radius: 10px;
-//     width: 100%; /* Botón ocupa todo el ancho del formulario */
-//     background-color: #0066ff; /* Color del botón */
-//   }
-  
-//   .link-container {
-//     margin-top: 10px;
-//   }
-  
-//   a {
-//     color: white;
-//     text-decoration: none;
-//   }
+/* Área de contenido */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  z-index: 2;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px; /* Limita el ancho en pantallas más grandes */
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+@media (min-width: 360px) {
+  .login-box h2 {
+    font-size: 24px;
+  }
+  .logo-container img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-container img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+ion-item {
+  --border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+ion-input {
+  color: black;
+  padding: 10px;
+}
+
+ion-label {
+  color: white;
+}
+
+.login-btn {
+  --background: #002EFF;
+  --border-radius: 10px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.link-container a {
+  color: white;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+}
+
+/* Estilos adicionales para pantallas más grandes */
+@media (min-width: 1024px) {
+  .login-box {
+    padding: 80px;
+  width: 200%;
+  max-width: 400px;
+    
+  }
+
+  .login-box h2 {
+    font-size: 24px;
+  }
+  .logo-container img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+
