@@ -1,16 +1,37 @@
-#empaquetar [io.ionic.starter]
 
-npm i @capacitor/core
-npm i -D @capacitor/cli
-npm i @capacitor/android
+npm i @capacitor/core (Ya esta instalado)
+npm i -D @capacitor/cli (Ya esta instalado)
+npm i @capacitor/android (Ya esta instalado)
 
-ionic cap add android -no
-npx cap add android [en caso de que no deje ejecutar (rmdir /s /q android)]
+#Añadir la plataforma Android (solo se hace la primera vez, si ya tienes la carpeta android/ NO LO HAGAS)
+ionic cap add android (Ya esta)
 
+# Si ya tienes la carpeta android y necesitas empezar de nuevo, elimina la carpeta y vuelve a añadir Android:
+rmdir /s /q android
+npx cap add android o ionic cap add android
+
+# Construir la aplicación web (debes ejecutar este comando cada vez que cambies algo en el frontend)
 ionic build --prod
+npx cap add android
 
-ionic cap sync - no
+# Sincronizar Capacitor con Android (ejecuta cada vez que hagas cambios en el proyecto)
 npx cap sync
 
-abrimos en AS 
+# Abrir el proyecto en Android Studio 
+npx cap open android
+
+
+
+# NOTA: Si otra persona clona tu proyecto desde un commit (después de haber hecho `git clone` o `git pull`), ellos deben ejecutar los siguientes comandos:
+
+# Instalar dependencias de npm (debe hacerse después de clonar el proyecto)
+npm install
+
+# Construir la aplicación web
+ionic build --prod
+
+# Sincronizar Capacitor con Android
+npx cap sync
+
+# Luego, pueden abrir el proyecto en Android Studio [npx cap run android]
 npx cap open android
