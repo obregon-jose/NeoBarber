@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("io.ionic.starter", appContext.getPackageName());
+        assertEquals("com.getcapacitor.app", appContext.getPackageName());
     }
 }

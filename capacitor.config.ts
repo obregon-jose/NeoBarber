@@ -5,14 +5,20 @@ const config: CapacitorConfig = {
   // appId: 'com.josh.neobarber',
   appName: 'NeoBarber',
   webDir: 'www',
-  bundledWebRuntime: false,
-  // plugins: {
-  //   SplashScreen: {
-  //     launchShowDuration: 0,
-  //     backgroundColor: '#ffffff',
-  //   },
-  // },
-  //icon: 'src/assets/icon/icon.png',
+  
+  plugins: {
+    // CapacitorHttp: {
+    //   enabled: true,
+    // },
+    // SplashScreen: {
+    //   launchShowDuration: 0,
+    //   backgroundColor: '#ffffff',
+    // },
+    PushNotifications: {
+      presentationOptions: ["badge", "sound", "alert"],
+    },
+  },
+  // icon: 'src/assets/icon/icon.png',
   //splash: 'src/assets/icon/icon.png',
 };
 

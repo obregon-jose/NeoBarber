@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { Toast, ToastPlugin } from '@capacitor/toast';
+// import { Toast, ToastPlugin } from '@capacitor/toast';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,12 +19,12 @@ export class AlertToastService {
   // Método para mostrar el toast TEMPORAL
 
   // Método para mostrar un Toast
-  public async showToast(message: string) {
-    await Toast.show({
-      text: message,
-      duration: 'long',
-    });
-  }
+  // public async showToast(message: string) {
+  //   await Toast.show({
+  //     text: message,
+  //     duration: 'long',
+  //   });
+  // }
   public async showToast1(message: string, duration: 'short' | 'long' = 'long', position: 'top' | 'middle' | 'bottom' = 'top', color: 'success' | 'danger' | 'warning' = 'warning') {
     const toast = await this.toastController.create({
       message: message,
