@@ -21,77 +21,37 @@ import { TokenService } from '../services/get-token/token.service';
   providers: [
     LoginService,
     AlertToastService,
-    TokenService, //
   ] 
 
 })
 export class LoginPage implements OnInit {
   email: any = null;
   password: any = null;
-  loading: any;  // Variable para controlar el spinner
 
   constructor(
     private _alertService: AlertToastService,
-    private _router: Router,
-    private _loginService: LoginService,
-    private _tokenService: TokenService, 
-    private _loading: AlertToastService,
+    private _authService: LoginService,
   ) { } 
 
   ngOnInit() { }
 
-  async login() {
-    
-    if(!this.email || !this.password){
-      this._alertService.alertToastYellow('Debe ingresar un correo electrónico y una contraseña', 'top');
-      return;
-    }
-
+  login() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
       this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
       return;
     }
 
-    let UserData = {
-      email: this.email,
-      password: this.password
-    };
-
-    const loading = await this._loading.presentLoading();
-
-    this._loginService.login(UserData).subscribe( 
-      async (response: any) => {
-      await loading.dismiss();
-        if (!response.error) {
-
-          if (response.role == 'cliente') {
-            this._router.navigate(['/cliente']);
-          } else if (response.role == 'peluquero') {
-            this._router.navigate(['/peluquero']);
-          } else if (response.role == 'administrador') {
-            // Redirigir según sea necesario
-          } else if (response.role == 'dueño') {
-            // Redirigir según sea necesario
-          } else if (response.role == 'root') {
-            this._router.navigate(['/irregistro']);
-          } else {
-            this._alertService.alertToastRed('No se ha podido identificar el usuario', 'top');
-          }
-          this._tokenService.saveToken(response.token); // Guardar el token
-        }
-      },
-      async (error: any) => {
-        await loading.dismiss();
-        this._alertService.alertToastRed( error.error.message || 'Ocurrió un error inesperado', 'top');
-      }
-    )
+    if (this.email && this.password) {
+      this._authService.login(this.email, this.password);
+    } else {
+      this._alertService.alertToastYellow('Debe ingresar un correo electrónico y una contraseña', 'top');
+    }
   }
 
   // Método para cerrar sesión
   logout() {
-    this._loginService.logout();
-    this._alertService.alertToastGreen('Sesión cerrada', 'top');
+    this._authService.logout();
   }
   // <ion-button (click)="logout()">Cerrar sesion</ion-button>
 }

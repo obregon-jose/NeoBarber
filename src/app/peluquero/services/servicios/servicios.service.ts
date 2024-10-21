@@ -1,6 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
+import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { TokenService } from 'src/app/auth/services/get-token/token.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { environment } from 'src/environments/environment';
@@ -12,85 +11,124 @@ export class ServiciosService {
   private apiUrl = environment.apiUrl+'/services';
 
   constructor(
-    private _http: HttpClient,
     private _tokenService: TokenService,
-    private _alertService: AlertToastService
+    private _alert_loading_Service: AlertToastService
   ) { }
 
   // Método para cargar servicios
-  cargarServicios(): Observable<any> {
-    return this._tokenService.getHeaders().pipe(
-      switchMap((headers) => {
-        return this._http.get(this.apiUrl, { headers });
-      })
-    );
+  async cargarServicios(): Promise<any[]> {
+    const token = await this._tokenService.getToken();
+    const options = {
+      url: `${this.apiUrl}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+    const loading = await this._alert_loading_Service.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.get(options);
+      console.log('exitoso', response);
+      await loading.dismiss();
+      return response.data.services || [];
+    } catch (error) {
+      console.log('fallido-2');
+      this._alert_loading_Service.alertToastRed('La conexión al servidor fue rechazada');
+      await loading.dismiss();
+      return [];
+    }
   }
 
   // mostrarUnServicio(data: any){}
   
   // Crear un servicio
-  crearServicio(data: any): Observable<any> {
-    return from(this._tokenService.getHeaders()).pipe(
-      switchMap((headers: HttpHeaders) => 
-        this._http.post(this.apiUrl, data, { headers }).pipe(
-          map((resp: any) => {
-            return resp;
-          }),
-          catchError((error) => {
-            this._alertService.alertToastRed('Error al crear el servicio', 'top');
-            return throwError(() => error);
-          })
-        )
-      ),
-      catchError((error) => {
-        this._alertService.alertToastRed('Error al obtener los encabezados', 'top');
-        return throwError(() => error);
-      })
-    );
+  async crearServicio(data: any): Promise<void> {
+    const token = await this._tokenService.getToken();
+    const options = {
+      url: `${this.apiUrl}`,
+      data: {
+        name: data.name,
+        price: data.price,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+    const loading = await this._alert_loading_Service.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.post(options);
+      if (response.status === 201) { console.log('exitoso',response);
+        this._alert_loading_Service.alertToastGreen(response.data.message);
+        await loading.dismiss();
+      } else {console.log('fallido', response);
+        this._alert_loading_Service.alertToastYellow(response.data.message);
+        await loading.dismiss();
+      }
+    } catch (error) {
+      console.log('fallido-2');
+      this._alert_loading_Service.alertToastRed('La conexión al servidor fue rechazada');
+      await loading.dismiss();
+    }
   }
 
   //Editar un servicio
-  editarServicios(data: any): Observable<any> {
-    return from(this._tokenService.getHeaders()).pipe(
-      switchMap((headers: HttpHeaders) =>
-        this._http.put(`${this.apiUrl}/${data.id}`, data, { headers }).pipe(
-          map((resp: any) => {
-            return resp;
-          }),
-          catchError((error) => {
-            this._alertService.alertToastRed('Error al editar el servicio', 'top');
-            return throwError(() => error);
-          })
-        )
-      ),
-      catchError((error) => {
-        this._alertService.alertToastRed('Error al obtener los encabezados', 'top');
-        return throwError(() => error);
-      })
-    );
+  async editarServicios(data: any): Promise<void> {
+    const token = await this._tokenService.getToken();
+    const options = {
+      url: `${this.apiUrl}/${data.id}`,
+      data: {
+        name: data.name,
+        price: data.price,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+    const loading = await this._alert_loading_Service.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.put(options);
+      if (response.status === 200) {console.log('exitoso', response);
+        this._alert_loading_Service.alertToastGreen(response.data.message );
+        await loading.dismiss();
+      } else {console.log('fallido', response);
+        this._alert_loading_Service.alertToastYellow(response.data.message);
+        await loading.dismiss();
+      }
+    } catch (error) {
+      console.log('fallido-2');
+      this._alert_loading_Service.alertToastRed('La conexión al servidor fue rechazada');
+      await loading.dismiss();
+    }
   }
 
   //Eliminar servicio
-  eliminarServicios(id: number): Observable<any> {
-    return from(this._tokenService.getHeaders()).pipe(
-      switchMap((headers: HttpHeaders) =>
-        this._http.delete(`${this.apiUrl}/${id}`, { headers }).pipe(
-          map((resp: any) => {
-            return resp;
-          }),
-          catchError((error) => {
-            this._alertService.alertToastRed('Error al eliminar el servicio');
-            return throwError(() => error);
-          })
-        )
-      ),
-      catchError((error) => {
-        this._alertService.alertToastRed('Error al obtener los encabezados');
-        return throwError(() => error);
-      })
-    );
+  async eliminarServicios(id: number): Promise<void> {
+    const token = await this._tokenService.getToken();
+    const options = {
+      url: `${this.apiUrl}/${id}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+    const loading = await this._alert_loading_Service.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.delete(options);
+      if (response.status === 200) { console.log('exitoso', response);
+        this._alert_loading_Service.alertToastGreen(response.data.message );
+        await loading.dismiss();
+      } else { console.log('fallido');
+        this._alert_loading_Service.alertToastYellow(response.data.message);
+        await loading.dismiss();
+        // Si la respuesta no es 200, manejar el error
+      }
+    } catch (error) {
+      console.log('fallido-2');
+      this._alert_loading_Service.alertToastRed('La conexión al servidor fue rechazada');
+      await loading.dismiss();
+    }
   }
-
-
 
 }
