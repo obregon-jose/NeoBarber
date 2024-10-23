@@ -1,0 +1,94 @@
+ <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>horario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!--
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">horario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecciona los días</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Lunes</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.lunes"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Martes</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.martes"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Miércoles</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.miercoles"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Jueves</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.jueves"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Viernes</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.viernes"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sábado</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.sabado"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Domingo</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="dias.domingo"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      
+      <ion-item>
+        <ion-label>Hora Inicial</ion-label>
+        <ion-select [(ngModel)]="horaInicio">
+          <ion-select-option>07:00 AM</ion-select-option>
+          <ion-select-option>08:00 AM</ion-select-option>
+          <ion-select-option>09:00 AM</ion-select-option>
+          <ion-select-option>10:00 AM</ion-select-option>
+          <ion-select-option>11:00 AM</ion-select-option>
+          <ion-select-option>12:00 PM</ion-select-option>
+          <ion-select-option>01:00 PM</ion-select-option>
+          <ion-select-option>02:00 PM</ion-select-option>
+          <ion-select-option>03:00 PM</ion-select-option>
+          <ion-select-option>04:00 PM</ion-select-option>
+          <ion-select-option>05:00 PM</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Hora Final</ion-label>
+        <ion-select [(ngModel)]="horaFin">
+          <ion-select-option>07:00 AM</ion-select-option>
+          <ion-select-option>08:00 AM</ion-select-option>
+          <ion-select-option>09:00 AM</ion-select-option>
+          <ion-select-option>10:00 AM</ion-select-option>
+          <ion-select-option>11:00 AM</ion-select-option>
+          <ion-select-option>12:00 PM</ion-select-option>
+          <ion-select-option>01:00 PM</ion-select-option>
+          <ion-select-option>02:00 PM</ion-select-option>
+          <ion-select-option>03:00 PM</ion-select-option>
+          <ion-select-option>04:00 PM</ion-select-option>
+          <ion-select-option>05:00 PM</ion-select-option>
+          <ion-select-option>06:00 PM</ion-select-option>
+          <ion-select-option>07:00 PM</ion-select-option>
+          <ion-select-option>08:00 PM</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="full" (click)="crearHorario()">Crear Horario</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

@@ -37,6 +37,10 @@ export const routes: Routes = [
           import('../perfil/perfil-peluquero.page').then((m) => m.PerfilPeluqueroPage),
       },
       {
+        path: 'horario',
+        loadComponent: () => import('../horario/horario.page').then( m => m.HorarioPage)
+      },
+      {
         path: '',
         redirectTo: '/peluquero/fila',
         pathMatch: 'full',
