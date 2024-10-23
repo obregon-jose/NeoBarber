@@ -47,14 +47,7 @@ export const routes: Routes = [
     loadComponent: () => import('./root/irregistro/irregistro.page').then( m => m.IrregistroPage)
   },
 
-  {
-    path: 'cliente/perfil',
-    loadComponent: () => import('./cliente/perfil/perfil-cliente.page').then( m => m.PerfilClientePage)
-  },
-  {
-    path: 'peluquero/perfil',
-    loadComponent: () => import('./peluquero/perfil/perfil-peluquero.page').then( m => m.PerfilPeluqueroPage)
-  },
+
 
 
 

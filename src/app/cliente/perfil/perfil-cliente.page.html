@@ -7,30 +7,32 @@
 <ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ user.name }}</ion-card-title>
+      <ion-card-title>{{ "user.name"}}</ion-card-title>
       
     </ion-card-header>
 
     <ion-card-content>
       <div class="profile-picture">
-        <img [src]="user.photo" alt="Foto de perfil">
+        <img [src]="photos.photo" alt="Foto de perfil">
       </div>
       <ion-list>
         <ion-item>
-          <ion-label>Nombre</ion-label>
-          <ion-input [(ngModel)]="user.name" placeholder=" Ingresa tu nombre"></ion-input>
+          <ion-label>Nombre: {{"user.name" }}</ion-label>
+          <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
-          <ion-label>Teléfono</ion-label>
-          <ion-input [(ngModel)]="user.phone" placeholder=" Ingresa tu teléfono"></ion-input>
+          <ion-label>Teléfono: {{" user.phone" }}</ion-label>
+          <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-input [(ngModel)]="user.email" type="email" placeholder=" Ingresa tu correo"></ion-input>
+          <ion-label>Email: {{ "user.email" }}</ion-label>
+          <ion-text type="email"></ion-text>
         </ion-item>
       </ion-list>
 
-      <ion-button expand="block" (click)="saveProfile()">Editar perfil</ion-button>
+      <ion-button expand="block" (click)="mostrarUsuario()" color="medium">
+        <ion-icon slot="start" name="pencil" ></ion-icon>
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
