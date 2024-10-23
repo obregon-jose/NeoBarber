@@ -151,3 +151,14 @@ ion-label {
 }
 
 
+.custom-button {
+  color: white; /* Texto en blanco */
+  border-color: white; /* Borde en blanco */
+  margin-top: 20px; /* Espacio arriba */
+  width: 90%; 
+  --border-radius: 10px;
+
+  ion-icon {
+    color: white; /* Icono en blanco */
+  }
+}

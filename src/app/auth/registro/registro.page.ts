@@ -32,8 +32,6 @@ export class RegistroPage implements OnInit {
   constructor(
     private _registroCliente:RegistroService,
     private _alertService: AlertToastService,
-    private _loading: AlertToastService,
-    private _router:Router,
   ) { }
 
   ngOnInit() {}
