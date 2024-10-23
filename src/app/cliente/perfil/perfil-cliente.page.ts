@@ -30,7 +30,7 @@ import { AlertToastService } from 'src/app/shared/alert-toast.service';
 })
 
 export class PerfilClientePage {
-  users: any[] = [];
+  user: any = {};
   
   photos = {
     photo: 'assets/images/profile.png'
@@ -50,15 +50,15 @@ export class PerfilClientePage {
   async mostrarUsuario() {
     try {
       const data = await this._perfilService.cargarUsuario();
-      this.users = data;  // Asigna los datos al array
-      console.log(this.users);  // Aquí tendrás los servicios cargados
+      this.user = data;  // Asigna los datos al array
+      console.log("....-",this.user);  // Aquí tendrás los servicios cargados
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }
   }
   saveProfile() {
     // Aquí puedes implementar la lógica para guardar el perfil
-    console.log('Perfil guardado', this.users);
+    console.log('Perfil guardado', this.user);
     // Llamar a un servicio para actualizar los datos del usuario en el backend
     
     

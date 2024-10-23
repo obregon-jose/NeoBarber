@@ -4,10 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" >
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ "user.name"}}</ion-card-title>
+      <ion-card-title>{{ user?.name}}</ion-card-title>
       
     </ion-card-header>
 
@@ -17,15 +17,15 @@
       </div>
       <ion-list>
         <ion-item>
-          <ion-label>Nombre: {{"user.name" }}</ion-label>
+          <ion-label>Apodo: {{ user?.detail?.nickname || user?.name}}</ion-label>
           <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
-          <ion-label>Teléfono: {{" user.phone" }}</ion-label>
+          <ion-label>Teléfono: {{ user?.detail?.phone }}</ion-label>
           <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
-          <ion-label>Email: {{ "user.email" }}</ion-label>
+          <ion-label>Email: {{ user?.email }}</ion-label>
           <ion-text type="email"></ion-text>
         </ion-item>
       </ion-list>
