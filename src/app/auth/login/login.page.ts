@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, IonButtons } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, IonButtons, IonIcon } from '@ionic/angular/standalone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router'; 
 import { LoginService } from '../services/login/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
-import { TokenService } from '../services/get-token/token.service';
+import { addIcons } from 'ionicons';
+import { person } from 'ionicons/icons';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, 
+  imports: [IonIcon, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonInput, IonButton, IonFooter, IonGrid, IonCol, IonRow, IonLabel, 
     ReactiveFormsModule,
     HttpClientModule,
     RouterLink,
@@ -31,7 +32,11 @@ export class LoginPage implements OnInit {
   constructor(
     private _alertService: AlertToastService,
     private _authService: LoginService,
-  ) { } 
+  ) {
+    addIcons({
+      'person': person,
+    });
+   } 
 
   ngOnInit() { }
 
