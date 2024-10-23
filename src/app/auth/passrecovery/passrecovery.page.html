@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Recuperar Contraseña</ion-title>
   </ion-toolbar>
@@ -10,4 +10,65 @@
       <ion-title size="large">Recuperar Contraseña</ion-title>
     </ion-toolbar>
   </ion-header>
+</ion-content> -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Restablecer Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <form (submit)="solicitarCodigo()">
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!email">Enviar Código</ion-button>
+  </form>
 </ion-content>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verificar Código</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (submit)="verificarCodigo()">
+    <ion-item>
+      <ion-label position="floating">Código de Verificación</ion-label>
+      <ion-input type="number" [(ngModel)]="code" name="code" maxlength="6" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!code">Verificar Código</ion-button>
+  </form>
+</ion-content>
+
+
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Restablecer Contraseña</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form (submit)="actualizarContrasena()">
+        <ion-item>
+          <ion-label position="floating">Nueva Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="newPassword" name="newPassword"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword"></ion-input>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label position="floating">Código de Verificación</ion-label>
+          <ion-input type="text" [(ngModel)]="code" name="code" maxlength="6" required></ion-input>
+        </ion-item> -->
+    
+        <ion-button expand="full" type="submit" [disabled]="newPassword!=confirmPassword">Restablecer Contraseña</ion-button>
+      </form>
+    </ion-content>
+    
