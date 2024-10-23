@@ -31,31 +31,27 @@ import { AlertToastService } from 'src/app/shared/alert-toast.service';
 
 export class PerfilClientePage {
   user: any = {};
-  
-  photos = {
-    photo: 'assets/images/profile.png'
-  };
-  //photo: 'assets/images/profile.png'
+
   constructor(
     private _perfilService:PerfilService,
-    private _alert_loading_Service: AlertToastService,
     
   ) {
     addIcons({ pencil });
   }
 
   ngOnInit() {
-    this.mostrarUsuario();
+    this.mostrarPerfil();
   }
-  async mostrarUsuario() {
+
+  async mostrarPerfil() {
     try {
       const data = await this._perfilService.cargarUsuario();
-      this.user = data;  // Asigna los datos al array
-      console.log("....-",this.user);  // Aquí tendrás los servicios cargados
+      this.user = data;
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }
   }
+
   saveProfile() {
     // Aquí puedes implementar la lógica para guardar el perfil
     console.log('Perfil guardado', this.user);

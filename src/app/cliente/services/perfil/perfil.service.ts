@@ -15,7 +15,7 @@ export class PerfilService {
   ) { }
   
 
-  async cargarUsuario(): Promise<void> {
+  async cargarUsuario(): Promise<any> {
     const token = await this._tokenService.getToken();
     const options = {
       url: `${this.apiUrl}/user`,
@@ -29,13 +29,11 @@ export class PerfilService {
       const response: HttpResponse = await CapacitorHttp.get(options);
       // console.log('exitoso', response.data);
       await loading.dismiss();
-      // console.log(response.data);
-      return response.data 
+      return response.data
     } catch (error) {
       console.log('fallido-2');
       this._alert_loading_Service.alertToastRed('La conexión al servidor fue rechazada');
       await loading.dismiss();
-      // return [];
     }
   }
 }

@@ -41,36 +41,18 @@ export class TokenService {
   }
 
    // Obtener el token de manera segura con manejo de errores
-   async getToken(): Promise<string | null> {
+  async getToken(): Promise<string | null> {
     try {
       const { value } = await Preferences.get({ key: 'token' });
+      if (!value) {
+        this._alertService.alertToastRed('Tenemos Problemas para verificar su identidad. Por favor, inicie sesión nuevamente.');
+        this._router.navigate(['/login']);
+      }
       return value;
     } catch (error) {
-      console.error('Error obteniendo el token:', error);
+      this._alertService.alertToastRed('Ocurrió un error inesperado. Por favor, intente nuevamente. Si el problema persiste, inicie sesión nuevamente.');
       return null;
     }
-  }
-  
-  // Método para crear headers con el token
-  getHeaders(): Observable<HttpHeaders> {
-    return from(this.getToken()).pipe(
-      switchMap((token) => {
-        if (token) {
-          return of(new HttpHeaders({
-            'Authorization': `Bearer ${token}`,  // Incluye el token en los headers
-            'Content-Type': 'application/json',
-          }));
-        } else {
-          this._alertService.alertToastRed('Tenemos Problemas para verificar su identidad, Por favor Inicie Sesión nuevamente', 'top', 5000);
-          this._router.navigate(['/login']);
-          return throwError(() => new Error('No hay token'));
-        }
-      }),
-      catchError((error) => {
-        // Manejo de errores adicional si es necesario
-        return throwError(() => error);
-      })
-    );
   }
 
   // Limpiar todo el almacenamiento - PELIGROSO

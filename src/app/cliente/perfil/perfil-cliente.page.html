@@ -13,7 +13,7 @@
 
     <ion-card-content>
       <div class="profile-picture">
-        <img [src]="photos.photo" alt="Foto de perfil">
+        <ion-img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"></ion-img>
       </div>
       <ion-list>
         <ion-item>
@@ -21,7 +21,7 @@
           <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
-          <ion-label>Teléfono: {{ user?.detail?.phone }}</ion-label>
+          <ion-label>Teléfono: {{ user?.detail?.phone || '0000000000' }}</ion-label>
           <ion-text  ></ion-text>
         </ion-item>
         <ion-item>
@@ -29,8 +29,8 @@
           <ion-text type="email"></ion-text>
         </ion-item>
       </ion-list>
-
-      <ion-button expand="block" (click)="mostrarUsuario()" color="medium">
+      <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
+      <ion-button expand="block" (click)="mostrarPerfil()" color="medium">
         <ion-icon slot="start" name="pencil" ></ion-icon>
       </ion-button>
     </ion-card-content>
