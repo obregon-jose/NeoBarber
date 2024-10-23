@@ -6,15 +6,23 @@
 
 <ion-content class="ion-padding" >
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>{{ user?.name}}</ion-card-title>
-      
-    </ion-card-header>
-
     <ion-card-content>
+      <!-- <div class="profile-picture">
+        <ion-img [src]="user?.detail?.photo || 'assets/images/messi.png'" alt="Foto de perfil"></ion-img>
+      </div> -->
+
       <div class="profile-picture">
-        <ion-img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"></ion-img>
+      <ion-thumbnail >
+        <img  src='assets/images/messi.png'  />
+      </ion-thumbnail>
       </div>
+
+      <div class="profile-picture">
+        <ion-card-header  >
+          <ion-card-title>{{ user?.name}}</ion-card-title>
+        </ion-card-header>
+        </div>
+
       <ion-list>
         <ion-item>
           <ion-label>Apodo: {{ user?.detail?.nickname || user?.name}}</ion-label>

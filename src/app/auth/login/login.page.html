@@ -31,23 +31,23 @@
           <ion-item>
             <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required></ion-input>
           </ion-item>
-
-          <br>
+<br>
+          <!-- <div class="link-container">
+            <a href="/passrecovery">¿Olvidaste tu contraseña?</a>
+          </div>
+          <br> -->
 
           <ion-button type="submit" class="login-btn">Iniciar</ion-button>
 
-          <br>
-          <div class="link-container">
-            <a href="/passrecovery">Olvidaste tu contraseña?</a>
-          </div>
+          <ion-button routerLink="/registro"  class="custom-button"  color="medium">
+            <ion-icon slot="start" name="person"></ion-icon>
+            Registrarse
+          </ion-button>
         </form>
       </div>
-      
+
     </div>
-    <ion-button  fill="outline" class="custom-button">
-      <ion-icon slot="start" name="person"></ion-icon>
-      Registrarse
-    </ion-button>
+
   </div>
 </ion-content>
 
@@ -55,9 +55,9 @@
 
 
 <!-- <ion-header [translucent]="true">
-  
+
     <ion-title>Inicio de de sesion</ion-title>
-  
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -72,7 +72,7 @@
       >
       </ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-input
         label="Input with clear on edit"
@@ -82,7 +82,7 @@
       >
       </ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-input
         label="Password input"

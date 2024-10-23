@@ -42,6 +42,7 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
+  
 
   async mostrarPerfil() {
     try {
@@ -52,12 +53,14 @@ export class PerfilClientePage {
     }
   }
 
-  saveProfile() {
-    // Aquí puedes implementar la lógica para guardar el perfil
-    console.log('Perfil guardado', this.user);
-    // Llamar a un servicio para actualizar los datos del usuario en el backend
-    
-    
+  editarUsuario(data: any, id: number) {
+    let UserData = {
+      id: id,
+      name: data.nombre,
+      price: data.precio,
+    };
+    this._perfilService.editarUsuario(UserData);
+    this.mostrarPerfil();
   }
 
 }
