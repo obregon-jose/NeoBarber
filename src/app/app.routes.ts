@@ -41,10 +41,12 @@ export const routes: Routes = [
   {
     path: 'registropeluquero',
     loadComponent: () => import('./root/registropeluquero/registropeluquero.page').then( m => m.RegistropeluqueroPage)
-  },  {
+  },
+  {
     path: 'irregistro',
     loadComponent: () => import('./root/irregistro/irregistro.page').then( m => m.IrregistroPage)
   },
+  
 
 
 

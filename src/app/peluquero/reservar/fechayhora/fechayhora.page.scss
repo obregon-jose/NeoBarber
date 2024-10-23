@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
 ion-content {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,52 @@ ion-content {
   padding: 16px;
 }
 
-h3 {
-  margin: 20px 0;
+
+h2 {
+  font-family: "Aclonica";
+  font-size: bold;
+  text-align: center;
+  margin-top: 10px;
 }
+
+.label-hora {
+  font-size: 20px;
+}
+
+ion-select {
+  margin-top: 10px;
+  width: 100px;
+}
+
+.botones {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  margin-top: 20px; /* Espaciado superior para separar de la lista */
+}
+
+.label-fecha {
+  font-size: 20px;
+  display: block;
+  text-align: center; /* Centra el texto */
+  width: 100%; /* Asegura que el label ocupe todo el ancho del contenedor */
+  margin-bottom: 8px; /* Espacio para separar del calendario */
+}
+
+.label-hora {
+  font-size: 20px;
+  display: block;
+  text-align: center; /* Centra el texto */
+  width: 100%; /* Asegura que el label ocupe todo el ancho del contenedor */
+  margin-bottom: 8px; /* Espacio para separar del calendario */
+}
+
+.fecha {
+  display: flex;
+  justify-content: center;
+}
+
+.hora{
+  display: flex;
+  justify-content: center;
+}
+

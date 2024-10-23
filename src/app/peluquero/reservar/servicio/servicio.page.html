@@ -1,0 +1,25 @@
+<ion-header>
+  <h2>Reservar</h2>
+  <ion-progress-bar value="1.2"></ion-progress-bar> <!-- Barra de progreso -->
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label><strong>Servicios</strong></ion-label>
+      <ion-label class="precio"><strong>Precio sugerido</strong></ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let servicio of servicios">
+      <ion-checkbox slot="start" [(ngModel)]="servicio.seleccionado"></ion-checkbox>
+      <ion-label>{{ servicio.nombre }}</ion-label>
+      <ion-label slot="end">${{ servicio.precio }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="botones">
+    <ion-button (click)="volver()">Volver</ion-button>
+    <ion-button (click)="siguiente()">Siguiente</ion-button>
+  </div>
+</ion-content>
+
