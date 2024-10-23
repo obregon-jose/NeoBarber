@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { addIcons } from 'ionicons';
 import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
-import { AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-servicios',
   templateUrl: 'servicios.page.html',
@@ -54,7 +54,7 @@ export class ServiciosPage implements OnInit {
     }
   }
 
-  async agregarServicio(data: any) {
+  agregarServicio(data: any) {
     let serviceData = {
       name: data.nombre,
       price: data.precio,
@@ -63,7 +63,7 @@ export class ServiciosPage implements OnInit {
     this.mostrarServicios();
   }
 
-  async editarServicio(data: any, id: number) {
+  editarServicio(data: any, id: number) {
     let serviceData = {
       id: id,
       name: data.nombre,
@@ -73,7 +73,7 @@ export class ServiciosPage implements OnInit {
     this.mostrarServicios();
   }
   
-  async eliminarServicio(id: number) {
+  eliminarServicio(id: number) {
     this._serviciosServicie.eliminarServicios(id)
     this.mostrarServicios();
   }

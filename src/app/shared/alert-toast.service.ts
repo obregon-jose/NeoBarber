@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular/standalone';
 import { LoadingController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 // import { Toast, ToastPlugin } from '@capacitor/toast';
