@@ -5,10 +5,9 @@ import { ServiciosService } from '../services/servicios/servicios.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
-import { Subject, takeUntil } from 'rxjs';
 import { addIcons } from 'ionicons';
 import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
-import { AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-servicios',
   templateUrl: 'servicios.page.html',
@@ -28,15 +27,12 @@ import { AlertController } from '@ionic/angular';
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class ServiciosPage implements OnInit {
-  private unsubscribe$ = new Subject<void>();
   services: any[] = [];
 
   constructor(
      private _serviciosServicie:ServiciosService,
-     private _alertService: AlertToastService,
+     private _alert_loading_Service: AlertToastService,
      private alertController: AlertController,
-     private _loading: AlertToastService,
-
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -49,85 +45,39 @@ export class ServiciosPage implements OnInit {
   }
 
   async mostrarServicios() {
-    const loading = await this._loading.presentLoading();
-    this._serviciosServicie.cargarServicios()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe({
-        next: async (response) => {
-          this.services = response.services;
-          await loading.dismiss();
-        },
-        error: () => {
-          this._alertService.alertToastRed('Error al cargar los servicios', 'top');
-        }
-      });
+    try {
+      const data = await this._serviciosServicie.cargarServicios();
+      this.services = data;  // Asigna los datos al array
+      console.log(this.services);  // Aquí tendrás los servicios cargados
+    } catch (error) {
+      console.error('Error al cargar los servicios', error);
+    }
   }
 
-  async agregarServicio(data: any) {
+  agregarServicio(data: any) {
     let serviceData = {
       name: data.nombre,
       price: data.precio,
     };
-    const loading = await this._loading.presentLoading();
-  
-    this._serviciosServicie.crearServicio(serviceData).subscribe(
-      async (response: any) => {
-        if (!response.error) {
-          this.mostrarServicios();
-          this._alertService.alertToastGreen('Servicio agregado exitosamente', 'top');
-          await loading.dismiss();
-        } else {
-          this._alertService.alertToastRed(response.error.message || 'Error al agregar el servicio', 'top');
-        }
-      },
-      async (error: any) => {
-        // Maneja errores en la petición HTTP
-        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
-        await loading.dismiss();
-      }
-    );
+    this._serviciosServicie.crearServicio(serviceData);
+    this.mostrarServicios();
   }
 
-  async editarServicio(data: any, id: number) {
+  editarServicio(data: any, id: number) {
     let serviceData = {
       id: id,
       name: data.nombre,
       price: data.precio,
     };
-    const loading = await this._loading.presentLoading();
-
-    this._serviciosServicie.editarServicios(serviceData).subscribe(
-      async (response: any) => {
-        if (!response.error) {
-          this.mostrarServicios(); // Actualiza la lista de servicios
-          this._alertService.alertToastGreen('Servicio editado con éxito');
-          await loading.dismiss();
-        } else {
-          this._alertService.alertToastRed('Error al editar el servicio');
-        }
-      },
-      async (error: any) => {
-        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado', 'top');
-        await loading.dismiss();
-      }
-    );
+    this._serviciosServicie.editarServicios(serviceData);
+    this.mostrarServicios();
   }
   
-  async eliminarServicio(id: number) {
-    this._serviciosServicie.eliminarServicios(id).subscribe(
-      (response: any) => {
-        if (!response.error) {
-          this.mostrarServicios(); 
-          this._alertService.alertToastGreen('Servicio eliminado con éxito');
-        } else {
-          this._alertService.alertToastRed('Error al eliminar el servicio');
-        }
-      },
-      (error: any) => {
-        this._alertService.alertToastRed(error.error?.message || 'Ocurrió un error inesperado');
-      }
-    );
+  eliminarServicio(id: number) {
+    this._serviciosServicie.eliminarServicios(id)
+    this.mostrarServicios();
   }
+
   public alertButtons = [
     {
       text: 'CANCELAR',
@@ -141,7 +91,7 @@ export class ServiciosPage implements OnInit {
           this.agregarServicio(data);
           return true; 
         } else {
-          this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
+          this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
           return false;
         }
       },
@@ -202,7 +152,7 @@ async openEditAlert(service: any) {
             this.editarServicio(data, service.id); // Llama a la función para editar el servicio
             return true
           } else {
-            this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
+            this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
             return false;
           }
         }

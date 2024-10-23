@@ -32,55 +32,32 @@ export class RegistroPage implements OnInit {
   constructor(
     private _registroCliente:RegistroService,
     private _alertService: AlertToastService,
-    private _loading: AlertToastService,
-    private _router:Router,
   ) { }
 
   ngOnInit() {}
   
-  async registrarUsuario() {
-    if (!this.email || !this.nombre || !this.password) {
-      this._alertService.alertToastYellow('Debe llenar todos los campos', 'top');
-      return;
-    }
-
+  registrarUsuario() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(this.email)) {
-      this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido', 'top');
+      this._alertService.alertToastYellow('Debes ingresar un Correo Electrónico válido');
       return;
     }
 
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*\d).{8,}$/;
     if (!passwordPattern.test(this.password)) {
-      this._alertService.alertToastYellow('La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.', 'top');
+      this._alertService.alertToastYellow('La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.');
       return;
     }
 
-    let userData = {
-      name: this.nombre,
-      email: this.email,
-      password: this.password
-    };
-
-    // Mostrar el spinner antes de la llamada a la API
-    const loading = await this._loading.presentLoading('Registrando...');
-
-    this._registroCliente.registroUser(userData).subscribe(
-      async (response: any) => {
-        await loading.dismiss();
-        if (!response.error) {
-          this._router.navigate(['/login']);
-          this._alertService.alertToastGreen(response.message || 'Registro exitoso', 'top');
-        } else { //revisar no esta validando aqui
-          this._alertService.alertToastRed(response.error.message || 'Ocurrió un error inesperado', 'top');
-        }
-      },
-      async(error: any) => {
-        await loading.dismiss();
-        // Maneja errores en la petición HTTP
-        this._alertService.alertToastYellow(error.error?.message || 'No pudimos registra su cuenta', 'top');
-      }
-    );
+    if (this.email && this.nombre && this.password) {
+      let userData = {
+        name: this.nombre,
+        email: this.email,
+        password: this.password
+      };
+      this._registroCliente.registroUser(userData);
+    } else {
+      this._alertService.alertToastYellow('Debe llenar todos los campos');
+    }
   }
-  
 }
