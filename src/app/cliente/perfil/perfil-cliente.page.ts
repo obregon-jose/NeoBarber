@@ -9,6 +9,9 @@ import { PerfilService } from '../services/perfil/perfil.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { AlertController } from '@ionic/angular/standalone';
 
+// import { Camera, CameraResultType } from '@capacitor/camera';
+import { ImagenService } from '../services/imagen/imagen.service';
+
 @Component({
   selector: 'app-perfil-cliente',
   templateUrl: 'perfil-cliente.page.html',
@@ -30,11 +33,13 @@ import { AlertController } from '@ionic/angular/standalone';
 
 export class PerfilClientePage {
   user: any = {};
+  imageUrl: string | null = null;
 
   constructor(
     private _perfilService:PerfilService,
     private alertController: AlertController,
     private _alert_loading_Service: AlertToastService,
+    private ImagenService: ImagenService,
     
   ) {
     addIcons({ pencil });
@@ -43,6 +48,20 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
+
+  async takePicture() {
+    this.imageUrl = await this.ImagenService.takePicture() || null;
+  }
+
+  async uploadImage() {
+    if (this.imageUrl) {
+      const response = await this.ImagenService.uploadImage(this.imageUrl);
+      console.log('Image uploaded:', response);
+    }
+   
+  }
+
+  
   
 
   async mostrarPerfil() {

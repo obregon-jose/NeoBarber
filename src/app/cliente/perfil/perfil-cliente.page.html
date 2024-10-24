@@ -10,16 +10,21 @@
       <!-- <div class="profile-picture">
         <ion-img [src]="user?.detail?.photo || 'assets/images/messi.png'" alt="Foto de perfil"></ion-img>
       </div> -->
+      
 
       <div class="profile-picture">
       <ion-thumbnail >
-        <img  src='assets/images/messi.png'  />
+        <img  src='assets/images/profile.png'  />
       </ion-thumbnail>
 
       </div>
       <ion-button  fill="clear" class="edit-button" class="centrar">
         <ion-icon name="pencil"></ion-icon>
       </ion-button>
+
+      <ion-button (click)="takePicture()">Tomar Foto</ion-button>
+      <img [src]="imageUrl" *ngIf="imageUrl" />
+      <ion-button (click)="uploadImage()" *ngIf="imageUrl">Subir Imagen</ion-button>
 
       <div class="centrar">
         <ion-card-header  >
