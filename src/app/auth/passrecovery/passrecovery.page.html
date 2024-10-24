@@ -18,7 +18,7 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content class="ion-padding">
+<!-- <ion-content class="ion-padding">
   <form (submit)="solicitarCodigo()">
     <ion-item>
       <ion-label position="floating">Correo Electrónico</ion-label>
@@ -35,6 +35,49 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recuperar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <SOLICITAR CODIGO> -->
+<!-- <ion-content class="ion-padding">
+  <div class="center-content">
+    <ion-list class="form-container">
+      <div class="logo-container">
+        <img src="assets/images/neo.png" alt="Barbería Logo">
+      </div>
+
+      <h2 style="text-align: center; margin-top: 10px;">Recuperar Contraseña</h2>
+
+      <form (submit)="solicitarCodigo()">
+        
+        <ion-input [(ngModel)]="email" label="Correo electronico" label-placement="floating" fill="outline" placeholder="Ingresa tu Correo electronico" type="email"  name="email"></ion-input>
+        <br>
+        <ion-button expand="block" type="submit" [disabled]="!email">Enviar Código</ion-button>
+      </form>
+    </ion-list>
+  </div>
+</ion-content> -->
+<!-- ------------------------------------------------- -->
+
+
+<!-- <VERIFICAR CODIGO> -->
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+
+
+<!-- 
 <ion-content class="ion-padding">
   <form (submit)="verificarCodigo()">
     <ion-item>
@@ -62,13 +105,10 @@
         <ion-item>
           <ion-label position="floating">Confirmar Contraseña</ion-label>
           <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword"></ion-input>
-        </ion-item>
-        <!-- <ion-item>
-          <ion-label position="floating">Código de Verificación</ion-label>
-          <ion-input type="text" [(ngModel)]="code" name="code" maxlength="6" required></ion-input>
         </ion-item> -->
+       
     
-        <ion-button expand="full" type="submit" [disabled]="newPassword!=confirmPassword">Restablecer Contraseña</ion-button>
+        <!-- <ion-button expand="full" type="submit" [disabled]="newPassword!=confirmPassword">Restablecer Contraseña</ion-button>
       </form>
     </ion-content>
-    
+     -->

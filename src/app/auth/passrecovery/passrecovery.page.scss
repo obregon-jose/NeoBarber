@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+
+.center-content {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa del contenedor */
+    
+    
+}
+
+.form-container {
+    
+    margin-top: 50%;
+    width: 92%;
+    max-width: 500px;
+    margin: 0 auto; /* Centra el formulario */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: white; /* Fondo blanco */
+    
+}
+
+.logo-container {
+    padding: 20px 0 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centrar logo */
+}
+
+.logo-container img {
+    width: 110px; /* Ajusta el tamaño del logo */
+    height: 110px;
+}
+
+ion-label {
+    color: #666; /* Color del texto */
+    font-family: "Ubuntu", sans-serif; /* Tipografía */
+    align-items: center;
+}
+
+h2 {
+    padding-bottom: 50px;
+
+}
+ion-button {
+    --background: #002EFF; /* Color de fondo del botón */
+    --border-radius: 8px; /* Bordes redondeados */
+    --padding: 12px; /* Espaciado interno */
+}
+
+/* Evita el desplazamiento hacia arriba */
+ion-content {
+    scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
