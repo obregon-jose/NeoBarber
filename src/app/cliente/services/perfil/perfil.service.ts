@@ -38,13 +38,13 @@ export class PerfilService {
   }
 
 
-  async editarUsuario(data: any): Promise<void> {
+  async editarPerfil(data: any): Promise<void> {
     const token = await this._tokenService.getToken();
     const options = {
-      url: `${this.apiUrl}/${data.id}`,
+      url: `${this.apiUrl}/user-details/${data.id}`,
       data: {
         name: data.name,
-        email: data.email,
+        
 
       },
       headers: {

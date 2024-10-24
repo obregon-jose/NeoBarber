@@ -7,8 +7,7 @@ import { addIcons } from 'ionicons';
 import { pencil } from 'ionicons/icons';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
-
-
+import { AlertController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-perfil-cliente',
@@ -34,6 +33,8 @@ export class PerfilClientePage {
 
   constructor(
     private _perfilService:PerfilService,
+    private alertController: AlertController,
+    private _alert_loading_Service: AlertToastService,
     
   ) {
     addIcons({ pencil });
@@ -53,14 +54,56 @@ export class PerfilClientePage {
     }
   }
 
-  editarUsuario(data: any, id: number) {
+  editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
-      name: data.nombre,
-      price: data.precio,
+      name: data.nombre
     };
-    this._perfilService.editarUsuario(UserData);
+    this._perfilService.editarPerfil(UserData);
     this.mostrarPerfil();
   }
 
+  async openEditAlert(user: any) {
+   
+    const alert = await this.alertController.create({
+      header: 'Editar usuario',
+      message: 'Por favor, ingresa el nuevo nombre:',
+      inputs: [
+        {
+          name: 'nombre',
+          
+          placeholder: 'Nombre',
+          value: user.name // Prellenar el campo con el nombre actual
+        }
+      ],
+      buttons: [
+        {
+          text: 'CANCELAR',
+        },
+        {
+          text: 'GUARDAR',
+          role: 'GUARDAR',
+          handler: (data: any) => {
+            if (data.nombre) {
+              
+              this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
+              return true
+            } else {
+              this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  
+  }
+  public alertInputs = [
+    {
+      name: 'nombre',
+      placeholder: 'Nombre',
+    }
+  ];
+  
 }

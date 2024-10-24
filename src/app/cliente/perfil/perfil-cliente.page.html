@@ -15,9 +15,13 @@
       <ion-thumbnail >
         <img  src='assets/images/messi.png'  />
       </ion-thumbnail>
-      </div>
 
-      <div class="profile-picture">
+      </div>
+      <ion-button  fill="clear" class="edit-button" class="centrar">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <div class="centrar">
         <ion-card-header  >
           <ion-card-title>{{ user?.name}}</ion-card-title>
         </ion-card-header>
@@ -38,7 +42,7 @@
         </ion-item>
       </ion-list>
       <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
-      <ion-button expand="block" (click)="mostrarPerfil()" color="medium">
+      <ion-button expand="block" (click)="openEditAlert(user)" color="medium">
         <ion-icon slot="start" name="pencil" ></ion-icon>
       </ion-button>
     </ion-card-content>
