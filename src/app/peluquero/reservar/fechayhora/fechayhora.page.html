@@ -1,5 +1,5 @@
 <ion-header>
-  <h2>Reservar</h2>
+  <h1>Reservar</h1>
   <ion-progress-bar value="0.67"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
@@ -9,6 +9,7 @@
   <div class="fecha">
     <ion-datetime
       presentation="date"
+      [(ngModel)]="selectedDate"
       [dayValues]="[23, 24, 25, 26, 27, 28, 29]"
       [monthValues]="10"
     ></ion-datetime>
@@ -26,6 +27,7 @@
       <ion-select-option value="15:00">03:00 PM</ion-select-option>
       <ion-select-option value="16:00">04:00 PM</ion-select-option>
       <ion-select-option value="17:00">05:00 PM</ion-select-option>
+      
     </ion-select>
   </div>
 

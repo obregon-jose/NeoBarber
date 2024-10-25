@@ -24,7 +24,7 @@ import { NavController } from '@ionic/angular'; // Importa NavController
   ]
 })
 export class FechaYHoraPage {
-  selectedDate: string = '';
+  selectedDate: string = ''; // Asegúrate de que esto esté inicializado
   selectedTime: string = '';
   disableDates: string[] = [];
 
@@ -43,10 +43,11 @@ export class FechaYHoraPage {
   }
 
   confirmSelection() {
-    console.log('Fecha seleccionada:', this.selectedDate);
+    console.log('Fecha seleccionada:', this.selectedDate); // Ahora debería mostrar la fecha correctamente
     console.log('Hora seleccionada:', this.selectedTime);
     this.navCtrl.navigateForward('/peluquero/reservar/servicio'); // Redirige a la nueva ruta
   }
+
   volver() {
     this.navCtrl.navigateBack('/peluquero/reservar/seleccionarbarbero');
   }
