@@ -1,30 +1,39 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="ion-padding" >
   <ion-card>
     <ion-card-content>
       <!-- <div class="profile-picture">
-        <ion-img [src]="user?.detail?.photo || 'assets/images/messi.png'" alt="Foto de perfil"></ion-img>
+        <ion-img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"></ion-img>
       </div> -->
       
 
       <div class="profile-picture">
       <ion-thumbnail >
-        <img  src='assets/images/profile.png'  />
+        <img  [src]="user?.detail?.photo || 'assets/images/profile.png'"  />
       </ion-thumbnail>
 
       </div>
       <ion-button  fill="clear" class="edit-button" class="centrar">
         <ion-icon name="pencil"></ion-icon>
       </ion-button>
+      <!-- <ion-content> -->
+        <ion-button expand="block" color="primary" (click)="selectImageFromStorage(user.id)">
+          Subir 
+        </ion-button>
+      
+        <ion-button expand="block" color="secondary" (click)="takePhotoWithCamera(user.id)">
+          Tomar 
+        </ion-button>
+      <!-- </ion-content> -->
 
-      <ion-button (click)="takePicture()">Tomar Foto</ion-button>
+      <!-- <ion-button (click)="takePicture()">Tomar Foto</ion-button>
       <img [src]="imageUrl" *ngIf="imageUrl" />
-      <ion-button (click)="uploadImage()" *ngIf="imageUrl">Subir Imagen</ion-button>
+      <ion-button (click)="uploadImage()" *ngIf="imageUrl">Subir Imagen</ion-button> -->
 
       <div class="centrar">
         <ion-card-header  >
@@ -47,7 +56,7 @@
         </ion-item>
       </ion-list>
       <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
-      <ion-button expand="block" (click)="openEditAlert(user)" color="medium">
+      <ion-button expand="block" (click)="openEditAlert(user.id)" color="medium">
         <ion-icon slot="start" name="pencil" ></ion-icon>
       </ion-button>
     </ion-card-content>

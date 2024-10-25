@@ -9,9 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class PerfilService {
   private apiUrl = environment.apiUrl;
+
   constructor(
     private _tokenService: TokenService,
-    private _alert_loading_Service: AlertToastService
+    private _alert_loading_Service: AlertToastService,
   ) { }
   
 
@@ -46,7 +47,6 @@ export class PerfilService {
         name: data.name,
         nickname: data.nickname, 
         phone: data.phone,       
-
       },
       headers: {
         'Content-Type': 'application/json',

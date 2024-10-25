@@ -8,6 +8,7 @@ import { pencil } from 'ionicons/icons';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { AlertController } from '@ionic/angular/standalone';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 // import { Camera, CameraResultType } from '@capacitor/camera';
 import { ImagenService } from '../services/imagen/imagen.service';
@@ -39,7 +40,7 @@ export class PerfilClientePage {
     private _perfilService:PerfilService,
     private alertController: AlertController,
     private _alert_loading_Service: AlertToastService,
-    private ImagenService: ImagenService,
+    private _imagenService: ImagenService,
     
   ) {
     addIcons({ pencil });
@@ -48,18 +49,61 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
+  async selectImageFromStorage(id: number) {
+    const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Photos,
+    });
 
-  async takePicture() {
-    this.imageUrl = await this.ImagenService.takePicture() || null;
-  }
-
-  async uploadImage() {
-    if (this.imageUrl) {
-      const response = await this.ImagenService.uploadImage(this.imageUrl);
-      console.log('Image uploaded:', response);
+    if (image && image.base64String) {
+        const base64Data = image.base64String;
+        await this._imagenService.uploadImage(base64Data, id);
+        this.mostrarPerfil();
     }
-   
+}
+
+  // async selectImageFromStorage(id: number) {
+  //   const image = await Camera.getPhoto({
+  //     quality: 90,
+  //     allowEditing: true,
+  //     resultType: CameraResultType.Base64,
+  //     source: CameraSource.Photos,
+  //   });
+  
+  //   if (image) {
+  //     const base64Data = image.base64String!;
+  //     await this._imagenService.uploadImage(base64Data, id);
+  //     this.mostrarPerfil();
+  //   }
+  // }
+  
+  async takePhotoWithCamera(id: number) {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+    });
+  
+    if (image) {
+      const base64Data = image.base64String!;
+      await this._imagenService.uploadImage(base64Data, id);
+      this.mostrarPerfil();
+    }
   }
+  // async takePicture() {
+  //   this.imageUrl = await this.ImagenService.takePicture() || null;
+  // }
+
+  // async uploadImage() {
+  //   if (this.imageUrl) {
+  //     const response = await this.ImagenService.uploadImage(this.imageUrl);
+  //     console.log('Image uploaded:', response);
+  //   }
+   
+  // }
 
   
   
@@ -77,8 +121,8 @@ export class PerfilClientePage {
     let UserData = {
       id: id,
       name: data.nombre,
-      phone:data.phone,
-      nickname:data.nickname
+      phone: data.phone,
+      nickname: data.nickname
     };
     this._perfilService.editarPerfil(UserData);
     this.mostrarPerfil();
