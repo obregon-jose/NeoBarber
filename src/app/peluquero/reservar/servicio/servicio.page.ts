@@ -8,47 +8,60 @@ import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { AlertController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
+
 @Component({
   selector: 'app-servicio',
   templateUrl: './servicio.page.html',
   styleUrls: ['./servicio.page.scss'],
   standalone: true,
-  imports: [IonProgressBar, IonButton, IonButtons, IonFooter, IonItem, IonLabel, IonListHeader, IonList, IonContent, IonHeader, IonTitle, IonToolbar, IonCheckbox, CommonModule,
-     FormsModule,
-     ReactiveFormsModule,
-     HttpClientModule,
-     CommonModule,
-     
-
+  imports: [
+    IonProgressBar,
+    IonButton,
+    IonButtons,
+    IonFooter,
+    IonItem,
+    IonLabel,
+    IonListHeader,
+    IonList,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonCheckbox,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers:[
+  providers: [
     ServiciosService,
     AlertToastService,
-
   ],
   schemas: [NO_ERRORS_SCHEMA],
 })
 export class ServicioPage implements OnInit {
   private unsubscribe$ = new Subject<void>();
-  // services = [
-  //   { name: 'Cote de pelo', price: 20000, selected: false },
-  //   { name: 'Tintura', price: 20000, selected: false },
-  //   { name: 'Barba', price: 20000, selected: false },
-  //   { name: 'Cejas', price: 20000, selected: false },
-  //   // Agrega más servicios si es necesario
-  // ];
   services: any[] = [];
+  barberName: string = ''; // Propiedad para el nombre del barbero
+  selectedDate: string = ''; // Propiedad para la fecha seleccionada
+  selectedTime: string = ''; // Propiedad para la hora seleccionada
 
   constructor(
     private navCtrl: NavController,
-    private _serviciosServicie:ServiciosService,
+    private _serviciosServicie: ServiciosService,
     private _alertService: AlertToastService,
     private alertController: AlertController,
     private _loading: AlertToastService,
-
+    private route: ActivatedRoute // Inyección de ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.barberName = params['barberName'] || '';
+      this.selectedDate = params['selectedDate'] || '';
+      this.selectedTime = params['selectedTime'] || '';
+    });
     this.mostrarServicios();
   }
 
@@ -73,7 +86,26 @@ export class ServicioPage implements OnInit {
 
   siguiente() {
     const serviciosSeleccionados = this.services.filter(service => service.selected);
-    console.log(serviciosSeleccionados);
-    this.navCtrl.navigateForward('/peluquero/reservar/resumen');
+    console.log('Servicios seleccionados:', serviciosSeleccionados);
+
+    if (serviciosSeleccionados.length > 0) {
+        const totalPrecio = serviciosSeleccionados.reduce((total, service) => total + service.price, 0);
+        const serviciosParaResumen = serviciosSeleccionados.map(service => ({
+            nombre: service.name, // Ajusta según el nombre exacto de la propiedad en tu JSON
+            precio: service.price
+        }));
+
+        this.navCtrl.navigateForward('/peluquero/reservar/resumen', {
+            queryParams: {
+                barberName: this.barberName,
+                selectedDate: this.selectedDate,
+                selectedTime: this.selectedTime,
+                servicios: JSON.stringify(serviciosParaResumen),
+                precio: totalPrecio
+            }
+        });
+    } else {
+        this._alertService.alertToastYellow('Por favor selecciona al menos un servicio', 'top');
+    }
   }
 }

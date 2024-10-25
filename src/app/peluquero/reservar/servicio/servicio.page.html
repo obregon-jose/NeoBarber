@@ -3,7 +3,6 @@
   <ion-progress-bar value="1.2"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
-
 <ion-content>
   <ion-list>
     <ion-list-header>
@@ -23,34 +22,6 @@
       <ion-label slot="end">${{ service.price }}</ion-label>
     </ion-item>
   </ion-list>
-
-
-  <!--  -->
-  <!--  -->
-<!-- 
-  <ion-list>
-    <ion-item *ngIf="services.length === 0">
-      <ion-label>
-        <h2>No hay servicios Agregados</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item *ngFor="let service of services">
-      <ion-label>
-        <h2>{{ service.name }}</h2>
-        <p>Price: {{ service.price}}</p>
-      </ion-label> -->
-    <!-- Botón para editar el servicio -->
-    <!-- <ion-button color="secondary" (click)="openEditAlert(service)">
-      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-    </ion-button> -->
-
-    <!-- Botón para eliminar el servicio -->
-    <!-- <ion-button color="danger" (click)="eliminarServicio(service.id)">
-      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-    </ion-button>
-  
-    </ion-item>
-  </ion-list> -->
 
   <div class="botones">
     <ion-button (click)="volver()">Volver</ion-button>
