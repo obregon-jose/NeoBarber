@@ -23,7 +23,11 @@ ion-label {
 
 
 ion-button {
-  margin: 10px; /* Espaciado entre botones */
+  --background: #002EFF;
+--border-radius: 10px;
+width: 80%;
+font-weight: bold;
+margin: 5px; /* Espaciado entre botones */
 }
 
 .botones {
@@ -32,7 +36,7 @@ ion-button {
   margin-top: 20px; /* Espaciado superior para separar de la lista */
 }
 
-h2{
+h1{
   font-family: "Aclonica";
   font-size: bold;
   text-align: center;

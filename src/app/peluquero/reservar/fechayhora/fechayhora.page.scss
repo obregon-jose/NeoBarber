@@ -8,7 +8,7 @@ ion-content {
 }
 
 
-h2 {
+h1 {
   font-family: "Aclonica";
   font-size: bold;
   text-align: center;
@@ -28,6 +28,14 @@ ion-select {
   display: flex;
   justify-content: center; /* Centra los botones horizontalmente */
   margin-top: 20px; /* Espaciado superior para separar de la lista */
+}
+
+ion-button {
+  --background: #002EFF;
+--border-radius: 10px;
+width: 80%;
+font-weight: bold;
+margin: 5px; /* Espaciado entre botones */
 }
 
 .label-fecha {

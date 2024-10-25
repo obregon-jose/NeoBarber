@@ -80,22 +80,31 @@ ion-img {
   z-index: 2;
 }
 
-.landing-btn {
-  --border-radius: 10px;
-  font-weight: bold;
-  padding: 10px 20px;
-  color: white;
-  text-transform: uppercase;
-  transition: background 0.3s ease;
-}
+// .landing-btn {
+//   --border-radius: 10px;
+//   font-weight: bold;
+//   padding: 10px 20px;
+//   color: white;
+//   text-transform: uppercase;
+//   transition: background 0.3s ease;
+// }
 
 .landing-btn:hover {
   --background: #1d4ed8; /* Cambio de color al pasar el ratón */
 }
 
+ion-button {
+  --background: #002EFF;
+--border-radius: 10px;
+width: 100%;
+font-weight: bold;
+height: 45px;
+ /* Espaciado entre botones */
+
+}
+
 .landing-btn.secondary {
   --background: #44403c;
-  color: white;
 }
 
 @media (min-width: 768px) {

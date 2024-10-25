@@ -31,5 +31,6 @@ export class ServicioPage implements OnInit {
   siguiente() {
     const serviciosSeleccionados = this.servicios.filter(servicio => servicio.seleccionado);
     console.log(serviciosSeleccionados);
+    this.navCtrl.navigateForward('/peluquero/reservar/resumen');
   }
 }

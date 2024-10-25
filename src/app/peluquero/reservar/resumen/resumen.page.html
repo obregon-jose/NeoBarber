@@ -1,0 +1,24 @@
+<ion-header>
+  <h1>Reservar</h1>
+  <ion-progress-bar value="1.2"></ion-progress-bar> <!-- Barra de progreso -->
+</ion-header>
+
+<ion-content>
+  <div class="resumen">
+    <h2>Tu Reserva</h2><br>
+    <p><strong>Barbero:</strong> {{ reserva.barbero }}</p> <br>
+    <p><strong>Fecha:</strong> {{ reserva.fecha }}</p> <br>
+    <p><strong>Servicios:</strong></p> <br>
+    <ul>
+      <li *ngFor="let servicio of reserva.servicios">{{ servicio }}</li>
+    </ul>
+    <p><strong>Precio sugerido:</strong> {{ reserva.precio | currency:'COP':'symbol' }}</p>
+
+   
+  </div>
+  <div class="botones">
+    <ion-button (click)="volver()">Volver</ion-button>
+    <ion-button color="primary" (click)="confirmarReserva()">Terminar</ion-button>
+  </div>
+</ion-content>
+

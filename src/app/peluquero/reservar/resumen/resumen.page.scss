@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+h1{
+    font-family: "Aclonica";
+    font-size: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Estilos para el contenido */
+  .resumen {
+    padding: 16px;
+    background-color: #ffffff; /* Color de fondo del contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin: 16px; /* Margen alrededor del contenido */
+  }
+  
+  /* Estilos para los párrafos */
+  p {
+    font-size: 16px;
+    margin: 8px 0; /* Espaciado entre párrafos */
+  }
+  
+  /* Estilos para la lista de servicios */
+  ul {
+    padding-left: 20px; /* Espaciado a la izquierda */
+    margin: 8px 0; /* Espaciado entre lista y párrafos */
+  }
+  
+  
+  
+  .botones {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    margin-top: 20px; /* Espaciado superior para separar de la lista */
+  }
+  
+  ion-button {
+    --background: #002EFF;
+  --border-radius: 10px;
+  width: 80%;
+  font-weight: bold;
+  margin: 5px; /* Espaciado entre botones */
+  }
+  
+  h2 {
+    text-align: center;
+    font-weight: bold;
+  }
