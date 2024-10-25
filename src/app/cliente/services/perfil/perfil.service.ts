@@ -44,7 +44,8 @@ export class PerfilService {
       url: `${this.apiUrl}/user-details/${data.id}`,
       data: {
         name: data.name,
-        
+        nickname: data.nickname, 
+        phone: data.phone,       
 
       },
       headers: {

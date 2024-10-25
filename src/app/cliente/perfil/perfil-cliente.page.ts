@@ -76,7 +76,9 @@ export class PerfilClientePage {
   editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
-      name: data.nombre
+      name: data.nombre,
+      phone:data.phone,
+      nickname:data.nickname
     };
     this._perfilService.editarPerfil(UserData);
     this.mostrarPerfil();
@@ -86,14 +88,33 @@ export class PerfilClientePage {
    
     const alert = await this.alertController.create({
       header: 'Editar usuario',
-      message: 'Por favor, ingresa el nuevo nombre:',
+      message: '',
       inputs: [
         {
           name: 'nombre',
           
           placeholder: 'Nombre',
           value: user.name // Prellenar el campo con el nombre actual
-        }
+        },
+        {
+          name: 'nickname',
+          placeholder: 'apodo',
+          type:'text',
+          value: user.detail.nickname // Prellenar el campo con el precio actual
+          
+        },
+        {
+          name: 'phone',
+          placeholder: 'telefono',
+          type:'tel',
+          value: user.detail.phone, // Prellenar el campo con el precio actual
+          attributes: {
+            inputmode: 'numeric',
+            minlength: 8,
+            maxlength: 10,
+          }
+        },
+        
       ],
       buttons: [
         {
@@ -103,6 +124,12 @@ export class PerfilClientePage {
           text: 'GUARDAR',
           role: 'GUARDAR',
           handler: (data: any) => {
+            const phoneRegex = /^\d{8,}$/;
+            
+            if (data.phone && !phoneRegex.test(data.phone)) {
+              this._alert_loading_Service.alertToastYellow('El teléfono debe tener al menos 8 dígitos.');
+              return false; // Evitar el envío
+            }
             if (data.nombre) {
               
               this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
