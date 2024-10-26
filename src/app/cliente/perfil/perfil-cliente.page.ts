@@ -8,9 +8,6 @@ import { pencil } from 'ionicons/icons';
 import { PerfilService } from '../services/perfil/perfil.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { AlertController } from '@ionic/angular/standalone';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
-// import { Camera, CameraResultType } from '@capacitor/camera';
 import { ImagenService } from '../services/imagen/imagen.service';
 
 @Component({
@@ -49,64 +46,23 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
-  async selectImageFromStorage(id: number) {
-    const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Base64,
-        source: CameraSource.Photos,
-    });
-
-    if (image && image.base64String) {
-        const base64Data = image.base64String;
-        await this._imagenService.uploadImage(base64Data, id);
-        this.mostrarPerfil();
-    }
-}
-
-  // async selectImageFromStorage(id: number) {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Base64,
-  //     source: CameraSource.Photos,
-  //   });
   
-  //   if (image) {
-  //     const base64Data = image.base64String!;
-  //     await this._imagenService.uploadImage(base64Data, id);
-  //     this.mostrarPerfil();
-  //   }
-  // }
-  
-  async takePhotoWithCamera(id: number) {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Camera,
-    });
-  
-    if (image) {
-      const base64Data = image.base64String!;
-      await this._imagenService.uploadImage(base64Data, id);
-      this.mostrarPerfil();
-    }
+  async tomarFoto(id: number) {
+    this.imageUrl = await this._imagenService.takePicture() || null;
+    this.subirImagen(id);
   }
-  // async takePicture() {
-  //   this.imageUrl = await this.ImagenService.takePicture() || null;
-  // }
 
-  // async uploadImage() {
-  //   if (this.imageUrl) {
-  //     const response = await this.ImagenService.uploadImage(this.imageUrl);
-  //     console.log('Image uploaded:', response);
-  //   }
-   
-  // }
+  async selecionarImagen(id: number) {
+    this.imageUrl = await this._imagenService.selectPicture() || null;
+    this.subirImagen(id);
+  }
 
-  
-  
+  async subirImagen(id: number) {
+    if (this.imageUrl) {
+      await this._imagenService.uploadImage(this.imageUrl, id);
+    }
+    return this.mostrarPerfil();
+  }
 
   async mostrarPerfil() {
     try {

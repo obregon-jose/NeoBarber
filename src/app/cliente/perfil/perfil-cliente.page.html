@@ -7,14 +7,9 @@
 <ion-content class="ion-padding" >
   <ion-card>
     <ion-card-content>
-      <!-- <div class="profile-picture">
-        <ion-img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"></ion-img>
-      </div> -->
-      
-
       <div class="profile-picture">
       <ion-thumbnail >
-        <img  [src]="user?.detail?.photo || 'assets/images/profile.png'"  />
+        <img  [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"/>
       </ion-thumbnail>
 
       </div>
@@ -22,12 +17,12 @@
         <ion-icon name="pencil"></ion-icon>
       </ion-button>
       <!-- <ion-content> -->
-        <ion-button expand="block" color="primary" (click)="selectImageFromStorage(user.id)">
-          Subir 
+        <ion-button expand="block" color="primary" (click)="selecionarImagen(user.id)">
+          Galería 
         </ion-button>
       
-        <ion-button expand="block" color="secondary" (click)="takePhotoWithCamera(user.id)">
-          Tomar 
+        <ion-button expand="block" color="secondary" (click)="tomarFoto(user.id)">
+          Cámara 
         </ion-button>
       <!-- </ion-content> -->
 

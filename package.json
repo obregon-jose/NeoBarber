@@ -30,6 +30,7 @@
     "@capacitor/preferences": "^6.0.2",
     "@capacitor/status-bar": "6.0.1",
     "@ionic/angular": "^8.0.0",
+    "@ionic/pwa-elements": "^3.3.0",
     "ionicons": "^7.2.1",
     "lucide": "^0.445.0",
     "lucide-angular": "^0.445.0",

@@ -23,6 +23,7 @@ export class RegistropeluqueroPage implements OnInit {
   nombre: string = '';
   email: string = '';
   password: string = '';
+  // role: [] = []; 
   roles: { value: number }[] = [
     { value: 2 }
   ];
