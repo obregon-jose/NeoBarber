@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+
+ion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e0e0e0; /* Línea separadora entre ítems */
+}
+
+ion-label {
+  padding-left: 15px;
+  flex: 1; /* Permite que el label use el espacio disponible */
+  font-size: 20px;
+}
+
+.precio {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+ion-button {
+  --background: #002EFF;
+--border-radius: 10px;
+width: 80%;
+font-weight: bold;
+margin: 5px; /* Espaciado entre botones */
+}
+
+.botones {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  margin-top: 20px; /* Espaciado superior para separar de la lista */
+}
+
+h1{
+  font-family: "Aclonica";
+  font-size: bold;
+  text-align: center;
+  margin-top: 10px;
+}

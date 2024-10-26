@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
   styleUrls: ['seleccionarbarbero.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, // Añade CommonModule aquí
+    CommonModule,
     IonCard,
     IonRow,
     IonCol,
@@ -21,45 +21,27 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
     IonToolbar,
     IonTitle,
     IonContent,
-    IonProgressBar // Añade IonProgressBar aquí
+    IonProgressBar
   ],
 })
 export class SeleccionarBarberoPage {
-  barbers: any[] = []; // Array para almacenar los barberos
-  progressValue: number = 0.33; // Valor inicial para la barra de progreso
+  barbers: any[] = [];
+  progressValue: number = 0.33;
 
   constructor(private router: Router) {
-    this.loadBarbers(); // Cargar los barberos en el constructor
+    this.loadBarbers();
   }
 
   loadBarbers() {
-    // Simulación de datos desde una API
     this.barbers = [
-      {
-        name: 'Mac Miller',
-        subtitle: 'El mono',
-        image: 'assets/images/sebastian.jpeg'
-      },
-      {
-        name: 'Sebastián Yatra',
-        subtitle: 'El mago',
-        image: 'assets/images/sebastian.jpeg'
-      },
-      {
-        name: 'Johnny Sins',
-        subtitle: 'Arcángel',
-        image: 'assets/images/sebastian.jpeg'
-      },
-      {
-        name: 'Ronny Red',
-        subtitle: 'El Cholo',
-        image: 'assets/images/sebastian.jpeg'
-      }
+      { name: 'Mac Miller', subtitle: 'El mono', image: 'assets/images/sebastian.jpeg' },
+      { name: 'Sebastián Yatra', subtitle: 'El mago', image: 'assets/images/sebastian.jpeg' },
+      { name: 'Johnny Sins', subtitle: 'Arcángel', image: 'assets/images/sebastian.jpeg' },
+      { name: 'Ronny Red', subtitle: 'El Cholo', image: 'assets/images/sebastian.jpeg' }
     ];
   }
 
   selectBarber(barber: any) {
-    // Redirigir a la vista de selección de día y hora
     this.router.navigate(['/peluquero/reservar/fechayhora'], {
       queryParams: { barberName: barber.name }
     });

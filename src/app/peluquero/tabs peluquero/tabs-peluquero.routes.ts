@@ -32,6 +32,14 @@ export const routes: Routes = [
           import('../reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
       },
       {
+        path: 'reservar/servicio',
+        loadComponent: () => import('../reservar/servicio/servicio.page').then( m => m.ServicioPage)
+      },
+      {
+        path: 'reservar/resumen',
+        loadComponent: () => import('../reservar/resumen/resumen.page').then( m => m.ResumenPage)
+      },
+      {
         path: 'perfil',
         loadComponent: () =>
           import('../perfil/perfil-peluquero.page').then((m) => m.PerfilPeluqueroPage),

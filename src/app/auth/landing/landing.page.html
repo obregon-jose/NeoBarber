@@ -1,16 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>landing</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">landing</ion-title>
-      <ion-button>Iniciar Sesión</ion-button>
-      <ion-button fill="outline">Crear una Cuenta</ion-button>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="background-pattern"></div>
+  <div class="container">
+    <div class="logo-container">
+      <ion-img src="assets/images/neo.png" alt="Logo de NeoBarber"></ion-img>
+    </div>
+    <p class="tagline">
+      Somos una barbería moderna con todas las tecnologías para brindar el mejor servicio. Nuestros barberos son personas de excelente calidad humana.
+    </p>
+    <div class="button-container">
+      <ion-button class="iniciarsesion" (click)="iniciarsesion()">Iniciar sesión</ion-button>
+    </div>
+    <div class="button-container2">
+     <ion-button class="registrar" (click)="registrar()">Registrar</ion-button>
+    </div>
+    </div>
 </ion-content>
-
