@@ -53,7 +53,7 @@ export class ServicioPage implements OnInit {
     private _alertService: AlertToastService,
     private alertController: AlertController,
     private _loading: AlertToastService,
-    private route: ActivatedRoute // Inyección de ActivatedRoute
+    private route: ActivatedRoute, // Inyección de ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -66,18 +66,13 @@ export class ServicioPage implements OnInit {
   }
 
   async mostrarServicios() {
-    const loading = await this._loading.presentLoading();
-    this._serviciosServicie.cargarServicios()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe({
-        next: async (response) => {
-          this.services = response.services;
-          await loading.dismiss();
-        },
-        error: () => {
-          this._alertService.alertToastRed('Error al cargar los servicios', 'top');
-        }
-      });
+    try {
+      const data = await this._serviciosServicie.cargarServicios();
+      this.services = data;  
+      console.log(this.services);  
+    } catch (error) {
+      console.error('Error al cargar los servicios', error);
+    }
   }
 
   volver() {

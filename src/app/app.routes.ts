@@ -46,20 +46,5 @@ export const routes: Routes = [
     path: 'irregistro',
     loadComponent: () => import('./root/irregistro/irregistro.page').then( m => m.IrregistroPage)
   },
- 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
 ];
