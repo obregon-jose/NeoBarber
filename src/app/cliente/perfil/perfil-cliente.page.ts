@@ -155,13 +155,6 @@ export class PerfilClientePage {
           value: user.name // Prellenar el campo con el nombre actual
         },
         {
-          name: 'nickname',
-          placeholder: 'apodo',
-          type:'text',
-          value: user.detail?.nickname // Prellenar el campo con el precio actual
-          
-        },
-        {
           name: 'phone',
           placeholder: 'telefono',
           type:'tel',
