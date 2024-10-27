@@ -9,6 +9,8 @@ import { PerfilService } from '../services/perfil/perfil.service';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
 import { AlertController } from '@ionic/angular/standalone';
 import { ImagenService } from '../services/imagen/imagen.service';
+import { LoginService } from 'src/app/auth/services/login/login.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil-cliente',
@@ -38,7 +40,8 @@ export class PerfilClientePage {
     private alertController: AlertController,
     private _alert_loading_Service: AlertToastService,
     private _imagenService: ImagenService,
-    
+    private _authService: LoginService,
+    private navCtrl: NavController
   ) {
     addIcons({ pencil });
   }
@@ -46,6 +49,8 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
+
+  
   
   async tomarFoto(id: number) {
     this.imageUrl = await this._imagenService.takePicture() || null;
@@ -72,8 +77,43 @@ export class PerfilClientePage {
       console.error('Error al cargar los servicios', error);
     }
   }
+  editarPerfil(data: any, id: number) {
+    let UserData = {
+      id: id,
+      name: data.nombre,
+      phone:data.phone,
+      nickname:data.nickname
+    };
+     this._perfilService.editarPerfil(UserData);
+    this.mostrarPerfil();
+  }
 
-
+  //Cerrar sesión
+  logout() {
+    this._authService.logout();
+    this.navCtrl.navigateRoot('/login');
+  }
+//alerta para cerrar sesión
+  async LogoutAlert() {
+    const alert = await this.alertController.create({
+      header: '¿Está seguro de que desea cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Cerrar sesión',
+          handler: () => {
+            this.logout();
+          }
+        },
+      ]
+    });
+    await alert.present();
+  }
+  
+  //alerta para editar imagen
   async openImageOptionsAlert(userId: number) {
     const alert = await this.alertController.create({
       header: 'Seleccionar opción',
@@ -101,21 +141,7 @@ export class PerfilClientePage {
   }
   
 
-
-  editarPerfil(data: any, id: number) {
-    let UserData = {
-      id: id,
-      name: data.nombre,
-      phone:data.phone,
-      nickname:data.nickname
-    };
-     this._perfilService.editarPerfil(UserData);
-    this.mostrarPerfil();
-  }
-
-
-
-  
+  //alerta para editar perfil
   async openEditAlert(user: any) {
 
     const alert = await this.alertController.create({
@@ -177,12 +203,7 @@ export class PerfilClientePage {
     await alert.present();
 
   }
-  public alertInputs = [
-    {
-      name: 'nombre',
-      placeholder: 'Nombre',
-    }
-  ];
+
 
 
 

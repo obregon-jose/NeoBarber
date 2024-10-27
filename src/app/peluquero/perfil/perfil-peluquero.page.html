@@ -1,17 +1,73 @@
-<ion-header [translucent]="true">
+<!-- <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Perfil
-    </ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" >
+  <ion-card>
+    <ion-card-content>
+      <!-- <div class="profile-picture">
+      <ion-thumbnail >
+        <img  [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"/>
+      </ion-thumbnail>
 
-  
+      </div>
+      <ion-button  fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)" class="centrar">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button> -->
+
+      <div class="profile-picture">
+        <ion-thumbnail>
+          <img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil" />
+        </ion-thumbnail>
+        <ion-button fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)">
+          <ion-icon name="pencil" color="medium" ></ion-icon>
+        </ion-button>
+      </div>
+      <!-- <ion-content> -->
+<!--         
+        <ion-button expand="block" color="primary" (click)="selecionarImagen(user.id)">
+          Galería 
+        </ion-button>
+      
+        <ion-button expand="block" color="secondary" (click)="tomarFoto(user.id)">
+          Cámara 
+        </ion-button> -->
+      <!-- </ion-content> -->
+
+      <!-- <ion-button (click)="takePicture()">Tomar Foto</ion-button>
+      <img [src]="imageUrl" *ngIf="imageUrl" />
+      <ion-button (click)="uploadImage()" *ngIf="imageUrl">Subir Imagen</ion-button> -->
+
+      <div class="centrar">
+        <ion-card-header  >
+          <ion-card-title>{{ user?.name}}</ion-card-title>
+        </ion-card-header>
+        </div>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Apodo: {{ user?.detail?.nickname || user?.name}}</ion-label>
+          <ion-text  ></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Teléfono: {{ user?.detail?.phone || '0000000000' }}</ion-label>
+          <ion-text  ></ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email: {{ user?.email }}</ion-label>
+          <ion-text type="email"></ion-text>
+        </ion-item>
+      </ion-list>
+      <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
+      <ion-button expand="block" (click)="openEditAlert(user)" color="medium">
+        <ion-icon slot="start" name="pencil" ></ion-icon>
+      </ion-button>
+
+      <ion-button expand="block"  color="danger"  (click)="LogoutAlert()">
+    Cerrar sesión
+  </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
