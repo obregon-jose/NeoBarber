@@ -7,23 +7,33 @@
 <ion-content class="ion-padding" >
   <ion-card>
     <ion-card-content>
-      <div class="profile-picture">
+      <!-- <div class="profile-picture">
       <ion-thumbnail >
         <img  [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil"/>
       </ion-thumbnail>
 
       </div>
-      <ion-button  fill="clear" class="edit-button" class="centrar">
+      <ion-button  fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)" class="centrar">
         <ion-icon name="pencil"></ion-icon>
-      </ion-button>
+      </ion-button> -->
+
+      <div class="profile-picture">
+        <ion-thumbnail>
+          <img [src]="user?.detail?.photo || 'assets/images/profile.png'" alt="Foto de perfil" />
+        </ion-thumbnail>
+        <ion-button fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)">
+          <ion-icon name="pencil" color="medium" ></ion-icon>
+        </ion-button>
+      </div>
       <!-- <ion-content> -->
+<!--         
         <ion-button expand="block" color="primary" (click)="selecionarImagen(user.id)">
           Galería 
         </ion-button>
       
         <ion-button expand="block" color="secondary" (click)="tomarFoto(user.id)">
           Cámara 
-        </ion-button>
+        </ion-button> -->
       <!-- </ion-content> -->
 
       <!-- <ion-button (click)="takePicture()">Tomar Foto</ion-button>
@@ -51,7 +61,7 @@
         </ion-item>
       </ion-list>
       <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
-      <ion-button expand="block" (click)="openEditAlert(user.id)" color="medium">
+      <ion-button expand="block" (click)="openEditAlert(user)" color="medium">
         <ion-icon slot="start" name="pencil" ></ion-icon>
       </ion-button>
     </ion-card-content>

@@ -73,26 +73,58 @@ export class PerfilClientePage {
     }
   }
 
+
+  async openImageOptionsAlert(userId: number) {
+    const alert = await this.alertController.create({
+      header: 'Seleccionar opción',
+      buttons: [
+        {
+          text: 'Galería',
+          handler: () => {
+            this.selecionarImagen(userId);
+          }
+        },
+        {
+          text: 'Cámara',
+          handler: () => {
+            this.tomarFoto(userId);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
+
+
   editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
       name: data.nombre,
-      phone: data.phone,
-      nickname: data.nickname
+      phone:data.phone,
+      nickname:data.nickname
     };
-    this._perfilService.editarPerfil(UserData);
+     this._perfilService.editarPerfil(UserData);
     this.mostrarPerfil();
   }
 
+
+
+  
   async openEditAlert(user: any) {
-   
+
     const alert = await this.alertController.create({
       header: 'Editar usuario',
       message: '',
       inputs: [
         {
           name: 'nombre',
-          
+
           placeholder: 'Nombre',
           value: user.name // Prellenar el campo con el nombre actual
         },
@@ -100,14 +132,14 @@ export class PerfilClientePage {
           name: 'nickname',
           placeholder: 'apodo',
           type:'text',
-          value: user.detail.nickname // Prellenar el campo con el precio actual
+          value: user.detail?.nickname // Prellenar el campo con el precio actual
           
         },
         {
           name: 'phone',
           placeholder: 'telefono',
           type:'tel',
-          value: user.detail.phone, // Prellenar el campo con el precio actual
+          value: user.detail?.phone, // Prellenar el campo con el precio actual
           attributes: {
             inputmode: 'numeric',
             minlength: 8,
@@ -131,7 +163,7 @@ export class PerfilClientePage {
               return false; // Evitar el envío
             }
             if (data.nombre) {
-              
+
               this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
               return true
             } else {
@@ -143,7 +175,7 @@ export class PerfilClientePage {
       ]
     });
     await alert.present();
-  
+
   }
   public alertInputs = [
     {
@@ -151,5 +183,11 @@ export class PerfilClientePage {
       placeholder: 'Nombre',
     }
   ];
+
+
+
+
+
+
   
 }
