@@ -1,0 +1,7 @@
+{
+  "name": "NeoBarber",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
