@@ -77,6 +77,7 @@ export class PerfilClientePage {
       console.error('Error al cargar los servicios', error);
     }
   }
+
   editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
@@ -181,12 +182,13 @@ export class PerfilClientePage {
               this._alert_loading_Service.alertToastYellow('El teléfono debe tener al menos 8 dígitos.');
               return false; // Evitar el envío
             }
+
             if (data.nombre) {
 
               this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
               return true
             } else {
-              this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
+              this._alert_loading_Service.alertToastYellow('Debe llenar el campo "nombre".');
               return false;
             }
           }

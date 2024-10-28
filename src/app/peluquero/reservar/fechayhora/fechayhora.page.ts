@@ -30,6 +30,7 @@ export class FechaYHoraPage implements OnInit {
   barberName: string = '';
   minDate: string;
   maxDate: string;
+  barberId: string = '';
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {
     const today = new Date();
@@ -40,7 +41,11 @@ export class FechaYHoraPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.barberName = params['barberName'] || 'Desconocido';
-      console.log('Barbero seleccionado:', this.barberName);
+      console.log(
+        'Id del barbero:', this.barberId,
+        'Barbero seleccionado:', this.barberName,
+        
+      );
     });
   }
 

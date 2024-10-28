@@ -30,7 +30,7 @@ export class ServiciosPage implements OnInit {
   services: any[] = [];
 
   constructor(
-     private _serviciosServicie:ServiciosService,
+     private _serviciosService:ServiciosService,
      private _alert_loading_Service: AlertToastService,
      private alertController: AlertController,
   ) {
@@ -46,7 +46,7 @@ export class ServiciosPage implements OnInit {
 
   async mostrarServicios() {
     try {
-      const data = await this._serviciosServicie.cargarServicios();
+      const data = await this._serviciosService.cargarServicios();
       this.services = data;  // Asigna los datos al array
       console.log(this.services);  // Aquí tendrás los servicios cargados
     } catch (error) {
@@ -59,7 +59,7 @@ export class ServiciosPage implements OnInit {
       name: data.nombre,
       price: data.precio,
     };
-    this._serviciosServicie.crearServicio(serviceData);
+    this._serviciosService.crearServicio(serviceData);
     this.mostrarServicios();
   }
 
@@ -69,12 +69,12 @@ export class ServiciosPage implements OnInit {
       name: data.nombre,
       price: data.precio,
     };
-    this._serviciosServicie.editarServicios(serviceData);
+    this._serviciosService.editarServicios(serviceData);
     this.mostrarServicios();
   }
   
   eliminarServicio(id: number) {
-    this._serviciosServicie.eliminarServicios(id)
+    this._serviciosService.eliminarServicios(id)
     this.mostrarServicios();
   }
 
