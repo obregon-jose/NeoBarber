@@ -49,6 +49,7 @@
 
 // }
 
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -100,4 +101,7 @@ export class PassrecoveryPage implements OnInit {
   actualizarContrasena() {
     this.passwordService.resetPassword(this.email, this.newPassword);
   }
-}
+  
+}    
+
+

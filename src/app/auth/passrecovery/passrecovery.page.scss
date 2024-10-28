@@ -1,58 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
 
+/* Centrar el contenido */
 .center-content {
     display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    height: 100vh; /* Altura completa del contenedor */
-    
-    
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
 }
 
+/* Contenedor del formulario */
 .form-container {
-    
-    margin-top: 50%;
     width: 92%;
     max-width: 500px;
-    margin: 0 auto; /* Centra el formulario */
+    margin: 0 auto; 
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: white; /* Fondo blanco */
-    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px;
+    background-color: white; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
 }
 
+/* Botón de registro */
+.register-button {
+    --background: #002EFF; 
+    --border-radius: 8px; 
+    --padding: 12px; 
+}
+
+/* Desplazamiento suave para ion-content */
+ion-content {
+    scroll-behavior: smooth; 
+}
+
+/* Estilo para el título de la página */
+h2 {
+    font-family: "Aclonica", sans-serif;
+    padding-bottom: 50px;
+    color: black;
+}
+
+/* Estilo para los labels de los inputs */
+ion-label {
+    color: #ccc;
+}
+
+/* Contenedor para el logo */
 .logo-container {
-    padding: 20px 0 10px 0;
     width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center; /* Centrar logo */
+    justify-content: center;
+    padding: 20px 0 10px 0;
 }
 
+/* Imagen del logo */
 .logo-container img {
-    width: 110px; /* Ajusta el tamaño del logo */
+    width: 110px;
     height: 110px;
 }
 
-ion-label {
-    color: #666; /* Color del texto */
-    font-family: "Ubuntu", sans-serif; /* Tipografía */
-    align-items: center;
-}
-
-h2 {
-    padding-bottom: 50px;
-
-}
-ion-button {
-    --background: #002EFF; /* Color de fondo del botón */
-    --border-radius: 8px; /* Bordes redondeados */
-    --padding: 12px; /* Espaciado interno */
-}
-
-/* Evita el desplazamiento hacia arriba */
-ion-content {
-    scroll-behavior: smooth; /* Desplazamiento suave */
+/* Estilo para el input (campo de correo electrónico) */
+.input-box {
+    --background: #fff; 
+    --padding-start: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    padding: 10px; 
+    width: 100%; 
+    font-size: 16px; 
+    margin-bottom: 20px; 
 }
 
