@@ -1,62 +1,83 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonLabel, IonCheckbox, IonButton, IonPopover, IonNote, IonSelect, IonSelectOption, IonDatetime,} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonLabel, IonCheckbox, IonButton, IonPopover, IonNote, IonSelect, IonSelectOption, IonDatetime, IonListHeader, IonIcon, IonFab, IonFabButton, IonAlert, IonAccordionGroup, IonAccordion } from '@ionic/angular/standalone';
+import { ServiciosService } from '../services/servicios/servicios.service';
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
+import { AlertController } from '@ionic/angular';
 
+interface HorarioDia {
+  seleccionado: boolean;
+  horas: { [hora: string]: boolean };
+}
 @Component({
   selector: 'app-horario',
   templateUrl: './horario.page.html',
   styleUrls: ['./horario.page.scss'],
   standalone: true,
-  imports: [IonNote, IonPopover, IonButton, 
+  imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton, 
     IonCheckbox, IonLabel, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, 
     IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
     IonSelectOption,
     IonDatetime,
-  ]
+  ],
 })
 export class HorarioPage implements OnInit {
-  horaInicio: string = '';
-  horaFin: string = '';
-  
-  dias = {
-    lunes: false,
-    martes: false,
-    miercoles: false,
-    jueves: false,
-    viernes: false,
-    sabado: false,
-    domingo: false
-  };
+  dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
+  horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+  horario: { [key: string]: { seleccionado: boolean, horas: string[] } } = {};
 
-  constructor() { }
+  constructor(private alertController: AlertController) {
+    this.dias.forEach(dia => {
+      this.horario[dia] = { seleccionado: false, horas: [] };
+    });
+  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  crearHorario() {
-    const diasSeleccionados = Object.keys(this.dias).filter(dia => this.dias[dia as keyof typeof this.dias]);
-
-    if (!this.horaInicio || !this.horaFin) {
-      console.log('Debe seleccionar una franja horaria.');
-      return;
+  toggleDia(dia: string) {
+    this.horario[dia].seleccionado = !this.horario[dia].seleccionado;
+    if (!this.horario[dia].seleccionado) {
+      this.horario[dia].horas = [];
     }
+  }
 
-    // Valida que la hora de inicio sea anterior a la hora de fin
-    if (this.horaInicio <= this.horaFin) {
-      console.log('La hora de inicio debe ser anterior a la hora de fin.');
-      return;
+  toggleHora(dia: string, hora: string) {
+    const index = this.horario[dia].horas.indexOf(hora);
+    if (index > -1) {
+      this.horario[dia].horas.splice(index, 1);
+    } else {
+      this.horario[dia].horas.push(hora);
     }
+  }
 
-    const horario = {
-      dias: diasSeleccionados,
-      franja: {
-        inicio: this.horaInicio,
-        fin: this.horaFin
-      }
-    };
+  async guardarHorario() {
+    const horarioGuardado = Object.entries(this.horario)
+      .filter(([_, { seleccionado }]) => seleccionado)
+      .reduce((acc, [dia, { horas }]) => ({
+        ...acc,
+        [dia]: horas
+      }), {});
 
-    console.log('Horario creado:', horario);
-    // Aquí puedes añadir lógica para guardar el horario o realizar otra acción
+    console.log('Horario guardado:', horarioGuardado);
+
+    if (Object.keys(horarioGuardado).length > 0) {
+      await this.mostrarAlerta('Éxito', 'El horario se ha guardado correctamente.');
+      // Aquí puedes implementar la lógica para guardar el horario en tu backend
+    } else {
+      await this.mostrarAlerta('Error', 'No se ha seleccionado ningún horario para guardar.', 'danger');
+    }
+  }
+
+  async mostrarAlerta(titulo: string, mensaje: string, color: string = 'success') {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK'],
+      cssClass: `alert-${color}`
+    });
+
+    await alert.present();
   }
 }
 
