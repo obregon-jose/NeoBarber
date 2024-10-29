@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { NavController ,AlertController} from '@ionic/angular';
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
 
 @Component({
   selector: 'app-fechayhora',
@@ -35,7 +36,7 @@ export class FechaYHoraPage implements OnInit {
   showErrorMessage: boolean = false;
 
 
-  constructor(private navCtrl: NavController, private route: ActivatedRoute ,  private alertController: AlertController) {
+  constructor(private navCtrl: NavController, private route: ActivatedRoute ,  private alertController: AlertController, private _alertService: AlertToastService) {
     const today = new Date();
     const futureDate = new Date();
     futureDate.setDate(today.getDate() + 7); // 7 días después de hoy
@@ -101,10 +102,9 @@ export class FechaYHoraPage implements OnInit {
   confirmSelection() {
     if (!this.selectedDate || !this.selectedTime) {
       this.showErrorMessage = true;
-      console.log(("selecione todos los campos"))
       //console.log(alert("selecione todos los campos"))
-      this.presentAlert();
-
+      // this.presentAlert();
+      this._alertService.alertToastYellow('Por favor seleccione una fecha y hora', 'top');
 
   
     } else {
