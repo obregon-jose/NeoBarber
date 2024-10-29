@@ -37,11 +37,18 @@ export class FechaYHoraPage implements OnInit {
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute ,  private alertController: AlertController) {
     const today = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(today.getDate() + 7); // 7 días después de hoy
+    
     this.minDate = today.toISOString().split('T')[0];
-    this.maxDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().split('T')[0];
+    this.maxDate = futureDate.toISOString().split('T')[0]; // Fecha máxima es 7 días después
+    this.selectedDate = today.toISOString();
+
+    
+    //this.maxDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().split('T')[0];
      // Inicializar selectedDate con la fecha actual en formato ISO para que muestre el año y la fecha actual
-     const currentDate = new Date();
-     this.selectedDate = currentDate.toISOString();
+     //const currentDate = new Date();
+     //this.selectedDate = currentDate.toISOString();
    
   }
 

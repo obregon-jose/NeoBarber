@@ -10,12 +10,14 @@
     <ion-datetime
       presentation="date"
       [(ngModel)]="selectedDate"
-      [dayValues]="[23, 24, 25, 26, 27, 28, 29]"
-      [monthValues]="10"
-    (ionChange)="onDateChange($event)"
-    required></ion-datetime>
-
+      [min]="minDate"
+      [max]="maxDate"
+      (ionChange)="onDateChange($event)"
+      required>
+    </ion-datetime>
   </div>
+  
+  
 
   <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
   <div class="hora">
