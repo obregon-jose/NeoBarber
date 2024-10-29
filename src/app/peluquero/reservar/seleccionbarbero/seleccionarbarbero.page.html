@@ -6,18 +6,18 @@
 
 <ion-content>
 
-
-  <h3>Selecciona un Barbero</h3>
+  <br>
+  <p class="texto">Selecciona un Barbero</p>
 
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let barber of barbers" (click)="selectBarber(barber)">
         <ion-card>
           <img [src]="barber?.detail?.photo || 'assets/images/profile.png'" alt="{{ barber.name }}">
-          <ion-card-header>
-            <ion-card-title>{{ barber.name }}</ion-card-title>
-            <ion-card-subtitle>{{ barber?.detail?.nickname }}</ion-card-subtitle>
-          </ion-card-header>
+          <div>
+            <p class="nombre">{{ barber.name }}</p>
+            <p class="alias">{{ barber?.detail?.nickname }}</p>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
