@@ -57,11 +57,10 @@ export class ServicioPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.barberName = params['barberName'] || '';
-      this.selectedDate = params['selectedDate'] || '';
-      this.selectedTime = params['selectedTime'] || '';
-    });
+    const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
+    this.barberName = reserva.barberName || '';
+    this.selectedDate = reserva.selectedDate || '';
+    this.selectedTime = reserva.selectedTime || '';
     this.mostrarServicios();
   }
 
@@ -84,23 +83,17 @@ export class ServicioPage implements OnInit {
     console.log('Servicios seleccionados:', serviciosSeleccionados);
 
     if (serviciosSeleccionados.length > 0) {
-        const totalPrecio = serviciosSeleccionados.reduce((total, service) => total + service.price, 0);
-        const serviciosParaResumen = serviciosSeleccionados.map(service => ({
-            nombre: service.name, // Ajusta según el nombre exacto de la propiedad en tu JSON
-            precio: service.price
-        }));
+      const totalPrecio = serviciosSeleccionados.reduce((total, service) => total + service.price, 0);
+      const serviciosParaResumen = serviciosSeleccionados.map(service => ({
+        nombre: service.name, // Ajusta según el nombre exacto de la propiedad en tu JSON
+        precio: service.price
+      }));
 
-        this.navCtrl.navigateForward('/peluquero/reservar/resumen', {
-            queryParams: {
-                barberName: this.barberName,
-                selectedDate: this.selectedDate,
-                selectedTime: this.selectedTime,
-                servicios: JSON.stringify(serviciosParaResumen),
-                precio: totalPrecio
-            }
-        });
+      localStorage.setItem('reserva', JSON.stringify({ ...JSON.parse(localStorage.getItem('reserva') || '{}'), servicios: serviciosParaResumen, precio: totalPrecio }));
+
+      this.navCtrl.navigateForward('/peluquero/reservar/resumen');
     } else {
-        this._alertService.alertToastYellow('Por favor selecciona al menos un servicio', 'top');
+      this._alertService.alertToastYellow('Por favor selecciona al menos un servicio', 'top');
     }
   }
 }

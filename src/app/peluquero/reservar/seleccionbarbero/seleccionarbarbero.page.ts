@@ -42,10 +42,9 @@ export class SeleccionarBarberoPage {
 
   constructor(
     private router: Router,
-    private _BarbersService:BarbersService
+    private _BarbersService: BarbersService
   ) {
     this.mostrarBarberos();
-    
   }
 
   async mostrarBarberos() {
@@ -58,25 +57,9 @@ export class SeleccionarBarberoPage {
     }
   }
 
-  // loadBarbers() {
-  //   this.barbers = [
-  //     { name: 'Mac Miller', subtitle: 'El mono', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Sebastián Yatra', subtitle: 'El mago', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Ismael Antonio Quiñonez Bustamante', subtitle: 'Arcángel', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Poncho zuleto', subtitle: 'El poncho', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Mac Zucaritas', subtitle: 'El broer', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Juliancito sodmg', subtitle: 'El pri', image: 'assets/images/sebastian.jpeg' },
-  //     { name: 'Ronny Red', subtitle: 'El Cholo', image: 'assets/images/sebastian.jpeg' }
-  //   ];
-  // }
-
   selectBarber(barber: any) {
-    this.router.navigate(['/peluquero/reservar/fechayhora'], {
-      queryParams: { 
-        barberId: barber.id,
-        barberName: barber.name,
-        
-       }
-    });
+    // Guarda el barbero seleccionado en el objeto de reserva
+    localStorage.setItem('reserva', JSON.stringify({ ...JSON.parse(localStorage.getItem('reserva') || '{}'), barberName: barber.name }));
+    this.router.navigate(['/peluquero/reservar/fechayhora']);
   }
 }

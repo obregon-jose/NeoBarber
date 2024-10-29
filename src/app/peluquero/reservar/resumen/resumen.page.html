@@ -14,11 +14,11 @@
     <ul>
       <li *ngFor="let servicio of reserva.servicios">{{ servicio.nombre }} </li>
     </ul>
-    <p><strong>Precio sugerido:</strong> {{ reserva.precio | currency:'COP':'symbol' }}</p>
+    <p><strong>Precio sugerido:</strong> {{ reserva.precio | currency:'USD':'symbol' }}</p>
   </div>
 
   <div class="botones" style="display: flex; justify-content: space-between; margin-top: 20px;">
     <ion-button (click)="volver()">Volver</ion-button>
-    <ion-button color="primary" (click)="confirmarReserva()">Terminar</ion-button>
+    <ion-button color="primary" (click)="confirmarReserva()">Reservar</ion-button>
   </div>
 </ion-content>

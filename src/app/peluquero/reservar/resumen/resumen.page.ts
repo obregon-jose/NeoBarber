@@ -21,21 +21,20 @@ export class ResumenPage implements OnInit {
     precio: 0
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient, private route: ActivatedRoute) { } // Inyecta ActivatedRoute
+  constructor(private navCtrl: NavController, private http: HttpClient) { } // Inyecta ActivatedRoute
 
   ngOnInit() {
     this.obtenerReserva();
   }
 
   obtenerReserva() {
-    this.route.queryParams.subscribe((params: { [key: string]: any }) => {
-        this.reserva.barbero = params['barberName'];
-        this.reserva.fecha = params['selectedDate'];
-        this.reserva.hora = params['selectedTime'];
-        this.reserva.servicios = JSON.parse(params['servicios']);
-        this.reserva.precio = params['precio'];
-    });
-}
+    const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
+    this.reserva.barbero = reserva.barberName || '';
+    this.reserva.fecha = reserva.selectedDate || '';
+    this.reserva.hora = reserva.selectedTime || '';
+    this.reserva.servicios = reserva.servicios || [];
+    this.reserva.precio = reserva.precio || 0;
+  }
 
   confirmarReserva() {
     console.log('Reserva confirmada:', this.reserva);
