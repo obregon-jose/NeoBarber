@@ -5,6 +5,7 @@ ion-content {
   flex-direction: column;
   align-items: center;
   padding: 16px;
+  
 }
 
 
@@ -57,10 +58,11 @@ margin: 5px; /* Espaciado entre botones */
 .fecha {
   display: flex;
   justify-content: center;
+  /* width: 230px;
+  height: 230px; */
 }
 
 .hora{
   display: flex;
   justify-content: center;
 }
-

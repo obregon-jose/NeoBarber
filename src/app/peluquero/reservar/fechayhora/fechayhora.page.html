@@ -13,13 +13,13 @@
       [dayValues]="[23, 24, 25, 26, 27, 28, 29]"
       [monthValues]="10"
     (ionChange)="onDateChange($event)"
-    ></ion-datetime>
+    required></ion-datetime>
 
   </div>
 
   <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
   <div class="hora">
-    <ion-select [(ngModel)]="selectedTime" placeholder="Hora">
+    <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
       <ion-select-option value="09:00">09:00 AM</ion-select-option>
       <ion-select-option value="10:00">10:00 AM</ion-select-option>
       <ion-select-option value="11:00">11:00 AM</ion-select-option>
@@ -31,6 +31,7 @@
       <ion-select-option value="17:00">05:00 PM</ion-select-option>
       
     </ion-select>
+    
   </div>
 
   <div class="botones">
