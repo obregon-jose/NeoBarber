@@ -153,7 +153,10 @@ export class PerfilClientePage {
           name: 'nombre',
 
           placeholder: 'Nombre',
-          value: user.name // Prellenar el campo con el nombre actual
+          value: user.name,
+          attributes: {
+            maxlength: 30,
+          } // Prellenar el campo con el nombre actual
         },
         {
           name: 'phone',
@@ -164,6 +167,7 @@ export class PerfilClientePage {
             inputmode: 'numeric',
             minlength: 8,
             maxlength: 10,
+            oninput: (event: any) => this.onlyNumbers(event)
           }
         },
         
@@ -197,6 +201,11 @@ export class PerfilClientePage {
     });
     await alert.present();
 
+  }
+
+  onlyNumbers(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/\D/g, '');  // Solo permite números
   }
 
 

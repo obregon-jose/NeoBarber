@@ -153,24 +153,32 @@ export class PerfilPeluqueroPage {
           name: 'nombre',
 
           placeholder: 'Nombre',
-          value: user.name // Prellenar el campo con el nombre actual
+          value: user.name ,
+          attributes: {
+            maxlength: 30,
+          }
+          // Prellenar el campo con el nombre actual
         },
         {
           name: 'nickname',
           placeholder: 'apodo',
           type:'text',
-          value: user.detail?.nickname // Prellenar el campo con el precio actual
+          value: user.detail?.nickname, // Prellenar el campo con el apodo actual
+          attributes: {
+            maxlength: 15,
+          }
           
         },
         {
           name: 'phone',
           placeholder: 'telefono',
           type:'tel',
-          value: user.detail?.phone, // Prellenar el campo con el precio actual
+          value: user.detail?.phone, // Prellenar el campo con el telefono actual
           attributes: {
             inputmode: 'numeric',
             minlength: 8,
             maxlength: 10,
+            oninput: (event: any) => this.onlyNumbers(event)
           }
         },
         
@@ -183,14 +191,13 @@ export class PerfilPeluqueroPage {
           text: 'GUARDAR',
           role: 'GUARDAR',
           handler: (data: any) => {
-            const phoneRegex = /^\d{8,}$/;
+            const phoneRegex = /^\d{8,10}$/;
             
             if (data.phone && !phoneRegex.test(data.phone)) {
               this._alert_loading_Service.alertToastYellow('El teléfono debe tener al menos 8 dígitos.');
               return false; // Evitar el envío
             }
             if (data.nombre) {
-
               this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
               return true
             } else {
@@ -206,7 +213,10 @@ export class PerfilPeluqueroPage {
   }
 
 
-
+  onlyNumbers(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/\D/g, '');  // Solo permite números
+  }
 
 
 
