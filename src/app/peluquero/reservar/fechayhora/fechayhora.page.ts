@@ -33,9 +33,15 @@ export class FechaYHoraPage implements OnInit {
   maxDate: string;
   showErrorMessage: boolean = false;
 
-  constructor(private navCtrl: NavController, private route: ActivatedRoute, private alertController: AlertController, private _alertService: AlertToastService) {
+  constructor(
+    private navCtrl: NavController, 
+    private route: ActivatedRoute, 
+    private alertController: AlertController, 
+    private _alertService: AlertToastService
+  ) {
     const today = new Date();
-    const futureDate = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Ajuste de zona horaria
+    const futureDate = new Date(today);
     futureDate.setDate(today.getDate() + 7); // 7 días después de hoy
 
     this.minDate = today.toISOString().split('T')[0];
