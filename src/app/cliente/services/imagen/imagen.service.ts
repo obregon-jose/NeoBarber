@@ -36,22 +36,49 @@ export class ImagenService {
     return image.webPath;
   }
 
+  // async uploadImage(imageUrl: string, id: number): Promise<any> {
+  //   const response = await fetch(imageUrl);
+  //   const blob = await response.blob();
+
+  //   const formData = new FormData();
+  //   formData.append('image', blob);
+
+  //   const res = await fetch(`${this.apiUrl}/subir-imagen/`+id,  {
+  //     method: 'POST',
+  //     // headers: {
+  //     //   'Authorization': `Bearer ${token}`, // Si necesitas autenticación
+  //     // },
+  //     body: formData,
+  //   });
+
+  //   return await res.json();
+  // }
+
   async uploadImage(imageUrl: string, id: number): Promise<any> {
+    try {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
 
     const formData = new FormData();
     formData.append('image', blob);
 
-    const res = await fetch(`${this.apiUrl}/subir-imagen/`+id,  {
-      method: 'POST',
+    const res: HttpResponse = await CapacitorHttp.post({
+      url: `${this.apiUrl}/subir-imagen/`+id,
       // headers: {
-      //   'Authorization': `Bearer ${token}`, // Si necesitas autenticación
+      //   'Authorization': Bearer ${token},
+      //   // Agrega cualquier otro encabezado necesario
       // },
-      body: formData,
+      data: formData,
     });
 
-    return await res.json();
+    return await res.data;
+    
+  }catch (error){
+    console.error('Error en uploadImage:', error);
+    throw error;
+  }
+
+    
   }
 
 }

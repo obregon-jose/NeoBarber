@@ -49,6 +49,9 @@ export class PerfilClientePage {
   ngOnInit() {
     this.mostrarPerfil();
   }
+  ionViewWillEnter() {
+    this.mostrarPerfil(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
+  }
 
   
   
@@ -78,15 +81,15 @@ export class PerfilClientePage {
     }
   }
 
-  editarPerfil(data: any, id: number) {
+  async editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
       name: data.nombre,
       phone:data.phone,
       nickname:data.nickname
     };
-     this._perfilService.editarPerfil(UserData);
-    this.mostrarPerfil();
+    await this._perfilService.editarPerfil(UserData);
+    await this.mostrarPerfil();
   }
 
   //Cerrar sesión

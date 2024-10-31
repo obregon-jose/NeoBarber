@@ -44,6 +44,10 @@ export class ServiciosPage implements OnInit {
     this.mostrarServicios();
   }
 
+  ionViewWillEnter() {
+    this.mostrarServicios(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
+  }
+
   async mostrarServicios() {
     try {
       const data = await this._serviciosService.cargarServicios();
@@ -54,69 +58,96 @@ export class ServiciosPage implements OnInit {
     }
   }
 
-  agregarServicio(data: any) {
+  async agregarServicio(data: any) {
     let serviceData = {
       name: data.nombre,
       price: data.precio,
     };
-    this._serviciosService.crearServicio(serviceData);
-    this.mostrarServicios();
+    await this._serviciosService.crearServicio(serviceData); // espera a que el servicio sea creado
+    await this.mostrarServicios(); // luego recarga los servicios
   }
 
-  editarServicio(data: any, id: number) {
+  async editarServicio(data: any, id: number) {
     let serviceData = {
       id: id,
       name: data.nombre,
       price: data.precio,
     };
-    this._serviciosService.editarServicios(serviceData);
-    this.mostrarServicios();
+    await this._serviciosService.editarServicios(serviceData); // espera la edición
+    await this.mostrarServicios(); // luego recarga los servicios
   }
   
-  eliminarServicio(id: number) {
-    this._serviciosService.eliminarServicios(id)
-    this.mostrarServicios();
+  async eliminarServicio(id: number) {
+    await this._serviciosService.eliminarServicios(id); // espera a que se elimine
+    await this.mostrarServicios(); // recarga los servicios
   }
 
-  public alertButtons = [
-    {
-      text: 'CANCELAR',
-    },
-    {
-      text: 'GUARDAR',
-      role: 'GUARDAR',
-      handler: (data: any) => {
-        if (data.nombre && data.precio) {
-          data.precio = this.removeFormatting(data.precio);
-          this.agregarServicio(data);
-          return true; 
-        } else {
-          this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
-          return false;
-        }
-      },
-    },
-    ];
-  
-  public alertInputs = [
-    {
-      name: 'nombre',
-      placeholder: 'Nombre',
-    },
-    {
-      name: 'precio',
-      placeholder: 'Precio',
-      type: 'text',
-
-      attributes: {
-        inputmode: 'numeric',
-        maxlength: 6, 
-        oninput: (event: any) => this.formatPrice(event)
-      }
-    }
+  //alerta para eliminar servicio
+  async DeleteServiceAlert(id: number) {
+    const alert = await this.alertController.create({
+      header: '¿Está seguro de que desea eliminar el servicio?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar servicio',
+          handler: () => {
+            this.eliminarServicio(id);
+          }
+        },
+      ]
+    });
+    await alert.present();
     
-  ];
-  
+  }
+  // Función para abrir la alerta de agregar servicio y limpiar los campos
+async openAddServiceAlert() {
+  const alert = await this.alertController.create({
+    header: 'Agregar Servicio',
+    inputs: [
+      {
+        name: 'nombre',
+        placeholder: 'Nombre',
+        value: '' // Limpia el campo de nombre
+      },
+      {
+        name: 'precio',
+        placeholder: 'Precio',
+        type: 'text',
+        value: '', // Limpia el campo de precio
+        attributes: {
+          inputmode: 'numeric',
+          maxlength: 6,
+          oninput: (event: any) => this.formatPrice(event)
+        }
+      }
+    ],
+    buttons: [
+      {
+        text: 'CANCELAR',
+      },
+      {
+        text: 'GUARDAR',
+        role: 'GUARDAR',
+        handler: (data: any) => {
+          if (data.nombre && data.precio) {
+            data.precio = this.removeFormatting(data.precio);
+            this.agregarServicio(data);
+            return true;
+          } else {
+            this._alert_loading_Service.alertToastYellow('Debe llenar todos los campos');
+            return false;
+          }
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
+
 /*----------------------EDITAR---------------------*/
 async openEditAlert(service: any) {
   const alert = await this.alertController.create({

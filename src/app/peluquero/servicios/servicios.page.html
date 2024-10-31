@@ -22,7 +22,7 @@
     </ion-button>
 
     <!-- Botón para eliminar el servicio -->
-    <ion-button color="danger" (click)="eliminarServicio(service.id)">
+    <ion-button color="danger" (click)="DeleteServiceAlert(service.id)">
       <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
     </ion-button>
   
@@ -30,8 +30,14 @@
   </ion-list>
   
   <!-- Botón flotante para agregar servicios -->
-  <ion-fab id="present-alert" horizontal="end" vertical="bottom" slot="fixed">
+  <!-- <ion-fab id="present-alert" horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="openAddServiceAlert()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
@@ -40,9 +46,9 @@
 
   <!-- FORMULARIO PARA CREAR SEVICIO -->
   <!-- <ion-button id="present-alert">Agregar servicio</ion-button> -->
-  <ion-alert
+  <!-- <ion-alert
     trigger="present-alert"
     header="Ingrese el Servicio"
     [buttons]="alertButtons"
     [inputs]="alertInputs"
-  ></ion-alert>
+  ></ion-alert> -->
