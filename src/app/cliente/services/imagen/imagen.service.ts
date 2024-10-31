@@ -43,7 +43,7 @@ export class ImagenService {
     const formData = new FormData();
     formData.append('image', blob);
 
-    const res = await fetch('http://localhost:8000/api/subir-imagen/'+id, {
+    const res = await fetch(`${this.apiUrl}/subir-imagen/`+id,  {
       method: 'POST',
       // headers: {
       //   'Authorization': `Bearer ${token}`, // Si necesitas autenticación
