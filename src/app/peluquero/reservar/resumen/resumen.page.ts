@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar,AlertController } from '@ionic/angular/standalone';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
 
@@ -21,7 +21,7 @@ export class ResumenPage implements OnInit {
     precio: 0
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient) { } // Inyecta ActivatedRoute
+  constructor(private navCtrl: NavController, private http: HttpClient,private alertController: AlertController,) { } // Inyecta ActivatedRoute
 
   ngOnInit() {
     this.obtenerReserva();
@@ -36,9 +36,16 @@ export class ResumenPage implements OnInit {
     this.reserva.precio = reserva.precio || 0;
   }
 
-  confirmarReserva() {
+  async confirmarReserva() {
     console.log('Reserva confirmada:', this.reserva);
-    // Aquí puedes agregar la lógica para confirmar la reserva
+
+    // Muestra el mensaje de éxito
+    const alert = await this.alertController.create({
+      header: 'Reserva Confirmada',
+      message: 'Tu reserva ha sido realizada con éxito.',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   volver() {
