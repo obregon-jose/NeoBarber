@@ -2,16 +2,75 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { environment } from 'src/environments/environment';
+import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiURL = environment.apiURL;
 
   constructor(
     private _router:Router,
     private _toastAlertService: ToastService,
   ) { }
+
+  async login(email: string, password: string): Promise<void> {
+    const options = {
+      url: `${this.apiURL}/login`,
+      data: {
+        email: email,
+        password: password,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const loading = await this._toastAlertService.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.post(options);
+      if (response.status === 200) {
+        if (response.data.role) { console.log('login exitoso');
+            this._router.navigate([`/home/${response.data.role}`]);
+        } else {
+          this._toastAlertService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
+        }
+        await loading.dismiss();
+        this.saveToken(response.data.token);
+      } else {
+        console.log('fallido', response);
+        this._toastAlertService.toastYellow(response.data.message);
+        await loading.dismiss();
+      }
+    } catch (error) {
+      console.log('fallido-2');
+      this._toastAlertService.toastRed('La conexión al servidor fue rechazada');
+      await loading.dismiss();
+    }
+  }
+
+  async logout(): Promise<void> {
+    const token = await this.getToken();
+    const options = {
+        url: `${this.apiURL}/logout`, 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    };
+
+    try {
+        const response: HttpResponse = await CapacitorHttp.post(options);
+        if (response.status === 200) {
+          this._toastAlertService.toastGreen(response.data.message);
+          this._router.navigate(['/login']);
+          this.deleteToken();
+        }
+    } catch (error) {
+        // Manejar errores de la petición HTTP
+    }
+  }
 
   // Guardar un token de manera segura y con manejo de errores
   async saveToken(token: string): Promise<void> {
@@ -37,7 +96,7 @@ export class AuthService {
     }
   }
 
-   // Obtener el token de manera segura con manejo de errores
+  // Obtener el token de manera segura con manejo de errores
   async getToken(): Promise<string | null> {
     try {
       const { value } = await Preferences.get({ key: 'token' });

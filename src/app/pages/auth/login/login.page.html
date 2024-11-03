@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>login</ion-title>
   </ion-toolbar>
@@ -10,4 +10,65 @@
       <ion-title size="large">login</ion-title>
     </ion-toolbar>
   </ion-header>
+</ion-content> -->
+
+<ion-content >
+  <div class="container">
+    <!-- Fondo animado -->
+    <div class="background-pattern"></div>
+
+    <!-- Elementos decorativos -->
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="assets/images/logo_neobarber.png" alt="Barbería Logo">
+    </div>
+    <!-- Área de contenido -->
+    <div class="content">
+      <div class="login-box">
+        <form (ngSubmit)="login()">
+          <h2>INICIAR SESION</h2>
+
+          <ion-label for="email">Correo electrónico</ion-label>
+          <ion-item>
+            <ion-input  
+            name="email" 
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Ingrese su Correo electrónico" 
+            required>
+            </ion-input>
+          </ion-item>
+
+          <br>
+
+          <ion-label for="password">Contraseña</ion-label>
+          <ion-item>
+            <ion-input  
+            name="password" 
+            type="password"
+            [(ngModel)]="password" 
+            placeholder="Ingrese su Contraseña" 
+            required>
+            <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+            </ion-input>
+          </ion-item>
+<br>
+          <!-- <div class="link-container">
+            <a href="/passrecovery">¿Olvidaste tu contraseña?</a>
+          </div>
+          <br> -->
+
+          <ion-button type="submit" class="login-btn">Iniciar</ion-button>
+
+          <ion-button [routerLink]="['/register']" class="custom-button"  color="medium">
+            <ion-icon slot="start" name="person"></ion-icon>
+            Registrarse
+          </ion-button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
 </ion-content>
+
