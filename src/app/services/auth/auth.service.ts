@@ -32,12 +32,13 @@ export class AuthService {
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 200) {
         if (response.data.role) { console.log('login exitoso');
-            this._router.navigate([`/home/${response.data.role}`]);
+            this._router.navigate([`/home`]);
         } else {
           this._toastAlertService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
         }
         await loading.dismiss();
         this.saveToken(response.data.token);
+        this.saveRole(response.data.role);
       } else {
         console.log('fallido', response);
         this._toastAlertService.toastYellow(response.data.message);
@@ -52,20 +53,21 @@ export class AuthService {
   async logout(): Promise<void> {
     const token = await this.getToken();
     const options = {
-        url: `${this.apiURL}/logout`, 
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        },
+      url: `${this.apiURL}/logout`, 
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      },
     };
 
     try {
-        const response: HttpResponse = await CapacitorHttp.post(options);
-        if (response.status === 200) {
-          this._toastAlertService.toastGreen(response.data.message);
-          this._router.navigate(['/login']);
-          this.deleteToken();
-        }
+      const response: HttpResponse = await CapacitorHttp.post(options);
+      if (response.status === 200) {
+        this._toastAlertService.toastGreen(response.data.message);
+        this._router.navigate(['/login']);
+        this.deleteToken();
+        this.removeRole();
+      }
     } catch (error) {
       this._toastAlertService.toastRed();
     }

@@ -1,22 +1,39 @@
+import { CommonModule } from '@angular/common';
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, square, person, home } from 'ionicons/icons';
+import { person, home, create, cut } from 'ionicons/icons';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
+  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel,
+    CommonModule,
+  ],
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
+  userRole: string = '';
 
-  constructor() {
+  constructor(
+    public authService: AuthService,
+  ) {
     addIcons({
       home,
-      person, 
+      person,
+      create,
+      cut, 
     });
   }
+
+  async ngOnInit() {
+    this.userRole = (await this.authService.getRole()) ?? '';
+  }
+  showTab(tab: string): boolean {
+    return tab === this.userRole;
+  }
+
 }

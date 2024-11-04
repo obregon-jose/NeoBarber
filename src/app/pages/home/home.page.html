@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>home</ion-title>
   </ion-toolbar>
@@ -10,4 +10,20 @@
       <ion-title size="large">home</ion-title>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+</ion-content> -->
+
+<ng-container *ngIf="userRole === 'client'">
+  <app-client></app-client>
+</ng-container>
+<ng-container *ngIf="userRole === 'barber'">
+  <app-barber></app-barber>
+</ng-container>
+<ng-container *ngIf="userRole === 'owner'">
+  <app-owner></app-owner>
+</ng-container>
+<ng-container *ngIf="userRole === 'admin'">
+  <app-admin></app-admin>
+</ng-container>
+<ng-container *ngIf="userRole === 'root'">
+  <app-root></app-root>
+</ng-container>

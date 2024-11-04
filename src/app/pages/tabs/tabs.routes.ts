@@ -9,11 +9,13 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadComponent: () => import('../profile/profile.page').then( m => m.ProfilePage),
+
       },
       {
         path: 'home',
         loadComponent: () => import('../home/home.page').then( m => m.HomePage),
       },
+      
       {
         path: '',
         redirectTo: '/dashboard/home',
