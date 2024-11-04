@@ -49,14 +49,14 @@
             [(ngModel)]="password" 
             placeholder="Ingrese su Contraseña" 
             required>
-            <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
             </ion-input>
+            
           </ion-item>
-<br>
-          <!-- <div class="link-container">
-            <a href="/passrecovery">¿Olvidaste tu contraseña?</a>
+          <div class="link-container">
+            <a [routerLink]="['/recover-password']">¿Olvidaste tu contraseña?</a>
           </div>
-          <br> -->
+<br>
 
           <ion-button type="submit" class="login-btn">Iniciar</ion-button>
 

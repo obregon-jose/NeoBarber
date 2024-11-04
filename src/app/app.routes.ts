@@ -17,7 +17,18 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./pages/auth/register/register.page').then( m => m.RegisterPage)
   },
-  
+  {
+    path: 'recover-password',
+    loadComponent: () => import('./pages/auth/recover-password/recover-password.page').then( m => m.RecoverPasswordPage)
+  },
+  {
+    path: 'verify-code',
+    loadComponent: () => import('./pages/auth/recover-password/verify-code/verify-code.page').then( m => m.VerifyCodePage)
+  },
+  {
+    path: 'password-new',
+    loadComponent: () => import('./pages/auth/recover-password/password-new/password-new.page').then( m => m.PasswordNewPage)
+  },
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/tabs/tabs.routes').then((m) => m.routes),
@@ -58,7 +69,4 @@ export const routes: Routes = [
     path: 'service',
     loadComponent: () => import('./pages/barbershop/service/service.page').then( m => m.ServicePage)
   },
-
-
-
 ];
