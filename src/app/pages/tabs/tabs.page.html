@@ -1,10 +1,5 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="profile" href="/dashboard/profile">
-      <ion-icon aria-hidden="true" name="person"></ion-icon>
-      <ion-label>Perfil</ion-label>
-    </ion-tab-button>
-
     <ion-tab-button tab="home" href="/dashboard/home">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
@@ -23,6 +18,11 @@
     <ion-tab-button tab="attention" href="/dashboard/attention" *ngIf="showTab('barber')">
       <ion-icon aria-hidden="true" name="create"></ion-icon>
       <ion-label>Atención</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" href="/dashboard/profile">
+      <ion-icon aria-hidden="true" name="person"></ion-icon>
+      <ion-label>Perfil</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
