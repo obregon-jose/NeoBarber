@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
 import { Router } from '@angular/router'; // Importa Router para la navegación
+import { AlertToastService } from 'src/app/shared/alert-toast.service';
 
 @Component({
   selector: 'app-resumen',
@@ -22,7 +23,7 @@ export class ResumenPage implements OnInit {
     precio: 0
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient,private alertController: AlertController,  private router: Router,) { } // Inyecta ActivatedRoute
+  constructor(private navCtrl: NavController, private http: HttpClient,private alertController: AlertController,  private router: Router, private _alertService: AlertToastService,) { } // Inyecta ActivatedRoute
 
   ngOnInit() {
     this.obtenerReserva();
@@ -40,13 +41,14 @@ export class ResumenPage implements OnInit {
   async confirmarReserva() {
     console.log('Reserva confirmada:', this.reserva);
 
-    // Muestra el mensaje de éxito
-    const alert = await this.alertController.create({
-      header: 'Reserva Confirmada',
-      message: 'Tu reserva ha sido realizada con éxito.',
-      buttons: ['OK']
-    });
-    await alert.present();
+    this._alertService.alertToastGreen('Tu reserva ha sido realizada con éxito.', 'top');
+    // // Muestra el mensaje de éxito
+    // const alert = await this.alertController.create({
+    //   header: 'Reserva Confirmada',
+    //   message: 'Tu reserva ha sido realizada con éxito.',
+    //   buttons: ['OK']
+    // });
+    // await alert.present();
   }
 
   volver() {

@@ -8,7 +8,6 @@
   .centrar {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
   }
   
   
@@ -31,3 +30,8 @@
     
   }
   
+  ion-card-title {
+    text-align: center;
+    font-size: bold;
+    font-size: 25px;
+  }
