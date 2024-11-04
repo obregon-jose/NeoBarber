@@ -49,9 +49,10 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadComponent: () => import('./pages/home/admin/admin.page').then( m => m.AdminPage)
-  },  {
+  },
+  {
     path: 'add-user',
-    loadComponent: () => import('./pages/auth/add-user/add-user/add-user.page').then( m => m.AddUserPage)
+    loadComponent: () => import('./pages/auth/add-user/add-user.page').then( m => m.AddUserPage)
   },
 
 

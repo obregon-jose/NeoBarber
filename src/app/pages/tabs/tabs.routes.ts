@@ -17,7 +17,7 @@ export const routes: Routes = [
       },
       {
         path: 'add-user',
-        loadComponent: () => import('../auth/add-user/add-user/add-user.page').then( m => m.AddUserPage)
+        loadComponent: () => import('../auth/add-user/add-user.page').then( m => m.AddUserPage)
       },
       {
         path: '',
