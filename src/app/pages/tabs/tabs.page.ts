@@ -27,6 +27,7 @@ export class TabsPage {
       create,
       cut, 
     });
+    this.ngOnInit();
   }
 
   async ngOnInit() {

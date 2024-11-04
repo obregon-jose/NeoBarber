@@ -23,7 +23,9 @@ export class HomePage implements OnInit {
 
   constructor(
     private authService: AuthService
-  ) {}
+  ) {
+    this.ngOnInit();
+  }
 
   async ngOnInit() {
     this.userRole = (await this.authService.getRole()) ?? ''; 

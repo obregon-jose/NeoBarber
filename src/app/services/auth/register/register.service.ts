@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class RegisterService {
   private apiUrl = environment.apiURL;
 
   constructor(
-    private _router: Router,
+    private _navCtrl: NavController,
     private _tokenService: AuthService,
     private _alert_loading_Service: ToastService
   ) { }
@@ -33,15 +33,15 @@ export class RegisterService {
     const loading = await this._alert_loading_Service.presentLoading();
     try {
       const response: HttpResponse = await CapacitorHttp.post(options);
-      if (response.status === 201) { console.log('exitoso',response);
+      if (response.status === 201) { 
         this._alert_loading_Service.toastGreen(response.data.message);
-        this._router.navigate(['/login']);
+        this._navCtrl.navigateRoot(['/login']);
         await loading.dismiss();
       } else {console.log('fallido', response);
         this._alert_loading_Service.toastYellow(response.data.message);
         await loading.dismiss();
       }
-    } catch (error) {console.log('fallido-2', error);
+    } catch (error) {
       this._alert_loading_Service.toastRed();
       await loading.dismiss();
     }

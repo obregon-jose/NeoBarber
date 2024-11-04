@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +12,7 @@ export class AuthService {
   private apiURL = environment.apiURL;
 
   constructor(
-    private _router:Router,
+    private _navCtrl: NavController,
     private _toastAlertService: ToastService,
   ) { }
 
@@ -31,14 +31,14 @@ export class AuthService {
     try {
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 200) {
-        if (response.data.role) { console.log('login exitoso');
-            this._router.navigate([`/home`]);
+        this.saveRole(response.data.role);
+        if (response.data.role) {
+            this._navCtrl.navigateRoot([`/dashboard/home`]);
         } else {
           this._toastAlertService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
         }
         await loading.dismiss();
         this.saveToken(response.data.token);
-        this.saveRole(response.data.role);
       } else {
         console.log('fallido', response);
         this._toastAlertService.toastYellow(response.data.message);
@@ -64,7 +64,7 @@ export class AuthService {
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 200) {
         this._toastAlertService.toastGreen(response.data.message);
-        this._router.navigate(['/login']);
+        this._navCtrl.navigateRoot(['/login']);
         this.deleteToken();
         this.removeRole();
       }
@@ -103,7 +103,7 @@ export class AuthService {
       const { value } = await Preferences.get({ key: 'token' });
       if (!value) {
         this._toastAlertService.toastRed('Tenemos Problemas para verificar su identidad. Por favor, inicie sesión nuevamente.');
-        this._router.navigate(['/login']);
+        this._navCtrl.navigateRoot(['/login']);
       }
       return value;
     } catch (error) {
