@@ -1,10 +1,6 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
-  // },
   {
     path: '',
     loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage)
@@ -20,5 +16,18 @@ export const routes: Routes = [
   {
     path: 'register',
     loadComponent: () => import('./pages/auth/register/register.page').then( m => m.RegisterPage)
+  },
+  
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/tabs/tabs.routes').then((m) => m.routes),
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
   },
 ];

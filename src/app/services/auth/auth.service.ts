@@ -114,4 +114,16 @@ export class AuthService {
   // clearPreferences = async () => {
   //   await Preferences.clear();
   // };
+
+  async saveRole(role: string): Promise<void> {
+    await Preferences.set({ key: 'role', value: role });
+  }
+  async getRole() {
+    const { value } = await Preferences.get({ key: 'role' });
+    console.log(value);
+    return value;
+  }
+  async removeRole() {
+    await Preferences.remove({ key: 'role' });
+  }
 }
