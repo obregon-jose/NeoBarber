@@ -44,8 +44,7 @@ export class AuthService {
         await loading.dismiss();
       }
     } catch (error) {
-      console.log('fallido-2');
-      this._toastAlertService.toastRed('La conexión al servidor fue rechazada');
+      this._toastAlertService.toastRed();
       await loading.dismiss();
     }
   }
@@ -68,7 +67,7 @@ export class AuthService {
           this.deleteToken();
         }
     } catch (error) {
-        // Manejar errores de la petición HTTP
+      this._toastAlertService.toastRed();
     }
   }
 

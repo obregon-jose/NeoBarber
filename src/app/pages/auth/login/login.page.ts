@@ -37,11 +37,11 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   login() {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailPattern.test(this.email)) {
-      this._alertService.toastYellow('Debes ingresar un Correo Electrónico válido');
-      return;
-    }
+    // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // if (!emailPattern.test(this.email)) {
+    //   this._alertService.toastYellow('Debes ingresar un Correo Electrónico válido');
+    //   return;
+    // }
 
     if (this.email && this.password) {
       this._authService.login(this.email, this.password);
