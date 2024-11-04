@@ -122,7 +122,6 @@ export class AuthService {
   }
   async getRole() {
     const { value } = await Preferences.get({ key: 'role' });
-    console.log(value);
     return value;
   }
   async removeRole() {

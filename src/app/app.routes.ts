@@ -54,6 +54,11 @@ export const routes: Routes = [
     path: 'add-user',
     loadComponent: () => import('./pages/auth/add-user/add-user.page').then( m => m.AddUserPage)
   },
+  {
+    path: 'service',
+    loadComponent: () => import('./pages/barbershop/service/service.page').then( m => m.ServicePage)
+  },
+
 
 
 ];

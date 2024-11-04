@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadComponent: () => import('../auth/add-user/add-user.page').then( m => m.AddUserPage)
       },
       {
+        path: 'service',
+        loadComponent: () => import('../barbershop/service/service.page').then( m => m.ServicePage)
+      },
+      {
         path: '',
         redirectTo: '/dashboard/home',
         pathMatch: 'full',

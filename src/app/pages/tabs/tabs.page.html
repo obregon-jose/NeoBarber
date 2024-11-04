@@ -20,7 +20,7 @@
       <ion-label>Atención</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="add-user" href="/dashboard/add-user" *ngIf="showTab('administrador')">
+    <ion-tab-button tab="add-user" href="/dashboard/add-user" *ngIf="showTab('administrador') || showTab('root')">
       <ion-icon aria-hidden="true" name="person-add"></ion-icon>
       <ion-label>Nuevo Usuario</ion-label>
     </ion-tab-button>
