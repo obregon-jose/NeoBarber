@@ -33,7 +33,6 @@ export class AddUserPage implements OnInit {
 
   ngOnInit() {
     this.mostrarRoles();
-    // this.isRandomPassword= true;
    } 
 
   async mostrarRoles() {
@@ -51,7 +50,7 @@ export class AddUserPage implements OnInit {
     if (this.isRandomPassword) {
       this.password = this.generateRandomPassword();
     } else {
-      this.password = '';  // Limpia el campo de contraseña si el toggle está desactivado
+      this.password = '';
     }
   }
 
@@ -63,7 +62,6 @@ export class AddUserPage implements OnInit {
     }
     return result;
   }
-
 
   agregarUsuario() {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/;

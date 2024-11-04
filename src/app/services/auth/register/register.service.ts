@@ -68,7 +68,7 @@ export class RegisterService {
     const loading = await this._alert_loading_Service.presentLoading();
     try {
       const response: HttpResponse = await CapacitorHttp.post(options);
-      if (response.status === 201) { console.log('exitoso',response);
+      if (response.status === 201) { 
         this._alert_loading_Service.toastGreen(response.data.message);
         await loading.dismiss();
       } else {console.log('fallido', response);
