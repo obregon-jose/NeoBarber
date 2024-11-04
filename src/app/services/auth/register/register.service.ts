@@ -50,14 +50,15 @@ export class RegisterService {
   // /*
   // -------- REGISTRO DE USUARIO CON ROL --------
   // */
-  async crearUsuarioConRol(data: any): Promise<void> {
+  async addUser(data: any): Promise<void> {
     const token = await this._tokenService.getToken();
     const options = {
       url: `${this.apiUrl}/register`,
       data: {
         name: data.name,
         email: data.email,
-        role_id: data.role_id,
+        password: data.password,
+        role_id: data.role,
       },
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +76,6 @@ export class RegisterService {
         await loading.dismiss();
       }
     } catch (error) {
-      console.log('fallido-2');
       this._alert_loading_Service.toastRed();
       await loading.dismiss();
     }

@@ -12,16 +12,16 @@
   </ion-header>
 </ion-content> -->
 
-<ng-container *ngIf="userRole === 'client'">
+<ng-container *ngIf="userRole === 'cliente'">
   <app-client></app-client>
 </ng-container>
-<ng-container *ngIf="userRole === 'barber'">
+<ng-container *ngIf="userRole === 'peluquero'">
   <app-barber></app-barber>
 </ng-container>
-<ng-container *ngIf="userRole === 'owner'">
+<ng-container *ngIf="userRole === 'dueño'">
   <app-owner></app-owner>
 </ng-container>
-<ng-container *ngIf="userRole === 'admin'">
+<ng-container *ngIf="userRole === 'administrador'">
   <app-admin></app-admin>
 </ng-container>
 <ng-container *ngIf="userRole === 'root'">

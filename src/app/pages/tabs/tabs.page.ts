@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { person, home, create, cut } from 'ionicons/icons';
+import { person, home, create, cut, add, personAdd } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -25,7 +25,8 @@ export class TabsPage {
       home,
       person,
       create,
-      cut, 
+      cut,
+      personAdd,
     });
     this.ngOnInit();
   }

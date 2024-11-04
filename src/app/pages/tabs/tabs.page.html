@@ -10,14 +10,19 @@
       <ion-label>Reservación</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="service" href="/dashboard/service" *ngIf="showTab('barber')">
+    <ion-tab-button tab="service" href="/dashboard/service" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="cut"></ion-icon>
       <ion-label>Servicios</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="attention" href="/dashboard/attention" *ngIf="showTab('barber')">
+    <ion-tab-button tab="attention" href="/dashboard/attention" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="create"></ion-icon>
       <ion-label>Atención</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="add-user" href="/dashboard/add-user" *ngIf="showTab('administrador')">
+      <ion-icon aria-hidden="true" name="person-add"></ion-icon>
+      <ion-label>Nuevo Usuario</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="profile" href="/dashboard/profile">
