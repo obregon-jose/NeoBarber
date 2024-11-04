@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar,AlertController } from '@ionic/angular/standalone';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
+import { Router } from '@angular/router'; // Importa Router para la navegación
 
 @Component({
   selector: 'app-resumen',
@@ -21,7 +22,7 @@ export class ResumenPage implements OnInit {
     precio: 0
   };
 
-  constructor(private navCtrl: NavController, private http: HttpClient,private alertController: AlertController,) { } // Inyecta ActivatedRoute
+  constructor(private navCtrl: NavController, private http: HttpClient,private alertController: AlertController,  private router: Router,) { } // Inyecta ActivatedRoute
 
   ngOnInit() {
     this.obtenerReserva();
@@ -49,6 +50,17 @@ export class ResumenPage implements OnInit {
   }
 
   volver() {
-    this.navCtrl.navigateBack('/peluquero/reservar/servicio');
+    // this.navCtrl.navigateBack('/peluquero/reservar/servicio');
+
+    const currentUrl = this.router.url;
+    let newUrl = '';
+
+    if (currentUrl.includes('cliente')) {
+      newUrl = 'cliente/reservar/servicio';
+    } else if (currentUrl.includes('peluquero')) {
+      newUrl = '/peluquero/reservar/servicio';
+    }
+
+    this.router.navigate([newUrl]);
   }
 }

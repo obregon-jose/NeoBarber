@@ -16,10 +16,34 @@ export const routes: Routes = [
       //   loadComponent: () =>
       //     import('../servicios/servicios.page').then((m) => m.ServiciosPage),
       // },
+      // {
+      //   path: 'reservas',
+      //   loadComponent: () =>
+      //     import('../reservas/reservas-cliente.page').then((m) => m.ReservasClientePage),
+      // },
+
       {
-        path: 'reservas',
+        path: 'reservar',
         loadComponent: () =>
-          import('../reservas/reservas-cliente.page').then((m) => m.ReservasClientePage),
+          import('../../shared/reservar/reservar.page').then((m) => m.ReservarPage),
+      },
+      {
+        path: 'reservar/seleccionarbarbero',
+        loadComponent: () =>
+          import('../../shared/reservar/seleccionbarbero/seleccionarbarbero.page').then((m) => m.SeleccionarBarberoPage),
+      },
+      {
+        path: 'reservar/fechayhora',
+        loadComponent: () =>
+          import('../../shared/reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
+      },
+      {
+        path: 'reservar/servicio',
+        loadComponent: () => import('../../shared/reservar/servicio/servicio.page').then( m => m.ServicioPage)
+      },
+      {
+        path: 'reservar/resumen',
+        loadComponent: () => import('../../shared/reservar/resumen/resumen.page').then( m => m.ResumenPage)
       },
       {
         path: 'perfil',

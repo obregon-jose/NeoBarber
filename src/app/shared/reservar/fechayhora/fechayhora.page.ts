@@ -4,6 +4,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLab
 import { FormsModule } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fechayhora',
@@ -35,6 +36,7 @@ export class FechaYHoraPage implements OnInit {
 
   constructor(
     private navCtrl: NavController, 
+    private router: Router,
     private route: ActivatedRoute, 
     private alertController: AlertController, 
     private _alertService: AlertToastService
@@ -46,7 +48,7 @@ export class FechaYHoraPage implements OnInit {
 
     this.minDate = today.toISOString().split('T')[0];
     this.maxDate = futureDate.toISOString().split('T')[0]; // Fecha máxima es 7 días después
-    this.selectedDate = today.toISOString();
+    this.selectedDate = today.toISOString().split('T')[0];
   }
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class FechaYHoraPage implements OnInit {
   onDateChange(event: any) {
     const dateString = event.detail.value;
     if (dateString) {
-      this.selectedDate = dateString;
+      this.selectedDate = dateString.split('T')[0];
     } else {
       console.log("Fecha no válida");
     }
@@ -70,11 +72,30 @@ export class FechaYHoraPage implements OnInit {
     } else {
       this.showErrorMessage = false;
       localStorage.setItem('reserva', JSON.stringify({ ...JSON.parse(localStorage.getItem('reserva') || '{}'), selectedDate: this.selectedDate, selectedTime: this.selectedTime }));
-      this.navCtrl.navigateForward('/peluquero/reservar/servicio');
+  
+      const currentUrl = this.router.url;
+      let newUrl = '';
+  
+      if (currentUrl.includes('cliente')) {
+        newUrl = 'cliente/reservar/servicio';
+      } else if (currentUrl.includes('peluquero')) {
+        newUrl = 'peluquero/reservar/servicio';
+      }
+  
+      this.navCtrl.navigateForward(newUrl);
     }
   }
 
   volver() {
-    this.navCtrl.navigateBack('/peluquero/reservar/seleccionarbarbero');
+    const currentUrl = this.router.url;
+    let newUrl = '';
+
+    if (currentUrl.includes('cliente')) {
+      newUrl = 'cliente/reservar/seleccionarbarbero';
+    } else if (currentUrl.includes('peluquero')) {
+      newUrl = '/peluquero/reservar/seleccionarbarbero';
+    }
+
+    this.router.navigate([newUrl]);
   }
 }

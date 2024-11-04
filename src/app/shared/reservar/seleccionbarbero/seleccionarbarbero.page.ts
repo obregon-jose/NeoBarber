@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertToastService } from 'src/app/shared/alert-toast.service';
-import { BarbersService } from '../../services/barbers/barbers.service';
+import { BarbersService } from 'src/app/peluquero/services/barbers/barbers.service';
 
 @Component({
   selector: 'app-seleccionarbarbero-peluquero',
@@ -60,6 +60,16 @@ export class SeleccionarBarberoPage {
   selectBarber(barber: any) {
     // Guarda el barbero seleccionado en el objeto de reserva
     localStorage.setItem('reserva', JSON.stringify({ ...JSON.parse(localStorage.getItem('reserva') || '{}'), barberName: barber.name }));
-    this.router.navigate(['/peluquero/reservar/fechayhora']);
+  
+    const currentUrl = this.router.url;
+    let newUrl = '';
+
+    if (currentUrl.includes('cliente')) {
+      newUrl = 'cliente/reservar/fechayhora';
+    } else if (currentUrl.includes('peluquero')) {
+      newUrl = 'peluquero/reservar/fechayhora';
+    }
+
+    this.router.navigate([newUrl]);
   }
 }

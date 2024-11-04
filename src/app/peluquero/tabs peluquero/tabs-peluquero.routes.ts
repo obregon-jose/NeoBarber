@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { TabsPeluqueroPage } from './tabs-peluquero.page';
 
+
 export const routes: Routes = [
   {
     path: '',
@@ -19,25 +20,25 @@ export const routes: Routes = [
       {
         path: 'reservar',
         loadComponent: () =>
-          import('../reservar/reservar.page').then((m) => m.ReservarPage),
+          import('../../shared/reservar/reservar.page').then((m) => m.ReservarPage),
       },
       {
         path: 'reservar/seleccionarbarbero',
         loadComponent: () =>
-          import('../reservar/seleccionbarbero/seleccionarbarbero.page').then((m) => m.SeleccionarBarberoPage),
+          import('../../shared/reservar/seleccionbarbero/seleccionarbarbero.page').then((m) => m.SeleccionarBarberoPage),
       },
       {
         path: 'reservar/fechayhora',
         loadComponent: () =>
-          import('../reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
+          import('../../shared/reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
       },
       {
         path: 'reservar/servicio',
-        loadComponent: () => import('../reservar/servicio/servicio.page').then( m => m.ServicioPage)
+        loadComponent: () => import('../../shared/reservar/servicio/servicio.page').then( m => m.ServicioPage)
       },
       {
         path: 'reservar/resumen',
-        loadComponent: () => import('../reservar/resumen/resumen.page').then( m => m.ResumenPage)
+        loadComponent: () => import('../../shared/reservar/resumen/resumen.page').then( m => m.ResumenPage)
       },
       {
         path: 'perfil',

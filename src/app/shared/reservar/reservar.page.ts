@@ -14,6 +14,15 @@ export class ReservarPage {
   constructor(private router: Router) {} // Inyecta Router en el constructor
 
   navigateToSelectBarber() {
-    this.router.navigate(['/peluquero/reservar/seleccionarbarbero']); // Método para redirigir
+    const currentUrl = this.router.url;
+    let newUrl = '';
+
+    if (currentUrl.includes('cliente')) {
+      newUrl = 'cliente/reservar/seleccionarbarbero';
+    } else if (currentUrl.includes('peluquero')) {
+      newUrl = 'peluquero/reservar/seleccionarbarbero';
+    }
+
+    this.router.navigate([newUrl]);
   }
 }
