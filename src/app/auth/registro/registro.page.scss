@@ -16,7 +16,6 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra */
     border-radius: 10px;
-    background-color: white; /* Fondo blanco para destacar */
     position: fixed; /* Ajusta la posición para centrar el contenedor */
     top: 50%; /* Centra verticalmente */
     left: 50%; /* Centra horizontalmente */
@@ -28,6 +27,11 @@
     --background: #002EFF; /* Color de fondo del botón */
     --border-radius: 8px; /* Bordes redondeados */
     --padding: 12px; /* Espaciado interno */
+    color: white; /* Color de texto por defecto */
+
+    @media (prefers-color-scheme: dark) {
+      color: white; /* Color de texto en tema oscuro */
+    }
   }
 
   /* Evita el desplazamiento hacia arriba */
@@ -42,7 +46,7 @@ h2{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    color: black;
+    
 } 
 
 ion-label{

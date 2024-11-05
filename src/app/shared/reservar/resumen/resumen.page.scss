@@ -10,7 +10,6 @@ h1{
   /* Estilos para el contenido */
   .resumen {
     padding: 16px;
-    background-color: #ffffff; /* Color de fondo del contenido */
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
     margin: 16px; /* Margen alrededor del contenido */
@@ -42,6 +41,10 @@ h1{
   width: 80%;
   font-weight: bold;
   margin: 5px; /* Espaciado entre botones */
+  }
+
+  ion-button {
+    color: white; /* Texto blanco por defecto */
   }
   
   h2 {

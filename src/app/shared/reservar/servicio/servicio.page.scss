@@ -21,7 +21,6 @@ ion-label {
 }
 
 
-
 ion-button {
   --background: #002EFF;
 --border-radius: 10px;
@@ -36,9 +35,20 @@ margin: 5px; /* Espaciado entre botones */
   margin-top: 20px; /* Espaciado superior para separar de la lista */
 }
 
+ion-button {
+  color: white; /* Texto blanco por defecto */
+}
+
 h1{
   font-family: "Aclonica";
   font-size: bold;
   text-align: center;
   margin-top: 10px;
+}
+
+ion-list{
+  border: 2px solid #ccc;
+  margin: 16px;
+  padding: 8px;
+  border-radius: 8px;
 }

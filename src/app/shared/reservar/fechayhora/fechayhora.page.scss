@@ -33,11 +33,17 @@ ion-select {
 
 ion-button {
   --background: #002EFF;
---border-radius: 10px;
-width: 80%;
-font-weight: bold;
-margin: 5px; /* Espaciado entre botones */
+  --border-radius: 10px;
+  width: 80%;
+  font-weight: bold;
+  margin: 5px; /* Espaciado entre botones */
 }
+
+ion-button {
+  color: white; /* Texto blanco por defecto */
+}
+
+
 
 .label-fecha {
   font-size: 20px;
