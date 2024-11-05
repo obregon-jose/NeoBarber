@@ -73,11 +73,11 @@ export class ProfilePage implements OnInit {
   }
 
   //Cerrar sesión
-  logout() {
-    this._authService.logout();
-  }
+  // logout() {
+  //   this._authService.logout();
+  // }
 //alerta para cerrar sesión
-  async LogoutAlert() {
+  async logoutAlert() {
     const alert = await this.alertController.create({
       header: '¿Está seguro de que desea cerrar sesión?',
       buttons: [
@@ -88,7 +88,8 @@ export class ProfilePage implements OnInit {
         {
           text: 'Cerrar sesión',
           handler: () => {
-            this.logout();
+            // this.logout();
+            this._authService.logout();
           }
         },
       ]

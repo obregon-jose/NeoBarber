@@ -62,8 +62,7 @@ export class AuthService {
 
     try {
       const response: HttpResponse = await CapacitorHttp.post(options);
-      if (response.status === 200) {
-        this._toastAlertService.toastGreen(response.data.message);
+      if (response.status === 204) {
         this._navCtrl.navigateRoot(['/login']);
         this.deleteToken();
         this.removeRole();
