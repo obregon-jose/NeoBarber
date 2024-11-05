@@ -1,33 +1,41 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage)
+    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
+    canActivate: [authGuard]
   },
   {
     path: 'landing',
-    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage)
+    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/auth/login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./pages/auth/login/login.page').then( m => m.LoginPage),
+    canActivate: [authGuard]
   },
   {
     path: 'register',
-    loadComponent: () => import('./pages/auth/register/register.page').then( m => m.RegisterPage)
+    loadComponent: () => import('./pages/auth/register/register.page').then( m => m.RegisterPage),
+    canActivate: [authGuard]
   },
   {
     path: 'recover-password',
-    loadComponent: () => import('./pages/auth/recover-password/recover-password.page').then( m => m.RecoverPasswordPage)
+    loadComponent: () => import('./pages/auth/recover-password/recover-password.page').then( m => m.RecoverPasswordPage),
+    canActivate: [authGuard]
   },
   {
     path: 'verify-code',
-    loadComponent: () => import('./pages/auth/recover-password/verify-code/verify-code.page').then( m => m.VerifyCodePage)
+    loadComponent: () => import('./pages/auth/recover-password/verify-code/verify-code.page').then( m => m.VerifyCodePage),
+    canActivate: [authGuard]
   },
   {
     path: 'password-new',
-    loadComponent: () => import('./pages/auth/recover-password/password-new/password-new.page').then( m => m.PasswordNewPage)
+    loadComponent: () => import('./pages/auth/recover-password/password-new/password-new.page').then( m => m.PasswordNewPage),
+    canActivate: [authGuard]
   },
   {
     path: 'dashboard',

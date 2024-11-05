@@ -4,9 +4,9 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'NeoBarber',
   webDir: 'www',
-  server: {
-    cleartext: true
-  },
+  // server: {
+  //   cleartext: true
+  // },
   plugins: {
     CapacitorHttp: {
       enabled: true,
