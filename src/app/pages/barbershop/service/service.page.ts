@@ -25,8 +25,8 @@ export class ServicePage implements OnInit {
      private alertController: AlertController,
   ) {
     addIcons({
-      'create-outline': createOutline,
-      'trash-outline': trashOutline,
+      createOutline,
+      trashOutline,
       add,
     });
   }

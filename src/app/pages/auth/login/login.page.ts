@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
     private _authService: AuthService,
   ) {
     addIcons({
-      'person': person,
+      person,
     });
    } 
 
