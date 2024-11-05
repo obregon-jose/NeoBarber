@@ -71,6 +71,7 @@ export class ProfileService {
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
     });
 
     return image.webPath;
