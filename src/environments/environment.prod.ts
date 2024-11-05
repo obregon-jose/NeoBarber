@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://barberia1.mandanga.co/public/api' 
+  apiUrl: 'https://barberia1.mandanga.co/public/api' 
 };
