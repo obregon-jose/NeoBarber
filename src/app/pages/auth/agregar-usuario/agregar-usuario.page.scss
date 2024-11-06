@@ -1,0 +1,60 @@
+.center-content {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa del contenedor */
+  }
+
+
+.form-container {
+    width: 92%;
+    max-width: 500px;
+    margin: 0 auto; /* Centra el formulario */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra */
+    border-radius: 10px;
+    background-color: white; /* Fondo blanco para destacar */
+    position: fixed; /* Ajusta la posición para centrar el contenedor */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); 
+}
+
+  /* Botón de registro estilizado */
+  .register-button {
+    --background: #002EFF; /* Color de fondo del botón */
+    --border-radius: 8px; /* Bordes redondeados */
+    --padding: 12px; /* Espaciado interno */
+  }
+
+  /* Evita el desplazamiento hacia arriba */
+  ion-content {
+    scroll-behavior: smooth; /* Desplazamiento suave */
+  }
+
+h2{
+    font-family: "Aclonica", sans-serif ;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+} 
+
+ion-label{
+    color: #ccc;
+}
+
+.logo-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.logo-container img {
+  width: 110px;
+  height: 110px;
+}

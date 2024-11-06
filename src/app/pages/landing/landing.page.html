@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="background-pattern"></div>
+  <div class="container">
+    <div class="logo-container">
+      <ion-img src="assets/images/neo.png" alt="Logo de NeoBarber"></ion-img>
+      <!-- Deberíamos incluir el logo de la barbería ya que el mensaje es de la barbería -->
+    </div>
+
+    <p class="tagline">
+      Somos una barbería moderna con todas las tecnologías para brindar el mejor servicio. Nuestros barberos son personas de excelente calidad humana.
+    </p>
+
+      <div class="button-container">
+        <ion-button [routerLink]="['/login']" class="iniciarsesion" >Iniciar sesión</ion-button>
+        <ion-button [routerLink]="['/registro']" class="registrar" >Registrar</ion-button>
+      </div>
+    
+    </div>
+</ion-content>

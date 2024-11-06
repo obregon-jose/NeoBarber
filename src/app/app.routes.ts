@@ -1,50 +1,103 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
-  },
-  {
-    path: 'peluquero',
-    loadChildren: () => import('./peluquero/tabs peluquero/tabs-peluquero.routes').then( m => m.routes)
-  },
-  {
-    path: 'cliente',
-    loadChildren: () => import('./cliente/tabs cliente/tabs-cliente.routes').then( m => m.routes)
-  },
-  
-  {
-    path: 'login',
-    loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
+    canActivate: [authGuard]
   },
   {
     path: 'landing',
-    loadComponent: () => import('./auth/landing/landing.page').then( m => m.LandingPage)
+    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/auth/login/login.page').then( m => m.LoginPage),
+    canActivate: [authGuard]
   },
   {
     path: 'registro',
-    loadComponent: () => import('./auth/registro/registro.page').then( m => m.RegistroPage)
+    loadComponent: () => import('./pages/auth/registro/registro.page').then( m => m.RegistroPage)
   },
   {
-    path: 'passrecovery',
-    loadComponent: () => import('./auth/passrecovery/passrecovery.page').then( m => m.PassrecoveryPage)
+    path: 'recover-password',
+    loadComponent: () => import('./pages/auth/recover-password/recover-password.page').then( m => m.RecoverPasswordPage),
+    canActivate: [authGuard]
   },
   {
-    path: 'codeconfirmation',
-    loadComponent: () => import('./auth/passrecovery/codeconfirmation/codeconfirmation.page').then( m => m.CodeconfirmationPage)
+    path: 'verify-code',
+    loadComponent: () => import('./pages/auth/recover-password/verify-code/verify-code.page').then( m => m.VerifyCodePage),
+    canActivate: [authGuard]
   },
   {
-    path: 'changepassword',
-    loadComponent: () => import('./auth/passrecovery/changepassword/changepassword.page').then( m => m.ChangepasswordPage)
+    path: 'password-new',
+    loadComponent: () => import('./pages/auth/recover-password/password-new/password-new.page').then( m => m.PasswordNewPage),
+    canActivate: [authGuard]
   },
   {
-    path: 'registropeluquero',
-    loadComponent: () => import('./root/registropeluquero/registropeluquero.page').then( m => m.RegistropeluqueroPage)
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.routes').then((m) => m.routes),
+  },
+  // {
+  //   path: 'reservar',
+  //   loadComponent: () => import('./pages/reservar/reservar.page').then((m) => m.ReservarPage),
+  // },
+  {
+    path: 'horario',
+    loadComponent: () => import('./pages/peluqueria/peluquero/horario/horario.page').then( m => m.HorarioPage)
   },
   {
-    path: 'irregistro',
-    loadComponent: () => import('./root/irregistro/irregistro.page').then( m => m.IrregistroPage)
+    path: 'reservar/seleccionarbarbero',
+    loadComponent: () => import('./pages/reservar/seleccionbarbero/seleccionarbarbero.page').then((m) => m.SeleccionarBarberoPage),
   },
+  {
+    path: 'reservar/fechayhora',
+    loadComponent: () => import('./pages/reservar/fechayhora/fechayhora.page').then((m) => m.FechaYHoraPage),
+  },
+  {
+    path: 'reservar/servicio',
+    loadComponent: () => import('./pages/reservar/servicio/servicio.page').then( m => m.ServicioPage)
+  },
+  {
+    path: 'reservar/resumen', 
+    loadComponent: () => import('./pages/reservar/resumen/resumen.page').then( m => m.ResumenPage)
+  },
+  
+  // {
+  //   path: 'home',
+  //   loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+  // },
+  // {
+  //   path: 'perfil',
+  //   loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
+  // },
+  // {
+  //   path: 'client',
+  //   loadComponent: () => import('./pages/home/client/client.page').then( m => m.ClientPage)
+  // },
+  // {
+  //   path: 'owner',
+  //   loadComponent: () => import('./pages/home/owner/owner.page').then( m => m.OwnerPage)
+  // },
+  // {
+  //   path: 'root',
+  //   loadComponent: () => import('./pages/home/root/root.page').then( m => m.RootPage)
+  // },
+  // {
+  //   path: 'barber',
+  //   loadComponent: () => import('./pages/home/barber/barber.page').then( m => m.BarberPage)
+  // },
+  // {
+  //   path: 'admin',
+  //   loadComponent: () => import('./pages/home/admin/admin.page').then( m => m.AdminPage)
+  // },
+  // {
+  //   path: 'agregar-usuario',
+  //   loadComponent: () => import('./pages/auth/agregar-usuario/agregar-usuario.page').then( m => m.AgregarUsuarioPage)
+  // },
+
+
 
 ];

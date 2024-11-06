@@ -1,0 +1,70 @@
+<ion-content class="ion-padding center-content">
+  <ion-list class="form-container">
+   <div class="logo-container">
+     <img src="assets/images/neo.png" alt="Barbería Logo">
+   </div>
+   <form (ngSubmit)="agregarUsuario()">
+    <h2>REGISTRAR</h2>
+    <!-- <ion-label>Crea cuenta para usuario</ion-label> -->
+<!-- <br> -->
+<br>
+    <ion-input  
+    name="name" 
+    type="text"
+    [(ngModel)]="name"
+    label="Nombre y Apellido"
+    placeholder="Ingrese su Nombre y Apellido"
+    label-placement="floating" 
+    fill="outline"
+    [maxlength]="50"
+    required>
+    </ion-input>
+<br>
+    <ion-input  
+    name="email" 
+    type="email"
+    [(ngModel)]="email"
+    label="Correo electrónico"
+    placeholder="Ingrese su Correo electrónico"
+    label-placement="floating" 
+    fill="outline"
+    pattern="^[\w.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+    
+    required>
+    </ion-input>
+  <br>
+    <ion-toggle [enableOnOffLabels]="true" [checked]="true" (ionChange)="togglePassword($event)">Contraseña aleatoria</ion-toggle>
+<br><br>
+
+<ion-input 
+  *ngIf="!isRandomPassword" 
+  name="password" 
+  type="password"
+  [(ngModel)]="password"
+  label="Contraseña"
+  placeholder="Ingrese su Contraseña"
+  label-placement="floating" 
+  fill="outline"
+  pattern="^(?=.*\d).{8,}$">
+</ion-input>
+
+<!-- <br> -->
+    <ion-list>
+      <ion-item>
+        <ion-select 
+          label="Rol del Usuario:" 
+          justify="start" 
+          aria-label="Rol" 
+          interface="popover" 
+          [(ngModel)]="role" 
+          name="role">
+          <ion-select-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+<br>
+    <ion-button type="submit" expand="block" class="register-button">Registrar Usuario</ion-button>
+   </form>
+   </ion-list>
+ </ion-content>

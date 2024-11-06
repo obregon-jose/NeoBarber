@@ -1,0 +1,164 @@
+ion-content {
+  --background: linear-gradient(to bottom right, #292524, #44403c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Mantiene la altura mínima para pantallas pequeñas */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Fondo dinámico con degradado radial */
+.background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.5), transparent 70%),
+              radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.5), transparent 70%);
+  z-index: 1;
+  filter: brightness(1);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  z-index: 2;
+}
+
+.logo-container img {
+  width: 100px;
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  .logo-container img {
+    width: 150px;
+    height: 150px;
+  }
+
+}
+
+
+/* Área de contenido */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  z-index: 2;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px; /* Limita el ancho en pantallas más grandes */
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+@media (min-width: 360px) {
+  .login-box h2 {
+    font-size: 24px;
+  }
+  .logo-container img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-container img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+ion-item {
+  --border-radius: 10px;
+  // background-color: rgba(255, 255, 255, 0.1);
+}
+
+ion-input {
+  // color: black;
+  padding: 10px;
+}
+
+ion-label {
+  color: white;
+}
+
+.login-btn {
+  --background: #002EFF;
+  --border-radius: 10px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.link-container a {
+  color: white;
+  // text-align: center;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Estilos adicionales para pantallas más grandes */
+@media (min-width: 1024px) {
+  .login-box {
+    padding: 80px;
+  width: 200%;
+  max-width: 400px;
+    
+  }
+
+  .login-box h2 {
+    font-size: 24px;
+  }
+  .logo-container img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+
+.custom-button {
+  color: white; /* Texto en blanco */
+  border-color: gray; /* Borde en blanco */
+  margin-top: 20px; /* Espacio arriba */
+  width: 100%; 
+  --border-radius: 10px;
+
+  ion-icon {
+    color: white; /* Icono en blanco */
+  }
+}
