@@ -17,10 +17,12 @@ interface HorarioDia {
   styleUrls: ['./horario.page.scss'],
   standalone: true,
   imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton, 
+  imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton, 
     IonCheckbox, IonLabel, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, 
     IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
     IonSelectOption,
     IonDatetime,
+  ],
   ],
 })
 export class HorarioPage implements OnInit {
