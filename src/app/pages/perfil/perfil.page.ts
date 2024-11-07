@@ -5,7 +5,7 @@ import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCa
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { pencil, logOut, person, callOutline, personOutline, mailOutline } from 'ionicons/icons';
+import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 @Component({
@@ -28,7 +28,7 @@ export class PerfilPage implements OnInit {
     private _authService: AuthService,
     
   ) {
-    addIcons({pencil,personOutline,callOutline,mailOutline,logOut,person});
+    addIcons({camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
   }
 
   ngOnInit() {

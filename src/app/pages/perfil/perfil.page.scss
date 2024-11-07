@@ -1,82 +1,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
 
-
 .profile-picture {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5px;
-    position: relative;
-  }
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+  position: relative;
+}
 
-  .name {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5px;
-    margin-top: 0px;
-  }
+.name {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
-  .nombre{
-    font-size: 30px;
-    font-weight: bold;
-    font-family: "Aclonica";
-  }
+.nombre {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Aclonica";
+}
 
-  
-//   .profile-picture ion-img {
+ion-card-header {
+  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+// .profile-picture ion-img {
 //     --border-radius: 100%;
 //     width: 200px;
 //     height: 200px;
-//   }
+// }
 
 .edit-button {
-    --ion-color: var(--ion-color-medium); /* Cambia el color del icono */
-    position: absolute; /* Cambia a posición absoluta para poder posicionarlo dentro del contenedor padre */
-    top: 10px; /* Ajusta la distancia desde arriba */
-    right: 10px; /* Ajusta la distancia desde la derecha */
-  }
+  position: absolute; /* Cambia a posición absoluta para poder posicionarlo dentro del contenedor padre */
+  bottom: -10px; /* Ajusta la distancia desde abajo */
+  right: 30px; /* Ajusta la distancia desde la derecha */
+}
 
-  ion-thumbnail {
-    --size: 160px;
-    --border-radius: 100%;
-    
-  }
+ion-thumbnail {
+  --size: 160px;
+  --border-radius: 100%;
+}
 
-  .editar{
-    margin-top: 20px;
-    display: block;
-    --background: #002EFF;
-    --border-radius: 10px;
-    width: 80%;
-    font-weight: bold;
-    color: white;
-  }
-
-  .logout {
-    margin-top: 10px;   
-    display: block;
-    --background: red;
+.editar {
+  margin-top: 0px;
+  display: block;
+  --background: #002EFF;
   --border-radius: 10px;
-    width: 80%;
-    font-weight: bold;
-    color: white;
-  }
-  
-  .edit{
-    display: flex;
-    justify-content: center;
-  }
+  width: 70%;
+  height: 30px;
+  font-weight: bold;
+  color: white;
+}
 
-  .cerrar{
-    display: flex;
-    justify-content: center;
-  }
+.logout {
+  margin-top: 5px;
+  display: block;
+  --background: red;
+  --border-radius: 10px;
+  width: 70%;
+  height: 30px;
+  font-weight: bold;
+  color: white;
+}
 
-  ion-card{
-    border: 200px  black;
-    
-  }
+.edit {
+  display: flex;
+  justify-content: center;
+}
 
+.cerrar {
+  display: flex;
+  justify-content: center;
+}
+
+ion-card {
+  border: 200px black;
+}
 
 .otra {
   display: flex;
@@ -86,7 +89,35 @@
 .subtitle {
   margin: 0;
   font-size: 20px;
+  font-weight: bold;
+  font-family: "Aclonica";
+  color: black;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
 }
 
+.info {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 15px;
+}
 
-  
+.iconos {
+  color: black;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+}
+
+ion-item {
+ 
+
+  @media (prefers-color-scheme: dark) {
+    --background: transparent;
+  }
+}
+
