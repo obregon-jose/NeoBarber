@@ -7,39 +7,58 @@
           <img [src]="user?.detail?.photo || 'assets/images/person.svg'" alt="Foto de perfil"/>
         </ion-thumbnail>
         <ion-button fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)">
-          <ion-icon name="pencil" color="medium" ></ion-icon>
+          <ion-icon name="pencil" color="medium"></ion-icon>
         </ion-button>
       </div>
 
-
-      <div class="centrar">
-        <ion-card-header  >
-          <ion-card-title>{{ user?.name}}</ion-card-title>
+      <div class="name">
+        <ion-card-header>
+          <ion-card-title class="nombre"><strong>{{ user?.name }}</strong></ion-card-title>
         </ion-card-header>
+      </div>
+
+      <div class="apodo">
+        <div class="otra">
+          <ion-icon slot="start" name="person-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+          <label *ngIf="userRole == 'peluquero'" class="subtitle">Apodo</label>
         </div>
-
-      <ion-list>
         <ion-item *ngIf="userRole == 'peluquero'">
-          <ion-label>Apodo: {{ user?.detail?.nickname || user?.name}}</ion-label>
-          <ion-text  ></ion-text>
+          <ion-label>{{ user?.detail?.nickname || user?.name }}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>Teléfono: {{ user?.detail?.phone || '0000000000' }}</ion-label>
-          <ion-text  ></ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-label>Email: {{ user?.email }}</ion-label>
-          <ion-text type="email"></ion-text>
-        </ion-item>
-      </ion-list>
-      <!-- Este botón debería llamar a actualizar y dentro de esa función se llama a mostrar perfil cuando se le de guardar esos datos actualizados-->
-      <ion-button expand="block" (click)="openEditAlert(user)" color="medium">
-        <ion-icon slot="start" name="pencil" ></ion-icon>
-      </ion-button>
+      </div>
+      <br>
 
-      <ion-button expand="block"  color="danger"  (click)="logoutAlert()">
-    Cerrar sesión
-  </ion-button>
+      <div class="telefono">
+        <ion-item>
+          <ion-icon slot="start" name="call-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+          <ion-label class="subtitle">Teléfono:</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ user?.detail?.phone || '0000000000' }}</ion-label>
+        </ion-item>
+      </div>
+      <br>
+
+      <div class="email">
+        <ion-item>
+          <ion-icon slot="start" name="mail-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+          <ion-label class="subtitle">Email:</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ user?.email }}</ion-label>
+        </ion-item>
+      </div>
+
+      <div class="edit">
+        <ion-button class="editar" (click)="openEditAlert(user)">
+          Editar<ion-icon slot="start" name="pencil"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="cerrar">
+        <ion-button class="logout"  (click)="logoutAlert()">
+          Cerrar sesión<ion-icon slot="start" name="log-out" ></ion-icon>
+        </ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

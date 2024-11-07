@@ -1,16 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+
+
 .profile-picture {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     position: relative;
   }
 
-  .centrar {
+  .name {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-top: 0px;
   }
-  
+
+  .nombre{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Aclonica";
+  }
+
   
 //   .profile-picture ion-img {
 //     --border-radius: 100%;
@@ -30,4 +41,52 @@
     --border-radius: 100%;
     
   }
+
+  .editar{
+    margin-top: 20px;
+    display: block;
+    --background: #002EFF;
+    --border-radius: 10px;
+    width: 80%;
+    font-weight: bold;
+    color: white;
+  }
+
+  .logout {
+    margin-top: 10px;   
+    display: block;
+    --background: red;
+  --border-radius: 10px;
+    width: 80%;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .edit{
+    display: flex;
+    justify-content: center;
+  }
+
+  .cerrar{
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-card{
+    border: 200px  black;
+    
+  }
+
+
+.otra {
+  display: flex;
+  align-items: center;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 20px;
+}
+
+
   

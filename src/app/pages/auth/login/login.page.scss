@@ -123,6 +123,7 @@ ion-label {
   --border-radius: 10px;
   width: 100%;
   font-weight: bold;
+  color: white;
 }
 
 .link-container a {
@@ -157,7 +158,8 @@ ion-label {
   margin-top: 20px; /* Espacio arriba */
   width: 100%; 
   --border-radius: 10px;
-
+  --background: #44403c;
+  font-weight: bold;
   ion-icon {
     color: white; /* Icono en blanco */
   }
