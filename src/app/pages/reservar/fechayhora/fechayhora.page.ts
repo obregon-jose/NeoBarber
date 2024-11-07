@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar, IonIcon, IonList } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
+import { DisponibilidadService } from 'src/app/services/peluqueria/disponibilidad/disponibilidad.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-fechayhora',
   templateUrl: 'fechayhora.page.html',
   styleUrls: ['fechayhora.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonList, IonIcon, 
+    CommonModule,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -31,6 +34,7 @@ import { Preferences } from '@capacitor/preferences';
 export class FechaYHoraPage implements OnInit {
   selectedDate: string = '';
   selectedTime: string = '';
+  disponibilidad: any[] = [];
   // barberName: string = '';
   minDate: string;
   maxDate: string;
@@ -43,6 +47,7 @@ export class FechaYHoraPage implements OnInit {
     private alertController: AlertController, 
     private _alertService: ToastService,
     private _navCtrl: NavController,
+    private _disponibilidadService: DisponibilidadService,
   ) {
     const today = new Date();
     today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); // Ajuste de zona horaria
@@ -54,15 +59,38 @@ export class FechaYHoraPage implements OnInit {
     this.selectedDate = today.toISOString().split('T')[0];
   }
 
-  ngOnInit() {
+  ngOnInit(
+    
+  ) {
     // const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
     // this.barberName = reserva.barberName || 'Desconocido';
+     
+    // Llama a mostrarDisponibilidad para cargar los horarios del día actual al inicio
+      this.mostrarDisponibilidad();
+    
+  }
+
+  // async mostrarDisponibilidad() {
+  //   try {
+  //     const data = await this._disponibilidadService.cargarDisponibilidad();
+  //     this.disponibilidad = data;
+  //     console.log(this.disponibilidad);
+  //   } catch (error) {
+  //     console.error('Error al cargar los servicios', error);
+  //   }
+  // }
+  async mostrarDisponibilidad() {
+    if (this.selectedDate) {
+      this.disponibilidad = await this._disponibilidadService.cargarDisponibilidad(this.selectedDate);
+      console.log(this.disponibilidad);
+    }
   }
 
   onDateChange(event: any) {
     const dateString = event.detail.value;
     if (dateString) {
       this.selectedDate = dateString.split('T')[0];
+      this.mostrarDisponibilidad();
     } else {
       console.log("Fecha no válida");
     }

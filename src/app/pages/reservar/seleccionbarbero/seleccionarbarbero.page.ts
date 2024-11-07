@@ -42,6 +42,7 @@ export class SeleccionarBarberoPage {
     this.mostrarBarberos();
   }
 
+  
   async mostrarBarberos() {
     try {
       const data = await this._BarbersService.cargarBarberos();
