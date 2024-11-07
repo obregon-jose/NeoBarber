@@ -1,0 +1,61 @@
+/* Contenedor del logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .logo-container img {
+    width: 100px;
+    height: auto;
+  }
+  
+  /* Título de la Agenda */
+  .title-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .title-container h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .date-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Cambiado para alinear a la izquierda */
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  
+  /* Botones alineados a la derecha */
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  
+//   ion-accordion.accordion-expanding,
+//   ion-accordion.accordion-expanded {
+//     width: calc(100% - 32px);
+  
+//     margin: 16px auto;
+//   }
+  
+//   ion-accordion.accordion-collapsing ion-item[slot='header'],
+//   ion-accordion.accordion-collapsed ion-item[slot='header'] {
+//     --background: var(--ion-color-light);
+//     --color: var(--ion-color-light-contrast);
+//   }
+  
+//   ion-accordion.accordion-expanding ion-item[slot='header'],
+//   ion-accordion.accordion-expanded ion-item[slot='header'] {
+//     --background: var(--ion-color-primary);
+//     --color: var(--ion-color-primary-contrast);
+//   }

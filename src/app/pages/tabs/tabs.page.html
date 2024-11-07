@@ -1,7 +1,7 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" href="/tabs/home">
+    <ion-tab-button tab="home" href="/tabs/home" *ngIf="!showTab('peluquero')">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
@@ -33,7 +33,7 @@
       <ion-label>Atención</ion-label>
     </ion-tab-button>
  -->
-    <ion-tab-button tab="agregar-usuario" href="/tabs/agregar-usuario" *ngIf="showTab('administrador') || showTab('peluquero')|| showTab('root')">
+    <ion-tab-button tab="agregar-usuario" href="/tabs/agregar-usuario" *ngIf="showTab('administrador') || showTab('root')">
       <ion-icon aria-hidden="true" name="person-add"></ion-icon>
       <ion-label>Nuevo Usuario</ion-label>
     </ion-tab-button>
