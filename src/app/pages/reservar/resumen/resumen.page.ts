@@ -18,6 +18,7 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class ResumenPage implements OnInit {
   reserva: any = {
+    id: 0,
     barbero: '',
     fecha: '',
     hora: '',
@@ -54,11 +55,12 @@ export class ResumenPage implements OnInit {
 
 
     // const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
-    this.reserva.barbero = reserva.barberName || '';
-    this.reserva.fecha = reserva.selectedDate || '';
-    this.reserva.hora = reserva.selectedTime || '';
-    this.reserva.servicios = reserva.servicios || [];
-    this.reserva.precio = reserva.precio || 0;
+    this.reserva.id=reserva.barberId ;
+    this.reserva.barbero = reserva.barberName ;
+    this.reserva.fecha = reserva.selectedDate ;
+    this.reserva.hora = reserva.selectedTime ;
+    this.reserva.servicios = reserva.servicios ;
+    this.reserva.precio = reserva.precio;
   }
 
   async confirmarReserva() {
