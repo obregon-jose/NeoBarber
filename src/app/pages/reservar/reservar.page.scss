@@ -1,0 +1,53 @@
+.ticket-card {
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .ticket-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  
+  .ticket-card .stars {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-card .stars ion-icon {
+    font-size: 24px;
+    color: #000;
+    margin: 0 5px;
+  }
+  
+  .ticket-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .ticket-title {
+    font-size: 1.9em;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    top: 10px;
+  }
+  
+  .ticket-info {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .ticket-info p {
+    margin: 5px 0;
+  }
