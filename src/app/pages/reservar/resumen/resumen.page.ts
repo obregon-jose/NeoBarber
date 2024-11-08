@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router'; // Importa Activat
 import { Router } from '@angular/router'; // Importa Router para la navegación
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
+import { ReservarService } from 'src/app/services/reservar/reservar.service';
 
 @Component({
   selector: 'app-resumen',
@@ -18,7 +19,7 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class ResumenPage implements OnInit {
   reserva: any = {
-    id: 0,
+    barbero_id: 0,
     barbero: '',
     fecha: '',
     hora: '',
@@ -28,9 +29,9 @@ export class ResumenPage implements OnInit {
 
   constructor(
     private navCtrl: NavController, 
-    private alertController: AlertController,  
-    private router: Router, 
+    private alertController: AlertController, 
     private _alertService: ToastService,
+    private _reserva: ReservarService 
   ) { } // Inyecta ActivatedRoute
 
   ngOnInit() {
@@ -42,9 +43,6 @@ export class ResumenPage implements OnInit {
     const { value } = await Preferences.get({ key: 'reserva' });
     const reserva = value ? JSON.parse(value) : {};
 
-    // reserva.selectedDate = this.selectedDate;
-    // reserva.selectedTime = this.selectedTime;
-
     // // Guardar la reserva actualizada
     // await Preferences.set({
     //   key: 'reserva',
@@ -55,7 +53,8 @@ export class ResumenPage implements OnInit {
 
 
     // const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
-    this.reserva.id=reserva.barberId ;
+
+    this.reserva.barbero_id = reserva.barberId ;
     this.reserva.barbero = reserva.barberName ;
     this.reserva.fecha = reserva.selectedDate ;
     this.reserva.hora = reserva.selectedTime ;
@@ -64,9 +63,19 @@ export class ResumenPage implements OnInit {
   }
 
   async confirmarReserva() {
-    console.log('Reserva confirmada:', this.reserva);
+    let reservaData ={
+      barber_id: this.reserva.barbero_id,
+      client_id:  4, //
+      date: this.reserva.fecha,
+      time: this.reserva.hora,
+      service_details: this.reserva.servicios,
+      total_paid: this.reserva.precio,
+    };
+    console.log('Reserva confirmada:', reservaData);
+    await this._reserva.crearReserva(reservaData); // espera a que el servicio sea creado
+    //await this.mostrarReserva(); // luego recarga los servicios
 
-    this._alertService.toastGreen('Tu reserva ha sido realizada con éxito.', 'top');
+    // this._alertService.toastGreen('Tu reserva ha sido realizada con éxito.', 'top');
     // // Muestra el mensaje de éxito
     // const alert = await this.alertController.create({
     //   header: 'Reserva Confirmada',

@@ -6,18 +6,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<!-- <ion-content [fullscreen]="true">
   <ion-button expand="full" [routerLink]="['/reservar/seleccionarbarbero']">
     INICIAR UNA RESERVA
   </ion-button>
-</ion-content>
-<ion-header [translucent]="true">
+</ion-content> -->
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Reservar
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ion-card  class="ticket-card" color="light" >
@@ -29,8 +29,6 @@
         Fecha: {{ reserva.fecha }}<br>
         Hora: {{ reserva.hora }}
       </ion-card-subtitle>
-  
-    
   </ion-card>
   <ion-button expand="full" [routerLink]="['/reservar/seleccionarbarbero']">
     INICIAR UNA RESERVA

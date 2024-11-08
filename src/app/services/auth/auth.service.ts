@@ -61,11 +61,14 @@ export class AuthService {
     };
 
     try {
+      this.deleteToken();
+      this.removeRole();
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 204) {
         this._navCtrl.navigateRoot(['/login']);
-        this.deleteToken();
-        this.removeRole();
+        this.removeReserva();
+        // this.deleteToken();
+        // this.removeRole();
       }
     } catch (error) {
       this._toastAlertService.toastRed();
@@ -125,5 +128,9 @@ export class AuthService {
   }
   async removeRole() {
     await Preferences.remove({ key: 'role' });
+  }
+
+  async removeReserva() {
+    await Preferences.remove({ key: 'reserva' });
   }
 }
