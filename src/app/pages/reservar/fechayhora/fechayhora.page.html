@@ -17,15 +17,17 @@
     </ion-datetime>
   </div>
   
-  
+<!--   
   <ion-label><strong>Selecciona una hora</strong></ion-label>
   <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
     <ion-select-option *ngFor="let franja of disponibilidad" [value]="franja.hour_start" [disabled]="!franja.available">
       {{ franja.hour_start }} 
     </ion-select-option>
   </ion-select>
-<!--   
-  <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
+  
+  <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label> -->
+
+
   <div class="hora">
     <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
       <ion-select-option value="09:00">09:00 AM</ion-select-option>
@@ -38,9 +40,9 @@
       <ion-select-option value="16:00">04:00 PM</ion-select-option>
       <ion-select-option value="17:00">05:00 PM</ion-select-option>
       
-    </ion-select> -->
+    </ion-select>
     
-  <!-- </div> -->
+  </div>
 
   <div class="botones">
     <ion-button [routerLink]="['/reservar/seleccionarbarbero']">Volver</ion-button>
