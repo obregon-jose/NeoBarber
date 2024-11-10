@@ -3,6 +3,8 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
 import { ResumenPage } from './resumen/resumen.page';
+import { ReservarService } from 'src/app/services/reservar/reservar.service';
+import { Preferences } from '@capacitor/preferences';
 
 
 @Component({
@@ -14,16 +16,36 @@ import { ResumenPage } from './resumen/resumen.page';
     RouterLink,
   ],
 })
-export class ReservarPage {
+export class ReservarPage  implements OnInit  {
   reserva: any;
+  reservas: any[] = [];
 
-  constructor() {
+  constructor(
+    private _reservarService:ReservarService,
+  ) {
+    
     // Inicializa la reserva con datos de ejemplo
     this.reserva = {
       nombre: 'Juan Pérez',
       fecha: '2023-10-01',
       hora: '10:00 AM'
     };
+  }
+
+  ngOnInit() {
+    this.mostrarReservas();
+  }
+
+  async mostrarReservas() {
+    const { value } = await Preferences.get({ key: 'user' });
+    const userAuth = value ? JSON.parse(value) : {};
+    try {
+      const data = await this._reservarService.cargarReservasCliente(userAuth.id);
+      this.reservas = data; 
+      console.log('reservas cliente pendientes, canceladas y completadas',this.reservas); 
+    } catch (error) {
+      console.error('Error al cargar los servicios', error);
+    }
   }
 }
     

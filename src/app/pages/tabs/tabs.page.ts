@@ -28,6 +28,7 @@ export class TabsPage {
   async ngOnInit() {
     this.userRole = (await this.authService.getRole()) ?? '';
   }
+
   showTab(tab: string): boolean {
     return tab === this.userRole;
   }

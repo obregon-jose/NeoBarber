@@ -53,4 +53,51 @@ export class ReservarService {
        await loading.dismiss();
      }
   }
+
+  // Método para cargar reservas del cliente
+  async cargarReservasCliente(id: number): Promise<any[]> {
+    const token = await this._authService.getToken();
+    const options = {
+      url: `${this.apiUrl}/reservations-client/${id}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+    const loading = await this._alert_loading_Service.presentLoading();
+    try {
+      const response: HttpResponse = await CapacitorHttp.get(options);
+      await loading.dismiss();
+      return response.data.reservations || [];
+    } catch (error) {
+      console.log('fallido-2');
+      this._alert_loading_Service.toastRed();
+      await loading.dismiss();
+      return [];
+    }
+  }
+
+    // Método para cargar reservas del peluquero
+    async cargarReservasPeluquero(id: number): Promise<any[]> {
+      const token = await this._authService.getToken();
+      const options = {
+        url: `${this.apiUrl}/reservations-barber/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      };
+      const loading = await this._alert_loading_Service.presentLoading();
+      try {
+        const response: HttpResponse = await CapacitorHttp.get(options);
+        await loading.dismiss();
+        return response.data.reservationsPending || [];
+      } catch (error) {
+        console.log('fallido-2');
+        this._alert_loading_Service.toastRed();
+        await loading.dismiss();
+        return [];
+      }
+    }
+
 }

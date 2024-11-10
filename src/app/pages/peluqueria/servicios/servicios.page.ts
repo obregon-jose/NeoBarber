@@ -34,6 +34,7 @@ export class ServiciosPage implements OnInit {
       'add': add,
     });
   }
+  
   ngOnInit() {
     this.mostrarServicios();
   }

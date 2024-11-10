@@ -63,9 +63,12 @@ export class ResumenPage implements OnInit {
   }
 
   async confirmarReserva() {
+    const { value } = await Preferences.get({ key: 'user' });
+    const userAuth = value ? JSON.parse(value) : {};
+
     let reservaData ={
       barber_id: this.reserva.barbero_id,
-      client_id:  4, //
+      client_id:  userAuth.id, //
       date: this.reserva.fecha,
       time: this.reserva.hora,
       service_details: this.reserva.servicios,
