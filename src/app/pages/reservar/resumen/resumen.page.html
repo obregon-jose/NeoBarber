@@ -9,7 +9,7 @@
     <h2>Tu Reserva</h2>
     <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
     <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-    <p><strong>Hora:</strong> {{ reserva.hora }}</p> <!-- Añadido el campo de hora -->
+    <p><strong>Hora:</strong> {{ formatHour(reserva.hora) }}</p> <!-- Añadido el campo de hora -->
     <p><strong>Servicios:</strong></p>
     <ul>
       <li *ngFor="let servicio of reserva.servicios">{{ servicio.nombre }} </li>

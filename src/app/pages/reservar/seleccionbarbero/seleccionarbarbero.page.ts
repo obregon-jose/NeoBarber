@@ -39,7 +39,13 @@ export class SeleccionarBarberoPage {
     private _BarbersService: BarbersService,
     private _navCtrl: NavController,
   ) {
-    this.mostrarBarberos();
+   
+  }
+  
+  ngOnInit(
+    
+  ) {
+      this.mostrarBarberos();    
   }
 
   

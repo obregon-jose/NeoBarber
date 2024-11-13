@@ -20,16 +20,18 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
+
   <ion-card  class="ticket-card" color="light" >
     <ion-card-header>
       <ion-card-title class="ticket-title">Reservas Activas</ion-card-title>
      </ion-card-header> 
      <ion-card-subtitle class="ticket-info">
-        Nombre: {{ reserva.nombre }}<br>
+        Peluquero: {{ reserva.nombre }}<br>
         Fecha: {{ reserva.fecha }}<br>
         Hora: {{ reserva.hora }}
       </ion-card-subtitle>
   </ion-card>
+
   <ion-button expand="full" [routerLink]="['/reservar/seleccionarbarbero']">
     INICIAR UNA RESERVA
   </ion-button>
