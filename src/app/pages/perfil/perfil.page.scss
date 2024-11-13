@@ -8,16 +8,9 @@
   position: relative;
 }
 
-.profile-picture img {
-  border-radius: 50%; /* Hace que la imagen sea circular */
-  width: 100%; /* Asegura que ocupe todo el espacio disponible */
-  height: auto; /* Mantiene la proporción */
-  object-fit: cover; /* Asegura que la imagen no se distorsione */
-}
 
-ion-thumbnail img {
-  object-fit: cover;
-}
+
+
 
 
 .name {
@@ -48,8 +41,8 @@ ion-card-header {
 
 .edit-button {
   position: absolute; /* Cambia a posición absoluta para poder posicionarlo dentro del contenedor padre */
-  bottom: -10px; /* Ajusta la distancia desde abajo */
-  right: 30px; /* Ajusta la distancia desde la derecha */
+  top: 15px; /* Ajusta la distancia desde abajo */
+  right: 40px; /* Ajusta la distancia desde la derecha */
 }
 
 ion-thumbnail {
