@@ -3,10 +3,12 @@
   <ion-progress-bar value="0.50"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
+
 <ion-content>
   <br>
   <ion-label class="label-fecha"><strong>Selecciona una fecha</strong></ion-label>
-  <div class="fecha">
+  <ion-card>
+    <div class="fecha">
     <ion-datetime
       presentation="date"
       [(ngModel)]="selectedDate"
@@ -16,33 +18,34 @@
       required>
     </ion-datetime>
   </div>
-  
-  
+  </ion-card>
+<!--   
   <ion-label><strong>Selecciona una hora</strong></ion-label>
   <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
     <ion-select-option *ngFor="let franja of disponibilidad" [value]="franja.hour_start" [disabled]="!franja.available">
       {{ formatHour(franja.hour_start) }} 
     </ion-select-option>
-  </ion-select>
+  </ion-select> -->
   
-  <!-- <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label> -->
+  <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
 
-<!-- 
+<ion-card>
   <div class="hora">
     <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
-      <ion-select-option value="09:00">09:00 AM</ion-select-option>
-      <ion-select-option value="10:00">10:00 AM</ion-select-option>
-      <ion-select-option value="11:00">11:00 AM</ion-select-option>
-      <ion-select-option value="12:00">12:00 PM</ion-select-option>
-      <ion-select-option value="13:00">01:00 PM</ion-select-option>
-      <ion-select-option value="14:00">02:00 PM</ion-select-option>
-      <ion-select-option value="15:00">03:00 PM</ion-select-option>
-      <ion-select-option value="16:00">04:00 PM</ion-select-option>
-      <ion-select-option value="17:00">05:00 PM</ion-select-option>
+      <ion-select-option value="09:00:00">09:00 AM</ion-select-option>
+      <ion-select-option value="10:00:00">10:00 AM</ion-select-option>
+      <ion-select-option value="11:00:00">11:00 AM</ion-select-option>
+      <ion-select-option value="12:00:00">12:00 PM</ion-select-option>
+      <ion-select-option value="13:00:00">01:00 PM</ion-select-option>
+      <ion-select-option value="14:00:00">02:00 PM</ion-select-option>
+      <ion-select-option value="15:00:00">03:00 PM</ion-select-option>
+      <ion-select-option value="16:00:00">04:00 PM</ion-select-option>
+      <ion-select-option value="17:00:00">05:00 PM</ion-select-option>
       
     </ion-select>
     
-  </div> -->
+  </div>
+  </ion-card>
 
   <div class="botones">
     <ion-button [routerLink]="['/reservar/seleccionarbarbero']">Volver</ion-button>

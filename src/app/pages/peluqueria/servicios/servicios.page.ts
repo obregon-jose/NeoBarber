@@ -8,6 +8,7 @@ import { addIcons } from 'ionicons';
 import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.page.html',
@@ -27,6 +28,7 @@ export class ServiciosPage implements OnInit {
      private _serviciosService:ServiciosService,
      private _alert_loading_Service: ToastService,
      private alertController: AlertController,
+     private _changeDetectorRef: ChangeDetectorRef,
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -37,20 +39,27 @@ export class ServiciosPage implements OnInit {
   
   ngOnInit() {
     this.mostrarServicios();
+    this._changeDetectorRef.detectChanges();
+    
   }
 
   ionViewWillEnter() {
-    this.mostrarServicios(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
+    this.mostrarServicios();
+    this._changeDetectorRef.detectChanges();
+    
+     // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
   }
 
   async mostrarServicios() {
     try {
       const data = await this._serviciosService.cargarServicios();
       this.services = data;  // Asigna los datos al array
-      console.log(this.services);  // Aquí tendrás los servicios cargados
+      console.log(this.services);
+      this._changeDetectorRef.detectChanges();  // Aquí tendrás los servicios cargados
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }
+    
   }
 
   async agregarServicio(data: any) {
@@ -60,6 +69,7 @@ export class ServiciosPage implements OnInit {
     };
     await this._serviciosService.crearServicio(serviceData); // espera a que el servicio sea creado
     await this.mostrarServicios(); // luego recarga los servicios
+    this._changeDetectorRef.detectChanges();
   }
 
   async editarServicio(data: any, id: number) {
@@ -70,11 +80,13 @@ export class ServiciosPage implements OnInit {
     };
     await this._serviciosService.editarServicios(serviceData); // espera la edición
     await this.mostrarServicios(); // luego recarga los servicios
+    this._changeDetectorRef.detectChanges();
   }
   
   async eliminarServicio(id: number) {
     await this._serviciosService.eliminarServicios(id); // espera a que se elimine
     await this.mostrarServicios(); // recarga los servicios
+    this._changeDetectorRef.detectChanges();
   }
 
   //alerta para eliminar servicio
@@ -129,7 +141,7 @@ async openAddServiceAlert() {
         handler: (data: any) => {
           if (data.nombre && data.precio) {
             data.precio = this.removeFormatting(data.precio);
-            this.agregarServicio(data);
+             this.agregarServicio(data);
             return true;
           } else {
             this._alert_loading_Service.toastYellow('Debe llenar todos los campos');
