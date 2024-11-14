@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonProgressBar } from '@ionic/angular/standalone';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, IonLabel, IonIcon } from '@ionic/angular/standalone';
+import {  IonBadge, IonItem, IonCardContent, IonLabel, } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
 import { ResumenPage } from './resumen/resumen.page';
@@ -13,10 +13,8 @@ import { Preferences } from '@capacitor/preferences';
   templateUrl: './reservar.page.html',
   styleUrls: ['./reservar.page.scss'],
   standalone: true,
-  imports: [IonProgressBar, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
-  imports: [IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
-    RouterLink,
-  ],
+  imports: [IonProgressBar, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, IonBadge, IonItem, IonCardContent, IonLabel, RouterLink]
+  
 })
 export class ReservarPage  implements OnInit  {
   reserva: any;
