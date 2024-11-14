@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonProgressBar } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
 import { ResumenPage } from './resumen/resumen.page';
@@ -12,7 +12,7 @@ import { Preferences } from '@capacitor/preferences';
   templateUrl: './reservar.page.html',
   styleUrls: ['./reservar.page.scss'],
   standalone: true,
-  imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
+  imports: [IonProgressBar, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
     RouterLink,
   ],
 })
