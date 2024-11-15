@@ -3,11 +3,12 @@ import { Component, OnInit, NO_ERRORS_SCHEMA  } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonFabButton, IonIcon, IonItem, IonCheckbox, IonFab, IonTabs, IonTabBar, IonTabButton, IonListHeader, IonLabel } from '@ionic/angular/standalone';
 import { ServiciosService } from '../../../services/peluqueria/servicios/servicios.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { addIcons } from 'ionicons';
 import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.page.html',
@@ -27,6 +28,7 @@ export class ServiciosPage implements OnInit {
      private _serviciosService:ServiciosService,
      private _alert_loading_Service: ToastService,
      private alertController: AlertController,
+     private cdr: ChangeDetectorRef
   ) {
     addIcons({
       'create-outline': createOutline,
@@ -39,15 +41,15 @@ export class ServiciosPage implements OnInit {
     this.mostrarServicios();
   }
 
-  ionViewWillEnter() {
-    this.mostrarServicios(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
-  }
+  // ionViewWillEnter() {
+  //   this.mostrarServicios(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
+  // }
 
   async mostrarServicios() {
     try {
-      const data = await this._serviciosService.cargarServicios();
-      this.services = data;  // Asigna los datos al array
-      console.log(this.services);  // Aquí tendrás los servicios cargados
+      this.services = await this._serviciosService.cargarServicios();// Asigna los datos al array
+      console.log('mostrarS',this.services);  // Aquí tendrás los servicios cargados
+      this.cdr.detectChanges(); // Forzar la actualización de la vista
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }

@@ -33,11 +33,11 @@
     required>
     </ion-input>
   <br>
-    <ion-toggle [enableOnOffLabels]="true" [checked]="true" (ionChange)="togglePassword($event)">Contraseña aleatoria</ion-toggle>
+    <!-- <ion-toggle [enableOnOffLabels]="true" [checked]="true" (ionChange)="togglePassword($event)">Contraseña aleatoria</ion-toggle> -->
 <br><br>
-
+<!-- *ngIf="!isRandomPassword"  -->
 <ion-input 
-  *ngIf="!isRandomPassword" 
+  
   name="password" 
   type="password"
   [(ngModel)]="password"

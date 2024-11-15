@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class RecoverPasswordService {
   constructor(
     private _alert_loading_Service: ToastService,
     private _navCtrl: NavController,
+    private _authService: AuthService,
   ) { }
   // Enviar código de restablecimiento de contraseña
   async sendResetCode(email: string): Promise<void> {
@@ -69,13 +71,13 @@ export class RecoverPasswordService {
   }
 
   // Restablecer contraseña
-  async resetPassword(token: string, email: string, Password: string): Promise<void> {
+  async resetPassword(token: string, email: string, password: string): Promise<void> {
     const options = {
       url: `${this.apiUrl}/password/reset-update`,
       data: { 
         token,
         email, 
-        Password 
+        password 
       },
       headers: { 'Content-Type': 'application/json' },
     };
@@ -85,7 +87,8 @@ export class RecoverPasswordService {
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 200) { 
         this._alert_loading_Service.toastGreen(response.data.message);
-        this._navCtrl.navigateRoot(['/login']);
+        this._authService.login(email, password);
+        // this._navCtrl.navigateRoot(['/login']);
       await loading.dismiss();
       } else {console.log('fallido', response);
         this._alert_loading_Service.toastYellow(response.data.message);

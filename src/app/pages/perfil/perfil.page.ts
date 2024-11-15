@@ -72,7 +72,7 @@ export class PerfilPage implements OnInit {
       phone:data.phone,
       nickname:data.nickname
     };
-     this._profileService.editarPerfil(UserData);
+    this._profileService.editarPerfil(UserData);
     this.mostrarPerfil();
   }
 
