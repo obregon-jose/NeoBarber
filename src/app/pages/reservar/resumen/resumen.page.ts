@@ -76,6 +76,8 @@ export class ResumenPage implements OnInit {
     };
     console.log('Reserva confirmada:', reservaData);
     await this._reserva.crearReserva(reservaData); // espera a que el servicio sea creado
+
+    this.navCtrl.navigateRoot(['/tabs/reservar']);
     //await this.mostrarReserva(); // luego recarga los servicios
 
     // this._alertService.toastGreen('Tu reserva ha sido realizada con éxito.', 'top');
@@ -86,6 +88,14 @@ export class ResumenPage implements OnInit {
     //   buttons: ['OK']
     // });
     // await alert.present();
+  }
+
+  formatHour(hour: string): string {
+    const [hours, minutes] = hour.split(':');
+    const hourInt = parseInt(hours, 10);
+    const suffix = hourInt >= 12 ? 'PM' : 'AM';
+    const formattedHour = ((hourInt + 11) % 12 + 1).toString().padStart(2, '0'); // Convierte de 24h a 12h
+    return `${formattedHour}:${minutes} ${suffix}`;
   }
 
   // volver() {

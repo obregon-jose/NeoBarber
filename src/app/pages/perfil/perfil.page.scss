@@ -8,6 +8,11 @@
   position: relative;
 }
 
+
+
+
+
+
 .name {
   display: flex;
   justify-content: center;
@@ -36,8 +41,8 @@ ion-card-header {
 
 .edit-button {
   position: absolute; /* Cambia a posición absoluta para poder posicionarlo dentro del contenedor padre */
-  bottom: -10px; /* Ajusta la distancia desde abajo */
-  right: 30px; /* Ajusta la distancia desde la derecha */
+  top: 15px; /* Ajusta la distancia desde abajo */
+  right: 40px; /* Ajusta la distancia desde la derecha */
 }
 
 // ion-thumbnail {

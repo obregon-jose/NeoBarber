@@ -1,16 +1,8 @@
 <ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-title>
-      Fila
-    </ion-title>
-  </ion-toolbar> -->
-  
+  <!-- Header content removed as per original -->
 </ion-header>
 
-
-<ion-content [fullscreen]="true">
-
-  
+<ion-content [fullscreen]="true" class="ion-padding">
   <!-- Logo y Título -->
   <div class="logo-container">
     <img src="assets/images/neo.png" alt="Barbería Logo">
@@ -19,20 +11,18 @@
     <h2>Agenda</h2>
     <div class="date-container">
       <h3>Septiembre 3</h3>
-      
     </div>
   </div>
 
   <!-- Acordeones de Citas -->
   <ion-accordion-group>
     <!-- Cita 1 -->
-    <ion-accordion value="first">
-      <ion-item slot="header" lines="none">
+    <ion-accordion value="first" class="custom-accordion">
+      <ion-item slot="header" lines="none" class="accordion-header">
         <ion-label>#1 Pepe Sanz 8:00 AM</ion-label>
-        <!-- <ion-icon name="chevron-down-outline" slot="end"></ion-icon> -->
         <ion-icon slot="end"></ion-icon>
       </ion-item>
-      <div class="ion-padding" slot="content">
+      <div class="ion-padding accordion-content" slot="content">
         <ion-item lines="none">
           <ion-label>
             <p>Info</p>
@@ -53,13 +43,12 @@
     </ion-accordion>
 
     <!-- Cita 2 -->
-    <ion-accordion value="second">
-      <ion-item slot="header" lines="none">
+    <ion-accordion value="second" class="custom-accordion">
+      <ion-item slot="header" lines="none" class="accordion-header">
         <ion-label>#2 Lalo Garza 9:00 AM</ion-label>
-        <!-- <ion-icon name="chevron-down-outline" slot="end"></ion-icon> -->
         <ion-icon slot="end"></ion-icon>
       </ion-item>
-      <div class="ion-padding" slot="content">
+      <div class="ion-padding accordion-content" slot="content">
         <ion-item lines="none">
           <ion-label>
             <p>Info</p>

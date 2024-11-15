@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
+import { ChangeDetectorRef } from '@angular/core';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-perfil',
@@ -26,6 +27,7 @@ export class PerfilPage implements OnInit {
     private alertController: AlertController,
     private _alert_loading_Service: ToastService,
     private _authService: AuthService,
+    private _changeDetectorRef: ChangeDetectorRef,
     
   ) {
     addIcons({camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
@@ -35,6 +37,11 @@ export class PerfilPage implements OnInit {
     this.mostrarPerfil();
     this.cargarRol();
   }
+
+  ionViewWillEnter() {
+    this.mostrarPerfil(); // Llamamos a mostrar perfil aquí para actualizar la lista cada vez que la página es visible
+  }
+
   async cargarRol() {
     this.userRole = (await this._authService.getRole()) ?? '';
   }
@@ -53,7 +60,9 @@ export class PerfilPage implements OnInit {
     if (this.imageUrl) {
       await this._profileService.uploadImage(this.imageUrl, id);
     }
-    return this.mostrarPerfil();
+    await this.mostrarPerfil();
+    this._changeDetectorRef.detectChanges();
+    
   }
 
   async mostrarPerfil() {
@@ -65,16 +74,17 @@ export class PerfilPage implements OnInit {
     }
   }
 
-  editarPerfil(data: any, id: number) {
+  async editarPerfil(data: any, id: number) {
     let UserData = {
       id: id,
       name: data.nombre,
       phone:data.phone,
       nickname:data.nickname
     };
-    this._profileService.editarPerfil(UserData);
-    this.mostrarPerfil();
-  }
+    await this._profileService.editarPerfil(UserData);
+    await this.mostrarPerfil();
+    this._changeDetectorRef.detectChanges();
+  } 
 
   //Cerrar sesión
   // logout() {
