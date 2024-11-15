@@ -134,33 +134,13 @@ span.estado-completada {
   color: white;
 }
 
-.reserva-detalles {
-  display: flex;
-  flex-direction: column;
-}
-
-.reserva-detalle {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.reserva-icono {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-@media (max-width: 480px) {
-  .reserva-card {
-      padding: 15px;
+  .boton{
+      display: flex;
+      justify-content: center;
   }
 
-  .reserva-servicio {
-      font-size: 1em;
+  h1 {
+    font-family: "Aclonica";
+    font-size: bold;
+    text-align: center;
   }
-
-  .reserva-estado {
-      font-size: 0.8em;
-  }
-}
