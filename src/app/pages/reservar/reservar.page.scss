@@ -54,6 +54,11 @@
 
 ///////////////////////////////////
 
+
+  
+ion-fab-button {
+  --background: #002EFF;
+}
 .reserva-card {
   background-color: #fff;
   border-radius: 8px;
@@ -93,6 +98,21 @@ span.reserva-estado {
   font-weight: bold;
   text-transform: capitalize;
   background-color: #4CAF50;
+  color: white;
+  width: 100px;
+}
+span.estado-pendiente {
+  background-color: #5f5f5f;
+  color: white;
+  width: 100px
+}
+span.estado-cancelada {
+  background-color: red;
+  color: white;
+  width: 100px
+}
+span.estado-completada {
+  background-color: #0077ff;
   color: white;
   width: 100px;
 }
