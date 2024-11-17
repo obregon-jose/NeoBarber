@@ -3,7 +3,7 @@ import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { environment } from 'src/environments/environment';
-
+import { NavController } from '@ionic/angular/standalone';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class ReservarService {
   constructor(
     private _authService: AuthService,
     private _alert_loading_Service: ToastService,
+    private navCtrl: NavController,
   ) { }
 
   async crearReserva(data:any): Promise<void> {
@@ -43,6 +44,7 @@ export class ReservarService {
        const response: HttpResponse = await CapacitorHttp.post(options);
        if (response.status === 201) { console.log('exitoso',response);
          this._alert_loading_Service.toastGreen(response.data.message);
+         this.navCtrl.navigateRoot(['/tabs/reservar']);
          await loading.dismiss();
        } else {console.log('fallido', response);
          this._alert_loading_Service.toastYellow(response.data.message);

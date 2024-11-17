@@ -49,7 +49,8 @@ export class ServiciosPage implements OnInit {
     try {
       this.services = await this._serviciosService.cargarServicios();// Asigna los datos al array
       console.log('mostrarS',this.services);  // Aquí tendrás los servicios cargados
-      this.cdr.detectChanges(); // Forzar la actualización de la vista
+      //this.cdr.detectChanges(); // Forzar la actualización de la vista
+      this.cdr.markForCheck();
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }

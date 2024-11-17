@@ -24,11 +24,11 @@ export class ResumenPage implements OnInit {
     fecha: '',
     hora: '',
     servicios: [],
-    precio: 0
+    precio: 0,
+    client_name: '',
   };
 
   constructor(
-    private navCtrl: NavController, 
     private alertController: AlertController, 
     private _alertService: ToastService,
     private _reserva: ReservarService 
@@ -42,6 +42,9 @@ export class ResumenPage implements OnInit {
     // Obtener la reserva actual
     const { value } = await Preferences.get({ key: 'reserva' });
     const reserva = value ? JSON.parse(value) : {};
+
+    const { value: userValue } = await Preferences.get({ key: 'user' });
+    const userAuth = userValue ? JSON.parse(userValue) : {};
 
     // // Guardar la reserva actualizada
     // await Preferences.set({
@@ -60,6 +63,7 @@ export class ResumenPage implements OnInit {
     this.reserva.hora = reserva.selectedTime ;
     this.reserva.servicios = reserva.servicios ;
     this.reserva.precio = reserva.precio;
+    this.reserva.client_name = userAuth.name;
   }
 
   async confirmarReserva() {
@@ -69,6 +73,7 @@ export class ResumenPage implements OnInit {
     let reservaData ={
       barber_id: this.reserva.barbero_id,
       client_id:  userAuth.id, //
+      client_name: userAuth.name,
       date: this.reserva.fecha,
       time: this.reserva.hora,
       service_details: this.reserva.servicios,
@@ -77,7 +82,7 @@ export class ResumenPage implements OnInit {
     console.log('Reserva confirmada:', reservaData);
     await this._reserva.crearReserva(reservaData); // espera a que el servicio sea creado
 
-    this.navCtrl.navigateRoot(['/tabs/reservar']);
+    
     //await this.mostrarReserva(); // luego recarga los servicios
 
     // this._alertService.toastGreen('Tu reserva ha sido realizada con éxito.', 'top');

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, IonLabel, IonIcon, IonFabButton, IonFab } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, IonLabel, IonIcon, IonFabButton, IonFab, IonList } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
 import { ResumenPage } from './resumen/resumen.page';
@@ -7,7 +7,7 @@ import { ReservarService } from 'src/app/services/reservar/reservar.service';
 import { Preferences } from '@capacitor/preferences';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { add } from 'ionicons/icons';
+import { add, calendar, alarm, person } from 'ionicons/icons';
 
 
 
@@ -16,34 +16,23 @@ import { add } from 'ionicons/icons';
   templateUrl: './reservar.page.html',
   styleUrls: ['./reservar.page.scss'],
   standalone: true,
-  imports: [IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
+  imports: [IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
     RouterLink,CommonModule
   ],
 })
 export class ReservarPage  implements OnInit  {
-  reserva: any;
   reservas: any[] = [];
 
   constructor(
     private _reservarService:ReservarService,
   ) {
-    
-    addIcons({
-
-      'add': add
-    });
-    
-    // Inicializa la reserva con datos de ejemplo
-    this.reserva = {
-      nombre: 'Juan Pérez',
-      fecha: '2023-10-01',
-      hora: '10:00 AM'
-    };
+    addIcons({add,person,alarm,calendar,});
   }
 
   ngOnInit() {
     this.mostrarReservas();
   }
+  
   formatHour(hour: string): string {
     const [hours, minutes] = hour.split(':');
     const hourInt = parseInt(hours, 10);
