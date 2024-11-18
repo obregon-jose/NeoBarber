@@ -1,6 +1,9 @@
 /* Estilos generales */
 ion-content {
+<<<<<<< HEAD
   //color fondo --background: #f4f5f8;
+=======
+>>>>>>> 244e15e4e9a7b60008c5399043d2e6761687a684
 }
 
 /* Contenedor del logo */
@@ -32,9 +35,12 @@ ion-content {
   font-family: 'Arial', sans-serif;
   font-size: 28px;
   font-weight: bold;
+<<<<<<< HEAD
   text-align: center; 
   color: #333;
   margin-bottom: 2px;
+=======
+>>>>>>> 244e15e4e9a7b60008c5399043d2e6761687a684
 }
 
 .date-container {
@@ -50,7 +56,6 @@ ion-content {
 .date-container h3 {
   margin: 0;
   font-size: 18px;
-  color: #666;
 }
 
 /* Estilos para los círculos de días */
@@ -109,13 +114,12 @@ ion-content {
 .custom-accordion {
   margin-bottom: 16px;
   border-radius: 8px;
+  box-decoration-break: var(--color);
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(69, 66, 66, 0.5);
 }
 
 .accordion-header {
-  --background: #ffffff;
-  --color: #333333;
 }
 
 .accordion-header ion-label {
@@ -123,7 +127,6 @@ ion-content {
 }
 
 .accordion-content {
-  background-color: #ffffff;
 }
 
 /* Botones alineados a la derecha */
@@ -157,12 +160,12 @@ ion-accordion .accordion-content ion-item {
 }
 
 ion-accordion .accordion-content ion-item ion-label p {
-  color: #666;
   margin-bottom: 4px;
 }
 
 ion-accordion .accordion-content ion-item ion-label h3 {
   font-weight: bold;
+<<<<<<< HEAD
   color: #333;
 }
 
@@ -184,4 +187,6 @@ ion-accordion .accordion-content ion-item ion-label h3 {
   .day-number {
     font-size: 16px;
   }
+=======
+>>>>>>> 244e15e4e9a7b60008c5399043d2e6761687a684
 }

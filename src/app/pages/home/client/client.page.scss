@@ -1,0 +1,26 @@
+
+  /* Contenedor del logo */
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .logo-container img {
+    width: 100px;
+    height: auto;
+  }
+
+  ion-card img {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 150px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que las imágenes mantengan proporciones adecuadas */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  ion-content {
+    padding-bottom: 10px; /* Espacio adicional al final si es necesario */
+    box-sizing: border-box;
+    display: flex;
+  flex-direction: column;
+  height: 10%; /* Ocupa toda la altura disponible */
+  }
