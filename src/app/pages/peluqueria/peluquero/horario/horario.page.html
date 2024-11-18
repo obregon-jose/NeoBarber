@@ -1,10 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>horario</ion-title>
-  </ion-toolbar>
-</ion-header>
+
+
 
 <ion-content [fullscreen]="true">
+
+  <h1 color="primary" class="header-title">Horarios</h1>
   <ion-card>
     <ion-accordion-group>
       <ion-item *ngFor="let horario of horarios">
@@ -14,10 +13,10 @@
       
 
       <ion-accordion *ngFor="let dia of dias; let i = index" [value]="'accordion-' + i">
-        <ion-item slot="header">
+        <ion-item id="dia"  slot="header">
           
-          <ion-checkbox id="Dia" justify="start" labelPlacement="end" 
-                        [(ngModel)]="horario[dia].seleccionado"
+          <ion-checkbox id="Checkbox_Dia" justify="start" labelPlacement="end" 
+                        [(ngModel)]=" horario[dia].seleccionado"
                         (click)="detenerPropagacion($event)">          
           </ion-checkbox>
           {{ dia }}
@@ -27,7 +26,7 @@
           <ion-button slot="end" size="small" (click)="toggleAllHoras(dia)" [disabled]= "!horario[dia].seleccionado">
             {{ horario[dia].horas.length === horas.length ? 'Deseleccionar' : 'Seleccionar' }} todas las horas 
           </ion-button> 
-          <ion-checkbox *ngFor="let hora of horas" justify="space-between"
+          <ion-checkbox id="horas" *ngFor="let hora of horas" justify="space-between"
                         [disabled]="!horario[dia].seleccionado"
                         [checked]="horario[dia].horas.includes(hora)"
                         (ionChange)="toggleHora(dia, hora)"
@@ -45,18 +44,31 @@
 </ion-content>
 
 
-<!--
+<!-- 
 <ion-content>
   <ion-list>
     <label >fd</label>
     <ion-item *ngFor="let dia of horarios">
       <ion-label>
         <h2>{{ dia }}</h2>
-         <p>Fecha: {{ dia.fecha }}</p>
-        <p>Creado: {{ dia.created_at }}</p> 
+        <p>Fecha: {{ dia.fecha }}</p>
+        <p>Creado: {{ dia.created_at }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
--->
 
+
+
+<ion-content>
+  <ion-list>
+    <label >fd</label>
+    <ion-item *ngFor="let dia of horarios">
+      <ion-label>
+        <h2>{{ dia }}</h2>
+        <p>Fecha: {{ dia.fecha }}</p>
+        <p>Creado: {{ dia.created_at }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content> -->

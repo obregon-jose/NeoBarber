@@ -32,13 +32,14 @@ export class AuthService {
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 200) {
         this.saveRole(response.data.role);
+        this.saveToken(response.data.token);
+        this.userAuthenticated();
         if (response.data.role) {
             this._navCtrl.navigateRoot([`/tabs/home`]);
         } else {
           this._toastAlertService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
         }
         await loading.dismiss();
-        this.saveToken(response.data.token);
       } else {
         console.log('fallido', response);
         this._toastAlertService.toastYellow(response.data.message);
@@ -49,6 +50,8 @@ export class AuthService {
       await loading.dismiss();
     }
   }
+
+  
 
   async logout(): Promise<void> {
     const token = await this.getToken();
@@ -63,10 +66,11 @@ export class AuthService {
     try {
       this.deleteToken();
       this.removeRole();
+      this._navCtrl.navigateRoot(['/login']);
       const response: HttpResponse = await CapacitorHttp.post(options);
       if (response.status === 204) {
-        this._navCtrl.navigateRoot(['/login']);
         this.removeReserva();
+        this.removeUserAuthenticated();
         // this.deleteToken();
         // this.removeRole();
       }
@@ -118,6 +122,35 @@ export class AuthService {
   // clearPreferences = async () => {
   //   await Preferences.clear();
   // };
+
+  async userAuthenticated() {
+    const token = await this.getToken();
+    const options = {
+      url: `${this.apiURL}/user`, 
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      },
+    };
+    const response: HttpResponse = await CapacitorHttp.get(options);
+    // Obtener
+    const { value } = await Preferences.get({ key: 'user' });
+    const userAuth = value ? JSON.parse(value) : {};
+
+    userAuth.id = response.data.id;
+    userAuth.name = response.data.name;
+    userAuth.email = response.data.email;
+    
+    // Guardar
+    await Preferences.set({
+      key: 'user',
+      value: JSON.stringify(userAuth),
+    });
+
+  }
+  async removeUserAuthenticated() {
+    await Preferences.remove({ key: 'user' });
+  }
 
   async saveRole(role: string): Promise<void> {
     await Preferences.set({ key: 'role', value: role });

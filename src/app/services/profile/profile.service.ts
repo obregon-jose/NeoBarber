@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,12 @@ export class ProfileService {
       if (response.status === 200) {
         this._alert_loading_Service.toastGreen(response.data.message );
         await loading.dismiss();
+        // Obtener 
+        const { value } = await Preferences.get({ key: 'user' });
+        const userAuth = value ? JSON.parse(value) : {};
+        userAuth.name = options.data.name;
+        // Guardar
+        await Preferences.set({key: 'user',value: JSON.stringify(userAuth),});
       } else {console.log('fallido', response);
         this._alert_loading_Service.toastYellow(response.data.message);
         await loading.dismiss();

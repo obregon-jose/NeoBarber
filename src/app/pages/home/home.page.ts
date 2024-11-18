@@ -8,6 +8,7 @@ import { OwnerPage } from "./owner/owner.page";
 import { AdminPage } from "./admin/admin.page";
 import { RootPage } from "./root/root.page";
 import { BarberPage } from "./barber/barber.page";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -21,12 +22,18 @@ export class HomePage implements OnInit {
   userRole: string = '';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private _navCtrl: NavController,
   ) {
     this.ngOnInit();
   }
 
   async ngOnInit() {
     this.userRole = (await this.authService.getRole()) ?? ''; 
+    // Redirigir si el usuario es peluquero
+    if (this.userRole === 'peluquero') {
+      this._navCtrl.navigateRoot(['/tabs/fila']);
+    }
   }
+  
 }

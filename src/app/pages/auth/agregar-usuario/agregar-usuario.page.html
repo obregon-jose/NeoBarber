@@ -35,9 +35,9 @@
   <br>
     <ion-toggle [enableOnOffLabels]="true" [checked]="true" (ionChange)="togglePassword($event)">Contraseña aleatoria</ion-toggle>
 <br><br>
-
+<!--   -->
 <ion-input 
-  *ngIf="!isRandomPassword" 
+  *ngIf="!isRandomPassword"
   name="password" 
   type="password"
   [(ngModel)]="password"

@@ -1,53 +1,163 @@
-.ticket-card {
-    border: 2px solid #000;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-  }
+
+.reservas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Ajusta este valor según el espacio que desees */
+}
+// .ticket-card {
+//     border: 2px solid #000;
+//     border-radius: 10px;
+//     padding: 20px;
+//     text-align: center;
+//     position: relative;
+//   }
   
-  .ticket-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-sizing: border-box;
-  }
+//   .ticket-card::before {
+//     content: "";
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     border: 2px solid #000;
+//     border-radius: 10px;
+//     box-sizing: border-box;
+//   }
   
-  .ticket-card .stars {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
+//   .ticket-card .stars {
+//     display: flex;
+//     justify-content: center;
+//     margin-bottom: 10px;
+//   }
   
-  .ticket-card .stars ion-icon {
-    font-size: 24px;
-    color: #000;
-    margin: 0 5px;
-  }
+//   .ticket-card .stars ion-icon {
+//     font-size: 24px;
+//     color: #000;
+//     margin: 0 5px;
+//   }
   
-  .ticket-card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  .ticket-title {
-    font-size: 1.9em;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    top: 10px;
-  }
+//   .ticket-card h2 {
+//     font-size: 24px;
+//     margin-bottom: 10px;
+//   }
+//   .ticket-title {
+//     font-size: 1.9em;
+//     font-weight: bold;
+//     text-align: center;
+//     color: #333;
+//     top: 10px;
+//   }
   
-  .ticket-info {
-    font-size: 1em;
-    color: #555;
-    line-height: 1.5;
-  }
+//   .ticket-info {
+//     font-size: 1em;
+//     color: #555;
+//     line-height: 1.5;
+//   }
   
-  .ticket-info p {
-    margin: 5px 0;
+//   .ticket-info p {
+//     margin: 5px 0;
+//   }
+
+///////////////////////////////////
+
+
+  
+ion-fab-button {
+  --background: #002EFF;
+}
+.reserva-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  // margin-bottom: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.nombre-card {
+  font-size: x-large;
+
+}
+
+.reserva-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 8;
+  
+}
+
+.reserva-servicio {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+span.reserva-estado {
+  font-size: large;
+  padding: 1px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: #4CAF50;
+  width: 100px;
+}
+span.estado-pendiente {
+  background-color: #5f5f5f;
+  width: 100px
+}
+span.estado-cancelada {
+  background-color: red;
+  width: 100px
+}
+span.estado-completada {
+  background-color: #0077ff;
+  width: 100px;
+}
+
+.estado-completada {
+  background-color: #4CAF50;
+  width: 100px;
+  //font-size: 0.61em;
+}
+
+.estado-pendiente {
+  background-color: #FFC107;
+}
+
+.estado-cancelada {
+  background-color: #F44336;
+}
+
+.reserva-detalles {
+  display: flex;
+  flex-direction: column;
+}
+
+.reserva-detalle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.reserva-icono {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .reserva-card {
+      padding: 15px;
   }
+
+  .reserva-servicio {
+      font-size: 1em;
+  }
+
+  .reserva-estado {
+      font-size: 0.8em;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonRow, IonCard, IonProgressBar } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { BarbersService } from 'src/app/services/peluqueria/barbers/barbers.service';
@@ -32,14 +32,20 @@ import { RouterLink } from '@angular/router';
   schemas: [NO_ERRORS_SCHEMA],
 })
 
-export class SeleccionarBarberoPage {
+export class SeleccionarBarberoPage implements OnInit {
   barbers: any[] = [];
 
   constructor(
     private _BarbersService: BarbersService,
     private _navCtrl: NavController,
   ) {
-    this.mostrarBarberos();
+   
+  }
+  
+  ngOnInit(
+    
+  ) {
+      this.mostrarBarberos();    
   }
 
   

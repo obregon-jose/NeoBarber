@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EnvironmentInjector, inject } from '@angular/core';
+import { Component, EnvironmentInjector, inject, OnInit } from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { person, home, create, cut, add, personAdd, reader, time } from 'ionicons/icons';
@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     CommonModule,
   ],
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);
   userRole: string = '';
 
@@ -28,6 +28,7 @@ export class TabsPage {
   async ngOnInit() {
     this.userRole = (await this.authService.getRole()) ?? '';
   }
+
   showTab(tab: string): boolean {
     return tab === this.userRole;
   }

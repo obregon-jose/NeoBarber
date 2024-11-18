@@ -2,14 +2,15 @@
  
 
       <div class="profile-picture">
-        <ion-thumbnail>
+        <ion-thumbnail class="thumbnail-circle">
           <img [src]="user?.detail?.photo || 'assets/images/person.svg'" alt="Foto de perfil"/>
         </ion-thumbnail>
-        <ion-button fill="clear" class="edit-button" (click)="openImageOptionsAlert(user.id)">
-          <ion-icon class="iconos" name="camera" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
-        </ion-button>
       </div>
-
+      <div class="botonfoto">
+        <ion-button fill="clear" class="camara" (click)="openImageOptionsAlert(user.id)">
+          <ion-icon class="iconos" name="camera"></ion-icon>
+        </ion-button>
+      </div>    
       <div class="name">
         <ion-card-header>
           <ion-card-title class="nombre"><strong>{{ user?.name }}</strong></ion-card-title>
@@ -21,10 +22,10 @@
 
       <div class="apodo">
         <div class="otra">
-          <ion-icon *ngIf="userRole == 'peluquero'" class="iconos" slot="start" name="person-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
-          <label *ngIf="userRole == 'peluquero'" class="subtitle">Apodo</label>
+          <ion-icon *ngIf="userRole === 'peluquero'" class="iconos" slot="start" name="person-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+          <label *ngIf="userRole === 'peluquero'" class="subtitle">Apodo</label>
         </div>
-        <ion-item *ngIf="userRole == 'peluquero'">
+        <ion-item *ngIf="userRole === 'peluquero'">
           <ion-label class="info">{{ user?.detail?.nickname || user?.name }}</ion-label>
         </ion-item>
       </div>

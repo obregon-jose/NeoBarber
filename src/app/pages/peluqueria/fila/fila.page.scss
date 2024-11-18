@@ -1,61 +1,91 @@
+/* Estilos generales */
+ion-content {
+}
+
 /* Contenedor del logo */
 .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .logo-container img {
-    width: 100px;
-    height: auto;
-  }
-  
-  /* Título de la Agenda */
-  .title-container {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .title-container h2 {
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .date-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Cambiado para alinear a la izquierda */
-    gap: 10px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  
-  /* Botones alineados a la derecha */
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  
-//   ion-accordion.accordion-expanding,
-//   ion-accordion.accordion-expanded {
-//     width: calc(100% - 32px);
-  
-//     margin: 16px auto;
-//   }
-  
-//   ion-accordion.accordion-collapsing ion-item[slot='header'],
-//   ion-accordion.accordion-collapsed ion-item[slot='header'] {
-//     --background: var(--ion-color-light);
-//     --color: var(--ion-color-light-contrast);
-//   }
-  
-//   ion-accordion.accordion-expanding ion-item[slot='header'],
-//   ion-accordion.accordion-expanded ion-item[slot='header'] {
-//     --background: var(--ion-color-primary);
-//     --color: var(--ion-color-primary-contrast);
-//   }
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.logo-container img {
+  width: 100px;
+  height: auto;
+}
+
+/* Título de la Agenda */
+.title-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.title-container h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.date-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* Estilos para los acordeones */
+.custom-accordion {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-decoration-break: var(--color);
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(69, 66, 66, 0.5);
+}
+
+.accordion-header {
+}
+
+.accordion-header ion-label {
+  font-weight: bold;
+}
+
+.accordion-content {
+}
+
+/* Botones alineados a la derecha */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Animación suave para la expansión del acordeón */
+ion-accordion-group {
+  transition: all 0.3s ease-in-out;
+}
+
+ion-accordion.accordion-expanding,
+ion-accordion.accordion-expanded {
+  margin: 16px 0;
+}
+
+ion-accordion.accordion-expanding ion-item[slot="header"],
+ion-accordion.accordion-expanded ion-item[slot="header"] {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+/* Estilos para los ítems dentro del acordeón */
+ion-accordion .accordion-content ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-accordion .accordion-content ion-item ion-label p {
+  margin-bottom: 4px;
+}
+
+ion-accordion .accordion-content ion-item ion-label h3 {
+  font-weight: bold;
+}

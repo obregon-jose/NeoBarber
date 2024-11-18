@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar, IonIcon, IonList } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar, IonIcon, IonList, IonCard } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'fechayhora.page.html',
   styleUrls: ['fechayhora.page.scss'],
   standalone: true,
-  imports: [IonList, IonIcon, 
+  imports: [IonCard, IonList, IonIcon, 
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -79,6 +79,7 @@ export class FechaYHoraPage implements OnInit {
   //     console.error('Error al cargar los servicios', error);
   //   }
   // }
+  
   async mostrarDisponibilidad() {
     if (this.selectedDate) {
       this.disponibilidad = await this._disponibilidadService.cargarDisponibilidad(this.selectedDate);
@@ -130,6 +131,14 @@ export class FechaYHoraPage implements OnInit {
   
       // this.navCtrl.navigateForward(newUrl);
     }
+  }
+  
+  formatHour(hour: string): string {
+    const [hours, minutes] = hour.split(':');
+    const hourInt = parseInt(hours, 10);
+    const suffix = hourInt >= 12 ? 'PM' : 'AM';
+    const formattedHour = ((hourInt + 11) % 12 + 1).toString().padStart(2, '0'); // Convierte de 24h a 12h
+    return `${formattedHour}:${minutes} ${suffix}`;
   }
 
   // volver() {
