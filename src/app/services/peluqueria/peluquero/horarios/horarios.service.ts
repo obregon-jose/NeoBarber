@@ -40,14 +40,10 @@ export class HorariosService {
 
   ////CREAR////////
   async crearHorario(data: any): Promise<void> {
-    const token = await this._authService.getToken();
+    const token = await this._authService.getToken(); 
     const options = {
-      url: `${this.apiUrl}/${data.id}/horario/createTimeSlots`,
-      data: {
-        //variable backend: variable data.frontend
-        horas_inicio: data.horas_inicio,
-        dias: data.dias,
-      },
+      url: `${this.apiUrl}/${1}/horario/createTimeSlots`,
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         // 'Authorization': `Bearer ${token}`
