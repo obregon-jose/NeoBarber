@@ -25,7 +25,7 @@ export class HorarioPage implements OnInit {
   horarios: any[] = [];
   dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
   horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-  horario: { [key: string]: { seleccionado: boolean, horas: string[] } } = {};
+  horario: { [key: string]: { seleccionado: any, horas: string[] } } = {};
 
   constructor(
     private alertController: AlertController,
@@ -44,7 +44,7 @@ export class HorarioPage implements OnInit {
     try {
       const data = await this._serviciosHorarios.cargarHorarios(1);
       this.horarios = data;  // Asigna los datos al array
-      //console.log(this.horarios);  // Aquí tendrás los servicios cargados
+      console.log(this.horarios);  // Aquí tendrás los servicios cargados
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }
@@ -76,37 +76,143 @@ export class HorarioPage implements OnInit {
     }
   }
 
-  async guardarHorario() {
-    const horarioGuardado = Object.entries(this.horario)
-      .filter(([_, { seleccionado }]) => seleccionado)
-      .reduce((acc, [dia, { horas }]) => ({
-        ...acc,
-        [dia]: horas
-      }), {});
+// Método para obtener el horario en el formato deseado
+getFormattedHorario() {
+  const formattedHorario: { [key: string]: string[] } = {};
+  for (const dia of this.dias) {
+    if (this.horario[dia].horas.length > 0) {
+      formattedHorario[dia] = this.horario[dia].horas;
+      console.log(this.horario[dia].horas);
+    }
+  }
+  return formattedHorario;
+}
 
-    console.log('Horario guardado:', horarioGuardado);
-
-    if (Object.keys(horarioGuardado).length > 0) {
-      await this.mostrarAlerta('Éxito', 'El horario se ha guardado correctamente.');
-      // Aquí puedes implementar la lógica para guardar el horario en tu backend
+async guardarHorario() {
+    // Crear el objeto horarioGuardado con la estructura correcta
+    const formattedHorario = this.getFormattedHorario();
+  
+    console.log('Horario guardado:', formattedHorario);
+  
+    if (Object.keys(formattedHorario).length > 0) {
+  
+      // Ahora pasamos el horarioGuardado directamente al servicio
+      const data = {
+        //id: 1,  // Ajusta el ID según sea necesario
+        ...formattedHorario,
+      };
+  
+      // Mostrar los datos en consola para verificar que la estructura es correcta
+      console.log('Datos que se enviarán al backend:', data);
+  
+      // Llamamos al servicio para guardar el horario
+      await this._serviciosHorarios.crearHorario(data);
     } else {
       await this.mostrarAlerta('Error', 'No se ha seleccionado ningún horario para guardar.', 'danger');
     }
   }
 
   async mostrarAlerta(titulo: string, mensaje: string, color: string = 'success') {
-    const alert = await this.alertController.create({
-      header: titulo,
-      message: mensaje,
-      buttons: ['OK'],
-      cssClass: `alert-${color}`
-    });
+          const alert = await this.alertController.create({
+            header: titulo,
+            message: mensaje,
+            buttons: ['OK'],
+            cssClass: `alert-${color}`
+          });
+      
+          await alert.present();
+        }
+      
+        detenerPropagacion(event: Event) {
+          event.stopPropagation();
+        }
 
-    await alert.present();
-  }
+//   async guardarHorario() {
+//     const horarioGuardado = Object.entries(this.horario)
+//       .filter(([_, { seleccionado }]) => seleccionado)
+//       .reduce((acc, [dia, { horas }]) => ({
+//         ...acc,
+//         [dia]: horas
+//       }), {});
 
-  detenerPropagacion(event: Event) {
-    event.stopPropagation();
-  }
+//     console.log('Horario guardado:', horarioGuardado);
 
+//     if (Object.keys(horarioGuardado).length > 0) {
+//       await this.mostrarAlerta('Éxito', 'El horario se ha guardado correctamente.');
+//       // Aquí puedes implementar la lógica para guardar el horario en tu backend
+//     } else {
+//       await this.mostrarAlerta('Error', 'No se ha seleccionado ningún horario para guardar.', 'danger');
+//     }
+//   }
+
+//   async mostrarAlerta(titulo: string, mensaje: string, color: string = 'success') {
+//     const alert = await this.alertController.create({
+//       header: titulo,
+//       message: mensaje,
+//       buttons: ['OK'],
+//       cssClass: `alert-${color}`
+//     });
+
+//     await alert.present();
+//   }
+
+//   detenerPropagacion(event: Event) {
+//     event.stopPropagation();
+//   }
+
+// }
+
+
+// 
+
+// 
+
+// async guardarHorario() {
+//   // Crear el objeto horarioGuardado con la estructura correcta
+//   const horarioGuardado = Object.entries(this.horario)
+//     .filter(([_, { seleccionado }]) => seleccionado)
+//     .reduce((acc, [dia, { horas }]) => {
+//       if (horas.length > 0) {  // Solo agregar días con horas seleccionadas
+//         acc[dia] = horas;
+//       }
+//       return acc;
+//     }, {} as { [key: string]: string[] });
+
+//   console.log('Horario guardado:', horarioGuardado);
+
+//   if (Object.keys(horarioGuardado).length > 0) {
+//     const diasSeleccionados = Object.keys(horarioGuardado);
+//     const horasInicio = diasSeleccionados.map(dia => horarioGuardado[dia]);
+
+//     // Ahora pasamos el horarioGuardado directamente al servicio
+//     const data = {
+//       id: 1,  // Ajusta el ID según sea necesario
+//       horariolocal:horarioGuardado
+//     };
+
+//     // Mostrar los datos en consola para verificar que la estructura es correcta
+//     console.log('Datos que se enviarán al backend:', data);
+
+//     // Llamamos al servicio para guardar el horario
+//     await this._serviciosHorarios.crearHorario(data);
+//   } else {
+//     await this.mostrarAlerta('Error', 'No se ha seleccionado ningún horario para guardar.', 'danger');
+//   }
+// }
+
+//  async mostrarAlerta(titulo: string, mensaje: string, color: string = 'success') {
+//       const alert = await this.alertController.create({
+//         header: titulo,
+//         message: mensaje,
+//         buttons: ['OK'],
+//         cssClass: `alert-${color}`
+//       });
+  
+//       await alert.present();
+//     }
+  
+//     detenerPropagacion(event: Event) {
+//       event.stopPropagation();
+//     }
+      
 }

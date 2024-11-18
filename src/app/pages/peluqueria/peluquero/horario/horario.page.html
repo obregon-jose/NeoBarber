@@ -4,94 +4,6 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content [fullscreen]="true">
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">horario</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>  -->
-<!-- <ion-content [fullscreen]="true">
-  <ion-card>
-      <ion-accordion-group>
-        <ion-accordion value="first">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>LUNES</ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-        <ion-accordion value="second">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>MARTES</ion-label>
-          </ion-item> 
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>  
-        </ion-accordion>
-
-        <ion-accordion value="third">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>MIERCOLES</ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-        <ion-accordion value="fourth">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>JUEVES</ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-        <ion-accordion value="fifth">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>VIERNES</ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-        <ion-accordion value="sixth">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end"></ion-checkbox><ion-label>SABADO</ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-        <ion-accordion value="seventh">
-          <ion-item slot="header">
-            <ion-checkbox justify="start" labelPlacement="end">DOMIGO</ion-checkbox><ion-label></ion-label>
-          </ion-item>       
-          <div class="ion-padding" slot="content" *ngFor="let hora of horas"><ion-checkbox justify="space-between">{{ hora }}</ion-checkbox></div>
-        </ion-accordion>
-      </ion-accordion-group>
-
-  </ion-card>
-</ion-content> -->
-<!-- <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-accordion-group>
-      
-      <ion-accordion *ngFor="let dia of dias; let i = index" [value]="'accordion-' + i">
-        <ion-item slot="header">
-          <ion-checkbox id="Dia" justify="start" labelPlacement="end" 
-                        [(ngModel)]="horario[dia].seleccionado"
-                        (ionChange)="toggleDia(dia)">
-            
-          </ion-checkbox>
-          {{ dia }}
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-checkbox *ngFor="let hora of horas" justify="space-between"
-                        [disabled]="!horario[dia].seleccionado"
-                        [checked]="horario[dia].horas.includes(hora)"
-                        (ionChange)="toggleHora(dia, hora)">
-            {{ hora }}
-          </ion-checkbox>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-  </ion-card>
-  
-  <ion-button expand="block" (click)="guardarHorario()" class="ion-margin">
-    Guardar Horario
-  </ion-button>
-</ion-content> -->
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-accordion-group>
@@ -133,31 +45,18 @@
 </ion-content>
 
 
-
+<!--
 <ion-content>
   <ion-list>
     <label >fd</label>
     <ion-item *ngFor="let dia of horarios">
       <ion-label>
         <h2>{{ dia }}</h2>
-        <!-- <p>Fecha: {{ dia.fecha }}</p>
-        <p>Creado: {{ dia.created_at }}</p> -->
+         <p>Fecha: {{ dia.fecha }}</p>
+        <p>Creado: {{ dia.created_at }}</p> 
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
+-->
 
-
-
-<ion-content>
-  <ion-list>
-    <label >fd</label>
-    <ion-item *ngFor="let dia of horarios">
-      <ion-label>
-        <h2>{{ dia }}</h2>
-        <!-- <p>Fecha: {{ dia.fecha }}</p>
-        <p>Creado: {{ dia.created_at }}</p> -->
-      </ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
