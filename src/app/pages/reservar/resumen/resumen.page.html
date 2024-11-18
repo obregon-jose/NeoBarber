@@ -1,18 +1,24 @@
-<ion-header >
+<ion-header>
   <h1>Reservar</h1>
   <ion-progress-bar value="1.1"></ion-progress-bar> <!-- Barra de progreso -->
-
 </ion-header>
 
 <ion-content>
   <div class="resumen">
     <h2>Tu Reserva</h2>
+
+    <!-- Campo editable -->
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input placeholder="Ingrese su nombre aquí" [(ngModel)]="reserva.client_name"></ion-input>
+    </ion-item>
+
     <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
     <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
     <p><strong>Hora:</strong> {{ formatHour(reserva.hora) }}</p> <!-- Añadido el campo de hora -->
     <p><strong>Servicios:</strong></p>
     <ul>
-      <li *ngFor="let servicio of reserva.servicios">{{ servicio.nombre }} </li>
+      <li *ngFor="let servicio of reserva.servicios">{{ servicio.nombre }}</li>
     </ul>
     <p><strong>Precio sugerido:</strong> {{ reserva.precio | currency:'USD':'symbol' }}</p>
   </div>

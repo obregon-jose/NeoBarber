@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonLabel, IonCheckbox, IonButton, IonPopover, IonNote, IonSelect, IonSelectOption, IonDatetime, IonListHeader, IonIcon, IonFab, IonFabButton, IonAlert, IonAccordionGroup, IonAccordion } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { HorariosService } from '../../../../services/peluqueria/peluquero/horarios/horarios.service';
+import { Preferences } from '@capacitor/preferences';
 
 interface HorarioDia {
   seleccionado: boolean;
@@ -91,7 +92,10 @@ getFormattedHorario() {
 async guardarHorario() {
     // Crear el objeto horarioGuardado con la estructura correcta
     const formattedHorario = this.getFormattedHorario();
-  
+    
+    const { value: userValue } = await Preferences.get({ key: 'user' });
+    const userAuth = userValue ? JSON.parse(userValue) : {};
+
     console.log('Horario guardado:', formattedHorario);
   
     if (Object.keys(formattedHorario).length > 0) {
@@ -99,14 +103,18 @@ async guardarHorario() {
       // Ahora pasamos el horarioGuardado directamente al servicio
       const data = {
         //id: 1,  // Ajusta el ID según sea necesario
+        
         ...formattedHorario,
+       
+        
       };
+      const id= userAuth.id;
   
       // Mostrar los datos en consola para verificar que la estructura es correcta
       console.log('Datos que se enviarán al backend:', data);
   
       // Llamamos al servicio para guardar el horario
-      await this._serviciosHorarios.crearHorario(data);
+      await this._serviciosHorarios.crearHorario(data,id);
     } else {
       await this.mostrarAlerta('Error', 'No se ha seleccionado ningún horario para guardar.', 'danger');
     }

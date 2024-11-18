@@ -22,7 +22,7 @@ export class ReservarService {
      const options = {
       url: `${this.apiUrl}/reservations`,
       data: {
-        // client_name : 'nullable|string',
+        client_name : data.client_name ,
         barber_id: data.barber_id,
         service_details: JSON.stringify(data.service_details),
         total_paid: data.total_paid,

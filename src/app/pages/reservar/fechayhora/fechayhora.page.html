@@ -19,14 +19,18 @@
     </ion-datetime>
   </div>
   </ion-card>
-<!--   
+  
+  
   <ion-label><strong>Selecciona una hora</strong></ion-label>
   <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
     <ion-select-option *ngFor="let franja of disponibilidad" [value]="franja.hour_start" [disabled]="!franja.available">
       {{ formatHour(franja.hour_start) }} 
     </ion-select-option>
-  </ion-select> -->
+  </ion-select>
+
+
   
+
   <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
 
 <ion-card>
