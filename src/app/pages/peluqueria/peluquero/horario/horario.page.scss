@@ -27,4 +27,34 @@
     border-radius: 10px;
 }
 
+.boton{
+    display: flex;
+    justify-content: center;
+}
+
+.guardar{
+    margin-top: 0px;
+    display: block;
+    --background: #002EFF;
+    --border-radius: 10px;
+    width: 55%;
+    height: 40px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .ion-accordion-header{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .ion-accordion-content{
+    font-size: 20px;
+}
+
+.seleccionar{
+    font-weight: bold;
+    --background: #002EFF;
+    --border-radius: 5px;
+}
     
