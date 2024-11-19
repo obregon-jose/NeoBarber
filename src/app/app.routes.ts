@@ -64,6 +64,11 @@ export const routes: Routes = [
     path: 'reservar/resumen', 
     loadComponent: () => import('./pages/reservar/resumen/resumen.page').then( m => m.ResumenPage)
   },
+  // {
+  //   path: 'agenda',
+  //   loadComponent: () => import('./pages/peluqueria/peluquero/agenda/agenda.page').then( m => m.AgendaPage)
+  // },
+
   
   // {
   //   path: 'home',
