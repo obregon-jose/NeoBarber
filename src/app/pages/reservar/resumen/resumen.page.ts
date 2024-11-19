@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar,AlertController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar,AlertController, IonIcon, IonLabel, IonItem, IonInput } from '@ionic/angular/standalone';
 import { ActivatedRoute, RouterLink } from '@angular/router'; // Importa ActivatedRoute
 import { Router } from '@angular/router'; // Importa Router para la navegación
 import { ToastService } from 'src/app/shared/toast/toast.service';
@@ -13,7 +13,7 @@ import { ReservarService } from 'src/app/services/reservar/reservar.service';
   templateUrl: './resumen.page.html',
   styleUrls: ['./resumen.page.scss'],
   standalone: true,
-  imports: [IonProgressBar, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+  imports: [IonInput, IonItem, IonLabel, IonIcon, IonProgressBar, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     RouterLink,
   ]
 })
@@ -27,6 +27,7 @@ export class ResumenPage implements OnInit {
     precio: 0,
     client_name: '',
   };
+  
 
   constructor(
     private alertController: AlertController, 
@@ -42,9 +43,11 @@ export class ResumenPage implements OnInit {
     // Obtener la reserva actual
     const { value } = await Preferences.get({ key: 'reserva' });
     const reserva = value ? JSON.parse(value) : {};
+    
 
     const { value: userValue } = await Preferences.get({ key: 'user' });
     const userAuth = userValue ? JSON.parse(userValue) : {};
+   
 
     // // Guardar la reserva actualizada
     // await Preferences.set({
@@ -63,7 +66,7 @@ export class ResumenPage implements OnInit {
     this.reserva.hora = reserva.selectedTime ;
     this.reserva.servicios = reserva.servicios ;
     this.reserva.precio = reserva.precio;
-    this.reserva.client_name = userAuth.name;
+    this.reserva.client_name = userAuth.name || '';
   }
 
   async confirmarReserva() {
@@ -73,7 +76,7 @@ export class ResumenPage implements OnInit {
     let reservaData ={
       barber_id: this.reserva.barbero_id,
       client_id:  userAuth.id, //
-      client_name: userAuth.name,
+      client_name: this.reserva.client_name,
       date: this.reserva.fecha,
       time: this.reserva.hora,
       service_details: this.reserva.servicios,

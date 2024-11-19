@@ -23,7 +23,7 @@
         </ion-item>
         <div class="ion-padding" slot="content">
           
-          <ion-button slot="end" size="small" (click)="toggleAllHoras(dia)" [disabled]= "!horario[dia].seleccionado">
+          <ion-button class="seleccionar" slot="end" size="small" (click)="toggleAllHoras(dia)" [disabled]= "!horario[dia].seleccionado">
             {{ horario[dia].horas.length === horas.length ? 'Deseleccionar' : 'Seleccionar' }} todas las horas 
           </ion-button> 
           <ion-checkbox id="horas" *ngFor="let hora of horas" justify="space-between"
@@ -38,9 +38,11 @@
     </ion-accordion-group>
   </ion-card>
   
-  <ion-button expand="block" (click)="guardarHorario()" class="ion-margin">
+  <div class="boton">
+  <ion-button class="guardar" (click)="guardarHorario()">
     Guardar Horario
   </ion-button>
+    </div>
 </ion-content>
 
 

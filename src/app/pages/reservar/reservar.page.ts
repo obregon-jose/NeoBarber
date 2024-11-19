@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, IonLabel, IonIcon, IonFabButton, IonFab, IonList } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
@@ -19,6 +19,7 @@ import { add, calendar, alarm, person } from 'ionicons/icons';
   imports: [IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, IonTitle, IonContent,
     RouterLink,CommonModule
   ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class ReservarPage  implements OnInit  {
   reservas: any[] = [];

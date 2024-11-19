@@ -7,58 +7,49 @@
   <div class="logo-container">
     <img src="assets/images/neo.png" alt="Barbería Logo">
   </div>
+  
   <div class="title-container">
     <h2>Agenda</h2>
     <div class="date-container">
-      <h3>Septiembre 3</h3>
+      <h3>{{ fechaSeleccionada }}</h3>
     </div>
   </div>
+  
+  <!-- Círculos de días -->
+  <div class="days-container">
+    <button 
+      *ngFor="let dia of dias" 
+      class="day-circle" 
+      [class.selected]="esDiaSeleccionado(dia.fecha)"
+      (click)="seleccionarDia(dia.fecha)"
+      [attr.aria-label]="dia.nombre + ' ' + dia.numero"
+    >
+      <span class="day-name">{{ dia.nombre.slice(0, 3) }}</span>
+      <span class="day-number">{{ dia.numero }}</span>
+    </button>
+  </div>
 
-  <!-- Acordeones de Citas -->
   <ion-accordion-group>
-    <!-- Cita 1 -->
-    <ion-accordion value="first" class="custom-accordion">
+    <ion-accordion *ngFor="let reserva of reservas; let i = index" [value]="'cita-' + i" class="custom-accordion">
       <ion-item slot="header" lines="none" class="accordion-header">
-        <ion-label>#1 Pepe Sanz 8:00 AM</ion-label>
+        <ion-label>#{{ i + 1 }} {{ reserva.client_name || 'Cliente sin nombre' }} {{ reserva.time }}</ion-label>
         <ion-icon slot="end"></ion-icon>
       </ion-item>
       <div class="ion-padding accordion-content" slot="content">
         <ion-item lines="none">
           <ion-label>
             <p>Info</p>
-            <h3>Corte de Pelo, Barba</h3>
+            <h3>
+              <span *ngFor="let servicio of reserva.service_details; let sIdx = index">
+                {{ servicio.nombre }}<span *ngIf="sIdx < reserva.service_details.length - 1">, </span>
+              </span>
+            </h3>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <p>Precio</p>
-            <h3>$20.000</h3>
-          </ion-label>
-        </ion-item>
-        <div class="button-container">
-          <ion-button color="primary">Hecho</ion-button>
-          <ion-button color="danger">Cancelar</ion-button>
-        </div>
-      </div>
-    </ion-accordion>
-
-    <!-- Cita 2 -->
-    <ion-accordion value="second" class="custom-accordion">
-      <ion-item slot="header" lines="none" class="accordion-header">
-        <ion-label>#2 Lalo Garza 9:00 AM</ion-label>
-        <ion-icon slot="end"></ion-icon>
-      </ion-item>
-      <div class="ion-padding accordion-content" slot="content">
-        <ion-item lines="none">
-          <ion-label>
-            <p>Info</p>
-            <h3>Servicio de Barba</h3>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>
-            <p>Precio</p>
-            <h3>$15.000</h3>
+            <h3>${{ reserva.total_paid }}</h3>
           </ion-label>
         </ion-item>
         <div class="button-container">
@@ -68,4 +59,5 @@
       </div>
     </ion-accordion>
   </ion-accordion-group>
+
 </ion-content>

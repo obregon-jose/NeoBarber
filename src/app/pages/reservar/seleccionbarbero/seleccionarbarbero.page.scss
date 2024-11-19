@@ -60,3 +60,18 @@ h1{
     margin-bottom: 0px;
     font-size: 20px;
 }
+
+.botones{
+    display: flex;
+    justify-content: center;
+}
+
+.cancelar{
+    display: block;
+    --background: #002EFF;
+    --border-radius: 10px;
+
+
+    font-weight: bold;
+    color: white;
+}

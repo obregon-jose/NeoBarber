@@ -1,6 +1,5 @@
 /* Estilos generales */
 ion-content {
-  --background: #f4f5f8;
 }
 
 /* Contenedor del logo */
@@ -15,38 +14,101 @@ ion-content {
   height: auto;
 }
 
+.day-circle.selected {
+  background-color: var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
 /* Título de la Agenda */
 .title-container {
-  text-align: center;
+  text-align: left;
   margin: 20px 0;
+  padding: 0 16px;
 }
 
 .title-container h2 {
   font-family: 'Arial', sans-serif;
   font-size: 28px;
   font-weight: bold;
-  color: #333;
+  text-align: center; 
+  //color: #333;
+  margin-bottom: 2px;
 }
 
 .date-container {
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  padding: 0%; 
+  overflow-x: auto;
+  margin-bottom: 2px;
+}
+.date-container h3 {
+  margin: 0;
+  font-size: 18px;
+  //color: #666;
+}
+/* Estilos para los círculos de días */
+.days-container {
   display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+/* Estilos para los círculos de días */
+.days-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+.day-circle {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  color: #666;
+  width: 200px; 
+  height: 200px; 
+  //background-color: #fff;
+  border: 2px solid #c0cbcf;
+  margin: 0 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+.day-circle.selected {
+  background-color: var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+  color: #fff;
+  transform: scale(1.10); /* Más destacado al seleccionarse */
+  box-shadow: 0 4px 12px rgba(0.1, 0, 0, 0.8);
+}
+.day-name {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.day-number {
+  font-size: 18px;
+  // color: #666;
+  font-weight: bold;
+}
+
 
 /* Estilos para los acordeones */
 .custom-accordion {
   margin-bottom: 16px;
   border-radius: 8px;
+  box-decoration-break: var(--color);
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(69, 66, 66, 0.5);
 }
 
 .accordion-header {
-  --background: #ffffff;
-  --color: #333333;
 }
 
 .accordion-header ion-label {
@@ -54,7 +116,6 @@ ion-content {
 }
 
 .accordion-content {
-  background-color: #ffffff;
 }
 
 /* Botones alineados a la derecha */
@@ -88,11 +149,26 @@ ion-accordion .accordion-content ion-item {
 }
 
 ion-accordion .accordion-content ion-item ion-label p {
-  color: #666;
   margin-bottom: 4px;
 }
 
 ion-accordion .accordion-content ion-item ion-label h3 {
   font-weight: bold;
-  color: #333;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+  .days-container {
+    justify-content: flex-start;
+  }
+  .day-circle {
+    width: 50px;
+    height: 50px;
+  }
+  .day-name {
+    font-size: 10px;
+  }
+  .day-number {
+    font-size: 16px;
+  }
 }
