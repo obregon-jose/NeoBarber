@@ -113,20 +113,26 @@ export class FilaPage implements OnInit {
       return this.reservas; // Si no hay día seleccionado, mostrar todas las reservas
     }
   
-    return this.reservas.filter(reserva => {
-      // Obtener la fecha de la reserva desde el backend (formato YYYY-MM-DD)
-      const fechaReserva = reserva.reservation.date;
+    // Filtrar las reservas por la fecha seleccionada
+    const reservasFiltradas = this.reservas.filter(reserva => {
+      // Validar que la reserva tiene el objeto 'reservation' y el campo 'date'
+      if (!reserva.reservation || !reserva.reservation.date) {
+ 
+        return false; // Excluir las reservas con datos incompletos
+      }
   
-      // Formatear la fecha seleccionada al formato YYYY-MM-DD sin afectar la zona horaria
-      const fechaSeleccionada = this.diaSeleccionado ? this.formatFechaLocal(this.diaSeleccionado) : '';
+      const fechaReserva = reserva.reservation.date; // Fecha de la reserva en formato YYYY-MM-DD
+      const fechaSeleccionada = this.diaSeleccionado ? this.formatFechaLocal(this.diaSeleccionado) : ''; // Fecha seleccionada formateada
   
-      // Comparar ambas fechas
-      const esMismaFecha = fechaReserva === fechaSeleccionada;
-  
-
-  
-      return esMismaFecha;
+      return fechaReserva === fechaSeleccionada; // Comparar fechas
     });
+  
+    // Ordenar las reservas por el campo 'time'
+    reservasFiltradas.sort((a, b) => {
+      return a.reservation.time.localeCompare(b.reservation.time); // Ordenar por string de tiempo
+    });
+  
+    return reservasFiltradas; // Devolver el resultado ordenado
   }
   
   // Función para formatear la fecha localmente en formato YYYY-MM-DD
@@ -137,6 +143,14 @@ export class FilaPage implements OnInit {
     return `${anio}-${mes}-${dia}`;
   }
   
+  
+  formatHour(hour: string): string {
+    const [hours, minutes] = hour.split(':');
+    const hourInt = parseInt(hours, 10);
+    const suffix = hourInt >= 12 ? 'PM' : 'AM';
+    const formattedHour = ((hourInt + 11) % 12 + 1).toString().padStart(2, '0'); // Convierte de 24h a 12h
+    return `${formattedHour}:${minutes} ${suffix}`;
+  }
 
   
 }
