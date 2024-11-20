@@ -123,18 +123,21 @@ export class ClientPage implements OnInit {
   
       // Si hay reservas pendientes, ordenarlas por fecha y hora
       if (reservasPendientes.length > 0) {
-        reservasPendientes.sort((a, b) => {
-          const fechaA = new Date(a.fecha + ' ' + a.hora);
-          const fechaB = new Date(b.fecha + ' ' + b.hora);
-          return fechaA.getTime() - fechaB.getTime();
-        });
-  
-        // Filtrar las reservas que estén en el futuro
+        // Filtrar reservas futuras
         const now = new Date();
         const reservasFuturas = reservasPendientes.filter(reserva => {
-          const reservaDate = new Date(reserva.date + ' ' + reserva.time);
-          return reservaDate > now; // Solo las futuras
+          const reservaDateTime = new Date(`${reserva.date}T${reserva.time}`);
+          return reservaDateTime > now; // Solo reservas futuras
         });
+  
+        if (reservasFuturas.length > 0) {
+          // Ordenar reservas futuras por fecha y hora
+          reservasFuturas.sort((a, b) => {
+            const dateA = new Date(`${a.date}T${a.time}`).getTime();
+            const dateB = new Date(`${b.date}T${b.time}`).getTime();
+            return dateA - dateB; // Orden ascendente
+          });
+        }
   
         if (reservasFuturas.length > 0) {
           // Asignar la reserva más próxima a nextAppointment
@@ -144,6 +147,7 @@ export class ClientPage implements OnInit {
             fecha: reservaMasProxima.date,
             hora: reservaMasProxima.time
           };
+          console.log("reservas futuras",reservasFuturas);
         } else {
           console.log('No hay reservas futuras');
         }
@@ -151,6 +155,8 @@ export class ClientPage implements OnInit {
         console.log('No hay reservas pendientes');
       }
       console.log('Reservas cliente pendientes:', reservasPendientes);
+      console.log('Próxima cita:', this.nextAppointment);
+      
     } catch (error) {
       console.error('Error al cargar las reservas', error);
     }
