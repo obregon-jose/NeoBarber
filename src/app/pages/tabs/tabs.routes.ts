@@ -28,6 +28,10 @@ export const routes: Routes = [
         path: 'horario',
         loadComponent: () => import('../peluqueria/peluquero/horario/horario.page').then( m => m.HorarioPage)
       },
+      {
+        path: 'agenda',
+        loadComponent: () => import('../peluqueria/peluquero/agenda/agenda.page').then( m => m.AgendaPage)
+      },
 
       // {
       //   path: 'reservar/seleccionarbarbero',

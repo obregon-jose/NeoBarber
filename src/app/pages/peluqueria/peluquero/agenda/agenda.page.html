@@ -1,0 +1,95 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>agenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">agenda</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-input type="date" class="custom-date-input"></ion-input>
+
+<style>
+.custom-date-input {
+  --background: #f0f0f0;
+  --color: #333;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --border-radius: 5px;
+  --box-shadow: 0 2px 4px rgba(248, 8, 8, 0.1);
+}
+
+</style>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let day of agenda">
+      <ion-label>{{ day.date }}</ion-label>
+      
+      <ion-toggle
+        *ngIf="!day.error"
+        [checked]="day.availability"
+        (ionChange)="toggleAvailability(day)"
+        slot="end">
+      </ion-toggle>
+
+      <ion-text color="danger" *ngIf="day.error">
+        {{ day.error }}
+      </ion-text>
+
+      <ion-button
+        *ngIf="!day.error"
+        slot="end"
+        (click)="openModal(day)">
+        <ion-icon name="time-outline"></ion-icon>
+        Horarios
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Modal flotante -->
+  <ion-modal [isOpen]="isModalOpen" (ionModalDidDismiss)="closeModal()">
+    <ng-container *ngIf="selectedDay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Horarios para {{ selectedDay?.date }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item *ngFor="let slot of selectedDay?.time_slots">
+            <ion-label>{{ getTimeLabel(slot.id) }}</ion-label>
+            <ion-checkbox
+              slot="start"
+              [disabled]="slot.reservation != null"
+              [checked]="slot.status === 1">
+            </ion-checkbox>
+            <ion-badge
+              *ngIf="slot.reservation > 0"
+              color="success"
+              slot="end">
+              Reservado
+            </ion-badge>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-container>
+  </ion-modal>
+</ion-content>
