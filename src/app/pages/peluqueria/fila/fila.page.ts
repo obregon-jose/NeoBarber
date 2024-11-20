@@ -40,9 +40,11 @@ export class FilaPage implements OnInit {
   //   { title: 'Coloración', content: 'Servicio de coloración de cabello, precio: $25.000' }
   // ];
   ngOnInit() {
-    this.mostrarReservas();
     this.generarDias();
     this.seleccionarDia(new Date());
+    
+    this.mostrarReservas();
+
   }
 
 

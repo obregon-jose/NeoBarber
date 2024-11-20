@@ -76,3 +76,17 @@ ion-button {
   
   
 }
+
+.mensaje-sin-horarios {
+  text-align: center;
+  margin-top: 10px;
+  color: var(--ion-color-medium);
+  font-style: italic;
+}
+
+.no-horarios-externo {
+  text-align: center;
+  margin: 10px 0;
+  color: var(--ion-color-danger);
+  font-weight: bold;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar, IonIcon, IonList, IonCard } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonProgressBar, IonIcon, IonList, IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'fechayhora.page.html',
   styleUrls: ['fechayhora.page.scss'],
   standalone: true,
-  imports: [IonCard, IonList, IonIcon, 
+  imports: [IonCardContent, IonCard, IonList, IonIcon, 
     CommonModule,
     IonHeader,
     IonToolbar,

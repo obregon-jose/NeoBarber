@@ -20,9 +20,20 @@
   </div>
   </ion-card>
   
-  
+    <!-- Mensaje externo si no hay horarios disponibles -->
+    <div *ngIf="disponibilidad?.length === 0" class="no-horarios-externo">
+      <p>No hay horarios disponibles para la fecha seleccionada.</p>
+    </div>
+
   <ion-label><strong>Selecciona una hora</strong></ion-label>
-  <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
+  <ion-select [(ngModel)]="selectedTime" placeholder="Hora" [disabled]="disponibilidad.length === 0" required>
+
+<!-- si no hay horarios disponibles -->
+  <!-- <ion-select-option *ngIf="disponibilidad?.length === 0" disabled>
+    No hay horarios disponibles
+  </ion-select-option> -->
+  <!-- si hay horarios disponibles -->
+  
     <ion-select-option *ngFor="let franja of disponibilidad" [value]="franja.hour_start" [disabled]="!franja.available">
       {{ formatHour(franja.hour_start) }} 
     </ion-select-option>

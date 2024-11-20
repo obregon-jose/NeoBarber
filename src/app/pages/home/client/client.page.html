@@ -8,7 +8,7 @@
       <ion-card-title>Tu próxima cita</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>📅 <strong>{{ nextAppointment.fecha }}</strong> a las <strong>{{ nextAppointment.hora }}</strong></p>
+      <p>📅 <strong>{{ nextAppointment.fecha }}</strong> a las <strong>{{ formatHour(nextAppointment.hora) }}</strong></p>
       <p>✂ Peluquero: <strong>{{ nextAppointment.peluquero }}</strong></p>
     </ion-card-content>
   </ion-card>

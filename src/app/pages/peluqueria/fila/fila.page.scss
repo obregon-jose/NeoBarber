@@ -1,5 +1,19 @@
 
+
+.no-reservations {
+  text-align: center;
+  margin-top: 20px;
+  //color: gray;
+}
+
+.no-reservations ion-card {
+  padding: 16px;
+  border-radius: 12px;
+  //background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 /* Contenedor del logo */
+
 .logo-container {
   display: flex;
   justify-content: center;

@@ -29,6 +29,14 @@
     </button>
   </div>
 
+  <div *ngIf="reservasFiltradas.length === 0" class="no-reservations">
+    <ion-card>
+      <ion-card-content>
+        <p>No hay reservas para este día.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <ion-accordion-group>
     <ion-accordion *ngFor="let reserva of reservasFiltradas; let i = index" [value]="'cita-' + i" class="custom-accordion">
       <ion-item slot="header" lines="none" class="accordion-header">
