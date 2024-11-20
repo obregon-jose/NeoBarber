@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { IonAccordionGroup, IonAccordion, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -26,6 +26,7 @@ export class FilaPage implements OnInit {
 
   constructor(
     private _reservarService:ReservarService,
+    private cdr: ChangeDetectorRef
   ) {
     // addIcons({
     //   chevronDownOutline,
@@ -59,12 +60,12 @@ export class FilaPage implements OnInit {
       });
     }
   }
-  seleccionarDia(fecha: Date) {
+  async seleccionarDia(fecha: Date) {
     this.diaSeleccionado = fecha;
     const opciones: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
     this.fechaSeleccionada = fecha.toLocaleDateString('es-ES', opciones);
-    // Here you might want to call a method to update the reservations for the selected date
-    // this.mostrarReservas();
+    await this.mostrarReservas();
+    console.log('Fecha seleccionada:', this.fechaSeleccionada);
   }
 
   async mostrarReservas() {
@@ -74,6 +75,7 @@ export class FilaPage implements OnInit {
       const data = await this._reservarService.cargarReservasPeluquero(userAuth.id);
       this.reservas = data;  
       console.log('reservas pendientes peluquero',this.reservas);  
+      this.cdr.markForCheck();
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }
@@ -81,5 +83,60 @@ export class FilaPage implements OnInit {
 
   esDiaSeleccionado(fecha: Date): boolean {
     return this.diaSeleccionado?.toDateString() === fecha.toDateString();
+    
+    
   }
+
+  // get reservasFiltradas(): any[] {
+  //   if (!this.diaSeleccionado) {
+  //     console.log('No hay día seleccionado');
+  //     return this.reservas; // Si no hay día seleccionado, muestra todas las reservas
+  //   }
+  
+  //   return this.reservas.filter(reserva => {
+  //     const fechaReserva = new Date(reserva.reservation.date); // Convierte la fecha a Date
+  //     const esMismaFecha = 
+  //       fechaReserva.getFullYear() === this.diaSeleccionado?.getFullYear() &&
+  //       fechaReserva.getMonth() === this.diaSeleccionado?.getMonth() &&
+  //       fechaReserva.getDate() === this.diaSeleccionado?.getDate();
+  //     console.log('fechaReserva:', fechaReserva);
+  //     console.log('diaSeleccionado:', this.diaSeleccionado);
+  //     console.log('reserva',reserva)
+  //     console.log('esMismaFecha:', esMismaFecha);
+  //     return esMismaFecha;
+  //   });
+  // }
+
+  get reservasFiltradas(): any[] {
+    if (!this.diaSeleccionado) {
+      console.log('No hay día seleccionado');
+      return this.reservas; // Si no hay día seleccionado, mostrar todas las reservas
+    }
+  
+    return this.reservas.filter(reserva => {
+      // Obtener la fecha de la reserva desde el backend (formato YYYY-MM-DD)
+      const fechaReserva = reserva.reservation.date;
+  
+      // Formatear la fecha seleccionada al formato YYYY-MM-DD sin afectar la zona horaria
+      const fechaSeleccionada = this.diaSeleccionado ? this.formatFechaLocal(this.diaSeleccionado) : '';
+  
+      // Comparar ambas fechas
+      const esMismaFecha = fechaReserva === fechaSeleccionada;
+  
+
+  
+      return esMismaFecha;
+    });
+  }
+  
+  // Función para formatear la fecha localmente en formato YYYY-MM-DD
+  formatFechaLocal(fecha: Date): string {
+    const anio = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes comienza en 0
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
+  }
+  
+
+  
 }

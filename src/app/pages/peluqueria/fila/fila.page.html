@@ -30,7 +30,7 @@
   </div>
 
   <ion-accordion-group>
-    <ion-accordion *ngFor="let reserva of reservas; let i = index" [value]="'cita-' + i" class="custom-accordion">
+    <ion-accordion *ngFor="let reserva of reservasFiltradas; let i = index" [value]="'cita-' + i" class="custom-accordion">
       <ion-item slot="header" lines="none" class="accordion-header">
         <ion-label>#{{ i + 1 }} {{ reserva.client_name || 'Cliente sin nombre' }} {{ reserva.time }}</ion-label>
         <ion-icon slot="end"></ion-icon>

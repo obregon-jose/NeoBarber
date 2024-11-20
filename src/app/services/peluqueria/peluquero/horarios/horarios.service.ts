@@ -46,7 +46,7 @@ export class HorariosService {
       url: `${this.apiUrl}/${id}/horario/createTimeSlots`,
       headers: {
         'Content-Type': 'application/json',
-         //'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       },
     };
     const loading = await this._alert_loading_Service.presentLoading();
