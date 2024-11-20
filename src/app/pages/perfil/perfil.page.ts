@@ -5,10 +5,12 @@ import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCa
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline } from 'ionicons/icons';
+import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline, timeOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ChangeDetectorRef } from '@angular/core';
 import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -31,9 +33,10 @@ export class PerfilPage implements OnInit {
     private _alert_loading_Service: ToastService,
     private _authService: AuthService,
     private _changeDetectorRef: ChangeDetectorRef,
+    private router: Router
     
   ) {
-    addIcons({ellipsisVertical,createOutline,logOutOutline,camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
+    addIcons({ellipsisVertical,createOutline,logOutOutline,timeOutline,camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
   }
 
   ngOnInit() {
@@ -141,6 +144,11 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
   
+  async navigateToHorario() {
+    await this.closePopover();
+    this.router.navigate(['/tabs/horario']);
+  }
+
   async presentPopover(event: Event) {
     this.popoverEvent = event;
     this.popoverOpen = true;
@@ -150,6 +158,7 @@ export class PerfilPage implements OnInit {
     this.popoverOpen = false;
   }
   
+
   onEdit() {
     console.log('Editar perfil seleccionado');
     this.closePopover();

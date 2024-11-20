@@ -15,6 +15,11 @@
         <ion-icon slot="start" name="create-outline"></ion-icon>
         <ion-label>Editar perfil</ion-label>
       </ion-item>
+      <!-- Nueva opción para ir a horarios -->
+      <ion-item button (click)="navigateToHorario()">
+        <ion-icon slot="start" name="time-outline"></ion-icon>
+        <ion-label>Horarios</ion-label>
+      </ion-item>
       <ion-item button (click)="onLogout()">
         <ion-icon slot="start" name="log-out-outline"></ion-icon>
         <ion-label>Cerrar sesión</ion-label>
@@ -22,6 +27,7 @@
     </ion-list>
   </ion-popover>
 
+  <!-- Resto del contenido -->
   <div class="profile-picture">
     <ion-thumbnail class="thumbnail-circle">
       <img [src]="user?.detail?.photo || 'assets/images/person.svg'" alt="Foto de perfil" />
@@ -77,7 +83,7 @@
   </div>
 
   <br />
-
+<!-- 
   <div class="edit">
     <ion-button class="editar" (click)="openEditAlert(user)">
       Editar <ion-icon slot="start" name="pencil"></ion-icon>
@@ -88,5 +94,5 @@
     <ion-button class="logout" (click)="logoutAlert()">
       Cerrar sesión <ion-icon slot="start" name="log-out"></ion-icon>
     </ion-button>
-  </div>
+  </div> -->
 </ion-content>
