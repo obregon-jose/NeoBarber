@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
 
+
+
 .profile-picture {
   display: flex;
   justify-content: center;
@@ -163,3 +165,9 @@ ion-item {
     color: white;
 }
 
+.menu-icon {
+  position: absolute; /* Para posicionar el elemento relativo a la ventana del contenido */
+  top: 10px; /* Distancia desde la parte superior */
+  right: 10px; /* Distancia desde la derecha */
+  z-index: 100; /* Asegura que esté por encima de otros elementos */
+}

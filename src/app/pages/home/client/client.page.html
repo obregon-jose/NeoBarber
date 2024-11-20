@@ -1,21 +1,18 @@
-
-
-<ion-content  [fullscreen]="true" class="ion-padding" overflow="hidden">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div class="logo-container">
     <img src="assets/images/neo.png" alt="Barbería Logo">
   </div>
-
+  
   <ion-card>
     <ion-card-header>
       <ion-card-title>Tu próxima cita</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>📅 <strong>{{ nextAppointment.fecha }}</strong> a las <strong>{{ nextAppointment.hora }}</strong></p>
-      <p>✂️ Peluquero: <strong>{{ nextAppointment.peluquero }}</strong></p>
+      <p>✂ Peluquero: <strong>{{ nextAppointment.peluquero }}</strong></p>
     </ion-card-content>
   </ion-card>
 
-  <!-- Botones de Acción Rápida -->
   <ion-grid>
     <ion-row>
       <ion-col size="6">
@@ -32,20 +29,19 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+  
   <ion-card>
     <ion-card-header>
       <ion-card-title>Estilos de Corte</ion-card-title>
-    </ion-card-header>  
-    <!-- Imágenes agrupadas -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6" *ngFor="let image of images">
-        <ion-card>
-          <img [src]="image" alt="Estilo de corte" />
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let image of images">
+          <ion-card>
+            <img [src]="image" alt="Estilo de corte" />
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 </ion-content>

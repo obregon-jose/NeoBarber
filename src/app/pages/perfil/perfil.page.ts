@@ -5,7 +5,7 @@ import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCa
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera } from 'ionicons/icons';
+import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ChangeDetectorRef } from '@angular/core';
 import { addIcons } from 'ionicons';
@@ -22,6 +22,9 @@ export class PerfilPage implements OnInit {
   userRole: string = '';
   imageUrl: string | null = null;
 
+  popoverOpen = false;
+  popoverEvent: any;
+
   constructor(
     private _profileService: ProfileService,
     private alertController: AlertController,
@@ -30,7 +33,7 @@ export class PerfilPage implements OnInit {
     private _changeDetectorRef: ChangeDetectorRef,
     
   ) {
-    addIcons({camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
+    addIcons({ellipsisVertical,createOutline,logOutOutline,camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
   }
 
   ngOnInit() {
@@ -138,6 +141,26 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
   
+  async presentPopover(event: Event) {
+    this.popoverEvent = event;
+    this.popoverOpen = true;
+  }
+
+  closePopover() {
+    this.popoverOpen = false;
+  }
+  
+  onEdit() {
+    console.log('Editar perfil seleccionado');
+    this.closePopover();
+    this.openEditAlert(this.user);
+  }
+
+  onLogout() {
+    console.log('Cerrar sesión seleccionado');
+    this.closePopover();
+    this.logoutAlert();
+  }
 
   //alerta para editar perfil
   async openEditAlert(user: any) {
