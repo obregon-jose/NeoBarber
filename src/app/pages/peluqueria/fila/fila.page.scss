@@ -1,6 +1,5 @@
 /* Estilos generales */
-ion-content {
-}
+
 
 /* Contenedor del logo */
 .logo-container {
@@ -10,8 +9,8 @@ ion-content {
 }
 
 .logo-container img {
-  width: 100px;
-  height: auto;
+  width: 150px;
+  height: 150px;
 }
 
 .day-circle.selected {
@@ -24,18 +23,11 @@ ion-content {
 /* Título de la Agenda */
 .title-container {
   text-align: left;
-  margin: 20px 0;
+  margin:  0;
   padding: 0 16px;
 }
 
-.title-container h2 {
-  font-family: 'Arial', sans-serif;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center; 
-  //color: #333;
-  margin-bottom: 2px;
-}
+
 
 .date-container {
   display: flex; 
