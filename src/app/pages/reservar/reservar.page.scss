@@ -56,18 +56,20 @@ ion-item {
   font-weight: bold;
   border-radius: 20px;
   color: #fff;
+  width: 120px;
+  text-align: center;
 }
 
 
 
 .estado-completada {
   background-color: #0077ff;
-  width: 100px;
+  width: 120px;
 }
 
 .estado-pendiente {
   background-color: #5f5f5f;
-  width: 100px
+  width: 120px
 }
 
 .estado-cancelada {
