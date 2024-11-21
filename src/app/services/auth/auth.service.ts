@@ -64,13 +64,14 @@ export class AuthService {
     };
 
     try {
-      this.deleteToken();
-      this.removeRole();
+      // this.deleteToken();
+      // this.removeRole();
+      await Preferences.clear();
       this._navCtrl.navigateRoot(['/login']);
       const response: HttpResponse = await CapacitorHttp.post(options);
-      if (response.status === 204) {
-        this.removeReserva();
-        this.removeUserAuthenticated();
+      if (response.status === 200) {
+        // this.removeReserva();
+        // this.removeUserAuth();
         // this.deleteToken();
         // this.removeRole();
       }
@@ -148,7 +149,8 @@ export class AuthService {
     });
 
   }
-  async removeUserAuthenticated() {
+
+  async removeUserAuth() {
     await Preferences.remove({ key: 'user' });
   }
 
