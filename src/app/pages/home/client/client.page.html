@@ -3,7 +3,7 @@
     <img src="assets/images/neo.png" alt="Barbería Logo">
   </div>
   
-  <ion-card>
+  <ion-card *ngIf="nextAppointment.peluquero != ''">
     <ion-card-header>
       <ion-card-title>Tu próxima cita</ion-card-title>
     </ion-card-header>

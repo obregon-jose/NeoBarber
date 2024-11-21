@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:8000/api'
-  apiUrl: 'https://barberia1.mandanga.co/public/api' 
-
+  apiUrl: 'http://localhost:8000/api'
+  // apiUrl: 'https://barberia1.mandanga.co/public/api' //NO HACER COMMITs CO ESTA URL ACTIVA
 };
 
 /*
