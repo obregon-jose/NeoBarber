@@ -1,98 +1,98 @@
-<ion-content class="ion-padding">
-  <!-- Icono de menú con evento para abrir el popover -->
-  <div class="menu-icon">
-    <ion-icon
-      name="ellipsis-vertical"
-      style="font-size: 25px;"
-      (click)="presentPopover($event)">
-    </ion-icon>
-  </div>
-
-  <!-- Contenido del popover -->
-  <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="closePopover()">
-    <ion-list>
-      <ion-item button (click)="onEdit()">
-        <ion-icon slot="start" name="create-outline"></ion-icon>
-        <ion-label>Editar perfil</ion-label>
-      </ion-item>
-      <!-- Nueva opción para ir a horarios -->
-      <ion-item button (click)="navigateToHorario()">
-        <ion-icon slot="start" name="time-outline"></ion-icon>
-        <ion-label>Horarios</ion-label>
-      </ion-item>
-      <ion-item button (click)="onLogout()">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
-        <ion-label>Cerrar sesión</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-popover>
-
-  <!-- Resto del contenido -->
-  <div class="profile-picture">
-    <ion-thumbnail class="thumbnail-circle">
-      <img [src]="user?.detail?.photo || 'assets/images/person.svg'" alt="Foto de perfil" />
-    </ion-thumbnail>
-  </div>
-
-  <div class="botonfoto">
-    <ion-button fill="clear" class="camara" (click)="openImageOptionsAlert(user.id)">
-      <ion-icon class="iconocamara" name="camera" style="font-size: 200px;"></ion-icon>
-    </ion-button>
-  </div>
-
-  <div class="name">
-    <ion-card-header>
-      <ion-card-title class="nombre">
-        <strong>{{ user?.name }}</strong>
-      </ion-card-title>
-    </ion-card-header>
-  </div>
-
-  <div class="apodo" *ngIf="userRole === 'peluquero'">
-    <div class="otra">
-      <ion-icon class="iconos" slot="start" name="person-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
-      <label class="subtitle">Apodo</label>
+  <ion-content class="ion-padding">
+    <!-- Icono de menú con evento para abrir el popover -->
+    <div class="menu-icon">
+      <ion-icon
+        name="ellipsis-vertical"
+        style="font-size: 25px;"
+        (click)="presentPopover($event)">
+      </ion-icon>
     </div>
-    <ion-item>
-      <ion-label class="info">{{ user?.detail?.nickname || user?.name }}</ion-label>
-    </ion-item>
-  </div>
 
-  <br />
+    <!-- Contenido del popover -->
+    <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="closePopover()">
+      <ion-list>
+        <ion-item button (click)="onEdit()">
+          <ion-icon slot="start" name="create-outline"></ion-icon>
+          <ion-label>Editar perfil</ion-label>
+        </ion-item>
+        <!-- Nueva opción para ir a horarios -->
+        <ion-item button (click)="navigateToHorario()"  *ngIf="showTab('peluquero')">
+          <ion-icon slot="start" name="time-outline"></ion-icon>
+          <ion-label>Horarios</ion-label>
+        </ion-item>
+        <ion-item button (click)="onLogout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-popover>
 
-  <div class="telefono">
-    <div class="otra">
-      <ion-icon class="iconos" slot="start" name="call-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
-      <label class="subtitle">Teléfono</label>
+    <!-- Resto del contenido -->
+    <div class="profile-picture">
+      <ion-thumbnail class="thumbnail-circle">
+        <img [src]="user?.detail?.photo || 'assets/images/person.svg'" alt="Foto de perfil" />
+      </ion-thumbnail>
     </div>
-    <ion-item>
-      <ion-label class="info">{{ user?.detail?.phone || '0000000000' }}</ion-label>
-    </ion-item>
-  </div>
 
-  <br />
-
-  <div class="email">
-    <div class="otra">
-      <ion-icon class="iconos" slot="start" name="mail-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
-      <label class="subtitle">Email</label>
+    <div class="botonfoto">
+      <ion-button fill="clear" class="camara" (click)="openImageOptionsAlert(user.id)">
+        <ion-icon class="iconocamara" name="camera" style="font-size: 200px;"></ion-icon>
+      </ion-button>
     </div>
-    <ion-item>
-      <ion-label class="info">{{ user?.email }}</ion-label>
-    </ion-item>
-  </div>
 
-  <br />
-<!-- 
-  <div class="edit">
-    <ion-button class="editar" (click)="openEditAlert(user)">
-      Editar <ion-icon slot="start" name="pencil"></ion-icon>
-    </ion-button>
-  </div>
+    <div class="name">
+      <ion-card-header>
+        <ion-card-title class="nombre">
+          <strong>{{ user?.name }}</strong>
+        </ion-card-title>
+      </ion-card-header>
+    </div>
 
-  <div class="cerrar">
-    <ion-button class="logout" (click)="logoutAlert()">
-      Cerrar sesión <ion-icon slot="start" name="log-out"></ion-icon>
-    </ion-button>
-  </div> -->
-</ion-content>
+    <div class="apodo" *ngIf="userRole === 'peluquero'">
+      <div class="otra">
+        <ion-icon class="iconos" slot="start" name="person-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+        <label class="subtitle">Apodo</label>
+      </div>
+      <ion-item>
+        <ion-label class="info">{{ user?.detail?.nickname || user?.name }}</ion-label>
+      </ion-item>
+    </div>
+
+    <br />
+
+    <div class="telefono">
+      <div class="otra">
+        <ion-icon class="iconos" slot="start" name="call-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+        <label class="subtitle">Teléfono</label>
+      </div>
+      <ion-item>
+        <ion-label class="info">{{ user?.detail?.phone || '0000000000' }}</ion-label>
+      </ion-item>
+    </div>
+
+    <br />
+
+    <div class="email">
+      <div class="otra">
+        <ion-icon class="iconos" slot="start" name="mail-outline" style="font-size: 1.5em; margin-right: 8px;"></ion-icon>
+        <label class="subtitle">Email</label>
+      </div>
+      <ion-item>
+        <ion-label class="info">{{ user?.email }}</ion-label>
+      </ion-item>
+    </div>
+
+    <br />
+  <!-- 
+    <div class="edit">
+      <ion-button class="editar" (click)="openEditAlert(user)">
+        Editar <ion-icon slot="start" name="pencil"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="cerrar">
+      <ion-button class="logout" (click)="logoutAlert()">
+        Cerrar sesión <ion-icon slot="start" name="log-out"></ion-icon>
+      </ion-button>
+    </div> -->
+  </ion-content>

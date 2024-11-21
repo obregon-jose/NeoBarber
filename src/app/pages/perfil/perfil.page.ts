@@ -1,7 +1,7 @@
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton,  IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -34,41 +34,53 @@ export class PerfilPage implements OnInit {
     private _authService: AuthService,
     private _changeDetectorRef: ChangeDetectorRef,
     private router: Router
-    
   ) {
-    addIcons({ellipsisVertical,createOutline,logOutOutline,timeOutline,camera,personOutline,callOutline,mailOutline,pencil,logOut,person,call,mail});
+    addIcons({ ellipsisVertical, createOutline, logOutOutline, timeOutline, camera, personOutline, callOutline, mailOutline, pencil, logOut, person, call, mail });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.mostrarPerfil();
-    this.cargarRol();
+    this.cargarRol();this.userRole = (await this._authService.getRole()) ?? '';
   }
-
+  showTab(tab: string): boolean {
+    return tab === this.userRole;
+  }
   ionViewWillEnter() {
-    this.mostrarPerfil(); // Llamamos a mostrar perfil aquí para actualizar la lista cada vez que la página es visible
+    this.mostrarPerfil();
   }
 
   async cargarRol() {
     this.userRole = (await this._authService.getRole()) ?? '';
   }
-  
+
   async tomarFoto(id: number) {
-    this.imageUrl = await this._profileService.takePicture() || null;
-    this.subirImagen(id);
+    try {
+      this.imageUrl = await this._profileService.takePicture() || null;
+      await this.subirImagen(id);
+    } catch (error) {
+      console.error('Error al tomar la foto', error);
+    }
   }
 
   async selecionarImagen(id: number) {
-    this.imageUrl = await this._profileService.selectPicture() || null;
-    this.subirImagen(id);
+    try {
+      this.imageUrl = await this._profileService.selectPicture() || null;
+      await this.subirImagen(id);
+    } catch (error) {
+      console.error('Error al seleccionar la imagen', error);
+    }
   }
 
   async subirImagen(id: number) {
     if (this.imageUrl) {
-      await this._profileService.uploadImage(this.imageUrl, id);
+      try {
+        await this._profileService.uploadImage(this.imageUrl, id);
+        await this.mostrarPerfil();
+        this._changeDetectorRef.detectChanges();
+      } catch (error) {
+        console.error('Error al subir la imagen', error);
+      }
     }
-    await this.mostrarPerfil();
-    this._changeDetectorRef.detectChanges();
-    
   }
 
   async mostrarPerfil() {
@@ -76,27 +88,27 @@ export class PerfilPage implements OnInit {
       const data = await this._profileService.cargarUsuario();
       this.user = data;
     } catch (error) {
-      console.error('Error al cargar los servicios', error);
+      console.error('Error al cargar el perfil', error);
     }
   }
 
   async editarPerfil(data: any, id: number) {
-    let UserData = {
+    const userData = {
       id: id,
       name: data.nombre,
-      phone:data.phone,
-      nickname:data.nickname
+      phone: data.phone,
+      nickname: data.nickname
     };
-    await this._profileService.editarPerfil(UserData);
-    await this.mostrarPerfil();
-    this._changeDetectorRef.detectChanges();
-  } 
 
-  //Cerrar sesión
-  // logout() {
-  //   this._authService.logout();
-  // }
-//alerta para cerrar sesión
+    try {
+      await this._profileService.editarPerfil(userData);
+      await this.mostrarPerfil();
+      this._changeDetectorRef.detectChanges();
+    } catch (error) {
+      console.error('Error al editar el perfil', error);
+    }
+  }
+
   async logoutAlert() {
     const alert = await this.alertController.create({
       header: '¿Está seguro de que desea cerrar sesión?',
@@ -108,7 +120,6 @@ export class PerfilPage implements OnInit {
         {
           text: 'Cerrar sesión',
           handler: () => {
-            // this.logout();
             this._authService.logout();
           }
         },
@@ -116,23 +127,18 @@ export class PerfilPage implements OnInit {
     });
     await alert.present();
   }
-  
-  //alerta para editar imagen
+
   async openImageOptionsAlert(userId: number) {
     const alert = await this.alertController.create({
       header: 'Seleccionar opción',
       buttons: [
         {
           text: 'Galería',
-          handler: () => {
-            this.selecionarImagen(userId);
-          }
+          handler: () => this.selecionarImagen(userId)
         },
         {
           text: 'Cámara',
-          handler: () => {
-            this.tomarFoto(userId);
-          }
+          handler: () => this.tomarFoto(userId)
         },
         {
           text: 'Cancelar',
@@ -140,10 +146,9 @@ export class PerfilPage implements OnInit {
         }
       ]
     });
-  
     await alert.present();
   }
-  
+
   async navigateToHorario() {
     await this.closePopover();
     this.router.navigate(['/tabs/horario']);
@@ -157,26 +162,20 @@ export class PerfilPage implements OnInit {
   closePopover() {
     this.popoverOpen = false;
   }
-  
 
   onEdit() {
-    console.log('Editar perfil seleccionado');
     this.closePopover();
     this.openEditAlert(this.user);
   }
 
   onLogout() {
-    console.log('Cerrar sesión seleccionado');
     this.closePopover();
     this.logoutAlert();
   }
 
-  //alerta para editar perfil
   async openEditAlert(user: any) {
-
     const alert = await this.alertController.create({
       header: 'Editar usuario',
-      message: '',
       inputs: [
         {
           name: 'nombre',
@@ -184,47 +183,45 @@ export class PerfilPage implements OnInit {
           value: user.name
         },
         {
-          name: 'nickname', // Mostar solo al peluquero
-          placeholder: 'apodo',
-          type:'text',
-          value: user.detail?.nickname, 
+          name: 'nickname',
+          placeholder: 'Apodo',
+          type: 'text',
+          value: user.detail?.nickname,
           attributes: {
             hidden: this.userRole !== 'peluquero'
           }
         },
         {
           name: 'phone',
-          placeholder: 'telefono',
-          type:'tel',
-          value: user.detail?.phone, 
+          placeholder: 'Teléfono',
+          type: 'tel',
+          value: user.detail?.phone,
           attributes: {
             inputmode: 'numeric',
             minlength: 8,
-            maxlength: 10,
+            maxlength: 10
           }
-        },
-        
+        }
       ],
       buttons: [
         {
-          text: 'CANCELAR',
+          text: 'Cancelar'
         },
         {
-          text: 'GUARDAR',
-          role: 'GUARDAR',
+          text: 'Guardar',
           handler: (data: any) => {
             const phoneRegex = /^\d{8,}$/;
-            
+
             if (data.phone && !phoneRegex.test(data.phone)) {
               this._alert_loading_Service.toastYellow('El teléfono debe tener al menos 8 dígitos.');
-              return false; // Evitar el envío
+              return false;
             }
-            if (data.nombre) {
 
-              this.editarPerfil(data, user.id); // Llama a la función para editar el servicio
-              return true
+            if (data.nombre) {
+              this.editarPerfil(data, user.id);
+              return true;
             } else {
-              this._alert_loading_Service.toastYellow('Debe llenar todos los campos');
+              this._alert_loading_Service.toastYellow('Debe llenar todos los campos.');
               return false;
             }
           }
@@ -232,6 +229,5 @@ export class PerfilPage implements OnInit {
       ]
     });
     await alert.present();
-
   }
 }
