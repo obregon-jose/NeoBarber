@@ -25,11 +25,7 @@
   margin-bottom: 20px;
 }
 
-.nombre {
-  font-size: 30px;
-  font-weight: bold;
-  font-family: "Aclonica";
-}
+
 
 ion-card-header {
   padding-top: 10px;
@@ -66,9 +62,9 @@ ion-thumbnail {
 
 
 .editar {
-  margin-top: 0px;
+  margin-top: 5px;
   display: block;
-  --background: #002EFF;
+  --background: #9E9E9E; /* Typical Android gray */
   --border-radius: 10px;
   width: 70%;
   height: 30px;
@@ -110,7 +106,7 @@ ion-card {
   margin: 0;
   font-size: 20px;
   font-weight: bold;
-  font-family: "Aclonica";
+  font-family: "Arial", sans-serif;
   color: black;
 
   @media (prefers-color-scheme: dark) {
@@ -170,4 +166,20 @@ ion-item {
   top: 10px; /* Distancia desde la parte superior */
   right: 10px; /* Distancia desde la derecha */
   z-index: 100; /* Asegura que esté por encima de otros elementos */
+}
+
+.horario {
+  margin-top: 0px;
+  display: block;
+  --background: #002EFF;
+  --border-radius: 10px;
+  width: 70%;
+  height: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.schedule{
+  display: flex;
+  justify-content: center;
 }

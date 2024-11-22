@@ -5,6 +5,8 @@ import { BarbersService } from 'src/app/services/peluqueria/barbers/barbers.serv
 import { Preferences } from '@capacitor/preferences';
 import { NavController } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-seleccionarbarbero-peluquero',
@@ -39,7 +41,9 @@ export class SeleccionarBarberoPage implements OnInit {
     private _BarbersService: BarbersService,
     private _navCtrl: NavController,
   ) {
-   
+    
+      addIcons({logOut});
+    
   }
   
   ngOnInit(

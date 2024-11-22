@@ -11,6 +11,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router'; // Importa Activat
 import { Router } from '@angular/router'; // Importa Router para la navegación
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
+import { addIcons } from 'ionicons';
+import { logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-servicio',
@@ -53,7 +55,9 @@ export class ServicioPage implements OnInit {
     private alertController: AlertController,
     private _loading: ToastService,
     private route: ActivatedRoute, // Inyección de ActivatedRoute
-  ) { }
+  ) {
+    addIcons({logOut});
+   }
 
   ngOnInit() {
     // const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');

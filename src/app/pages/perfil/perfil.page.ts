@@ -5,7 +5,7 @@ import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCa
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline, timeOutline } from 'ionicons/icons';
+import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline, timeOutline, time } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ChangeDetectorRef } from '@angular/core';
 import { addIcons } from 'ionicons';
@@ -35,7 +35,7 @@ export class PerfilPage implements OnInit {
     private _changeDetectorRef: ChangeDetectorRef,
     private router: Router
   ) {
-    addIcons({ ellipsisVertical, createOutline, logOutOutline, timeOutline, camera, personOutline, callOutline, mailOutline, pencil, logOut, person, call, mail });
+    addIcons({camera,personOutline,callOutline,mailOutline,time,pencil,logOut,ellipsisVertical,createOutline,logOutOutline,timeOutline,person,call,mail});
   }
 
   async ngOnInit() {

@@ -1,21 +1,20 @@
   <ion-content class="ion-padding">
     <!-- Icono de menú con evento para abrir el popover -->
-    <div class="menu-icon">
+    <!-- <div class="menu-icon">
       <ion-icon
         name="ellipsis-vertical"
         style="font-size: 25px;"
         (click)="presentPopover($event)">
       </ion-icon>
-    </div>
+    </div> -->
 
     <!-- Contenido del popover -->
-    <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="closePopover()">
+    <!-- <ion-popover [isOpen]="popoverOpen" [event]="popoverEvent" (ionPopoverDidDismiss)="closePopover()">
       <ion-list>
         <ion-item button (click)="onEdit()">
           <ion-icon slot="start" name="create-outline"></ion-icon>
           <ion-label>Editar perfil</ion-label>
         </ion-item>
-        <!-- Nueva opción para ir a horarios -->
         <ion-item button (click)="navigateToHorario()"  *ngIf="showTab('peluquero')">
           <ion-icon slot="start" name="time-outline"></ion-icon>
           <ion-label>Horarios</ion-label>
@@ -25,7 +24,7 @@
           <ion-label>Cerrar sesión</ion-label>
         </ion-item>
       </ion-list>
-    </ion-popover>
+    </ion-popover> -->
 
     <!-- Resto del contenido -->
     <div class="profile-picture">
@@ -42,7 +41,7 @@
 
     <div class="name">
       <ion-card-header>
-        <ion-card-title class="nombre">
+        <ion-card-title class="header-title-name">
           <strong>{{ user?.name }}</strong>
         </ion-card-title>
       </ion-card-header>
@@ -83,10 +82,16 @@
     </div>
 
     <br />
-  <!-- 
+  
+    <div class="schedule" (click)="navigateToHorario()" *ngIf="showTab('peluquero')">
+      <ion-button class="horario" >
+        Programar Horario <ion-icon slot="start" name="time"></ion-icon>
+      </ion-button>
+    </div>
+
     <div class="edit">
       <ion-button class="editar" (click)="openEditAlert(user)">
-        Editar <ion-icon slot="start" name="pencil"></ion-icon>
+        Editar perfil <ion-icon slot="start" name="pencil"></ion-icon>
       </ion-button>
     </div>
 
@@ -94,5 +99,5 @@
       <ion-button class="logout" (click)="logoutAlert()">
         Cerrar sesión <ion-icon slot="start" name="log-out"></ion-icon>
       </ion-button>
-    </div> -->
+    </div>
   </ion-content>
