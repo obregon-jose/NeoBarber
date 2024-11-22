@@ -33,7 +33,7 @@ export class AuthService {
       if (response.status === 200) {
         this.saveRole(response.data.role);
         this.saveToken(response.data.token);
-        this.userAuthenticated();
+        await this.userAuthenticated();
         if (response.data.role) {
             this._navCtrl.navigateRoot([`/tabs/home`]);
         } else {
