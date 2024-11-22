@@ -7,6 +7,8 @@ import { ReservarService } from 'src/app/services/reservar/reservar.service';
 import { NgFor,NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ViewChild } from '@angular/core';
+
 
 
 @Component({
@@ -19,6 +21,7 @@ import { FormsModule } from '@angular/forms';
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class FilaPage implements OnInit {
+  @ViewChild('accordionGroup', { static: false }) accordionGroup!: IonAccordionGroup;
   reservas: any[] = [];
   fechaSeleccionada: string = '';
   dias: { fecha: Date; nombre: string; numero: number }[] = [];
@@ -93,6 +96,10 @@ export class FilaPage implements OnInit {
 
   
   async seleccionarDia(fecha: Date) {
+    if (this.accordionGroup) {
+      this.accordionGroup.value = null;
+    }
+    
     this.diaSeleccionado = fecha;
     const opciones: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
     this.fechaSeleccionada = fecha.toLocaleDateString('es-ES', opciones);

@@ -39,6 +39,11 @@ export class ResumenPage implements OnInit {
     this.obtenerReserva();
   }
 
+  ionViewWillEnter() {
+    // Este método se ejecuta cada vez que la página está a punto de entrar en vista.
+    this.obtenerReserva();
+  }
+  
   async obtenerReserva() {
     // Obtener la reserva actual
     const { value } = await Preferences.get({ key: 'reserva' });
