@@ -10,21 +10,18 @@ ion-content {
 }
 
 
-h1 {
-  font-family: "Aclonica";
-  font-size: bold;
-  text-align: center;
-  margin-top: 10px;
-}
+
 
 .label-hora {
   font-size: 20px;
 }
 
+
 ion-select {
-  margin-top: 10px;
   width: 100px;
+  padding-top: 0px;
 }
+
 
 .botones {
   display: flex;
@@ -73,8 +70,6 @@ ion-button {
   display: flex;
   justify-content: center;
   font-size: large;
-  
-  
 }
 
 .mensaje-sin-horarios {
@@ -89,4 +84,32 @@ ion-button {
   margin: 10px 0;
   color: var(--ion-color-danger);
   font-weight: bold;
+}
+
+.cancelar{
+  display: block;
+  --background: red;
+  --border-radius: 10px;
+  width: auto;
+  height: auto;
+
+  font-weight: bold;
+  color: white;
+}
+
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-title-reservar {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.cancelar {
+  margin-left: auto;
 }
