@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { IonAccordionGroup, IonAccordion, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon } from '@ionic/angular/standalone';
+import { IonAccordionGroup, IonAccordion, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, AlertController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronDownOutline, calendarOutline } from 'ionicons/icons';
 import { ReservarService } from 'src/app/services/reservar/reservar.service';
@@ -27,9 +27,11 @@ export class FilaPage implements OnInit {
   dias: { fecha: Date; nombre: string; numero: number }[] = [];
   diaSeleccionado: Date | null = null;
 
+
   constructor(
     private _reservarService:ReservarService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private alertController: AlertController
   ) {
     // addIcons({
     //   chevronDownOutline,
@@ -193,6 +195,80 @@ export class FilaPage implements OnInit {
     const formattedHour = ((hourInt + 11) % 12 + 1).toString().padStart(2, '0'); // Convierte de 24h a 12h
     return `${formattedHour}:${minutes} ${suffix}`;
   }
-
+  async openPriceOptions(reserva: any) {
+    const alert = await this.alertController.create({
+      header: 'Seleccionar Precio',
+      inputs: [
+        {
+          name: 'precioSugerido',
+          type: 'radio',
+          label: 'Precio Sugerido',
+          value: 'precioSugerido',
+          checked: true
+        },
+        {
+          name: 'escribirPrecio',
+          type: 'radio',
+          label: 'Escribir Precio',
+          value: 'escribirPrecio',
+        },
+        {
+          name: 'inputPrecio',
+          type: 'text',
+          placeholder: 'Ingrese el precio',
+          attributes: {
+            inputmode: 'numeric',
+            maxlength: 6,
+            disabled: true // Campo deshabilitado inicialmente
+          },
+          cssClass: 'custom-input-price'
+        }
+      ],
+      buttons: [
+        {
+          text: 'CANCELAR',
+          role: 'cancel',
+        },
+        {
+          text: 'GUARDAR',
+          handler: (data: any) => {
+            if (data === 'escribirPrecio') {
+              const inputPrecio = document.querySelector('.custom-input-price input') as HTMLInputElement;
+              if (inputPrecio && inputPrecio.value.trim() !== '') {
+                console.log({
+                  opcion: 'Escribir un precio',
+                  precio: inputPrecio.value
+                });
+              } else {
+                console.error('Debe ingresar un precio válido.');
+                return false; // Evita cerrar el alert si no se ingresa un precio
+              }
+            } else if (data === 'precioSugerido') {
+              console.log({
+                opcion: 'Precio sugerido'
+              });
+            }
+            return true; // Cierra el alert
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  
+    // Habilita/deshabilita el campo dinámicamente según la selección
+    const radioButtons = alert.querySelectorAll('ion-alert-radio');
+    const inputPrecio = alert.querySelector('.custom-input-price input') as HTMLInputElement;
+  
+    radioButtons.forEach((radio: any) => {
+      radio.addEventListener('click', (event: any) => {
+        const value = event.target.value;
+        if (inputPrecio) {
+          inputPrecio.disabled = value !== 'escribirPrecio';
+          if (value !== 'escribirPrecio') inputPrecio.value = '';
+        }
+      });
+    });
+  }
   
 }
