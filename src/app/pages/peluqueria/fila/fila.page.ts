@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { IonAccordionGroup, IonAccordion, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, AlertController } from '@ionic/angular/standalone';
+import { IonAccordionGroup,IonPopover, IonAccordion, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, AlertController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronDownOutline, calendarOutline } from 'ionicons/icons';
 import { ReservarService } from 'src/app/services/reservar/reservar.service';
@@ -8,8 +8,8 @@ import { NgFor,NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-
-
+import { ToastService } from 'src/app/shared/toast/toast.service';
+// import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-fila',
@@ -17,10 +17,12 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./fila.page.scss'],
   standalone: true,
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, IonAccordionGroup, IonAccordion, NgFor,NgIf, CommonModule,FormsModule,
-  ],
+IonPopover],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class FilaPage implements OnInit {
+
+
   @ViewChild('accordionGroup', { static: false }) accordionGroup!: IonAccordionGroup;
   reservas: any[] = [];
   fechaSeleccionada: string = '';
@@ -31,21 +33,15 @@ export class FilaPage implements OnInit {
   constructor(
     private _reservarService:ReservarService,
     private cdr: ChangeDetectorRef,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private _alert_loading_Service: ToastService,
   ) {
-    // addIcons({
-    //   chevronDownOutline,
-    // });
+
     addIcons({ chevronDownOutline, calendarOutline });
   }
-  // items: { title: string; content: string }[] = [
-  //   { title: 'Corte de Pelo', content: 'Servicio de corte de pelo, precio: $20.000' },
-  //   { title: 'Barba', content: 'Servicio de arreglo de barba, precio: $15.000' },
-  //   { title: 'Lavado y Secado', content: 'Servicio de lavado y secado, precio: $10.000' },
-  //   { title: 'Coloración', content: 'Servicio de coloración de cabello, precio: $25.000' }
-  // ];
+
   ngOnInit() {
-    
+  
     this.generarDias();
     this.seleccionarDia(new Date());
 
@@ -71,30 +67,6 @@ export class FilaPage implements OnInit {
       });
     }
   }
-
-  // async cargarUsuario() {
-  //   let userAuth: any = null;
-  
-  //   while (!userAuth) {
-  //     const { value } = await Preferences.get({ key: 'user' });
-  //     userAuth = value ? JSON.parse(value) : null;
-  
-  //     if (!userAuth) {
-  //       //console.log('Esperando a que los datos del usuario estén disponibles...');
-  //       await this.delay(500); // Esperar 500ms antes de intentar de nuevo
-  //     }
-  //   }
-  
-  //   //console.log('Usuario autenticado encontrado:', userAuth);
-  //   this.mostrarReservas();
-  
-  // }
-  
-  // Método auxiliar para retrasar
-  delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
 
   
   async seleccionarDia(fecha: Date) {
@@ -131,25 +103,6 @@ export class FilaPage implements OnInit {
     
   }
 
-  // get reservasFiltradas(): any[] {
-  //   if (!this.diaSeleccionado) {
-  //     console.log('No hay día seleccionado');
-  //     return this.reservas; // Si no hay día seleccionado, muestra todas las reservas
-  //   }
-  
-  //   return this.reservas.filter(reserva => {
-  //     const fechaReserva = new Date(reserva.reservation.date); // Convierte la fecha a Date
-  //     const esMismaFecha = 
-  //       fechaReserva.getFullYear() === this.diaSeleccionado?.getFullYear() &&
-  //       fechaReserva.getMonth() === this.diaSeleccionado?.getMonth() &&
-  //       fechaReserva.getDate() === this.diaSeleccionado?.getDate();
-  //     console.log('fechaReserva:', fechaReserva);
-  //     console.log('diaSeleccionado:', this.diaSeleccionado);
-  //     console.log('reserva',reserva)
-  //     console.log('esMismaFecha:', esMismaFecha);
-  //     return esMismaFecha;
-  //   });
-  // }
 
   get reservasFiltradas(): any[] {
     if (!this.diaSeleccionado) {
@@ -178,6 +131,67 @@ export class FilaPage implements OnInit {
   
     return reservasFiltradas; // Devolver el resultado ordenado
   }
+
+  async cancelarReserva(data: any) {
+    let ReservationData = {
+      id: data.id,
+      barber_id: data.barber_id,
+    };
+    await this._reservarService.cancelarReserva(ReservationData); // espera la edición
+    await this.mostrarReservas(); // luego recarga los servicios
+
+  }
+  async confirmarReserva(data: any,id:number) {
+    let ReservationData = {
+      id: id,
+      barber_id: data.barber_id,
+      total_paid: data.total_paid,
+    };
+    await this._reservarService.confirmarReservaPeluquero(ReservationData); // espera la edición
+    await this.mostrarReservas(); // luego recarga los servicios
+
+  }
+
+  async confirmarReservaAlert(reserva: any) {
+    const alert = await this.alertController.create({
+      header: 'Precio pagado',
+      inputs: [
+        {
+          name: 'precio',
+          placeholder: 'Precio',
+          value: this.formatPriceShow(reserva.total_paid), // Prellenar el campo con el precio actual
+          type: 'text',
+          attributes: {
+            inputmode: 'numeric',
+            maxlength: 6,
+            oninput: (event: any) => this.formatPrice(event)
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'CANCELAR',
+        },
+        {
+          text: 'CONFIRMAR',
+          role: 'GUARDAR',
+          handler: (data: any) => {
+            if (data.precio) {
+              data.precio = this.removeFormatting(data.precio);
+              this.confirmarReserva(data, reserva.id); // Llama a la función para editar el servicio
+              return true
+            } else {
+              this._alert_loading_Service.toastYellow('Debe llenar todos los campos');
+              return false;
+            }
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
   
   // Función para formatear la fecha localmente en formato YYYY-MM-DD
   formatFechaLocal(fecha: Date): string {
@@ -195,80 +209,45 @@ export class FilaPage implements OnInit {
     const formattedHour = ((hourInt + 11) % 12 + 1).toString().padStart(2, '0'); // Convierte de 24h a 12h
     return `${formattedHour}:${minutes} ${suffix}`;
   }
-  async openPriceOptions(reserva: any) {
+
+  async cancelarAlert(data: any) {
     const alert = await this.alertController.create({
-      header: 'Seleccionar Precio',
-      inputs: [
-        {
-          name: 'precioSugerido',
-          type: 'radio',
-          label: 'Precio Sugerido',
-          value: 'precioSugerido',
-          checked: true
-        },
-        {
-          name: 'escribirPrecio',
-          type: 'radio',
-          label: 'Escribir Precio',
-          value: 'escribirPrecio',
-        },
-        {
-          name: 'inputPrecio',
-          type: 'text',
-          placeholder: 'Ingrese el precio',
-          attributes: {
-            inputmode: 'numeric',
-            maxlength: 6,
-            disabled: true // Campo deshabilitado inicialmente
-          },
-          cssClass: 'custom-input-price'
-        }
-      ],
+      header: '¿Está seguro de que desea cancelar la reserva?',
       buttons: [
         {
-          text: 'CANCELAR',
-          role: 'cancel',
+          text: 'No',
+          role: 'cancel'
         },
         {
-          text: 'GUARDAR',
-          handler: (data: any) => {
-            if (data === 'escribirPrecio') {
-              const inputPrecio = document.querySelector('.custom-input-price input') as HTMLInputElement;
-              if (inputPrecio && inputPrecio.value.trim() !== '') {
-                console.log({
-                  opcion: 'Escribir un precio',
-                  precio: inputPrecio.value
-                });
-              } else {
-                console.error('Debe ingresar un precio válido.');
-                return false; // Evita cerrar el alert si no se ingresa un precio
-              }
-            } else if (data === 'precioSugerido') {
-              console.log({
-                opcion: 'Precio sugerido'
-              });
-            }
-            return true; // Cierra el alert
+          text: 'Cancelar reserva',
+          handler: () => {
+            this.cancelarReserva(data);
           }
-        }
+        },
       ]
     });
-  
     await alert.present();
-  
-    // Habilita/deshabilita el campo dinámicamente según la selección
-    const radioButtons = alert.querySelectorAll('ion-alert-radio');
-    const inputPrecio = alert.querySelector('.custom-input-price input') as HTMLInputElement;
-  
-    radioButtons.forEach((radio: any) => {
-      radio.addEventListener('click', (event: any) => {
-        const value = event.target.value;
-        if (inputPrecio) {
-          inputPrecio.disabled = value !== 'escribirPrecio';
-          if (value !== 'escribirPrecio') inputPrecio.value = '';
-        }
-      });
-    });
   }
+
+
   
+  formatPrice(event: any) {
+    let input = event.target;
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return input.value = value;
+  }
+  removeFormatting(value: string): number {
+    return parseInt(value.replace(/\./g, ''), 10);
+  }
+
+  formatPriceShow(value: number): string {
+    let stringValue = value.toString().replace(/\D/g, '');
+    stringValue = stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return stringValue;
+  }
+
+  getFormattedPrice(price: number): string {
+    return this.formatPriceShow(price);
+  }
 }
