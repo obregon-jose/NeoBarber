@@ -39,8 +39,12 @@ ion-list {
 }
 
 ion-item {
+  --background: transparent;
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
   cursor: pointer;
 }
+
 
 .reserva-servicio {
   font-size: 1.2em;

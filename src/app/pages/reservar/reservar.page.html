@@ -24,12 +24,12 @@
         {{ reserva.barber_name || 'Cliente no definido' }}
       </span>
       <span>
-        <div class="options-icon">
-          <ion-icon
-            name="ellipsis-horizontal"
-            style="font-size: 25px;"
-            (click)="presentPopover($event)">
-          </ion-icon>
+        <div >
+          <span>
+          <ion-item (click)="cancelarAlert(reserva)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+          </ion-item>
+        </span>
         </div>
       </span>
     </div>
@@ -66,23 +66,7 @@
     </div>
   </div>
 </ion-card>
-  
-<!-- IonPopover -->
-<ion-popover [isOpen]="isPopoverOpen" (ionPopoverDidDismiss)="closeMenu()">
-  <ng-template>
-    <ion-list>
-      <ion-item (click)="editarReserva(selectedReserva)">
-        <ion-icon slot="start" name="create-outline"></ion-icon>
-        Editar Reserva
-      </ion-item>
-      <ion-item (click)="cancelarReserva(selectedReserva)">
-        <ion-icon slot="start" name="trash-outline"></ion-icon>
-        Cancelar Reserva
-      </ion-item>
-    </ion-list>
-  </ng-template>
-</ion-popover>
-
+ 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button [routerLink]="['/reservar/seleccionarbarbero']">

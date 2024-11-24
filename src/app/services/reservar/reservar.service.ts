@@ -122,7 +122,7 @@ export class ReservarService {
           try {
             const response: HttpResponse = await CapacitorHttp.put(options);
             if (response.status === 200) {console.log('exitoso', response);
-              this._alert_loading_Service.toastGreen(response.data.message );
+              this._alert_loading_Service.toastGreen("Reserva completada con éxito");
               await loading.dismiss();
             } else {console.log('fallido', response);
               this._alert_loading_Service.toastYellow(response.data.message);
@@ -154,7 +154,7 @@ export class ReservarService {
           try {
             const response: HttpResponse = await CapacitorHttp.put(options);
             if (response.status === 200) {console.log('exitoso', response);
-              this._alert_loading_Service.toastGreen(response.data.message );
+              this._alert_loading_Service.toastGreen("Reserva cancelada" );
               await loading.dismiss();
             } else {console.log('fallido', response);
               this._alert_loading_Service.toastYellow(response.data.message);

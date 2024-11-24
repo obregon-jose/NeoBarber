@@ -2,7 +2,7 @@ import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, 
   IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, 
-  IonLabel, IonIcon, IonFabButton, IonFab, IonList, IonPopover 
+  IonLabel, IonIcon, IonFabButton, IonFab, IonList, IonPopover, AlertController
 } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SeleccionarBarberoPage } from "./seleccionbarbero/seleccionarbarbero.page"; // Importa Router para la navegación
@@ -21,17 +21,18 @@ import { add, calendar, alarm, person, ellipsisVertical, createOutline, trashOut
   standalone: true,
   imports: [    IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, 
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, 
-    IonTitle, IonContent, IonPopover, RouterLink, CommonModule
+    IonTitle, IonContent, IonPopover, RouterLink, CommonModule,
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class ReservarPage  implements OnInit  {
   reservas: any[] = [];
-  isPopoverOpen = false;
-  selectedReserva: any;
-  popoverEvent: any;
+
+
+
   constructor(
     private _reservarService:ReservarService,
+    private alertController: AlertController,
   ) {
     addIcons({ellipsisHorizontal,createOutline,trashOutline,add,person,alarm,calendar,ellipsisVertical});
   }
@@ -69,33 +70,38 @@ export class ReservarPage  implements OnInit  {
     }
   }
 
-  openMenu(event: Event, reserva: any) {
-    this.selectedReserva = reserva;
-    this.isPopoverOpen = true;
+
+
+
+
+  async cancelarReserva(data: any) {
+    let ReservationData = {
+      id: data.id,
+      barber_id: data.barber_id,
+    };
+    await this._reservarService.cancelarReserva(ReservationData); // espera la edición
+    await this.mostrarReservas(); // luego recarga los servicios
+    
   }
 
-  closeMenu() {
-    this.isPopoverOpen = false;
-  }
 
-  editarReserva(reserva: any) {
-    console.log('Editar reserva:', reserva);
-    // Lógica para editar la reserva
-    this.closeMenu();
-  }
-
-  cancelarReserva(reserva: any) {
-    console.log('Cancelar reserva:', reserva);
-    // Lógica para cancelar la reserva
-    this.closeMenu();
-  }
-  async presentPopover(event: Event) {
-    this.popoverEvent = event;
-    this.isPopoverOpen = true;
-  }
-
-  closePopover() {
-    this.isPopoverOpen = false;
+  async cancelarAlert(data: any) {
+    const alert = await this.alertController.create({
+      header: '¿Está seguro de que desea cancelar la reserva?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        },
+        {
+          text: 'Cancelar reserva',
+          handler: () => {
+            this.cancelarReserva(data);
+          }
+        },
+      ]
+    });
+    await alert.present();
   }
   
 }
