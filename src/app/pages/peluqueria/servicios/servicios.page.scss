@@ -1,12 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
-.header-title {
-    font-size: 25px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 35px;
-    font-family: "Aclonica";
-  }
-
 
   
 ion-list {
@@ -35,4 +27,5 @@ ion-list {
   
   ion-fab-button {
     --background: #002EFF;
+    --color: white;
   }

@@ -102,4 +102,71 @@ export class ReservarService {
       }
     }
 
+        // Método para confirmar la reserva por parte del peluquero
+        async confirmarReservaPeluquero(data: any): Promise<void> {
+          const token = await this._authService.getToken();
+          const options = {
+            url: `${this.apiUrl}/update-reservations`,
+            data: {
+              id: data.id,
+              status: 'completed',
+              barber_id: data.barber_id,
+              total_paid: data.total_paid
+            },
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          };
+          const loading = await this._alert_loading_Service.presentLoading();
+          try {
+            const response: HttpResponse = await CapacitorHttp.put(options);
+            if (response.status === 200) {console.log('exitoso', response);
+              this._alert_loading_Service.toastGreen(response.data.message );
+              await loading.dismiss();
+            } else {console.log('fallido', response);
+              this._alert_loading_Service.toastYellow(response.data.message);
+              await loading.dismiss();
+            }
+          } catch (error) {
+            console.log('fallido-2');
+            this._alert_loading_Service.toastRed();
+            await loading.dismiss();
+          }
+        }
+        
+        // Método para cancelar la reserva
+        async cancelarReserva(data: any): Promise<void> {
+          const token = await this._authService.getToken();
+          const options = {
+            url: `${this.apiUrl}/update-reservations`,
+            data: {
+              id: data.id,
+              status: 'cancelled',
+              barber_id: data.barber_id,
+            },
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          };
+          const loading = await this._alert_loading_Service.presentLoading();
+          try {
+            const response: HttpResponse = await CapacitorHttp.put(options);
+            if (response.status === 200) {console.log('exitoso', response);
+              this._alert_loading_Service.toastGreen(response.data.message );
+              await loading.dismiss();
+            } else {console.log('fallido', response);
+              this._alert_loading_Service.toastYellow(response.data.message);
+              await loading.dismiss();
+            }
+          } catch (error) {
+            console.log('fallido-2');
+            this._alert_loading_Service.toastRed();
+            await loading.dismiss();
+          }
+        }
+        
+    
+
 }

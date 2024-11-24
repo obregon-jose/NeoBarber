@@ -1,6 +1,4 @@
-
-    
-      <h2 color="primary" class="header-title-basic" >RESERVAS</h2>
+<h2 color="primary" class="header-title-basic" >Reservas</h2>
     
  
 
@@ -14,52 +12,76 @@
   </ion-item>
 <!--  -->
  
-    <ion-card class="ticket-card" color="light" *ngFor="let reserva of reservas">
-      <div class="reserva-card" >
-        <span 
-          class="reserva-estado" 
-          [ngClass]="{
-            'estado-completada': reserva.status === 'completed',
-            'estado-pendiente': reserva.status === 'pending',
-            'estado-cancelada': reserva.status === 'cancelled',
-            'estado-vencida': reserva.status === 'expired'
-          }">
-          {{ reserva.status === 'cancelled' ? 'Cancelada' : reserva.status === 'completed' ? 'Completada' : reserva.status === 'pending' ? 'Pendiente' : 'Expirada' }}
-        </span>
-        <div class="reserva-header">
-          <span class="nombre-card">
-            <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            {{ reserva.barber_name || 'Cliente no definido' }}
-          </span>
-        
+<ion-card class="ticket-card" color="light" *ngFor="let reserva of reservas">
+  <div class="reserva-card">
+    <!-- Header con el nombre del peluquero -->
+    <div class="reserva-header">
+      <span class="nombre-card">
+        <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        {{ reserva.barber_name || 'Cliente no definido' }}
+      </span>
+      <span>
+        <div class="options-icon">
+          <ion-icon
+            name="ellipsis-horizontal"
+            style="font-size: 25px;"
+            (click)="presentPopover($event)">
+          </ion-icon>
         </div>
-        <div class="reserva-detalles">
-          <div class="reserva-detalle">
-            <!-- Aquí puedes agregar otros detalles si es necesario -->
-          </div>
-          <div class="reserva-detalle">
-            <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>{{ formatHour(reserva.time) }}</span>
-          </div>
-          <div class="reserva-detalle">
-            <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>{{ reserva.date }}</span>
-          </div>
-        </div>
+      </span>
+    </div>
+
+    <!-- Detalles de la reserva -->
+    <div class="reserva-detalles">
+      <div class="reserva-detalle">
+        <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>{{ formatHour(reserva.time) }}</span>
       </div>
-    </ion-card>
+      <div class="reserva-detalle">
+        <svg class="reserva-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>{{ reserva.date }}</span>
+      </div>
+    </div>
+
+    <!-- Estado de la reserva -->
+    <div 
+      class="reserva-estado-wrapper" 
+      [ngClass]="{
+        'estado-completada': reserva.status === 'completed',
+        'estado-pendiente': reserva.status === 'pending',
+        'estado-cancelada': reserva.status === 'cancelled'
+      }">
+      {{ reserva.status === 'cancelled' ? 'Cancelada' : reserva.status === 'completed' ? 'Completada' : 'Pendiente' }}
+    </div>
+  </div>
+</ion-card>
   
+<!-- IonPopover -->
+<ion-popover [isOpen]="isPopoverOpen" (ionPopoverDidDismiss)="closeMenu()">
+  <ng-template>
+    <ion-list>
+      <ion-item (click)="editarReserva(selectedReserva)">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Editar Reserva
+      </ion-item>
+      <ion-item (click)="cancelarReserva(selectedReserva)">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Cancelar Reserva
+      </ion-item>
+    </ion-list>
+  </ng-template>
+</ion-popover>
 
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
@@ -67,4 +89,6 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+
 </ion-content>

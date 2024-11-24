@@ -48,6 +48,7 @@ export class ClientPage implements OnInit {
   ngOnInit(
     
   ) {
+    // this.cargarUsuario();
     this.mostrarReservas();
   }
 
@@ -110,10 +111,33 @@ export class ClientPage implements OnInit {
   //     console.error('Error al cargar las reservas', error);
   //   }
   // }
+  
+  // async cargarUsuario() {
+  //   let userAuth: any = null;
+  
+  //   while (!userAuth) {
+  //     const { value } = await Preferences.get({ key: 'user' });
+  //     userAuth = value ? JSON.parse(value) : null;
+  
+  //     if (!userAuth) {
+  //       //console.log('Esperando a que los datos del usuario estén disponibles...');
+  //       await this.delay(500); // Esperar 500ms antes de intentar de nuevo
+  //     }
+  //   }
+  
+  //   //console.log('Usuario autenticado encontrado:', userAuth);
+  //   this.mostrarReservas();
+  
+  // }
 
+  // delay(ms: number): Promise<void> {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
+  
   async mostrarReservas() {
     const { value } = await Preferences.get({ key: 'user' });
     const userAuth = value ? JSON.parse(value) : {};
+    console.log("user autg",userAuth);
     try {
       const data = await this._reservarService.cargarReservasCliente(userAuth.id);
       this.reservas = data;

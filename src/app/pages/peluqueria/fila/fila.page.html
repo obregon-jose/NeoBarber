@@ -36,11 +36,10 @@
       </ion-card-content>
     </ion-card>
   </div>
-
-  <ion-accordion-group>
+  <ion-accordion-group #accordionGroup>
     <ion-accordion *ngFor="let reserva of reservasFiltradas; let i = index" [value]="'cita-' + i" class="custom-accordion">
       <ion-item slot="header" lines="none" class="accordion-header">
-        <ion-label>#{{ i + 1 }} {{ reserva.client_name || 'Cliente sin nombre' }} {{formatHour(reserva.reservation.time)}}</ion-label>
+        <ion-label>#{{ i + 1 }} {{ reserva.client_name || 'Cliente sin nombre' }} {{ formatHour(reserva.reservation.time) }}</ion-label>
         <ion-icon slot="end"></ion-icon>
       </ion-item>
       <div class="ion-padding accordion-content" slot="content">
@@ -61,7 +60,7 @@
           </ion-label>
         </ion-item>
         <div class="button-container">
-          <ion-button color="primary">Hecho</ion-button>
+          <ion-button color="primary" (click)="openPriceOptions($event)">Hecho</ion-button>
           <ion-button color="danger">Cancelar</ion-button>
         </div>
       </div>

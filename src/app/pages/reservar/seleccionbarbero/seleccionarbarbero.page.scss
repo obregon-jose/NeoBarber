@@ -28,12 +28,6 @@ ion-card img {
     border-radius: 10px;
 }
 
-h1{
-    font-family: "Aclonica";
-    font-size: bold;
-    text-align: center;
-    margin-top: 10px;
-}
 
 .nombre{
     text-align: center;
@@ -68,10 +62,28 @@ h1{
 
 .cancelar{
     display: block;
-    --background: #002EFF;
+    --background: red;
     --border-radius: 10px;
-
+    width: auto;
+    height: auto;
 
     font-weight: bold;
     color: white;
 }
+
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .header-title-reservar {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .cancelar {
+    margin-left: auto;
+  }

@@ -1,5 +1,8 @@
 <ion-header>
-  <h1 class="titulo">Reservar</h1>
+  <div class="header-content">
+    <h1 class="header-title-reservar">Reservar</h1>
+    <ion-button class="cancelar" [routerLink]="['/tabs/reservar']"><ion-icon name="log-out"></ion-icon></ion-button>
+  </div>
   <ion-progress-bar value="0.50"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
@@ -25,8 +28,10 @@
       <p>No hay horarios disponibles para la fecha seleccionada.</p>
     </div>
 
-  <ion-label><strong>Selecciona una hora</strong></ion-label>
-  <ion-select [(ngModel)]="selectedTime" placeholder="Hora" [disabled]="disponibilidad.length === 0" required>
+  <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
+  
+  <div class="hora">
+  <ion-select  [(ngModel)]="selectedTime" placeholder="Hora" [disabled]="disponibilidad.length === 0" required>
 
 <!-- si no hay horarios disponibles -->
   <!-- <ion-select-option *ngIf="disponibilidad?.length === 0" disabled>
@@ -38,7 +43,7 @@
       {{ formatHour(franja.hour_start) }} 
     </ion-select-option>
   </ion-select>
-
+</div>
 
   
 

@@ -5,7 +5,7 @@
   
   <ion-card *ngIf="nextAppointment.peluquero != ''">
     <ion-card-header>
-      <ion-card-title>Tu próxima cita</ion-card-title>
+      <ion-card-title><strong>Tu próxima cita</strong></ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>📅 <strong>{{ nextAppointment.fecha }}</strong> a las <strong>{{ formatHour(nextAppointment.hora) }}</strong></p>
@@ -32,7 +32,7 @@
   
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Estilos de Corte</ion-card-title>
+      <ion-card-title><strong>Estilos de Corte</strong></ion-card-title>
     </ion-card-header>
     <ion-grid>
       <ion-row>

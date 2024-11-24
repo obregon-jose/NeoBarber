@@ -1,7 +1,9 @@
-<ion-header >
-  <h1 class="titulo">Reservar</h1>
-  <ion-progress-bar value="0.25"></ion-progress-bar> <!-- Barra de progreso -->
-
+<ion-header>
+    <div class="header-content">
+      <h1 class="header-title-reservar">Reservar</h1>
+      <ion-button class="cancelar" [routerLink]="['/tabs/reservar']"><ion-icon name="log-out"></ion-icon></ion-button>
+    </div>
+    <ion-progress-bar value="0.25"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
 <ion-content>
@@ -23,7 +25,4 @@
     </ion-row>
   </ion-grid>
 
-  <div class="botones">
-    <ion-button class="cancelar" [routerLink]="['/tabs/reservar']">Cancelar reserva</ion-button>
-  </div>
 </ion-content>
