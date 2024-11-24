@@ -39,7 +39,7 @@ export class AgregarUsuarioPage implements OnInit {
     }
   }
 
-  isRandomPassword: boolean = true;
+  isRandomPassword: boolean = false;
   togglePassword(event: any) {
     this.isRandomPassword = event.detail.checked;
     if (this.isRandomPassword) {
