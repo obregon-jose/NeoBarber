@@ -60,11 +60,13 @@
           </ion-label>
         </ion-item>
         <div class="button-container">
-          <ion-button color="primary" (click)="openPriceOptions($event)">Hecho</ion-button>
-          <ion-button color="danger">Cancelar</ion-button>
+          <ion-button color="primary" (click)="confirmarReservaAlert(reserva)">Hecho</ion-button>
+          <ion-button color="danger" (click)="cancelarAlert(reserva)">Cancelar</ion-button>
         </div>
       </div>
     </ion-accordion>
   </ion-accordion-group>
+
+
 
 </ion-content>
