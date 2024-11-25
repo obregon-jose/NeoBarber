@@ -8,6 +8,7 @@ import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { ChangeDetectorRef } from '@angular/core';
+import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-servicios',
@@ -31,15 +32,139 @@ export class ServiciosPage implements OnInit {
      private cdr: ChangeDetectorRef
   ) {
     addIcons({
-      'create-outline': createOutline,
-      'trash-outline': trashOutline,
-      'add': add,
+      createOutline,
+      trashOutline,
+      add,
     });
   }
   
   ngOnInit() {
     this.mostrarServicios();
+    this.configurarPusher();
+  //   this.mostrarServicios().then(() => {
+  //     this.configurarPusher();
+  // });
   }
+
+configurarPusher() {
+  Pusher.logToConsole = true;
+
+  const pusher = new Pusher('678d8b96033d6d19e407', {
+    cluster: 'mt1',
+    forceTLS: true,
+  });
+
+  const channel = pusher.subscribe('servicios');
+
+  channel.bind('servicio-actualizado', (data: any) => {
+    console.log('Evento recibido:', data);
+    this.manejarEvento(data);
+  });
+
+  channel.bind('pusher:subscription_succeeded', () => {
+    console.log('Suscripción al canal "servicios" exitosa.');
+  });
+
+  channel.bind('pusher:subscription_error', (status: any) => {
+    console.error('Error en la suscripción al canal:', status);
+  });
+}
+
+manejarEvento(data: any) {
+  const { action, serviceDelete, servicio } = data;
+
+  switch (action) {
+    // case 'update':
+    //   this.actualizarServiciosPusher(servicio);
+    //   break;
+
+    case 'delete':
+      this.eliminarServicioPusher(serviceDelete);
+      //this.mostrarServicios()
+      break;
+
+    default:
+      this.actualizarServiciosPusher(servicio);
+      // console.warn('Acción desconocida recibida:', action);
+  }
+}
+actualizarServiciosPusher(service: any) {
+  const index = this.services.findIndex(s => s.id === service.id);
+  if (index !== -1) {
+      // Actualiza el servicio existente
+      this.services[index] = { ...this.services[index], ...service };
+  } else {
+      // Agrega un nuevo servicio si no existe
+      this.services.push(service);
+  }
+
+  //console.log('Lista actualizada:', this.services);
+  // Forzar actualización de la vista
+  this.cdr.detectChanges(); // Asegura que Angular refleje los cambios
+}
+eliminarServicioPusherA(service: any) {
+  const index = this.services.findIndex(s => s.id === service.id);
+  if (index !== -1) {
+      // Elimina el servicio existente
+      this.services.splice(index, 1);
+  } else {
+      // Opcional: manejar caso de que el servicio no exista
+      console.warn(`El servicio con ID ${service.id} no existe en la lista.`);
+  }
+
+  // Forzar actualización de la vista
+  this.cdr.detectChanges(); // Asegura que Angular refleje los cambios
+}
+eliminarServicioPusher(service: any) {
+  console.log('Intentando eliminar servicio:', service);
+  const index = this.services.findIndex(s => s.id === service.id);
+  if (index !== -1) {
+      this.services.splice(index, 1);
+      console.log('Servicio eliminado. Lista actualizada:', this.services);
+  } else {
+      console.warn(`El servicio con ID ${service.id} no existe.`);
+  }
+
+  this.cdr.detectChanges();
+}
+
+// eliminarServicioPusher(serviceId: number) {
+//   const index = this.services.findIndex(s => s.id === serviceId);
+//   if (index !== -1) {
+//     this.services.splice(index, 1); // Elimina el servicio
+//     this.cdr.detectChanges(); // Refresca la vista
+//   }
+// }
+// eliminarServicioPusher(serviceId: number) {
+//   if (!serviceId) {
+//     console.error('ServiceId inválido:', serviceId);
+//     return;
+//   }
+
+//   // Encuentra el índice del servicio a eliminar
+//   const index = this.services.findIndex(s => s.id === serviceId);
+//   if (index !== -1) {
+//     // Elimina el servicio del arreglo
+//     this.services.splice(index, 1);
+//     console.log(`Servicio con ID ${serviceId} eliminado.`);
+//   } else {
+//     console.warn(`No se encontró un servicio con ID ${serviceId}.`);
+//   }
+
+//   // Refresca la vista para asegurar que Angular detecte el cambio
+//   this.cdr.detectChanges();
+// }
+
+// actualizarServicios(service: any) {
+//     // Lógica para actualizar la lista local de servicios
+//     const index = this.services.findIndex(s => s.id === service.id);
+//     if (index !== -1) {
+//         this.services[index] = service; // Actualiza el servicio existente
+//     } else {
+//         this.services.push(service); // Agrega el nuevo servicio
+//     }
+//     this.cdr.detectChanges(); // Actualiza la vista
+// }
 
   // ionViewWillEnter() {
   //   this.mostrarServicios(); // Llamamos a mostrarServicios aquí para actualizar la lista cada vez que la página es visible
@@ -203,11 +328,19 @@ async openEditAlert(service: any) {
     return parseInt(value.replace(/\./g, ''), 10);
   }
 
-  formatPriceShow(value: number): string {
+  formatPriceShowANTERIOR(value: number): string {
     let stringValue = value.toString().replace(/\D/g, '');
     stringValue = stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return stringValue;
   }
+  formatPriceShow(price: any): string {
+    if (!price) {
+        console.warn('El precio no está definido');
+        return 'N/A'; // Devuelve un valor por defecto
+    }
+    return parseFloat(price).toFixed(2).toString();
+  }
+  
 
   getFormattedPrice(price: number): string {
     return this.formatPriceShow(price);
