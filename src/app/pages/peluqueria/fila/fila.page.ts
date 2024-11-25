@@ -82,7 +82,9 @@ export class FilaPage implements OnInit {
   }
 
   async mostrarReservas() {
-
+    if (this.accordionGroup) {
+      this.accordionGroup.value = null;
+    }
     try {
       const { value } = await Preferences.get({ key: 'user' });
       const userAuth = value ? JSON.parse(value) : {};
@@ -142,11 +144,13 @@ export class FilaPage implements OnInit {
 
   }
   async confirmarReserva(data: any,id:number) {
+    //console.log(data," Data al entrar a confirmar reservacion")
     let ReservationData = {
       id: id,
-      barber_id: data.barber_id,
-      total_paid: data.total_paid,
+      total_paid: data.precio,
     };
+    
+    //console.log(ReservationData," Data reservacion que se va indefinido")
     await this._reservarService.confirmarReservaPeluquero(ReservationData); // espera la edición
     await this.mostrarReservas(); // luego recarga los servicios
 
@@ -179,6 +183,8 @@ export class FilaPage implements OnInit {
             if (data.precio) {
               data.precio = this.removeFormatting(data.precio);
               this.confirmarReserva(data, reserva.id); // Llama a la función para editar el servicio
+              console.log('data en alerta:', data, 'reserva id:', reserva.id
+              );
               return true
             } else {
               this._alert_loading_Service.toastYellow('Debe llenar todos los campos');

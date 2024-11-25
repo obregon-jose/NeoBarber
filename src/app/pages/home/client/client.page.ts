@@ -137,7 +137,7 @@ export class ClientPage implements OnInit {
   async mostrarReservas() {
     const { value } = await Preferences.get({ key: 'user' });
     const userAuth = value ? JSON.parse(value) : {};
-    console.log("user autg",userAuth);
+    //console.log("user autg",userAuth);
     try {
       const data = await this._reservarService.cargarReservasCliente(userAuth.id);
       this.reservas = data;

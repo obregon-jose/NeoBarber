@@ -26,7 +26,7 @@
       <span>
         <div >
           <span>
-          <ion-item (click)="cancelarAlert(reserva)">
+          <ion-item *ngIf="reserva.status==='pending'" (click)="cancelarAlert(reserva)">
             <ion-icon slot="start" name="trash-outline"></ion-icon>
           </ion-item>
         </span>

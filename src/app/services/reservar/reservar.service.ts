@@ -110,7 +110,6 @@ export class ReservarService {
             data: {
               id: data.id,
               status: 'completed',
-              barber_id: data.barber_id,
               total_paid: data.total_paid
             },
             headers: {
@@ -120,6 +119,7 @@ export class ReservarService {
           };
           const loading = await this._alert_loading_Service.presentLoading();
           try {
+            //console.log('options', options);
             const response: HttpResponse = await CapacitorHttp.put(options);
             if (response.status === 200) {console.log('exitoso', response);
               this._alert_loading_Service.toastGreen("Reserva completada con éxito");
