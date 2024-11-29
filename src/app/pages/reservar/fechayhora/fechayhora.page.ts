@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { logOut } from 'ionicons/icons';
 
+
 @Component({
   selector: 'app-fechayhora',
   templateUrl: 'fechayhora.page.html',
@@ -48,6 +49,7 @@ export class FechaYHoraPage implements OnInit {
     private route: ActivatedRoute, 
     private alertController: AlertController, 
     private _alertService: ToastService,
+    private toastService: ToastService,
     private _navCtrl: NavController,
     private _disponibilidadService: DisponibilidadService,
   ) {
@@ -98,6 +100,11 @@ export class FechaYHoraPage implements OnInit {
     } else {
       console.log("Fecha no válida");
     }
+  }
+
+  onTimeSelect(event: any) {
+    this.selectedTime = event.detail.value;
+    this.toastService.toastGreen(`Hora seleccionada: ${this.formatHour(this.selectedTime)}`);
   }
 
   async confirmSelection() {

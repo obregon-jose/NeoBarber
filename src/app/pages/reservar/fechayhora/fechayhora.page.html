@@ -1,74 +1,58 @@
 <ion-header>
   <div class="header-content">
     <h1 class="header-title-reservar">Reservar</h1>
-    <ion-button class="cancelar" [routerLink]="['/tabs/reservar']"><ion-icon name="log-out"></ion-icon></ion-button>
+    <ion-button class="cancelar" [routerLink]="['/tabs/reservar']">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
   </div>
-  <ion-progress-bar value="0.50"></ion-progress-bar> <!-- Barra de progreso -->
+  <ion-progress-bar value="0.50"></ion-progress-bar>
 </ion-header>
-
 
 <ion-content>
   <br>
   <ion-label class="label-fecha"><strong>Selecciona una fecha</strong></ion-label>
   <ion-card>
     <div class="fecha">
-    <ion-datetime
-      presentation="date"
-      [(ngModel)]="selectedDate"
-      [min]="minDate"
-      [max]="maxDate"
-      (ionChange)="onDateChange($event)"
-      required>
-    </ion-datetime>
-  </div>
-  </ion-card>
-  
-    <!-- Mensaje externo si no hay horarios disponibles -->
-    <div *ngIf="disponibilidad?.length === 0" class="no-horarios-externo">
-      <p>No hay horarios disponibles para la fecha seleccionada.</p>
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="selectedDate"
+        [min]="minDate"
+        [max]="maxDate"
+        (ionChange)="onDateChange($event)"
+        required>
+      </ion-datetime>
     </div>
+  </ion-card>
+
+  <div *ngIf="disponibilidad?.length === 0" class="no-horarios-externo">
+    <p>No hay horarios disponibles para la fecha seleccionada.</p>
+  </div>
 
   <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
-  
+
   <div class="hora">
-  <ion-select  [(ngModel)]="selectedTime" placeholder="Hora" [disabled]="disponibilidad.length === 0" required>
-
-<!-- si no hay horarios disponibles -->
-  <!-- <ion-select-option *ngIf="disponibilidad?.length === 0" disabled>
-    No hay horarios disponibles
-  </ion-select-option> -->
-  <!-- si hay horarios disponibles -->
-  
-    <ion-select-option *ngFor="let franja of disponibilidad" [value]="franja.hour_start" [disabled]="!franja.available">
-      {{ formatHour(franja.hour_start) }} 
-    </ion-select-option>
-  </ion-select>
-</div>
-
-  
-
-  <!-- <ion-label class="label-hora"><strong>Selecciona una hora</strong></ion-label>
-
-<ion-card>
-  <div class="hora">
-    <ion-select [(ngModel)]="selectedTime" placeholder="Hora" required>
-      <ion-select-option value="09:00:00">09:00 AM</ion-select-option>
-      <ion-select-option value="10:00:00">10:00 AM</ion-select-option>
-      <ion-select-option value="11:00:00">11:00 AM</ion-select-option>
-      <ion-select-option value="12:00:00">12:00 PM</ion-select-option>
-      <ion-select-option value="13:00:00">01:00 PM</ion-select-option>
-      <ion-select-option value="14:00:00">02:00 PM</ion-select-option>
-      <ion-select-option value="15:00:00">03:00 PM</ion-select-option>
-      <ion-select-option value="16:00:00">04:00 PM</ion-select-option>
-      <ion-select-option value="17:00:00">05:00 PM</ion-select-option>
-      
-    </ion-select>
-    
+    <ion-list>
+      <ion-item>
+        <ion-select
+          justify="start"
+          aria-label="Hora"
+          interface="popover"
+          [(ngModel)]="selectedTime"
+          (ionChange)="onTimeSelect($event)"
+          placeholder="Selecciona un horario">
+          <ion-select-option
+            *ngFor="let franja of disponibilidad"
+            [disabled]="!franja.available"
+            [value]="franja.hour_start">
+            {{ formatHour(franja.hour_start) }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </div>
-  </ion-card> -->
 
   <div class="botones">
     <ion-button [routerLink]="['/reservar/seleccionarbarbero']">Volver</ion-button>
-    <ion-button (click)="confirmSelection()"> Siguiente </ion-button>
+    <ion-button (click)="confirmSelection()">Siguiente</ion-button>
   </div>
 </ion-content>
