@@ -1,5 +1,8 @@
 <ion-header>
-  <h1>Reservar</h1>
+  <div class="header-content">
+    <h1 class="header-title-reservar">Reservar</h1>
+    <ion-button class="cancelar" [routerLink]="['/tabs/reservar']"><ion-icon name="log-out"></ion-icon></ion-button>
+  </div>
   <ion-progress-bar value="1.1"></ion-progress-bar> <!-- Barra de progreso -->
 </ion-header>
 
@@ -10,7 +13,7 @@
     <!-- Campo editable -->
     <ion-item>
       <ion-label position="stacked">Nombre</ion-label>
-      <ion-input placeholder="Ingrese su nombre aquí" [(ngModel)]="reserva.client_name"></ion-input>
+      <ion-input placeholder="Ingrese su nombre aquí" [(ngModel)]="reserva.client_name" maxlength="50"></ion-input>
     </ion-item>
 
     <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>

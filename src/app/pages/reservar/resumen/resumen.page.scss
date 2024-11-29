@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
-h1{
-    font-family: "Aclonica";
-    font-size: bold;
-    text-align: center;
-    margin-top: 10px;
-  }
+
   
   /* Estilos para el contenido */
   .resumen {
@@ -52,4 +47,30 @@ h1{
     font-weight: bold;
   }
 
+  .cancelar{
+    display: block;
+    --background: red;
+    --border-radius: 10px;
+    width: auto;
+    height: auto;
+
+    font-weight: bold;
+    color: white;
+}
+
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
   
+  .header-title-reservar {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .cancelar {
+    margin-left: auto;
+  }

@@ -12,7 +12,7 @@
     </ion-item>
     <ion-item *ngFor="let service of services">
       <ion-label>
-        <h2>{{ service.name }}</h2>
+        <h2>{{ service.name || 'Sin nombre' }}</h2>
         <p>Price: {{ getFormattedPrice(service.price) }}</p>
       </ion-label>
     <!-- Botón para editar el servicio -->

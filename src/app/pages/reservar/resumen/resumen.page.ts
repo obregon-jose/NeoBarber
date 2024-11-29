@@ -7,6 +7,8 @@ import { Router } from '@angular/router'; // Importa Router para la navegación
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 import { ReservarService } from 'src/app/services/reservar/reservar.service';
+import { addIcons } from 'ionicons';
+import { logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-resumen',
@@ -33,12 +35,19 @@ export class ResumenPage implements OnInit {
     private alertController: AlertController, 
     private _alertService: ToastService,
     private _reserva: ReservarService 
-  ) { } // Inyecta ActivatedRoute
+  ) { 
+    addIcons({logOut});
+  } // Inyecta ActivatedRoute
 
   ngOnInit() {
     this.obtenerReserva();
   }
 
+  ionViewWillEnter() {
+    // Este método se ejecuta cada vez que la página está a punto de entrar en vista.
+    this.obtenerReserva();
+  }
+  
   async obtenerReserva() {
     // Obtener la reserva actual
     const { value } = await Preferences.get({ key: 'reserva' });

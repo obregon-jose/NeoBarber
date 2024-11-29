@@ -8,6 +8,8 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 import { DisponibilidadService } from 'src/app/services/peluqueria/disponibilidad/disponibilidad.service';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-fechayhora',
@@ -62,6 +64,7 @@ export class FechaYHoraPage implements OnInit {
   ngOnInit(
     
   ) {
+      addIcons({logOut});
     // const reserva = JSON.parse(localStorage.getItem('reserva') || '{}');
     // this.barberName = reserva.barberName || 'Desconocido';
      

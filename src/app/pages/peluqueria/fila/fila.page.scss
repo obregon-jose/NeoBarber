@@ -21,8 +21,8 @@
 }
 
 .logo-container img {
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
 }
 
 .day-circle.selected {
@@ -120,6 +120,7 @@
   margin-top: 16px;
 }
 
+
 /* Animación suave para la expansión del acordeón */
 ion-accordion-group {
   transition: all 0.3s ease-in-out;
@@ -150,6 +151,9 @@ ion-accordion .accordion-content ion-item ion-label h3 {
   font-weight: bold;
 }
 
+.custom-input-price {
+  margin-top: 8px;
+}
 /* Responsive design for smaller screens */
 @media (max-width: 480px) {
   .days-container {
