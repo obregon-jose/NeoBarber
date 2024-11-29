@@ -1,49 +1,52 @@
 import { Injectable } from '@angular/core';
-import { CapacitorHttp, HttpResponse } from '@capacitor/core';
-import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast/toast.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
+import { CapacitorHttp, HttpResponse } from '@capacitor/core';
+import { AuthService } from '../../../auth/auth.service';
+import { Preferences } from '@capacitor/preferences';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class HorariosService {
+export class UpdateDayService {
   private apiUrl = environment.apiUrl;
+  public variableCompartida: string = '';
 
   constructor(
     private _authService: AuthService,
     private _alert_loading_Service: ToastService
   ) { }
 
-  async cargarHorarios(id: number): Promise<any[]> {
-    const token = await this._authService.getToken();
-    const options = {
-      url: `${this.apiUrl}/${id}/horario`,
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${token}`
-      },
-    };
-    const loading = await this._alert_loading_Service.presentLoading();
+  async cargarDisponibilidad(selectedDate: string): Promise<any[]> {
     try {
+      const { value: userValue } = await Preferences.get({ key: 'user' });
+      const userAuth = userValue ? JSON.parse(userValue) : {};
+      const barberId= userAuth.id;
+
+      const options = {
+        url: `${this.apiUrl}/barbero/${barberId}/disponibilidad/${selectedDate}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${await this._authService.getToken()}`
+        },
+      };
+
+      const loading = await this._alert_loading_Service.presentLoading();
       const response: HttpResponse = await CapacitorHttp.get(options);
-      console.log('exitoso', response);
       await loading.dismiss();
-      return response.data.horario || [];
+      return response.data.franjas || [];
     } catch (error) {
-      console.log('fallido-2');
       this._alert_loading_Service.toastRed();
-      await loading.dismiss();
       return [];
     }
   }
 
-  ////CREAR////////
-  async crearHorario(data: any,id:number): Promise<void> {
+  async actualizarHorario(data: any,id:number,fecha:string): Promise<void> {
     const token = await this._authService.getToken(); 
     const options = {
       data: data,
-      url: `${this.apiUrl}/${id}/actualizar-franja`,
+      url: `${this.apiUrl}/barbero/${id}/horarios/${fecha}`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -52,7 +55,7 @@ export class HorariosService {
     const loading = await this._alert_loading_Service.presentLoading();
     try {
       const response: HttpResponse = await CapacitorHttp.put(options);
-      if (response.status === 201) { console.log('exitoso',response);
+      if (response.status === 200) { console.log('exitoso',response);
         this._alert_loading_Service.toastGreen(response.data.message);
         await loading.dismiss();
       } else {console.log('fallido', response);
@@ -65,7 +68,4 @@ export class HorariosService {
       await loading.dismiss();
     }
   }
-
-
-  
 }

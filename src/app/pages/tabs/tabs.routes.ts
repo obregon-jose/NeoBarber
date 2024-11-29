@@ -29,9 +29,14 @@ export const routes: Routes = [
         loadComponent: () => import('../peluqueria/peluquero/horario/horario.page').then( m => m.HorarioPage)
       },
       {
-        path: 'agenda',
-        loadComponent: () => import('../peluqueria/peluquero/agenda/agenda.page').then( m => m.AgendaPage)
+        path: 'update-day',
+        loadComponent: () => import('../peluqueria/peluquero/update-day/update-day.page').then( m => m.UpdateDayPage)
       },
+      {
+      path: 'modal',
+        loadComponent: () => import('../peluqueria/peluquero/update-day/horario-modal/horario-modal.component').then( m => m.HorarioModalComponent)
+      },
+    
 
       // {
       //   path: 'reservar/seleccionarbarbero',

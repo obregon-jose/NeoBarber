@@ -1,0 +1,31 @@
+<ion-content>
+  <br>
+  <ion-label class="label-fecha"><strong>Selecciona una fecha</strong></ion-label>
+  <ion-card>
+    <div class="fecha">
+      <ion-datetime
+        presentation="date"
+        [min]="minDate"
+        (ionChange)="onDateChange($event)"
+        required>
+      </ion-datetime>
+    </div>
+  </ion-card>
+  
+  <!-- Mensaje externo si no hay horarios disponibles -->
+  <div *ngIf="disponibilidad?.length === 0" class="no-horarios-externo">
+    <p>No hay horarios para la fecha seleccionada.</p>
+  </div>
+
+  <ion-list class="small-box">
+    <ion-item *ngFor="let franja of disponibilidad" [disabled]="!franja.available">
+      <ion-label>
+        {{ formatHour(franja.hour_start) }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="botones">
+    <ion-button [routerLink]="['/tabs/modal']">Editar</ion-button>
+  </div>
+</ion-content>

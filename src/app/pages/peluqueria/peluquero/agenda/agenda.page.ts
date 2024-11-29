@@ -147,7 +147,7 @@ agenda: any[] = [];
       const fechaHoy = this.getColombiaDate();
       const { value } = await Preferences.get({ key: 'user' });
       const userAuth = value ? JSON.parse(value) : {};
-      this.agenda = await this._servicioAgenda.cargarDisponibilidad(1, '2024-11-18');
+      this.agenda = await this._servicioAgenda.cargarDisponibilidad(2, '2024-12-04');
       console.log(this.agenda); // Datos de la agenda
     } catch (error) {
       console.error('Error al cargar la agenda', error);

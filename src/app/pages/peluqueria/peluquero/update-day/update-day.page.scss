@@ -1,0 +1,106 @@
+ion-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 16px;
+
+}
+
+.small-box {
+    width: 94%;
+    height: 50%;
+    overflow-y: auto;
+    border: 1px solid var(--ion-border-color, #ccc);
+    border-radius: 8px;
+    background: var(--ion-background-color, #f9f9f9);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.small-box-item {
+    font-size: 12px;
+    padding: 5px 0;
+    --inner-padding: 0; /* Quita padding interno de ion-item */
+}
+
+
+h1 {
+font-family: "Aclonica";
+font-size: bold;
+text-align: center;
+margin-top: 10px;
+}
+
+.label-hora {
+font-size: 20px;
+}
+
+ion-select {
+margin-top: 10px;
+width: 100px;
+}
+
+.botones {
+display: flex;
+justify-content: center; /* Centra los botones horizontalmente */
+margin-top: 20px; /* Espaciado superior para separar de la lista */
+}
+
+ion-button {
+--background: #002EFF;
+--border-radius: 10px;
+width: 80%;
+font-weight: bold;
+margin: 5px; /* Espaciado entre botones */
+}
+
+ion-button {
+color: white; /* Texto blanco por defecto */
+}
+
+
+
+.label-fecha {
+font-size: 20px;
+display: block;
+text-align: center; /* Centra el texto */
+width: 100%; /* Asegura que el label ocupe todo el ancho del contenedor */
+margin-bottom: 8px; /* Espacio para separar del calendario */
+}
+
+.label-hora {
+font-size: 20px;
+display: block;
+text-align: center; /* Centra el texto */
+width: 100%; /* Asegura que el label ocupe todo el ancho del contenedor */
+margin-bottom: 8px; /* Espacio para separar del calendario */
+}
+
+.fecha {
+display: flex;
+justify-content: center;
+/* width: 230px;
+height: 230px; */
+}
+
+.hora{
+display: flex;
+justify-content: center;
+font-size: large;
+
+
+}
+
+.mensaje-sin-horarios {
+text-align: center;
+margin-top: 10px;
+color: var(--ion-color-medium);
+font-style: italic;
+}
+
+.no-horarios-externo {
+text-align: center;
+margin: 10px 0;
+color: var(--ion-color-danger);
+font-weight: bold;
+}

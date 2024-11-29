@@ -28,7 +28,7 @@ export class HorarioPage implements OnInit {
   dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
   horas = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
   horario: { [key: string]: { seleccionado: any, horas: string[] } } = {};
-
+  
   constructor(
     private alertController: AlertController,
     private _serviciosHorarios: HorariosService,
@@ -106,7 +106,6 @@ async guardarHorario() {
         //id: 1,  // Ajusta el ID según sea necesario
         
         ...formattedHorario,
-       
         
       };
       const id= userAuth.id;

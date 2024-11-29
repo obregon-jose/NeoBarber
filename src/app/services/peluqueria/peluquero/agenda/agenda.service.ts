@@ -18,7 +18,7 @@ export class AgendaService {
   async cargarDisponibilidad(id: number, fecha: string): Promise<any[]> {
     const token = await this._authService.getToken();
     const options = {
-      url: `${this.apiUrl}/barber-agenda/${id}/${fecha}`,
+      url: `${this.apiUrl}/${id}/disponibilidad/${fecha}`,
       headers: {
         'Content-Type': 'application/json',
         // 'Authorization': `Bearer ${token}`
