@@ -68,13 +68,13 @@ export class UpdateDayPage implements OnInit {
     }
   }
 
-  onDateChange(event: any) {
+  async onDateChange(event: any) {
     const dateString = event.detail.value; // Obtiene el valor de la fecha seleccionada
     if (dateString) {
       this.selectedDate = dateString.split('T')[0]; // Formatea la fecha a "YYYY-MM-DD"
       this.UpdateDayService.variableCompartida = dateString.split('T')[0];
       console.log('Fecha seleccionada:', this.selectedDate);
-      this.mostrarDisponibilidad(); // Actualiza la disponibilidad para la nueva fecha
+      await this.mostrarDisponibilidad(); // Actualiza la disponibilidad para la nueva fecha
     } else {
       console.error('Fecha no válida');
     }

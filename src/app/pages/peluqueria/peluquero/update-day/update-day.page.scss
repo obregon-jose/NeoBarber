@@ -8,13 +8,15 @@ padding: 16px;
 
 .small-box {
     width: 94%;
-    height: 50%;
-    overflow-y: auto;
+    max-height: 50%; /* Altura máxima para evitar que sea demasiado grande */
+    overflow-y: auto; /* Activar scroll si es necesario */
     border: 1px solid var(--ion-border-color, #ccc);
     border-radius: 8px;
     background: var(--ion-background-color, #f9f9f9);
     margin-left: 10px;
     margin-right: 10px;
+    padding: 8px; /* Espaciado interno */
+    transition: max-height 0.3s ease; /* Suaviza el ajuste dinámico */
 }
 
 .small-box-item {

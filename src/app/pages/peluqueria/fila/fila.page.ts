@@ -51,6 +51,7 @@ export class FilaPage implements OnInit {
     this.mostrarReservas();
     //console.log("ng on init")
   }
+  
 
 
   async generarDias() {
@@ -94,6 +95,7 @@ export class FilaPage implements OnInit {
       this.reservas = data;  
       console.log('reservas pendientes peluquero',this.reservas);  
       //this.cdr.detectChanges();
+      this.cdr.markForCheck();
     } catch (error) {
       console.error('Error al cargar los servicios', error);
     }

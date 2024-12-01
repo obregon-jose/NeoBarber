@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonCardSubtitle, 
   IonCardTitle, IonCardHeader, IonCard, IonBadge, IonItem, IonCardContent, 
@@ -33,11 +33,15 @@ export class ReservarPage  implements OnInit  {
   constructor(
     private _reservarService:ReservarService,
     private alertController: AlertController,
+    private cdr: ChangeDetectorRef
   ) {
     addIcons({ellipsisHorizontal,createOutline,trashOutline,add,person,alarm,calendar,ellipsisVertical});
   }
 
   ngOnInit() {
+    this.mostrarReservas();
+  }
+  ionViewWillEnter() {
     this.mostrarReservas();
   }
   
@@ -61,7 +65,7 @@ export class ReservarPage  implements OnInit  {
       
       // Concatenar primero las pendientes y luego las completadas
       this.reservas = [...reservasPendientes, ...reservasCompletadas];
-  
+      this.cdr.markForCheck();
       // this.reservas.sort((a, b) => b.id - a.id); // Ordena las reservas por id de forma descendente
       console.log('reservas cliente pendientes y completadas',this.reservas);
        
@@ -77,9 +81,11 @@ export class ReservarPage  implements OnInit  {
   async cancelarReserva(data: any) {
     let ReservationData = {
       id: data.id,
-      barber_id: data.barber_id,
+      barber_id: data.attention_quote?.barber_id,
     };
     await this._reservarService.cancelarReserva(ReservationData); // espera la edición
+    // console.log("data que llega a cancelar reserva",data);
+    // console.log("reservation data ", ReservationData);
     await this.mostrarReservas(); // luego recarga los servicios
     
   }

@@ -328,18 +328,19 @@ async openEditAlert(service: any) {
     return parseInt(value.replace(/\./g, ''), 10);
   }
 
-  formatPriceShowANTERIOR(value: number): string {
+  formatPriceShow(value: number): string {
     let stringValue = value.toString().replace(/\D/g, '');
     stringValue = stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return stringValue;
   }
-  formatPriceShow(price: any): string {
-    if (!price) {
-        console.warn('El precio no está definido');
-        return 'N/A'; // Devuelve un valor por defecto
-    }
-    return parseFloat(price).toFixed(2).toString();
-  }
+  
+  // formatPriceShow(price: any): string {
+  //   if (!price) {
+  //       console.warn('El precio no está definido');
+  //       return 'N/A'; // Devuelve un valor por defecto
+  //   }
+  //   return parseFloat(price).toFixed(2).toString();
+  // }
   
 
   getFormattedPrice(price: number): string {

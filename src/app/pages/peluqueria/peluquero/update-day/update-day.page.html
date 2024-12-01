@@ -16,6 +16,10 @@
   <div *ngIf="disponibilidad?.length === 0" class="no-horarios-externo">
     <p>No hay horarios para la fecha seleccionada.</p>
   </div>
+  
+  <div class="botones">
+    <ion-button [routerLink]="['/tabs/modal']">Editar</ion-button>
+  </div>
 
   <ion-list class="small-box">
     <ion-item *ngFor="let franja of disponibilidad" [disabled]="!franja.available">
@@ -25,7 +29,5 @@
     </ion-item>
   </ion-list>
 
-  <div class="botones">
-    <ion-button [routerLink]="['/tabs/modal']">Editar</ion-button>
-  </div>
+
 </ion-content>
