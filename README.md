@@ -4,7 +4,7 @@
 
 Aplicación móvil para gestión de citas en barberías. NeoBarber permite a los usuarios agendar citas, elegir servicios y gestionar sus perfiles de manera eficiente. Con una interfaz intuitiva y fácil de usar, NeoBarber está diseñada para mejorar la experiencia tanto de los clientes como de los barberos.
 
-[![Download APK Android](https://img.shields.io/badge/Descargar%20Ahora-APK-blue.svg?logo=android)](https://og4j3a.by.files.1drv.com/y4my3PbCG6rvXbbO5_xgKgo3YPR7qU6kArSUYrl7yufIEKAaeIb4ov5I5brKC6602zuDyaLlCnSgfyESvQHW6O4L6tdDuLCMPV-i5iIlKboAvzP3Sz0545yExd0Ks5BTa_7OZrQmzE5iyb0t5hlLT6qELlQDpXXgehAcH8AFrSCnYn9hvcO0HufaYoPUn-KsqblTrVaFTZUjeO78QYJG9bJfCRhmRPLFZ5BSzo6tnYTm-0?AVOverride=1)
+[![Download APK Android](https://img.shields.io/badge/Descargar-APK-blue.svg?logo=android)](https://og4j3a.by.files.1drv.com/y4my3PbCG6rvXbbO5_xgKgo3YPR7qU6kArSUYrl7yufIEKAaeIb4ov5I5brKC6602zuDyaLlCnSgfyESvQHW6O4L6tdDuLCMPV-i5iIlKboAvzP3Sz0545yExd0Ks5BTa_7OZrQmzE5iyb0t5hlLT6qELlQDpXXgehAcH8AFrSCnYn9hvcO0HufaYoPUn-KsqblTrVaFTZUjeO78QYJG9bJfCRhmRPLFZ5BSzo6tnYTm-0?AVOverride=1)
 
 ## ✨ Roles y Características
 - Perfil personalizado
