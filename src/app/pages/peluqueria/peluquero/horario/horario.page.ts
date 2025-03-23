@@ -11,16 +11,15 @@ interface HorarioDia {
   horas: { [hora: string]: boolean };
 }
 @Component({
-  selector: 'app-horario',
-  templateUrl: './horario.page.html',
-  styleUrls: ['./horario.page.scss'],
-  standalone: true,
-  imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton, 
-    IonCheckbox, IonLabel, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem, 
-    IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
-    IonSelectOption,
-    IonDatetime,
-  ],
+    selector: 'app-horario',
+    templateUrl: './horario.page.html',
+    styleUrls: ['./horario.page.scss'],
+    imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton,
+        IonCheckbox, IonLabel, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem,
+        IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
+        IonSelectOption,
+        IonDatetime,
+    ]
 })
 export class HorarioPage implements OnInit {
   horarios: any[] = [];

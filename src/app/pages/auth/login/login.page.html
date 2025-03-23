@@ -1,101 +1,83 @@
-<ion-content >
-  <div class="container">
-    <!-- Fondo animado -->
-    <div class="background-pattern"></div>
+<ion-content class="background-content">
+  <div class="background-pattern"></div>
 
-    <!-- Elementos decorativos -->
+  <div class="container">
     <!-- Logo -->
     <div class="logo-container">
-      <img src="assets/images/neo.png" alt="Barbería Logo">
+      <img src="assets/images/neo.png" alt="Barbería Logo" />
     </div>
     <!-- Área de contenido -->
-    <div class="content">
-      <div class="login-box">
-        <form (ngSubmit)="login()">
-          <h2>INICIAR SESION</h2>
-          <ion-label for="email">Correo electrónico</ion-label>
-          <ion-item>
-            <ion-input 
-            name="email" 
+    <div class="form-box">
+      <form (ngSubmit)="login()">
+        <h1>Iniciar sesión</h1>
+        <ion-label for="email">Correo electrónico</ion-label>
+        <ion-item>
+          <ion-input
+            name="email"
             type="email"
             [(ngModel)]="email"
-            placeholder="Ingrese su Correo electrónico" 
-            required>
-            </ion-input>
-          </ion-item>
+            placeholder="Ingrese su correo electrónico"
+            required
+          >
+          </ion-input>
+        </ion-item>
 
-          <br>
+        <br />
 
-          <ion-label for="password">Contraseña</ion-label>
-          <ion-item>
-            <ion-input 
-            name="password" 
+        <ion-label for="password">Contraseña</ion-label>
+        <ion-item>
+          <ion-input
+            name="password"
             type="password"
-            [(ngModel)]="password" 
-            placeholder="Ingrese su Contraseña" 
-            required>
+            [(ngModel)]="password"
+            placeholder="Ingrese su contraseña"
+            required
+          >
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-            </ion-input>
-          </ion-item>
-          <div class="link-container">
-            <a [routerLink]="['/recover-password']">¿Olvidaste tu contraseña?</a>
-          </div>
-<br>
-          <ion-button type="submit" class="login-btn">Iniciar</ion-button>
+          </ion-input>
+        </ion-item>
 
-          <ion-button [routerLink]="['/registro']"  class="custom-button" >
+        <div class="link-container">
+          <a [routerLink]="['/recover-password']">¿Olvidaste tu contraseña?</a>
+        </div>
+        <br />
+
+        <div class="custom-button">
+          <ion-button 
+          type="submit" 
+          shape="round" 
+          class="btn-login"
+          [disabled]="!email || !password"
+            >Iniciar</ion-button
+          >
+
+          <!-- <ion-button
+            [routerLink]="['/register']"
+            shape="round"
+            class="btn-register"
+          >
             <ion-icon slot="start" name="person"></ion-icon>
             Registrarse
-          </ion-button>
-        </form>
+          </ion-button> -->
+        </div>
+      </form>
+    </div>
+    <div class="form-footer">
+      <div class="link-footer">
+        <ion-button [routerLink]="['/register']" fill="clear" shape="round" expand="block" ><ion-icon slot="start" name="person"></ion-icon>Registrarse</ion-button>
       </div>
+      <!-- <ion-label>
+          <h3>O inicia sesión con</h3>
+        </ion-label>
+      <div class="social-links">
+        <ion-button fill="clear" shape="round" expand="block">
+          <img width="64" height="64" src="https://img.icons8.com/color/48/facebook-new.png" alt="facebook-new"/>
+        </ion-button>
+        <ion-button fill="clear" shape="round" expand="block" >
+          <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/>
+        </ion-button>
+      </div> -->
 
     </div>
-
   </div>
 </ion-content>
-
-
-
-
-<!-- <ion-header [translucent]="true">
-
-    <ion-title>Inicio de de sesion</ion-title>
-
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-input
-        label="Input with clear button"
-        labelPlacement="stacked"
-        [clearInput]="true"
-        placeholder="Enter text to see clear button"
-        value="Default value"
-      >
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input
-        label="Input with clear on edit"
-        labelPlacement="stacked"
-        [clearOnEdit]="true"
-        placeholder="Enter text, leave the input, come back and type to clear"
-      >
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input
-        label="Password input"
-        labelPlacement="stacked"
-        type="password"
-        placeholder="Enter text, leave the input, come back and type to clear"
-      >
-      </ion-input>
-    </ion-item>
-  </ion-list>
-
-</ion-content> -->

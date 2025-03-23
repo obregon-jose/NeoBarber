@@ -12,12 +12,11 @@ import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
-  standalone: true,
-  imports: [IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
-  schemas: [NO_ERRORS_SCHEMA],
+    selector: 'app-perfil',
+    templateUrl: './perfil.page.html',
+    styleUrls: ['./perfil.page.scss'],
+    imports: [IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class PerfilPage implements OnInit {
   user: any = {};

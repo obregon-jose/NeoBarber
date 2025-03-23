@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-barber',
-  templateUrl: './barber.page.html',
-  styleUrls: ['./barber.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+    selector: 'app-barber',
+    templateUrl: './barber.page.html',
+    styleUrls: ['./barber.page.scss'],
+    imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class BarberPage implements OnInit {
 

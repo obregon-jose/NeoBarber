@@ -11,12 +11,11 @@ import { BarberPage } from "./barber/barber.page";
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-    ClientPage, OwnerPage, AdminPage, RootPage, BarberPage]
+    selector: 'app-home',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.scss'],
+    imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+        ClientPage, OwnerPage, AdminPage, RootPage, BarberPage]
 })
 export class HomePage implements OnInit {
   userRole: string = '';

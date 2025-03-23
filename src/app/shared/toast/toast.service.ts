@@ -22,7 +22,7 @@ export class ToastService {
     });
     toast.present();
   }
-  async toastRed(message: string = 'No pudimos conectar con el servidor. Por favor, verifica tu conexión y vuelve a intentarlo.', position: 'top' | 'middle' | 'bottom' = 'top', duration: number = 3000) {
+  async toastRed(message: string = 'No pudimos conectar con el servidor. Por favor vuelve a intentarlo.', position: 'top' | 'middle' | 'bottom' = 'top', duration: number = 3000) {
     const toast = await this.toastController.create({
       message: message,
       duration: duration,

@@ -9,29 +9,27 @@ import { addIcons } from 'ionicons';
 import { logOut } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-seleccionarbarbero-peluquero',
-  templateUrl: 'seleccionarbarbero.page.html',
-  styleUrls: ['seleccionarbarbero.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonCard,
-    IonRow,
-    IonCol,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardHeader,
-    IonGrid,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonProgressBar,
-    RouterLink,
-    IonButtons,
-  ],
-
-  schemas: [NO_ERRORS_SCHEMA],
+    selector: 'app-seleccionarbarbero-peluquero',
+    templateUrl: 'seleccionarbarbero.page.html',
+    styleUrls: ['seleccionarbarbero.page.scss'],
+    imports: [
+        CommonModule,
+        IonCard,
+        IonRow,
+        IonCol,
+        IonCardTitle,
+        IonCardSubtitle,
+        IonCardHeader,
+        IonGrid,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonProgressBar,
+        RouterLink,
+        IonButtons,
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 
 export class SeleccionarBarberoPage implements OnInit {

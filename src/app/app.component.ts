@@ -1,28 +1,18 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-// import { SplashScreen } from '@capacitor/splash-screen';
+import { NetworkService } from './services/network/network.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  standalone: true,
-  imports: [IonApp, IonRouterOutlet,
-  ],
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    imports: [IonApp, IonRouterOutlet,
+    ]
 })
 export class AppComponent {
 
-  constructor() {
-    
-    // this.showSplash();
+  constructor(
+    private networkService: NetworkService, 
+  ) {
+    this.networkService.isOnline();
   }
-
-  // async showSplash() {
-  //   await SplashScreen.hide();
-  //   // Show the splash for an indefinite amount of time:
-  //   await SplashScreen.show({
-  //     autoHide: true,
-  //     showDuration: 3000,
-  //   });
-  // }
-
 }

@@ -1,33 +1,18 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.neobarber.app',
   appName: 'NeoBarber',
-  webDir: 'www',
+  webDir: 'www/browser',
+  // bundledWebRuntime: false,
   // server: {
-  //   cleartext: true
+  //   androidScheme: 'https'
   // },
-  plugins: {
-    // CapacitorHttp: {
-    //   enabled: true,
-    // },
-    // SplashScreen: {
-    //   launchShowDuration: 0,
-    //   launchAutoHide: true,
-    //   // launchFadeOutDuration: 3000,
-    //   backgroundColor: "#ffffff",
-    //   androidSplashResourceName: "splash",
-    //   androidScaleType: "CENTER_CROP",
-    //   showSpinner: false,
-    //   androidSpinnerStyle: "large",
-    //   iosSpinnerStyle: "small",
-    //   spinnerColor: "#999999",
-    //   splashFullScreen: false,
-    //   splashImmersive: false,
-    //   layoutName: "launch_screen",
-    //   useDialog: false,
-    // },
-  },
+  // plugins: {
+  //   CapacitorHttp: {
+  //     enabled: true
+  //   }
+  // }
 };
 
 export default config;

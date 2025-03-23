@@ -12,13 +12,12 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
 // import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-fila',
-  templateUrl: './fila.page.html',
-  styleUrls: ['./fila.page.scss'],
-  standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, IonAccordionGroup, IonAccordion, NgFor,NgIf, CommonModule,FormsModule,
-IonPopover],
-  schemas: [NO_ERRORS_SCHEMA]
+    selector: 'app-fila',
+    templateUrl: './fila.page.html',
+    styleUrls: ['./fila.page.scss'],
+    imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, IonAccordionGroup, IonAccordion, NgFor, NgIf, CommonModule, FormsModule,
+        IonPopover],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class FilaPage implements OnInit {
 

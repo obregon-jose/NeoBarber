@@ -11,13 +11,12 @@ import { addIcons } from 'ionicons';
 import { logOut } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-resumen',
-  templateUrl: './resumen.page.html',
-  styleUrls: ['./resumen.page.scss'],
-  standalone: true,
-  imports: [IonInput, IonItem, IonLabel, IonIcon, IonProgressBar, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-    RouterLink,
-  ]
+    selector: 'app-resumen',
+    templateUrl: './resumen.page.html',
+    styleUrls: ['./resumen.page.scss'],
+    imports: [IonInput, IonItem, IonLabel, IonIcon, IonProgressBar, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+        RouterLink,
+    ]
 })
 export class ResumenPage implements OnInit {
   reserva: any = {

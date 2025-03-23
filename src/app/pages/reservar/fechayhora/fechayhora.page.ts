@@ -13,26 +13,25 @@ import { logOut } from 'ionicons/icons';
 
 
 @Component({
-  selector: 'app-fechayhora',
-  templateUrl: 'fechayhora.page.html',
-  styleUrls: ['fechayhora.page.scss'],
-  standalone: true,
-  imports: [IonCardContent, IonCard, IonList, IonIcon, 
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonItem,
-    IonLabel,
-    IonSelect,
-    IonSelectOption,
-    IonDatetime,
-    IonProgressBar,
-    FormsModule,
-    RouterLink,
-  ]
+    selector: 'app-fechayhora',
+    templateUrl: 'fechayhora.page.html',
+    styleUrls: ['fechayhora.page.scss'],
+    imports: [IonCardContent, IonCard, IonList, IonIcon,
+        CommonModule,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonButton,
+        IonItem,
+        IonLabel,
+        IonSelect,
+        IonSelectOption,
+        IonDatetime,
+        IonProgressBar,
+        FormsModule,
+        RouterLink,
+    ]
 })
 export class FechaYHoraPage implements OnInit {
   selectedDate: string = '';

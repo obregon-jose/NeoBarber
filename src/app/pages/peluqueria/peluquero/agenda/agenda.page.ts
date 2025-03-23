@@ -9,13 +9,12 @@ import { addIcons } from 'ionicons';
 import { timeOutline } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-agenda',
-  templateUrl: './agenda.page.html',
-  styleUrls: ['./agenda.page.scss'],
-  standalone: true,
-  imports: [IonDatetime, IonInput, IonCheckbox, IonToggle, IonText, IonItemDivider, IonBadge, IonIcon, IonButtons, IonModal, IonButton, IonLabel, IonItem, IonList, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [DatePipe], // Aquí se agrega el DatePipe como proveedor
+    selector: 'app-agenda',
+    templateUrl: './agenda.page.html',
+    styleUrls: ['./agenda.page.scss'],
+    imports: [IonDatetime, IonInput, IonCheckbox, IonToggle, IonText, IonItemDivider, IonBadge, IonIcon, IonButtons, IonModal, IonButton, IonLabel, IonItem, IonList, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+    // schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [DatePipe]
 })
 export class AgendaPage implements OnInit {
 //   agenda: any[] = [];

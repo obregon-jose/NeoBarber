@@ -15,30 +15,28 @@ import { addIcons } from 'ionicons';
 import { logOut } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-servicio',
-  templateUrl: './servicio.page.html',
-  styleUrls: ['./servicio.page.scss'],
-  standalone: true,
-  imports: [
-    IonProgressBar,
-    IonButton,
-    IonButtons,
-    IonFooter,
-    IonItem,
-    IonLabel,
-    IonListHeader,
-    IonList,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonCheckbox,
-    CommonModule,
-    FormsModule,
-    RouterLink,
-  ],
-
-  schemas: [NO_ERRORS_SCHEMA],
+    selector: 'app-servicio',
+    templateUrl: './servicio.page.html',
+    styleUrls: ['./servicio.page.scss'],
+    imports: [
+        IonProgressBar,
+        IonButton,
+        IonButtons,
+        IonFooter,
+        IonItem,
+        IonLabel,
+        IonListHeader,
+        IonList,
+        IonContent,
+        IonHeader,
+        IonTitle,
+        IonToolbar,
+        IonCheckbox,
+        CommonModule,
+        FormsModule,
+        RouterLink,
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class ServicioPage implements OnInit {
   private unsubscribe$ = new Subject<void>();

@@ -7,11 +7,10 @@ import { RegistroService } from 'src/app/services/auth/registro/registro.service
 import { RoleService } from 'src/app/services/role/role.service';
 
 @Component({
-  selector: 'app-agregar-usuario',
-  templateUrl: './agregar-usuario.page.html',
-  styleUrls: ['./agregar-usuario.page.scss'],
-  standalone: true,
-  imports: [IonInput, IonSelect, IonSelectOption, IonToggle, IonItem, IonList, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+    selector: 'app-agregar-usuario',
+    templateUrl: './agregar-usuario.page.html',
+    styleUrls: ['./agregar-usuario.page.scss'],
+    imports: [IonInput, IonSelect, IonSelectOption, IonToggle, IonItem, IonList, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class AgregarUsuarioPage implements OnInit {
   name: string = '';

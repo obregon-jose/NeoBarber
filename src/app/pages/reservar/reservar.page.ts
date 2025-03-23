@@ -15,15 +15,14 @@ import { add, calendar, alarm, person, ellipsisVertical, createOutline, trashOut
 
 
 @Component({
-  selector: 'app-reservar-peluquero',
-  templateUrl: './reservar.page.html',
-  styleUrls: ['./reservar.page.scss'],
-  standalone: true,
-  imports: [    IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge, 
-    IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar, 
-    IonTitle, IonContent, IonPopover, RouterLink, CommonModule,
-  ],
-  schemas: [NO_ERRORS_SCHEMA]
+    selector: 'app-reservar-peluquero',
+    templateUrl: './reservar.page.html',
+    styleUrls: ['./reservar.page.scss'],
+    imports: [IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge,
+        IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar,
+        IonTitle, IonContent, IonPopover, RouterLink, CommonModule,
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class ReservarPage  implements OnInit  {
   reservas: any[] = [];

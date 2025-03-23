@@ -71,4 +71,7 @@ Thumbs.db
 
 resources/android/**/*
 
-nota.txt
+nota
+public
+/android
+/src

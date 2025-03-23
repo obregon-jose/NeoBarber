@@ -11,16 +11,14 @@ import { ChangeDetectorRef } from '@angular/core';
 import Pusher from 'pusher-js';
 
 @Component({
-  selector: 'app-servicios',
-  templateUrl: './servicios.page.html',
-  styleUrls: ['./servicios.page.scss'],
-  standalone: true,
-  imports: [IonLabel, IonListHeader, IonTabButton, IonTabBar, IonTabs, IonFab, IonCheckbox, IonItem, IonIcon, IonFabButton, IonList, IonHeader, IonToolbar, IonTitle, IonContent, NgFor,
-    CommonModule,
-    FormsModule
-  ],
-
-  schemas: [NO_ERRORS_SCHEMA],
+    selector: 'app-servicios',
+    templateUrl: './servicios.page.html',
+    styleUrls: ['./servicios.page.scss'],
+    imports: [IonLabel, IonListHeader, IonTabButton, IonTabBar, IonTabs, IonFab, IonCheckbox, IonItem, IonIcon, IonFabButton, IonList, IonHeader, IonToolbar, IonTitle, IonContent, NgFor,
+        CommonModule,
+        FormsModule
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class ServiciosPage implements OnInit {
   services: any[] = [];

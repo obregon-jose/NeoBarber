@@ -6,13 +6,12 @@ import { person, home, create, cut, add, personAdd, reader, time } from 'ionicon
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.page.html',
-  styleUrls: ['./tabs.page.scss'],
-  standalone: true,
-  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel,
-    CommonModule,
-  ],
+    selector: 'app-tabs',
+    templateUrl: './tabs.page.html',
+    styleUrls: ['./tabs.page.scss'],
+    imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel,
+        CommonModule,
+    ]
 })
 export class TabsPage implements OnInit {
   public environmentInjector = inject(EnvironmentInjector);

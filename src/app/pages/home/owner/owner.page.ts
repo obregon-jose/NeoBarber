@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-owner',
-  templateUrl: './owner.page.html',
-  styleUrls: ['./owner.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+    selector: 'app-owner',
+    templateUrl: './owner.page.html',
+    styleUrls: ['./owner.page.scss'],
+    imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class OwnerPage implements OnInit {
 

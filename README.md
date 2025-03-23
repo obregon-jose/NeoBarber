@@ -8,12 +8,13 @@ Aplicación móvil para gestión de citas en barberías. NeoBarber permite a los
 
 ## ✨ Roles y Características
 - Perfil personalizado
-
-### root
-- Agregar usuarios de roles inferiores
-### administrador
+- Notificaciones en tiempo real
+- Offline-first para funciones no inmediatas
+### Administrador
 - Agregar usuarios de roles inferiores
 - Gestionar los servicios a brindar
+- Gestionar atenciones
+- Historial general
 ### Barbero
 - Gestionar atenciones
 - Gestionar Horario
@@ -25,8 +26,8 @@ Aplicación móvil para gestión de citas en barberías. NeoBarber permite a los
 ## 🚀 Instalación
 
 ### Requisitos
-- Android 6.0 o superior
-- 25MB de espacio libre
+<!-- - Android 6.0 o superior
+- 25MB de espacio libre -->
 - Conexión a internet
 
 ### Pasos
@@ -37,11 +38,12 @@ Aplicación móvil para gestión de citas en barberías. NeoBarber permite a los
 
 ## 🛠️ Tecnologías
 
-- Ionic 
+- Angular/Ionic 
 - MySQL
-- Laravel
+- PHP/Laravel
+<!-- - Firebase -->
 
-## 📷 Capturas de Pantalla
+## 📷 Ilustraciones del aplicativo
 
 <table>
  <tr>

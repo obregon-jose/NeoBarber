@@ -11,16 +11,15 @@ import { Preferences } from '@capacitor/preferences';
 import { ReservarService } from 'src/app/services/reservar/reservar.service';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.page.html',
-  styleUrls: ['./client.page.scss'],
-  standalone: true,
-  imports: [IonLabel, RouterLink,
-    IonGrid, IonRow, IonCol, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
-    IonButton, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar,
-    CommonModule, FormsModule
-  ],
-  schemas: [NO_ERRORS_SCHEMA]
+    selector: 'app-client',
+    templateUrl: './client.page.html',
+    styleUrls: ['./client.page.scss'],
+    imports: [IonLabel, RouterLink,
+        IonGrid, IonRow, IonCol, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+        IonButton, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar,
+        CommonModule, FormsModule
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class ClientPage implements OnInit {
 

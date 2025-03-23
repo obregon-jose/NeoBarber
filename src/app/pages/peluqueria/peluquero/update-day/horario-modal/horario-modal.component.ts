@@ -18,26 +18,25 @@ import { RouterModule } from '@angular/router';
 import { UpdateDayPage } from '../update-day.page';
 
 @Component({
-  selector: 'app-horario-modal',
-  templateUrl: './horario-modal.component.html',
-  styleUrls: ['./horario-modal.component.scss'],
-  standalone: true,
-  imports: [
-    RouterModule,
-    IonHeader,
-    FormsModule,
-    CommonModule,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonButtons,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonCheckbox,
-  ],
-  providers: [ModalController,UpdateDayPage],
+    selector: 'app-horario-modal',
+    templateUrl: './horario-modal.component.html',
+    styleUrls: ['./horario-modal.component.scss'],
+    imports: [
+        RouterModule,
+        IonHeader,
+        FormsModule,
+        CommonModule,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonButton,
+        IonButtons,
+        IonItem,
+        IonLabel,
+        IonList,
+        IonCheckbox,
+    ],
+    providers: [ModalController, UpdateDayPage]
 })
 export class HorarioModalComponent {
   horarios = [

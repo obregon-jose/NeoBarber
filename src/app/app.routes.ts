@@ -4,13 +4,8 @@ import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
-    canActivate: [authGuard]
-  },
-  {
-    path: 'landing',
-    loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage),
-    canActivate: [authGuard]
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
@@ -18,8 +13,8 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'registro',
-    loadComponent: () => import('./pages/auth/registro/registro.page').then( m => m.RegistroPage)
+    path: 'register',
+    loadComponent: () => import('./pages/auth/register/register.page').then( m => m.RegisterPage)
   },
   {
     path: 'recover-password',
@@ -63,7 +58,8 @@ export const routes: Routes = [
   {
     path: 'reservar/resumen', 
     loadComponent: () => import('./pages/reservar/resumen/resumen.page').then( m => m.ResumenPage)
-  },  {
+  },
+  {
     path: 'update-day',
     loadComponent: () => import('./pages/peluqueria/peluquero/update-day/update-day.page').then( m => m.UpdateDayPage)
   },

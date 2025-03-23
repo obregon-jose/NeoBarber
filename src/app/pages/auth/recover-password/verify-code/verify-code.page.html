@@ -1,49 +1,45 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>verify-code</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="background-content">
+  <div class="background-pattern"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">verify-code</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content> -->
+  <div class="container">
+    <div class="logo-container">
+      <img src="assets/images/neo.png" alt="Barbería Logo" />
+    </div>
 
-<ion-content class="ion-padding">
-  <div class="center-content">
-    <ion-list class="form-container">
-      <div class="logo-container">
-        <img src="assets/images/neo.png" alt="Barbería Logo">
-      </div>
-
-      <h2 class="header-title-recover" style="text-align: center;">Recuperar Contraseña</h2>
-      <p style="text-align: center; margin-top: 10px;">Ingresa el código que te enviamos a tu correo electrónico {{email}}</p>
-
-      <p style="text-align: center; margin-top: 10px;">
-        <a id="requestNewCodeLink" (click)="requestNewCode()" style="text-decoration: underline; cursor: pointer;">Solicitar un nuevo código</a>
-        <span *ngIf="timer > 0"> ({{ timer }}s)</span>
+    <div class="form-box">
+      <h1>Escribir el código</h1>
+      <p>
+        Hemos enviado por correo electrónico a {{email}} el código que hace
+        falta para restablecer tu contraseña.
       </p>
 
-      <form (submit)="verifyCodigo()">
-        <ion-input
-          [(ngModel)]="code" 
-          label="Codigo" 
-          label-placement="floating" 
-          fill="outline" 
-          placeholder="Ingresa el Código" 
-          type="number"  
-          name="code" 
-          class="input-box"
-          required>
-        </ion-input>
-        <br>
-        <div class="boton">
-        <ion-button class="enviar" expand="block" type="submit" [disabled]="!code">ENVIAR CÓDIGO</ion-button>
-       </div>
+      <form (ngSubmit)="verifyCode()">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="code"
+            placeholder="Ingresa el Código"
+            type="number" 
+            maxlength="6"
+            name="code"
+            required
+          >
+          </ion-input>
+        </ion-item>
+        <br />
+
+        <ion-button
+          type="submit"
+          shape="round" expand="block"
+          [disabled]="!isCodeValid()"
+          >Verificar</ion-button
+        >
       </form>
-    </ion-list>
+    </div>
+    <div class="form-footer">
+      <div class="link-footer">
+        <p *ngIf="timer > 0"> Tiempo restante: 00:{{ timer }}</p>
+        <ion-button *ngIf="timer === 0" (click)="requestNewCode()" id="requestNewCodeLink" fill="clear" shape="round" expand="block">Reenviar código</ion-button>
+      </div>
+    </div>
   </div>
 </ion-content>

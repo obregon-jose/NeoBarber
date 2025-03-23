@@ -36,59 +36,100 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
+/* Importar la fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
-
-
-.header-title {
-    font-size: 35px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-family: "Arial", sans-serif;
+/* Definir la fuente global para la app */
+:root {
+  --ion-font-family: 'Roboto', sans-serif;
 }
 
-.header-title-recover {
-    font-size: 30px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 25px;
-    font-family: "Arial", sans-serif;
+/* Aplicar la fuente a todo el cuerpo de la app */
+html, body {
+  font-family: var(--ion-font-family);
 }
 
-.header-title-basic{
-    font-size: 30px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-family: "Arial", sans-serif;
+/* Asegurar que todos los textos hereden la fuente */
+* {
+  font-family: var(--ion-font-family);
 }
 
-.header-title-agenda{
-    font-size: 30px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-family: "Arial", sans-serif;
+ion-item {
+  --border-radius: 10px;
+}
+h1 {
+  text-align: center;
+  font-size: min(24px, 6vw, 10vmin);
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+  max-width: 100%;
 }
 
-.header-title-name{
-    font-size: 35px;
-    font-weight: bold;
-    font-family: "Arial", sans-serif;
-  }
+.background-content {
+    --background: linear-gradient(to bottom right, #292524, #44403c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+}
+/* Fondo dinámico con degradado radial */
+.background-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.5), transparent 70%),
+                radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.5), transparent 70%);
+    z-index: -1;
+    filter: brightness(1);
+}
 
-  .header-title-reservar{
-    margin-left: 30px;
-    font-size: 35px;
-    font-weight: bold; 
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-family: "Arial", sans-serif;
-  }
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 20px;
+    // position: fixed;
+}
+
+.logo-container {
+    width: 200px;
+    height: 200px;
+}
+
+.form-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 0px 20px 20px 20px;
+    width: 100%;
+    max-width: 400px;
+    // box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.form-footer{
+  background: rgba(255, 255, 255, 0.164);
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+
+}
+
+.link-footer ion-button {
+  color: white;
+  text-transform: none;
+}
+
+.offline-modal {
+  --border-radius: 20px;
+}

@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './root.page.html',
-  styleUrls: ['./root.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+    selector: 'app-root',
+    templateUrl: './root.page.html',
+    styleUrls: ['./root.page.scss'],
+    imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class RootPage implements OnInit {
 

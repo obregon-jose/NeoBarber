@@ -41,7 +41,7 @@ export class AuthService {
         }
         await loading.dismiss();
       } else {
-        console.log('fallido', response);
+        // console.log('fallido', response);
         this._toastAlertService.toastYellow(response.data.message);
         await loading.dismiss();
       }
