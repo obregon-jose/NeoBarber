@@ -9,8 +9,6 @@ Aplicación móvil para gestión de citas en barberías. NeoBarber permite a los
 ## ✨ Roles y Características
 - Perfil personalizado
 
-### root
-- Agregar usuarios de roles inferiores
 ### administrador
 - Agregar usuarios de roles inferiores
 - Gestionar los servicios a brindar
