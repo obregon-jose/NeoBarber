@@ -27,8 +27,8 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'password-new',
-    loadComponent: () => import('./pages/auth/recover-password/password-new/password-new.page').then( m => m.PasswordNewPage),
+    path: 'new-password',
+    loadComponent: () => import('./pages/auth/recover-password/new-password/new-password.page').then( m => m.NewPasswordPage),
     canActivate: [authGuard]
   },
   {

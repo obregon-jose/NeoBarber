@@ -15,8 +15,7 @@ import { ToastService } from 'src/app/shared/toast/toast.service';
     selector: 'app-fila',
     templateUrl: './fila.page.html',
     styleUrls: ['./fila.page.scss'],
-    imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, IonAccordionGroup, IonAccordion, NgFor, NgIf, CommonModule, FormsModule,
-        IonPopover],
+    imports: [IonHeader, IonContent, IonCard, IonCardContent, IonButton, IonItem, IonLabel, IonIcon, IonAccordionGroup, IonAccordion, NgFor, NgIf, CommonModule, FormsModule],
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class FilaPage implements OnInit {

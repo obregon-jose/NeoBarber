@@ -4,6 +4,7 @@ import { Preferences } from '@capacitor/preferences';
 import { ToastService } from 'src/app/shared/toast/toast.service';
 import { environment } from 'src/environments/environment';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
+import { UserLogin } from 'src/app/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,72 +13,63 @@ export class AuthService {
   private apiURL = environment.apiUrl;
 
   constructor(
-    private _navCtrl: NavController,
-    private _toastAlertService: ToastService,
+    private navCtrl: NavController,
+    private _toastService: ToastService,
   ) { }
 
-  async login(email: string, password: string): Promise<void> {
+  async login(user: UserLogin): Promise<HttpResponse> {
     const options = {
       url: `${this.apiURL}/login`,
-      data: {
-        email: email,
-        password: password,
-      },
+      data: user,
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    const loading = await this._toastAlertService.presentLoading();
-    try {
+
       const response: HttpResponse = await CapacitorHttp.post(options);
+
       if (response.status === 200) {
-        this.saveRole(response.data.role);
-        this.saveToken(response.data.token);
-        await this.userAuthenticated();
         if (response.data.role) {
-            this._navCtrl.navigateRoot([`/tabs/home`]);
+          this.navCtrl.navigateRoot([`/tabs/home`]);
+          //organizar
+          this.saveRole(response.data.role);
+          this.saveToken(response.data.token);
+          await this.userAuthenticated();
         } else {
-          this._toastAlertService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
+          this._toastService.toastRed('No se ha podido identificar el usuario, por favor comuníquese con soporte.');
         }
-        await loading.dismiss();
-      } else {
-        // console.log('fallido', response);
-        this._toastAlertService.toastYellow(response.data.message);
-        await loading.dismiss();
       }
-    } catch (error) {
-      this._toastAlertService.toastRed();
-      await loading.dismiss();
-    }
+
+      return response;
+    
   }
 
   
-
   async logout(): Promise<void> {
-    const token = await this.getToken();
-    const options = {
-      url: `${this.apiURL}/logout`, 
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-      },
-    };
+  //   const token = await this.getToken();
+  //   const options = {
+  //     url: `${this.apiURL}/logout`, 
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`,
+  //     },
+  //   };
 
-    try {
-      // this.deleteToken();
-      // this.removeRole();
-      await Preferences.clear();
-      this._navCtrl.navigateRoot(['/login']);
-      const response: HttpResponse = await CapacitorHttp.post(options);
-      if (response.status === 200) {
-        // this.removeReserva();
-        // this.removeUserAuth();
-        // this.deleteToken();
-        // this.removeRole();
-      }
-    } catch (error) {
-      this._toastAlertService.toastRed();
-    }
+  //   try {
+  //     // this.deleteToken();
+  //     // this.removeRole();
+  //     await Preferences.clear();
+  //     this.navCtrl.navigateRoot(['/login']);
+  //     const response: HttpResponse = await CapacitorHttp.post(options);
+  //     if (response.status === 200) {
+  //       // this.removeReserva();
+  //       // this.removeUserAuth();
+  //       // this.deleteToken();
+  //       // this.removeRole();
+  //     }
+  //   } catch (error) {
+  //     this._toastService.toastRed();
+  //   }
   }
 
   // Guardar un token de manera segura y con manejo de errores
@@ -95,34 +87,30 @@ export class AuthService {
     }
   }
 
-  // Eliminar el token con manejo de errores
-  async deleteToken(): Promise<void> {
-    try {
-      await Preferences.remove({ key: 'token' });
-    } catch (error) {
-      console.error('Error eliminando el token:', error);
-    }
-  }
+  // // Eliminar el token con manejo de errores
+  // async deleteToken(): Promise<void> {
+  //   try {
+  //     await Preferences.remove({ key: 'token' });
+  //   } catch (error) {
+  //     console.error('Error eliminando el token:', error);
+  //   }
+  // }
 
   // Obtener el token de manera segura con manejo de errores
   async getToken(): Promise<string | null> {
     try {
       const { value } = await Preferences.get({ key: 'token' });
       if (!value) {
-        this._toastAlertService.toastRed('Tenemos Problemas para verificar su identidad. Por favor, inicie sesión nuevamente.');
-        this._navCtrl.navigateRoot(['/login']);
+        this._toastService.toastRed('Tenemos Problemas para verificar su identidad. Por favor, inicie sesión nuevamente.');
+        this.navCtrl.navigateRoot(['/login']);
       }
       return value;
     } catch (error) {
-      this._toastAlertService.toastRed('Ocurrió un error inesperado. Por favor, intente nuevamente. Si el problema persiste, inicie sesión nuevamente.');
+      this._toastService.toastRed('Ocurrió un error inesperado. Por favor, intente nuevamente. Si el problema persiste, inicie sesión nuevamente.');
       return null;
     }
   }
 
-  // Limpiar todo el almacenamiento - PELIGROSO
-  // clearPreferences = async () => {
-  //   await Preferences.clear();
-  // };
 
   async userAuthenticated() {
     const token = await this.getToken();
@@ -150,9 +138,9 @@ export class AuthService {
 
   }
 
-  async removeUserAuth() {
-    await Preferences.remove({ key: 'user' });
-  }
+  // async removeUserAuth() {
+  //   await Preferences.remove({ key: 'user' });
+  // }
 
   async saveRole(role: string): Promise<void> {
     await Preferences.set({ key: 'role', value: role });

@@ -13,22 +13,16 @@ import { logOut } from 'ionicons/icons';
     templateUrl: 'seleccionarbarbero.page.html',
     styleUrls: ['seleccionarbarbero.page.scss'],
     imports: [
-        CommonModule,
-        IonCard,
-        IonRow,
-        IonCol,
-        IonCardTitle,
-        IonCardSubtitle,
-        IonCardHeader,
-        IonGrid,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonProgressBar,
-        RouterLink,
-        IonButtons,
-    ],
+    CommonModule,
+    IonCard,
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonHeader,
+    IonContent,
+    IonProgressBar,
+    RouterLink
+],
     schemas: [NO_ERRORS_SCHEMA]
 })
 

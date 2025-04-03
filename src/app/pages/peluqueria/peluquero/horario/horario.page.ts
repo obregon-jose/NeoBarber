@@ -14,12 +14,9 @@ interface HorarioDia {
     selector: 'app-horario',
     templateUrl: './horario.page.html',
     styleUrls: ['./horario.page.scss'],
-    imports: [IonAccordion, IonAccordionGroup, IonAlert, IonFabButton, IonFab, IonIcon, IonListHeader, IonNote, IonPopover, IonButton,
-        IonCheckbox, IonLabel, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonItem,
-        IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect,
-        IonSelectOption,
-        IonDatetime,
-    ]
+    imports: [IonAccordion, IonAccordionGroup, IonButton,
+    IonCheckbox, IonLabel, IonCard, IonItem,
+    IonContent, CommonModule, FormsModule]
 })
 export class HorarioPage implements OnInit {
   horarios: any[] = [];

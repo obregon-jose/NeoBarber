@@ -1,83 +1,70 @@
 <ion-content class="background-content">
-  <div class="background-pattern"></div>
+  <div class="background-pattern">
 
-  <div class="container">
-    <!-- Logo -->
-    <div class="logo-container">
-      <img src="assets/images/neo.png" alt="Barbería Logo" />
-    </div>
-    <!-- Área de contenido -->
-    <div class="form-box">
-      <form (ngSubmit)="login()">
-        <h1>Iniciar sesión</h1>
-        <ion-label for="email">Correo electrónico</ion-label>
-        <ion-item>
-          <ion-input
-            name="email"
-            type="email"
-            [(ngModel)]="email"
-            placeholder="Ingrese su correo electrónico"
-            required
-          >
-          </ion-input>
-        </ion-item>
+    <div class="container">
+      <app-logo></app-logo>
 
-        <br />
+      <div class="form-box">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <h1>Iniciar sesión</h1>
 
-        <ion-label for="password">Contraseña</ion-label>
-        <ion-item>
-          <ion-input
-            name="password"
-            type="password"
-            [(ngModel)]="password"
-            placeholder="Ingrese su contraseña"
-            required
-          >
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-          </ion-input>
-        </ion-item>
+          <!-- Correo -->
+          <ion-label for="email">Correo electrónico</ion-label>
+          <ion-item>
+            <ion-input formControlName="email" name="email" type="email" placeholder="Ingrese su correo electrónico"
+              required>
+            </ion-input>
+          </ion-item>
 
-        <div class="link-container">
-          <a [routerLink]="['/recover-password']">¿Olvidaste tu contraseña?</a>
-        </div>
-        <br />
+          <br />
 
-        <div class="custom-button">
-          <ion-button 
-          type="submit" 
-          shape="round" 
-          class="btn-login"
-          [disabled]="!email || !password"
-            >Iniciar</ion-button
-          >
+          <!-- Contraseña -->
+          <ion-label for="password">Contraseña</ion-label>
+          <ion-item>
+            <ion-input formControlName="password" name="password" type="password" placeholder="Ingrese su contraseña"
+              required>
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+          </ion-item>
 
-          <!-- <ion-button
-            [routerLink]="['/register']"
-            shape="round"
-            class="btn-register"
-          >
-            <ion-icon slot="start" name="person"></ion-icon>
-            Registrarse
-          </ion-button> -->
-        </div>
-      </form>
-    </div>
-    <div class="form-footer">
-      <div class="link-footer">
-        <ion-button [routerLink]="['/register']" fill="clear" shape="round" expand="block" ><ion-icon slot="start" name="person"></ion-icon>Registrarse</ion-button>
+          <div class="link-container">
+            <a [routerLink]="['/recover-password']">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <br />
+          <!-- Botón de login -->
+          <ion-button [disabled]="loginForm.invalid || loading" type="submit" shape="round" expand="block">
+            <ng-container *ngIf="!loading; else cargando">
+              Iniciar
+            </ng-container>
+            <ng-template #cargando>
+              <ion-spinner name="bubbles"></ion-spinner>
+            </ng-template>
+          </ion-button>
+
+        </form>
       </div>
-      <!-- <ion-label>
+      <div class="footer">
+        <div class="link-footer">
+          <ion-button [routerLink]="['/register']" fill="clear" shape="round" expand="block"><ion-icon slot="start"
+              name="person"></ion-icon>
+            Registrarme
+          </ion-button>
+        </div>
+        <!-- <ion-label>
           <h3>O inicia sesión con</h3>
-        </ion-label>
-      <div class="social-links">
-        <ion-button fill="clear" shape="round" expand="block">
+        </ion-label> -->
+        <div class="social-links">
+          <!-- <ion-button fill="clear" shape="round" expand="block">
           <img width="64" height="64" src="https://img.icons8.com/color/48/facebook-new.png" alt="facebook-new"/>
-        </ion-button>
-        <ion-button fill="clear" shape="round" expand="block" >
-          <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/>
-        </ion-button>
-      </div> -->
+        </ion-button> -->
+          <ion-button fill="clear" shape="round" expand="block">
+            <img class="social-icon" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" />
+            <span class="button-text">Iniciar con Google</span>
+          </ion-button>
+        </div>
 
+      </div>
     </div>
   </div>
 </ion-content>

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     selector: 'app-perfil',
     templateUrl: './perfil.page.html',
     styleUrls: ['./perfil.page.scss'],
-    imports: [IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+    imports: [IonItem, IonLabel, IonCardTitle, IonCardHeader, IonIcon, IonButton, IonContent, CommonModule, FormsModule],
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class PerfilPage implements OnInit {

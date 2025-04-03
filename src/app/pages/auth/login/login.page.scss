@@ -8,39 +8,33 @@ ion-label {
   margin-top: 5px;
 }
 
-.custom-button {
-  gap: 5px;
-  display: flex;
-  flex-direction: column;  
-}
-
-.btn-register {
-  --background: #44403c;
-  // --border-radius: 10px;
-}
-
-
 .form-box{
   border-radius: 20px 20px 0 0;
 }
 
-
+// .link-footer{
+//   display: flex;
+//   justify-content: center;
+// }
 .social-links {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 0px;
+  padding-bottom: 10px;
 
   ion-button {
-    margin: 0;
-    padding: 0;
-
+    color: white;
+    --background: #44403c0e;
   }
-  
-
 }
 
-.social-links img {
-  width: 32px;
-  height: 32px;
+.social-icon {
+  width: 28px;
+height: 28px;
+  margin-right: 15px; 
+  vertical-align: middle; 
+}
+
+.button-text {
+  vertical-align: middle; 
 }

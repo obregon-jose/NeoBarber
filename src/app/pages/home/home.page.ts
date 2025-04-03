@@ -14,8 +14,8 @@ import { NavController } from '@ionic/angular';
     selector: 'app-home',
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
-    imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-        ClientPage, OwnerPage, AdminPage, RootPage, BarberPage]
+    imports: [CommonModule, FormsModule,
+    ClientPage, OwnerPage, AdminPage, RootPage]
 })
 export class HomePage implements OnInit {
   userRole: string = '';

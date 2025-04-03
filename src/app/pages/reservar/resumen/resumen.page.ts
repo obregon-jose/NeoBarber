@@ -14,7 +14,7 @@ import { logOut } from 'ionicons/icons';
     selector: 'app-resumen',
     templateUrl: './resumen.page.html',
     styleUrls: ['./resumen.page.scss'],
-    imports: [IonInput, IonItem, IonLabel, IonIcon, IonProgressBar, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+    imports: [IonInput, IonItem, IonLabel, IonIcon, IonProgressBar, IonButton, IonContent, IonHeader, CommonModule, FormsModule,
         RouterLink,
     ]
 })

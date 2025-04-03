@@ -12,23 +12,15 @@ import { CommonModule } from '@angular/common';
     selector: 'app-update-day',
     templateUrl: './update-day.page.html',
     styleUrls: ['./update-day.page.scss'],
-    imports: [IonCardContent, IonCard, IonList, IonIcon,
-        CommonModule,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonButton,
-        IonButtons,
-        IonItem,
-        IonLabel,
-        IonSelect,
-        IonSelectOption,
-        IonDatetime,
-        IonProgressBar,
-        FormsModule,
-        RouterLink,
-        UpdateDayPage,]
+    imports: [IonCard, IonList,
+    CommonModule,
+    IonContent,
+    IonButton,
+    IonItem,
+    IonLabel,
+    IonDatetime,
+    FormsModule,
+    RouterLink]
 })
 export class UpdateDayPage implements OnInit {
   selectedDate: string = '';

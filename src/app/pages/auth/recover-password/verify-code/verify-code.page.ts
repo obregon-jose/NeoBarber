@@ -1,45 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonInput, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonList, IonItem } from '@ionic/angular/standalone';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonInput, IonContent, IonButton, IonItem, IonSpinner } from '@ionic/angular/standalone';
 import { RecoverPasswordService } from 'src/app/services/auth/recover-password/recover-password.service';
-import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast/toast.service';
+import { UserRecover } from '../../../../interfaces/user';
+import { NavController } from '@ionic/angular';
+import { LogoComponent } from 'src/app/components/logo/logo.component';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
-    selector: 'app-verify-code',
-    templateUrl: './verify-code.page.html',
-    styleUrls: ['./verify-code.page.scss'],
-    imports: [IonInput, IonItem, IonList, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  selector: 'app-verify-code',
+  templateUrl: './verify-code.page.html',
+  styleUrls: ['./verify-code.page.scss'],
+  imports: [IonSpinner, IonInput, IonItem, IonButton, IonContent, CommonModule, ReactiveFormsModule, LogoComponent],
 })
 export class VerifyCodePage implements OnInit {
+  recoverPasswordForm: FormGroup;
+  loading = false;
   email: string = '';
-  code: string = '';
-  timer: number = 59;
+  timer: number = 20;
 
   constructor(
-    private passwordService: RecoverPasswordService,
-    private route: ActivatedRoute,
-    private _alertService: ToastService,
-  ) { }
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.email = params['email'] || '';
+    private _recoverPasswordService: RecoverPasswordService,
+    private _toastService: ToastService,
+    private _storageService: StorageService,
+    private navCtrl: NavController,
+    
+    private fb: FormBuilder,
+  ) {
+    this.recoverPasswordForm = this.fb.group({
+      code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
     });
+
+  }
+
+  async ngOnInit() {
+    const recoverData = await this._storageService.getData<UserRecover>('recoverUser');
+    this.email = recoverData?.email || '';
     this.startTimer();
   }
-  isCodeValid(): boolean {
-    return /^\d{6}$/.test(this.code);
+
+  get code() { return this.recoverPasswordForm.get('email'); }
+
+  async verifyCode() {
+
+    if (this.recoverPasswordForm.invalid) return;
+
+    const userVerify: UserRecover = { ...this.recoverPasswordForm.value, email: this.email };
+    this.loading = true;
+
+    try {
+      const response = await this._recoverPasswordService.verifyCode(userVerify);
+      this.loading = false;
+
+      if (response.status === 200) {
+        this.navCtrl.navigateRoot(['/new-password']);
+        this._toastService.toastGreen('Código verificado correctamente.');
+        this._storageService.setData('recoverUser', userVerify);
+      } else {
+        this._toastService.toastYellow(response.data.message);
+      }
+    } catch (error) {
+      this.loading = false;
+      this._toastService.toastRed();
+    }
   }
 
-  verifyCode() {
-    this.passwordService.verifyCode(this.code, this.email);
-  }
-
-  requestNewCode(){
-    this.passwordService.sendResetCode(this.email);
-    this.timer = 59;
+  requestNewCode() {
+    const UserVerify: UserRecover = { email: this.email };
+    this._recoverPasswordService.sendCode(UserVerify);
+    this.timer = 20;
     this.startTimer();
   }
 
@@ -49,7 +80,7 @@ export class VerifyCodePage implements OnInit {
       if (this.timer <= 0) {
         clearInterval(interval);
       }
-    }, 1000); 
+    }, 1000);
   }
 
 }

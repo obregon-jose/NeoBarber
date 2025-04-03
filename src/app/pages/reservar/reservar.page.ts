@@ -18,10 +18,9 @@ import { add, calendar, alarm, person, ellipsisVertical, createOutline, trashOut
     selector: 'app-reservar-peluquero',
     templateUrl: './reservar.page.html',
     styleUrls: ['./reservar.page.scss'],
-    imports: [IonList, IonFab, IonFabButton, IonIcon, IonLabel, IonCardContent, IonItem, IonBadge,
-        IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonHeader, IonToolbar,
-        IonTitle, IonContent, IonPopover, RouterLink, CommonModule,
-    ],
+    imports: [IonFab, IonFabButton, IonIcon, IonLabel, IonItem,
+    IonCard,
+    IonContent, RouterLink, CommonModule],
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class ReservarPage  implements OnInit  {
