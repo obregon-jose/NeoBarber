@@ -1,0 +1,43 @@
+/* Contenedor del logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+  }
+  
+  .logo-container img {
+    width: 150px;
+    height: auto;
+  }
+  
+  ion-card img {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 150px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que las imágenes mantengan proporciones adecuadas */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  ion-content {
+    display: flex;
+    flex-direction: column;
+    height: 90vh; /* Asegúrate de que ocupe toda la altura de la pantalla */
+  }
+  
+  .logo-container,
+  ion-card,
+  ion-grid {
+    flex: 0 0 auto; /* Evita que crezcan para ocupar más espacio del necesario */
+  }
+  
+  .ion-padding {
+    flex: 1; /* Permite que el contenido principal crezca para llenar el espacio disponible */
+    overflow: auto; /* Habilita el scroll solo si es necesario */
+  }
+  
+  ion-header{
+    font-family: Dosis;
+  }
+  
+  .reservar{
+    display: flex;
+    justify-content: center;
+  }

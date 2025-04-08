@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonButton, IonProgressBar,AlertController, IonIcon, IonLabel, IonItem, IonInput } from '@ionic/angular/standalone';
 import { ActivatedRoute, RouterLink } from '@angular/router'; // Importa ActivatedRoute
 import { Router } from '@angular/router'; // Importa Router para la navegación
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 import { ReservarService } from 'src/app/services/reservar/reservar.service';
 import { addIcons } from 'ionicons';

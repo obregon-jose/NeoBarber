@@ -100,11 +100,12 @@ h1 {
 }
 /* Fondo dinámico con degradado radial */
 .background-pattern {
-    overflow-y: auto;
+    // overflow-y: auto;
+    z-index: -1;
+    // filter: brightness(1);
     background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.5), transparent 70%),
                 radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.5), transparent 70%);
-    z-index: -1;
-    filter: brightness(1);
+    
 }
 
 .container {
@@ -127,7 +128,7 @@ h1 {
     border-radius: 20px;
     padding: 0px 20px 20px 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     position: relative;
     
 }
@@ -136,7 +137,7 @@ h1 {
   background: rgba(255, 255, 255, 0.164);
   border-radius: 0 0 20px 20px;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   position: relative;
   text-align: center;
 

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from '../../auth/auth.service';
 import { Preferences } from '@capacitor/preferences';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 
 @Injectable({
@@ -12,14 +13,14 @@ import { Preferences } from '@capacitor/preferences';
 export class DisponibilidadService {
   private apiUrl = environment.apiUrl;
 
-
   constructor(
+    private _storageService: StorageService,
     private _authService: AuthService,
     private _alert_loading_Service: ToastService
   ) { }
 
   // async cargarDisponibilidad(): Promise<any[]> {
-  //   const token = await this._authService.getToken();
+  //   const token = await this._storageService.getTokenData(); 
   //   const options = {
   //     url: ${this.apiUrl}/barbero/6/disponibilidad/2024-12-10,
   //     headers: {
@@ -48,7 +49,7 @@ export class DisponibilidadService {
         url: `${this.apiUrl}/barbero/${barberId}/disponibilidad/${selectedDate}`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${await this._authService.getToken()}`
+          'Authorization': `Bearer ${await this._storageService.getTokenData()}`
         },
       };
 

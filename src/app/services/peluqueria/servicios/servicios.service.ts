@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,13 +12,13 @@ export class ServiciosService {
   private apiUrl = environment.apiUrl+'/services';
  
   constructor(
-    private _authService: AuthService,
+    private _storageService: StorageService,
     private _alert_loading_Service: ToastService,
   ) { }
 
   // Método para cargar servicios
   async cargarServicios(): Promise<any[]> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}`,
       headers: {
@@ -43,7 +44,7 @@ export class ServiciosService {
   
   // Crear un servicio
   async crearServicio(data: any): Promise<void> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}`,
       data: {
@@ -74,7 +75,7 @@ export class ServiciosService {
 
   //Editar un servicio
   async editarServicios(data: any): Promise<void> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}/${data.id}`,
       data: {
@@ -105,7 +106,7 @@ export class ServiciosService {
 
   //Eliminar servicio
   async eliminarServicios(id: number): Promise<void> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}/${id}`,
       headers: {

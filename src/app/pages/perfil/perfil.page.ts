@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonItem, IonText, IonLabel, IonList, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ProfileService } from 'src/app/services/profile/profile.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { pencil, logOut, person, callOutline, personOutline, mailOutline, call, mail, camera, ellipsisVertical, createOutline, logOutOutline, timeOutline, time } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
 import { ChangeDetectorRef } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Component({
     selector: 'app-perfil',
@@ -20,7 +21,9 @@ import { Router } from '@angular/router';
 })
 export class PerfilPage implements OnInit {
   user: any = {};
-  userRole: string = '';
+  userRole: string = 'peluquero';
+
+  
   imageUrl: string | null = null;
 
   popoverOpen = false;
@@ -31,6 +34,7 @@ export class PerfilPage implements OnInit {
     private alertController: AlertController,
     private _alert_loading_Service: ToastService,
     private _authService: AuthService,
+    private _storageService: StorageService,
     private _changeDetectorRef: ChangeDetectorRef,
     private router: Router
   ) {
@@ -39,7 +43,8 @@ export class PerfilPage implements OnInit {
 
   async ngOnInit() {
     this.mostrarPerfil();
-    this.cargarRol();this.userRole = (await this._authService.getRole()) ?? '';
+    this.cargarRol();
+    this.userRole = (await this._storageService.getRoleData() ) ?? '';
   }
   showTab(tab: string): boolean {
     return tab === this.userRole;
@@ -49,7 +54,7 @@ export class PerfilPage implements OnInit {
   }
 
   async cargarRol() {
-    this.userRole = (await this._authService.getRole()) ?? '';
+    this.userRole = (await this._storageService.getRoleData() ) ?? '';
   }
 
   async tomarFoto(id: number) {
@@ -84,8 +89,8 @@ export class PerfilPage implements OnInit {
 
   async mostrarPerfil() {
     try {
-      const data = await this._profileService.cargarUsuario();
-      this.user = data;
+      // const data = await this._profileService.cargarUsuario();
+      // this.user = data;
     } catch (error) {
       console.error('Error al cargar el perfil', error);
     }
@@ -100,7 +105,7 @@ export class PerfilPage implements OnInit {
     };
 
     try {
-      await this._profileService.editarPerfil(userData);
+      // await this._profileService.editarPerfil(userData);
       await this.mostrarPerfil();
       this._changeDetectorRef.detectChanges();
     } catch (error) {

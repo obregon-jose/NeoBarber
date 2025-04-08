@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router'; // Importa ActivatedRoute
 import { Router } from '@angular/router'; // Importa Router para la navegación
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 import { addIcons } from 'ionicons';
 import { logOut } from 'ionicons/icons';

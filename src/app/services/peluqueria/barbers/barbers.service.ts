@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,12 +12,12 @@ export class BarbersService {
   private apiUrl = environment.apiUrl+'/barbers';
 
   constructor(
-    private _authService: AuthService,
+    private _storageService: StorageService,
     private _alert_loading_Service: ToastService
   ) { }
 
   async cargarBarberos(): Promise<any[]> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}`,
       headers: {

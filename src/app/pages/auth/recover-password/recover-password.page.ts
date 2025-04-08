@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonContent, IonButton, IonInput, IonItem, IonLabel, IonText, IonSpinner } from '@ionic/angular/standalone';
 import { RecoverPasswordService } from 'src/app/services/auth/recover-password/recover-password.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { RouterLink } from '@angular/router';
 import { UserRecover } from 'src/app/interfaces/user';
 import { NavController } from '@ionic/angular';

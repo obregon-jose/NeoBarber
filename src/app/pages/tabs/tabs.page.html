@@ -1,16 +1,22 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" href="/tabs/home" *ngIf="!showTab('peluquero')">
+    <div class="diagonal-stripes"></div>
+
+    <ion-tab-button class="diagonala" tab="home" href="/tabs/home" *ngIf="!showTab('peluquero')">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="reservar" href="/tabs/reservar" *ngIf="showTab('cliente')">
       <ion-icon aria-hidden="true" name="create"></ion-icon>
-      <ion-label>Reservación</ion-label>
+      <ion-label>Citas</ion-label>
     </ion-tab-button>
-
+    <ion-tab-button tab="reservar" href="/tabs/reservar" *ngIf="showTab('cliente')">
+      <ion-icon aria-hidden="true" name="create"></ion-icon>
+      <ion-label>Reservas</ion-label>
+    </ion-tab-button>
+    <!-- 
     <ion-tab-button tab="fila" href="/tabs/fila" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="reader"></ion-icon> 
       <ion-label>Fila</ion-label>
@@ -19,32 +25,35 @@
     <ion-tab-button tab="servicios" href="/tabs/servicios" *ngIf="showTab('administrador') || showTab('peluquero')">
       <ion-icon aria-hidden="true" name="cut"></ion-icon>
       <ion-label>Servicios</ion-label>
-    </ion-tab-button>
-    
+    </ion-tab-button> -->
+
     <!-- <ion-tab-button tab="horario" href="/tabs/horario" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="time"></ion-icon>
       <ion-label>Horarios</ion-label>
     </ion-tab-button> -->
-    <ion-tab-button tab="update-day" href="/tabs/update-day" *ngIf="showTab('peluquero')">
+    <!-- <ion-tab-button tab="update-day" href="/tabs/update-day" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="time"></ion-icon>
       <ion-label>Dia</ion-label>
-    </ion-tab-button>
-    
+    </ion-tab-button> -->
 
-<!-- 
+
+    <!-- 
     <ion-tab-button tab="attention" href="/tabs/attention" *ngIf="showTab('peluquero')">
       <ion-icon aria-hidden="true" name="create"></ion-icon>
       <ion-label>Atención</ion-label>
     </ion-tab-button>
  -->
-    <ion-tab-button tab="agregar-usuario" href="/tabs/agregar-usuario" *ngIf="showTab('administrador') || showTab('root')">
+    <!-- <ion-tab-button tab="agregar-usuario" href="/tabs/agregar-usuario" *ngIf="showTab('administrador') || showTab('root')">
       <ion-icon aria-hidden="true" name="person-add"></ion-icon>
       <ion-label>Nuevo Usuario</ion-label>
-    </ion-tab-button>
+    </ion-tab-button> -->
 
-    <ion-tab-button tab="perfil" href="/tabs/perfil">
-      <ion-icon aria-hidden="true" name="person"></ion-icon>
-      <ion-label>Mi Perfil</ion-label>
+    <ion-tab-button tab="profile" href="/tabs/profile">
+      <ion-avatar aria-hidden="true" style="margin: none; width: 24px; height: 24px;">
+        <img [src]="'assets/images/person.svg'" alt="Foto de perfil">
+      </ion-avatar>
+      <!-- <ion-icon  name="person"></ion-icon> -->
+      <ion-label>Perfil</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

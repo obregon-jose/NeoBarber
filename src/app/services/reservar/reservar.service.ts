@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 import { NavController } from '@ionic/angular/standalone';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,13 @@ export class ReservarService {
   private apiUrl = environment.apiUrl
 
   constructor(
-    private _authService: AuthService,
+    private _storageService: StorageService,
     private _alert_loading_Service: ToastService,
     private navCtrl: NavController,
   ) { }
 
   async crearReserva(data:any): Promise<void> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
      const options = {
       url: `${this.apiUrl}/reservations`,
       data: {
@@ -58,7 +59,7 @@ export class ReservarService {
 
   // Método para cargar reservas del cliente
   async cargarReservasCliente(id: number): Promise<any[]> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}/reservations-client/${id}`,
       headers: {
@@ -81,7 +82,7 @@ export class ReservarService {
 
     // Método para cargar reservas del peluquero
     async cargarReservasPeluquero(id: number): Promise<any[]> {
-      const token = await this._authService.getToken();
+      const token = await this._storageService.getTokenData(); 
       const options = {
         url: `${this.apiUrl}/reservations-barber/${id}`,
         headers: {
@@ -104,7 +105,7 @@ export class ReservarService {
 
         // Método para confirmar la reserva por parte del peluquero
         async confirmarReservaPeluquero(data: any): Promise<void> {
-          const token = await this._authService.getToken();
+          const token = await this._storageService.getTokenData(); 
           const options = {
             url: `${this.apiUrl}/update-reservations`,
             data: {
@@ -137,7 +138,7 @@ export class ReservarService {
         
         // Método para cancelar la reserva
         async cancelarReserva(data: any): Promise<void> {
-          const token = await this._authService.getToken();
+          const token = await this._storageService.getTokenData(); 
           const options = {
             url: `${this.apiUrl}/update-reservations`,
             data: {

@@ -4,7 +4,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem, IonLab
 import { FormsModule } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 import { DisponibilidadService } from 'src/app/services/peluqueria/disponibilidad/disponibilidad.service';
 import { CommonModule } from '@angular/common';

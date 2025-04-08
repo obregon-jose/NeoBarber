@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { AuthService } from '../../../auth/auth.service';
 import { Preferences } from '@capacitor/preferences';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UpdateDayService {
   public variableCompartida: string = '';
 
   constructor(
-    private _authService: AuthService,
+    private _storageService: StorageService,
     private _alert_loading_Service: ToastService
   ) { }
 
@@ -28,7 +29,7 @@ export class UpdateDayService {
         url: `${this.apiUrl}/barbero/${barberId}/disponibilidad/${selectedDate}`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${await this._authService.getToken()}`
+          'Authorization': `Bearer ${await this._storageService.getTokenData()}`
         },
       };
 
@@ -43,7 +44,7 @@ export class UpdateDayService {
   }
 
   async actualizarHorario(data: any,id:number,fecha:string): Promise<void> {
-    const token = await this._authService.getToken(); 
+    const token = await this._storageService.getTokenData();  
     const options = {
       data: data,
       url: `${this.apiUrl}/barbero/${id}/horarios/${fecha}`,

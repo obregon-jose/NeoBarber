@@ -8,7 +8,7 @@ import { NgFor,NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 // import { IonicModule } from '@ionic/angular';
 
 @Component({

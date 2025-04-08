@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class HorariosService {
   private apiUrl = environment.apiUrl;
 
   constructor(
-    private _authService: AuthService,
+    private _storageService: StorageService,
     private _alert_loading_Service: ToastService
   ) { }
 
   async cargarHorarios(id: number): Promise<any[]> {
-    const token = await this._authService.getToken();
+    const token = await this._storageService.getTokenData(); 
     const options = {
       url: `${this.apiUrl}/${id}/horario`,
       headers: {
@@ -40,7 +41,7 @@ export class HorariosService {
 
   ////CREAR////////
   async crearHorario(data: any,id:number): Promise<void> {
-    const token = await this._authService.getToken(); 
+    const token = await this._storageService.getTokenData();  
     const options = {
       data: data,
       url: `${this.apiUrl}/${id}/actualizar-franja`,

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonInput, IonSelect, IonSelectOption, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonList, IonItem, IonToggle } from '@ionic/angular/standalone';
-import { ToastService } from 'src/app/shared/toast/toast.service';
-import { RegistroService } from 'src/app/services/auth/registro/registro.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { RoleService } from 'src/app/services/role/role.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class AgregarUsuarioPage implements OnInit {
   roles: any[] = [];
 
   constructor(
-    private _addUsers: RegistroService,
     private _alertService: ToastService,
     private _roleService: RoleService,
   ) { }
@@ -78,7 +76,7 @@ export class AgregarUsuarioPage implements OnInit {
         password: this.password,
         role: this.role
       };
-      this._addUsers.agregarUsuario(userData);
+      // this._addUsers.agregarUsuario(userData);
     } else {
       this._alertService.toastYellow('Debe llenar todos los campos obligatorios');
     }

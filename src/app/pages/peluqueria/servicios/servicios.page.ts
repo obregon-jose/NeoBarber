@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { add, createOutline, reload, trashOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { ChangeDetectorRef } from '@angular/core';
 import Pusher from 'pusher-js';
 

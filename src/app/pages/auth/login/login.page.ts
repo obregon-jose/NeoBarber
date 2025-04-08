@@ -4,7 +4,7 @@ import { IonContent,IonInputPasswordToggle, IonItem, IonInput, IonButton, IonLab
 import { addIcons } from 'ionicons';
 import { logoFacebook, logoGoogle, person } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
-import { ToastService } from 'src/app/shared/toast/toast.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LogoComponent } from 'src/app/components/logo/logo.component';
 import { ReactiveFormsModule , FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,7 +37,6 @@ export class LoginPage  {
   constructor(
     private _toastService: ToastService,
     private _authService: AuthService,
-    private navCtrl: NavController,
     private fb: FormBuilder,
   ) {
     addIcons({
